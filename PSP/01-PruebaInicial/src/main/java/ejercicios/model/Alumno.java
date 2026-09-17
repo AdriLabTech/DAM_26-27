@@ -52,4 +52,13 @@ public class Alumno {
                 ", notas=" + notas +
                 '}';
     }
+
+    public float calcularPromedio(){
+        float sumaNotas = 0;
+        for(Asignatura a : notas){
+            sumaNotas += a.getNota();
+        }
+
+        return sumaNotas / notas.size();
+    }
 }
