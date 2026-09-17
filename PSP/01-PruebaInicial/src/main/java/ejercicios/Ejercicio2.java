@@ -14,9 +14,10 @@ public class Ejercicio2 {
     public static void main (String[] args){
         //Gestion de Estudiantes
         List<Alumno> listaAlumnos = new ArrayList<>();
-        mostrarOpciones();
-        int opcionUsuario = pedirNumeroUsuario();
+        int opcionUsuario = 1;
         while (opcionUsuario != 0){
+            mostrarOpciones();
+            opcionUsuario = pedirNumeroUsuario();
             switch (opcionUsuario){
                 case 1 -> {
                     //Agregar Alumno
@@ -24,9 +25,9 @@ public class Ejercicio2 {
                     String nombreAlunmno = s.next();
                     System.out.println("Introduce la edad del Alumno: ");
                     int edadAlumno = s.nextInt();
-                    System.out.println("Cuantas notas quieres agregat?");
+                    System.out.println("Cuantas notas quieres agregar?");
                     int cantidadNotas = s.nextInt();
-                    List<Asignatura> notasAlumno = List.of();
+                    List<Asignatura> notasAlumno = new ArrayList<>();
                     for(int i = 0;i < cantidadNotas; i++){
                         System.out.println("Introduce el nombre de la Asignatura: ");
                         String nombreAsig = s.next();
@@ -46,6 +47,7 @@ public class Ejercicio2 {
                         if (a.getNombre().toLowerCase().equals(alumnoABorrar.toLowerCase())){
                             System.out.println("Alumno encontrado!!!");
                             listaAlumnos.remove(a);
+                            break;
                         }
                     }
                     int longitudListaModificada = listaAlumnos.size();
@@ -59,6 +61,23 @@ public class Ejercicio2 {
                     for(Alumno a : listaAlumnos){
                         System.out.println(a.toString());
                     }
+                }
+
+                case 4 -> {
+                    System.out.println("Introduce el nombre del Alumno que quieras calcular su promedio: ");
+                    String nombreAlumnoABuscar = s.next();
+                    for(Alumno a : listaAlumnos){
+                        if(a.getNombre().toLowerCase().equals(nombreAlumnoABuscar.toLowerCase())){
+                            System.out.println("Alumno encontrado: ");
+                            System.out.println(a.toString());
+                            System.out.println("Promedio del Alumno " + a.getNombre() + ": "+ a.calcularPromedio());
+                        }
+                    }
+                }
+
+                default -> {
+                    System.out.println("Saliendo...");
+                    opcionUsuario = 0;
                 }
             }
         }
