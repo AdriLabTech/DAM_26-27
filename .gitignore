@@ -1,9 +1,47 @@
-# Documentacion y capturas de los ejercicios
+# =========================
+# Documentacion y capturas
+# =========================
 /Python/01-Introduccion-a-Python/docs
 
-# Vault de Obsidian con mis apuntes
+# =========================
+# Vault de Obsidian
+# =========================
 .obsidian
 
-# Bitácora del Alumno (Ficha tecnica)
-/Python/01-Introduccion-a-Python/'Ficha Técnica - Bitácora del Alumnado.md'
+# =========================
+# Java / Maven
+# =========================
 
+**/target/
+**/*.class
+
+# =========================
+# Python
+# =========================
+
+**/__pycache__/
+**/*.py[cod]
+**/.venv/
+**/venv/
+**/env/
+
+# =========================
+# IDEs / Editores
+# =========================
+
+.idea/
+.vscode/
+*.iml
+
+# =========================
+# Sistema operativo
+# =========================
+
+.DS_Store
+Thumbs.db
+
+# =========================
+# Archivos personales
+# =========================
+
+**/Ficha Técnica - Bitácora del Alumnado.md
