@@ -70,6 +70,8 @@ Actualmente contiene material de:
 
 * **PSP** — Programación de Servicios y Procesos
 * **Python / Inteligencia Artificial**
+* **Desarrollo de Interfaces**
+
 
 Se añadirán nuevos módulos y contenidos conforme avance el curso.
 
