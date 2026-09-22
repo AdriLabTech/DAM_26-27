@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "cac7H6GJS+I=",
+  "success": true,
+  "projectFilePath": "/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/01_PrimerPrograma/PrimerPrograma/PrimerPrograma.csproj",
+  "expectedPackageFiles": [
+    "/home/adrian/.nuget/packages/microsoft.aspnetcore.app.ref/10.0.12/microsoft.aspnetcore.app.ref.10.0.12.nupkg.sha512"
+  ],
+  "logs": []
+}
