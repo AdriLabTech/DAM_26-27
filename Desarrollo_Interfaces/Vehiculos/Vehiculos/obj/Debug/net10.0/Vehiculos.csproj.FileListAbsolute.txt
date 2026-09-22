@@ -1,0 +1,15 @@
+C:\Users\Adrian\source\repos\Vehiculos\Vehiculos\bin\Debug\net10.0\Vehiculos.exe
+C:\Users\Adrian\source\repos\Vehiculos\Vehiculos\bin\Debug\net10.0\Vehiculos.deps.json
+C:\Users\Adrian\source\repos\Vehiculos\Vehiculos\bin\Debug\net10.0\Vehiculos.runtimeconfig.json
+C:\Users\Adrian\source\repos\Vehiculos\Vehiculos\bin\Debug\net10.0\Vehiculos.dll
+C:\Users\Adrian\source\repos\Vehiculos\Vehiculos\bin\Debug\net10.0\Vehiculos.pdb
+C:\Users\Adrian\source\repos\Vehiculos\Vehiculos\obj\Debug\net10.0\Vehiculos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Adrian\source\repos\Vehiculos\Vehiculos\obj\Debug\net10.0\Vehiculos.AssemblyInfoInputs.cache
+C:\Users\Adrian\source\repos\Vehiculos\Vehiculos\obj\Debug\net10.0\Vehiculos.AssemblyInfo.cs
+C:\Users\Adrian\source\repos\Vehiculos\Vehiculos\obj\Debug\net10.0\Vehiculos.csproj.CoreCompileInputs.cache
+C:\Users\Adrian\source\repos\Vehiculos\Vehiculos\obj\Debug\net10.0\Vehiculos.dll
+C:\Users\Adrian\source\repos\Vehiculos\Vehiculos\obj\Debug\net10.0\refint\Vehiculos.dll
+C:\Users\Adrian\source\repos\Vehiculos\Vehiculos\obj\Debug\net10.0\Vehiculos.pdb
+C:\Users\Adrian\source\repos\Vehiculos\Vehiculos\obj\Debug\net10.0\Vehiculos.genruntimeconfig.cache
+C:\Users\Adrian\source\repos\Vehiculos\Vehiculos\obj\Debug\net10.0\ref\Vehiculos.dll
+C:\Users\Adrian\source\repos\Vehiculos\Vehiculos\obj\Debug\net10.0\Vehiculos.csproj.Up2Date

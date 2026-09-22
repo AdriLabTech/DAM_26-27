@@ -1,0 +1,15 @@
+C:\Users\Adrian\source\repos\CalcularArea\CalcularArea\obj\Debug\net10.0\CalcularArea.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Adrian\source\repos\CalcularArea\CalcularArea\obj\Debug\net10.0\CalcularArea.AssemblyInfoInputs.cache
+C:\Users\Adrian\source\repos\CalcularArea\CalcularArea\obj\Debug\net10.0\CalcularArea.AssemblyInfo.cs
+C:\Users\Adrian\source\repos\CalcularArea\CalcularArea\obj\Debug\net10.0\CalcularArea.csproj.CoreCompileInputs.cache
+C:\Users\Adrian\source\repos\CalcularArea\CalcularArea\bin\Debug\net10.0\CalcularArea.exe
+C:\Users\Adrian\source\repos\CalcularArea\CalcularArea\bin\Debug\net10.0\CalcularArea.deps.json
+C:\Users\Adrian\source\repos\CalcularArea\CalcularArea\bin\Debug\net10.0\CalcularArea.runtimeconfig.json
+C:\Users\Adrian\source\repos\CalcularArea\CalcularArea\bin\Debug\net10.0\CalcularArea.dll
+C:\Users\Adrian\source\repos\CalcularArea\CalcularArea\bin\Debug\net10.0\CalcularArea.pdb
+C:\Users\Adrian\source\repos\CalcularArea\CalcularArea\obj\Debug\net10.0\CalcularArea.dll
+C:\Users\Adrian\source\repos\CalcularArea\CalcularArea\obj\Debug\net10.0\refint\CalcularArea.dll
+C:\Users\Adrian\source\repos\CalcularArea\CalcularArea\obj\Debug\net10.0\CalcularArea.pdb
+C:\Users\Adrian\source\repos\CalcularArea\CalcularArea\obj\Debug\net10.0\CalcularArea.genruntimeconfig.cache
+C:\Users\Adrian\source\repos\CalcularArea\CalcularArea\obj\Debug\net10.0\ref\CalcularArea.dll
+C:\Users\Adrian\source\repos\CalcularArea\CalcularArea\obj\Debug\net10.0\Calcular.ABC6A717.Up2Date

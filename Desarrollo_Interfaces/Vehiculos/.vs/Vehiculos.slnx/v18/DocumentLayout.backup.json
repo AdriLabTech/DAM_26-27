@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Adrian\\source\\repos\\Vehiculos\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{59C897C3-7364-4B6A-A8D9-65A292A29973}|Vehiculos\\Vehiculos.csproj|c:\\users\\adrian\\source\\repos\\vehiculos\\vehiculos\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59C897C3-7364-4B6A-A8D9-65A292A29973}|Vehiculos\\Vehiculos.csproj|solutionrelative:vehiculos\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59C897C3-7364-4B6A-A8D9-65A292A29973}|Vehiculos\\Vehiculos.csproj|c:\\users\\adrian\\source\\repos\\vehiculos\\vehiculos\\vehiculo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59C897C3-7364-4B6A-A8D9-65A292A29973}|Vehiculos\\Vehiculos.csproj|solutionrelative:vehiculos\\vehiculo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59C897C3-7364-4B6A-A8D9-65A292A29973}|Vehiculos\\Vehiculos.csproj|c:\\users\\adrian\\source\\repos\\vehiculos\\vehiculos\\bicicleta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59C897C3-7364-4B6A-A8D9-65A292A29973}|Vehiculos\\Vehiculos.csproj|solutionrelative:vehiculos\\bicicleta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Bicicleta.cs",
+              "DocumentMoniker": "C:\\Users\\Adrian\\source\\repos\\Vehiculos\\Vehiculos\\Bicicleta.cs",
+              "RelativeDocumentMoniker": "Vehiculos\\Bicicleta.cs",
+              "ToolTip": "C:\\Users\\Adrian\\source\\repos\\Vehiculos\\Vehiculos\\Bicicleta.cs",
+              "RelativeToolTip": "Vehiculos\\Bicicleta.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-22T14:41:22.277Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Vehiculo.cs",
+              "DocumentMoniker": "C:\\Users\\Adrian\\source\\repos\\Vehiculos\\Vehiculos\\Vehiculo.cs",
+              "RelativeDocumentMoniker": "Vehiculos\\Vehiculo.cs",
+              "ToolTip": "C:\\Users\\Adrian\\source\\repos\\Vehiculos\\Vehiculos\\Vehiculo.cs",
+              "RelativeToolTip": "Vehiculos\\Vehiculo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-22T14:38:59.606Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Adrian\\source\\repos\\Vehiculos\\Vehiculos\\Program.cs",
+              "RelativeDocumentMoniker": "Vehiculos\\Program.cs",
+              "ToolTip": "C:\\Users\\Adrian\\source\\repos\\Vehiculos\\Vehiculos\\Program.cs",
+              "RelativeToolTip": "Vehiculos\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-22T14:38:41.282Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

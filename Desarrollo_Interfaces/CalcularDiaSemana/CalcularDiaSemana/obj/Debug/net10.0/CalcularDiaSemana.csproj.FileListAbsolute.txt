@@ -1,0 +1,15 @@
+C:\Users\Adrian\source\repos\CalcularDiaSemana\CalcularDiaSemana\bin\Debug\net10.0\CalcularDiaSemana.exe
+C:\Users\Adrian\source\repos\CalcularDiaSemana\CalcularDiaSemana\bin\Debug\net10.0\CalcularDiaSemana.deps.json
+C:\Users\Adrian\source\repos\CalcularDiaSemana\CalcularDiaSemana\bin\Debug\net10.0\CalcularDiaSemana.runtimeconfig.json
+C:\Users\Adrian\source\repos\CalcularDiaSemana\CalcularDiaSemana\bin\Debug\net10.0\CalcularDiaSemana.dll
+C:\Users\Adrian\source\repos\CalcularDiaSemana\CalcularDiaSemana\bin\Debug\net10.0\CalcularDiaSemana.pdb
+C:\Users\Adrian\source\repos\CalcularDiaSemana\CalcularDiaSemana\obj\Debug\net10.0\CalcularDiaSemana.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Adrian\source\repos\CalcularDiaSemana\CalcularDiaSemana\obj\Debug\net10.0\CalcularDiaSemana.AssemblyInfoInputs.cache
+C:\Users\Adrian\source\repos\CalcularDiaSemana\CalcularDiaSemana\obj\Debug\net10.0\CalcularDiaSemana.AssemblyInfo.cs
+C:\Users\Adrian\source\repos\CalcularDiaSemana\CalcularDiaSemana\obj\Debug\net10.0\CalcularDiaSemana.csproj.CoreCompileInputs.cache
+C:\Users\Adrian\source\repos\CalcularDiaSemana\CalcularDiaSemana\obj\Debug\net10.0\CalcularDiaSemana.dll
+C:\Users\Adrian\source\repos\CalcularDiaSemana\CalcularDiaSemana\obj\Debug\net10.0\refint\CalcularDiaSemana.dll
+C:\Users\Adrian\source\repos\CalcularDiaSemana\CalcularDiaSemana\obj\Debug\net10.0\CalcularDiaSemana.pdb
+C:\Users\Adrian\source\repos\CalcularDiaSemana\CalcularDiaSemana\obj\Debug\net10.0\CalcularDiaSemana.genruntimeconfig.cache
+C:\Users\Adrian\source\repos\CalcularDiaSemana\CalcularDiaSemana\obj\Debug\net10.0\ref\CalcularDiaSemana.dll
+C:\Users\Adrian\source\repos\CalcularDiaSemana\CalcularDiaSemana\obj\Debug\net10.0\Calcular.A6417605.Up2Date
