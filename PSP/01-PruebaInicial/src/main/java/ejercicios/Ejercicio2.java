@@ -14,28 +14,35 @@ public class Ejercicio2 {
     public static void main (String[] args){
         //Gestion de Estudiantes
         List<Alumno> listaAlumnos = new ArrayList<>();
+        List<Asignatura> notasAlumno;
         int opcionUsuario = 1;
         while (opcionUsuario != 0){
             mostrarOpciones();
             opcionUsuario = pedirNumeroUsuario();
             switch (opcionUsuario){
                 case 1 -> {
+                    //Borrar el Alumno
+                    notasAlumno = new ArrayList<>();
+
                     //Agregar Alumno
                     System.out.println("Introduce el Nombre del Alumno: ");
                     String nombreAlunmno = s.next();
                     System.out.println("Introduce la edad del Alumno: ");
                     int edadAlumno = s.nextInt();
+                    Alumno alumno = new Alumno(nombreAlunmno, edadAlumno);
+
                     System.out.println("Cuantas notas quieres agregar?");
                     int cantidadNotas = s.nextInt();
-                    List<Asignatura> notasAlumno = new ArrayList<>();
                     for(int i = 0;i < cantidadNotas; i++){
                         System.out.println("Introduce el nombre de la Asignatura: ");
                         String nombreAsig = s.next();
                         System.out.println("Que nota ha sacada en " + nombreAsig + "?: ");
-                        int notaAsig = s.nextInt();
+                        float notaAsig = s.nextFloat();
                         notasAlumno.add(new Asignatura(nombreAsig, notaAsig));
                     }
-                    listaAlumnos.add(new Alumno(nombreAlunmno, edadAlumno, notasAlumno));
+                    alumno.setNotas(notasAlumno);
+
+                    listaAlumnos.add(alumno);
                 }
 
                 case 2 -> {
@@ -45,7 +52,7 @@ public class Ejercicio2 {
                     int longitudListaSinModificar = listaAlumnos.size();
                     for(Alumno a : listaAlumnos){
                         if (a.getNombre().toLowerCase().equals(alumnoABorrar.toLowerCase())){
-                            System.out.println("Alumno encontrado!!!");
+                            System.out.println("Alumno borrado!!!");
                             listaAlumnos.remove(a);
                             break;
                         }
@@ -71,8 +78,10 @@ public class Ejercicio2 {
                             System.out.println("Alumno encontrado: ");
                             System.out.println(a.toString());
                             System.out.println("Promedio del Alumno " + a.getNombre() + ": "+ a.calcularPromedio());
+                            break;
                         }
                     }
+                    System.out.println("Alumno no encontrado...");
                 }
 
                 default -> {

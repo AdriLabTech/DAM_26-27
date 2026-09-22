@@ -6,23 +6,23 @@ public class Ejercicio1 {
     private static Scanner s = new Scanner(System.in);
     //Calculadora Basica
     public static void main(String[] args){
-        int numero1 = pedirNumeroUsuario();
-        int numero2 = pedirNumeroUsuario();
-
         System.out.println("Operacion a realizar: (s/r/m/d): ");
         String operacion = s.next();
 
+        int numero1 = pedirNumeroUsuario();
+        int numero2 = pedirNumeroUsuario();
+
         switch (operacion){
-            case "s" -> {
+            case "s", "suma" -> {
                 System.out.println(sumaNumeros(numero1, numero2));
             }
-            case "r" -> {
+            case "r", "resta" -> {
                 System.out.println(restaNumeros(numero1, numero2));
             }
-            case "m" -> {
+            case "m", "nultiplicacion" -> {
                 System.out.println(multiplicacionNumeros(numero1, numero2));
             }
-            case "d" -> {
+            case "d", "division" -> {
                 System.out.println(divisionNumeros(numero1, numero2));
             }
         }
