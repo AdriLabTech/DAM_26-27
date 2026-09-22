@@ -1,3 +1,4 @@
+# Actividad 1. Configuracion del entorno
 import sys
 print("¡Entorno configurado correctamente!")
 print("Versión de Python:", sys.version)
