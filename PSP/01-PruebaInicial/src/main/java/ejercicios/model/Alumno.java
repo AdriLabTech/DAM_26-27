@@ -6,7 +6,7 @@ import java.util.List;
 public class Alumno {
     private String nombre;
     private int edad;
-    private List<Asignatura> notas = new ArrayList<>();
+    private List<Asignatura> notas;
 
     public Alumno(){}
 
@@ -14,6 +14,12 @@ public class Alumno {
         this.edad = edad;
         this.nombre = nombre;
         this.notas = notas;
+    }
+
+    public Alumno(String nombre, int edad){
+        this.edad = edad;
+        this.nombre = nombre;
+        this.notas = new ArrayList<>();
     }
 
     public Alumno(String nombre){

@@ -2,11 +2,11 @@ package ejercicios.model;
 
 public class Asignatura {
     private String nombre;
-    private int nota;
+    private float nota;
 
     public Asignatura(){}
 
-    public Asignatura(String nombre, int nota){
+    public Asignatura(String nombre, float nota){
         this.nombre = nombre;
         this.nota = nota;
     }
@@ -19,11 +19,11 @@ public class Asignatura {
         this.nombre = nombre;
     }
 
-    public int getNota() {
+    public float getNota() {
         return nota;
     }
 
-    public void setNota(int nota) {
+    public void setNota(float nota) {
         this.nota = nota;
     }
 

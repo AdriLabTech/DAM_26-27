@@ -2,6 +2,7 @@
 
 distancia_km = float(input("Ingresa la longitud en kilómetros: "))
 
+# Aplicamos las conversiones
 distancia_metros = distancia_km * 1000
 
 distancia_millas = distancia_km * 0.621371
