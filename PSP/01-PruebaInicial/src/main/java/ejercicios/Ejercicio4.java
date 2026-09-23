@@ -12,6 +12,7 @@ public class Ejercicio4 {
         String frase = entrada.replace(" ", "").toLowerCase().replaceAll("\\p{P}", "");
 
         boolean isPalindromo = verificarPalindromo(frase);
+        System.out.println(isPalindromo ? "La cadena es palindroma" : "La cadena NO es palindroma");
     }
 
     private static boolean verificarPalindromo(String frase){

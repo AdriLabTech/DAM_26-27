@@ -1,0 +1,14 @@
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/EjerciciosPresentacion/04_VariablesTiposDatos/VariablesTiposDatos/obj/Debug/net10.0/VariablesTiposDatos.GeneratedMSBuildEditorConfig.editorconfig
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/EjerciciosPresentacion/04_VariablesTiposDatos/VariablesTiposDatos/obj/Debug/net10.0/VariablesTiposDatos.AssemblyInfoInputs.cache
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/EjerciciosPresentacion/04_VariablesTiposDatos/VariablesTiposDatos/obj/Debug/net10.0/VariablesTiposDatos.AssemblyInfo.cs
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/EjerciciosPresentacion/04_VariablesTiposDatos/VariablesTiposDatos/obj/Debug/net10.0/VariablesTiposDatos.csproj.CoreCompileInputs.cache
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/EjerciciosPresentacion/04_VariablesTiposDatos/VariablesTiposDatos/bin/Debug/net10.0/VariablesTiposDatos
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/EjerciciosPresentacion/04_VariablesTiposDatos/VariablesTiposDatos/bin/Debug/net10.0/VariablesTiposDatos.deps.json
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/EjerciciosPresentacion/04_VariablesTiposDatos/VariablesTiposDatos/bin/Debug/net10.0/VariablesTiposDatos.runtimeconfig.json
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/EjerciciosPresentacion/04_VariablesTiposDatos/VariablesTiposDatos/bin/Debug/net10.0/VariablesTiposDatos.dll
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/EjerciciosPresentacion/04_VariablesTiposDatos/VariablesTiposDatos/bin/Debug/net10.0/VariablesTiposDatos.pdb
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/EjerciciosPresentacion/04_VariablesTiposDatos/VariablesTiposDatos/obj/Debug/net10.0/VariablesTiposDatos.dll
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/EjerciciosPresentacion/04_VariablesTiposDatos/VariablesTiposDatos/obj/Debug/net10.0/refint/VariablesTiposDatos.dll
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/EjerciciosPresentacion/04_VariablesTiposDatos/VariablesTiposDatos/obj/Debug/net10.0/VariablesTiposDatos.pdb
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/EjerciciosPresentacion/04_VariablesTiposDatos/VariablesTiposDatos/obj/Debug/net10.0/VariablesTiposDatos.genruntimeconfig.cache
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/EjerciciosPresentacion/04_VariablesTiposDatos/VariablesTiposDatos/obj/Debug/net10.0/ref/VariablesTiposDatos.dll

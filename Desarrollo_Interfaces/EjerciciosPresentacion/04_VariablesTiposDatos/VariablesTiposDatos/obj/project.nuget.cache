@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "EepprsQ8sLs=",
+  "success": true,
+  "projectFilePath": "/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/EjerciciosPresentacion/04_VariablesTiposDatos/VariablesTiposDatos/VariablesTiposDatos.csproj",
+  "expectedPackageFiles": [
+    "/home/adrian/.nuget/packages/microsoft.aspnetcore.app.ref/10.0.12/microsoft.aspnetcore.app.ref.10.0.12.nupkg.sha512"
+  ],
+  "logs": []
+}

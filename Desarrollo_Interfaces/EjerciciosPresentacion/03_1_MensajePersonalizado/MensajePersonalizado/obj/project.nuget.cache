@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "VwPMGg0WGDk=",
+  "success": true,
+  "projectFilePath": "/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/EjerciciosPresentacion/03_1_MensajePersonalizado/MensajePersonalizado/MensajePersonalizado.csproj",
+  "expectedPackageFiles": [
+    "/home/adrian/.nuget/packages/microsoft.aspnetcore.app.ref/10.0.12/microsoft.aspnetcore.app.ref.10.0.12.nupkg.sha512"
+  ],
+  "logs": []
+}

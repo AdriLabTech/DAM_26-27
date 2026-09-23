@@ -1,0 +1,14 @@
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/09_ValidacionContraseña/ValidacionContrasenia/obj/Debug/net10.0/ValidacionContrasenia.GeneratedMSBuildEditorConfig.editorconfig
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/09_ValidacionContraseña/ValidacionContrasenia/obj/Debug/net10.0/ValidacionContrasenia.AssemblyInfoInputs.cache
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/09_ValidacionContraseña/ValidacionContrasenia/obj/Debug/net10.0/ValidacionContrasenia.AssemblyInfo.cs
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/09_ValidacionContraseña/ValidacionContrasenia/obj/Debug/net10.0/ValidacionContrasenia.csproj.CoreCompileInputs.cache
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/09_ValidacionContraseña/ValidacionContrasenia/bin/Debug/net10.0/ValidacionContrasenia
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/09_ValidacionContraseña/ValidacionContrasenia/bin/Debug/net10.0/ValidacionContrasenia.deps.json
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/09_ValidacionContraseña/ValidacionContrasenia/bin/Debug/net10.0/ValidacionContrasenia.runtimeconfig.json
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/09_ValidacionContraseña/ValidacionContrasenia/bin/Debug/net10.0/ValidacionContrasenia.dll
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/09_ValidacionContraseña/ValidacionContrasenia/bin/Debug/net10.0/ValidacionContrasenia.pdb
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/09_ValidacionContraseña/ValidacionContrasenia/obj/Debug/net10.0/ValidacionContrasenia.dll
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/09_ValidacionContraseña/ValidacionContrasenia/obj/Debug/net10.0/refint/ValidacionContrasenia.dll
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/09_ValidacionContraseña/ValidacionContrasenia/obj/Debug/net10.0/ValidacionContrasenia.pdb
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/09_ValidacionContraseña/ValidacionContrasenia/obj/Debug/net10.0/ValidacionContrasenia.genruntimeconfig.cache
+/home/adrian/Proyectos/DAM_26-27/Desarrollo_Interfaces/09_ValidacionContraseña/ValidacionContrasenia/obj/Debug/net10.0/ref/ValidacionContrasenia.dll
