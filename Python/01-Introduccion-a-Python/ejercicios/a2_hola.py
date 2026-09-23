@@ -1,4 +1,11 @@
-# Actividad 2. Hola, mundo personalizado. (Obligatoria)
+"""
+# ---------------------------------------
+# Actividad 2. Hola, mundo personalizado
+# ---------------------------------------
+
+Inicializamos las 3 variables agregandole los
+valores correctos para mostrarlos por patalla
+"""
 nombre = "Adrian"
 ciclo_formativo = "Desarrollo de Aplicaciones Multiplataforma"
 nombre_modulo = "Python aplicado a la Inteligencia Artificial"
