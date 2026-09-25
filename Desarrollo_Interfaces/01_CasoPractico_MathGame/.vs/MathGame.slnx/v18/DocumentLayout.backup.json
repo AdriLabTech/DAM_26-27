@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Adrian\\source\\repos\\MathGame\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEA4465-C8EF-22A7-2B71-39AAD5E3A6DA}|MathGame\\MathGame.csproj|c:\\users\\adrian\\source\\repos\\mathgame\\mathgame\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEA4465-C8EF-22A7-2B71-39AAD5E3A6DA}|MathGame\\MathGame.csproj|solutionrelative:mathgame\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEA4465-C8EF-22A7-2B71-39AAD5E3A6DA}|MathGame\\MathGame.csproj|c:\\users\\adrian\\source\\repos\\mathgame\\mathgame\\modelos\\partida.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEA4465-C8EF-22A7-2B71-39AAD5E3A6DA}|MathGame\\MathGame.csproj|solutionrelative:mathgame\\modelos\\partida.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CEA4465-C8EF-22A7-2B71-39AAD5E3A6DA}|MathGame\\MathGame.csproj|c:\\users\\adrian\\source\\repos\\mathgame\\mathgame\\utilidades\\utils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CEA4465-C8EF-22A7-2B71-39AAD5E3A6DA}|MathGame\\MathGame.csproj|solutionrelative:mathgame\\utilidades\\utils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Partida.cs",
+              "DocumentMoniker": "C:\\Users\\Adrian\\source\\repos\\MathGame\\MathGame\\Modelos\\Partida.cs",
+              "RelativeDocumentMoniker": "MathGame\\Modelos\\Partida.cs",
+              "ToolTip": "C:\\Users\\Adrian\\source\\repos\\MathGame\\MathGame\\Modelos\\Partida.cs",
+              "RelativeToolTip": "MathGame\\Modelos\\Partida.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-25T05:03:54.605Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Utils.cs",
+              "DocumentMoniker": "C:\\Users\\Adrian\\source\\repos\\MathGame\\MathGame\\Utilidades\\Utils.cs",
+              "RelativeDocumentMoniker": "MathGame\\Utilidades\\Utils.cs",
+              "ToolTip": "C:\\Users\\Adrian\\source\\repos\\MathGame\\MathGame\\Utilidades\\Utils.cs",
+              "RelativeToolTip": "MathGame\\Utilidades\\Utils.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAA0wCEAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-25T04:58:29.232Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Adrian\\source\\repos\\MathGame\\MathGame\\Program.cs",
+              "RelativeDocumentMoniker": "MathGame\\Program.cs",
+              "ToolTip": "C:\\Users\\Adrian\\source\\repos\\MathGame\\MathGame\\Program.cs",
+              "RelativeToolTip": "MathGame\\Program.cs",
+              "ViewState": "AgIAAGIAAAAAAAAAAAAgwHkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-25T04:19:15.305Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+<!-- Agrupa el proyecto ejecutable MathGame en la solución. -->
+<Solution>
+  <Project Path="MathGame/MathGame.csproj" />
+</Solution>

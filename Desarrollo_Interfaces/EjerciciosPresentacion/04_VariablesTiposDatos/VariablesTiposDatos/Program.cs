@@ -61,5 +61,19 @@ class Principal
 
     Console.WriteLine($"Total: {final:C}");
 
+    /* Tipos Anulables (Nullable Reference Types)
+     * Seguridad frente a Nulos
+     * --------------------------
+     * - String?: Permite valores nulos implicitos
+     * - Operator?: Navegacion segura frente a referencias nulas
+     * - Operador??: Asigna un valor por defecto si el objeto es null
+     */
+
+    string nombre = "Fernando";
+    int edad = 22;
+    double altura = 1.78;
+    bool esEstudiante = true;
+    Console.WriteLine($"Ficha: {nombre},{edad}a, {altura}m, Est: {esEstudiante}");
+
   }
 }
