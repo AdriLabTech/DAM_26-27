@@ -16,7 +16,7 @@ public class Ejercicio1 {
         switch (operacion) {
             case "s", "suma" -> System.out.println(sumaNumeros(numero1, numero2));
             // La errata se conserva para no cambiar las entradas admitidas.
-            case "m", "nutiplicacion" -> System.out.println(multiplicacionNumeros(numero1, numero2));
+            case "m", "nultiplicacion" -> System.out.println(multiplicacionNumeros(numero1, numero2));
             case "r", "resta" -> System.out.println(restaNumeros(numero1, numero2));
             case "d", "division" -> System.out.println(divisionNumeros(numero1, numero2));
         }
