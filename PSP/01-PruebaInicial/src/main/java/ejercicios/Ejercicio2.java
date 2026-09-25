@@ -7,100 +7,117 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/** Menú de consola para gestionar alumnos y sus notas. */
 public class Ejercicio2 {
-    private static Scanner s = new Scanner(System.in);
+    private static final Scanner SCANNER = new Scanner(System.in);
 
-    public static void main (String[] args){
-        //Gestion de Estudiantes
+    public static void main(String[] args) {
         List<Alumno> listaAlumnos = new ArrayList<>();
-        List<Asignatura> notasAlumno;
         int opcionUsuario;
-        do{
+
+        do {
             mostrarOpciones();
             opcionUsuario = pedirNumeroUsuario();
-            switch (opcionUsuario){
-                case 1 -> {
-                    //Borrar el Alumno
-                    notasAlumno = new ArrayList<>();
 
-                    //Agregar Alumno
-                    System.out.println("Introduce el Nombre del Alumno: ");
-                    String nombreAlunmno = s.next();
-                    System.out.println("Introduce la edad del Alumno: ");
-                    int edadAlumno = s.nextInt();
-                    Alumno alumno = new Alumno(nombreAlunmno, edadAlumno);
-
-                    System.out.println("Cuantas notas quieres agregar?");
-                    int cantidadNotas = s.nextInt();
-                    for(int i = 0;i < cantidadNotas; i++){
-                        System.out.println("Introduce el nombre de la Asignatura: ");
-                        String nombreAsig = s.next();
-                        System.out.println("Que nota ha sacada en " + nombreAsig + "?: ");
-                        float notaAsig = s.nextFloat();
-                        notasAlumno.add(new Asignatura(nombreAsig, notaAsig));
-                    }
-                    alumno.setNotas(notasAlumno);
-
-                    listaAlumnos.add(alumno);
-                }
-
-                case 2 -> {
-                    //Eliminar Alumno
-                    System.out.println("Inserta el nombre del Alumno que quieras borrar: ");
-                    String alumnoABorrar = s.next();
-                    int longitudListaSinModificar = listaAlumnos.size();
-                    for(Alumno a : listaAlumnos){
-                        if (a.getNombre().toLowerCase().equals(alumnoABorrar.toLowerCase())){
-                            System.out.println("Alumno borrado!!!");
-                            listaAlumnos.remove(a);
-                            break;
-                        }
-                    }
-                    int longitudListaModificada = listaAlumnos.size();
-                    if(longitudListaModificada == longitudListaSinModificar){
-                        System.out.println("No se ha encontrado ningun alumno con ese nombre");
-                    }
-                }
-
-                case 3 -> {
-                    //Mostrar todos los Alumnos
-                    for(Alumno a : listaAlumnos){
-                        System.out.println(a.toString());
-                    }
-                }
-
-                case 4 -> {
-                    System.out.println("Introduce el nombre del Alumno que quieras calcular su promedio: ");
-                    String nombreAlumnoABuscar = s.next();
-                    for(Alumno a : listaAlumnos){
-                        if(a.getNombre().toLowerCase().equals(nombreAlumnoABuscar.toLowerCase())){
-                            System.out.println("Alumno encontrado: ");
-                            System.out.println(a.toString());
-                            System.out.println("Promedio del Alumno " + a.getNombre() + ": "+ a.calcularPromedio());
-                            break;
-                        }
-                    }
-                    System.out.println("Alumno no encontrado...");
-                }
-
+            switch (opcionUsuario) {
+                case 1 -> agregarAlumno(listaAlumnos);
+                case 2 -> eliminarAlumno(listaAlumnos);
+                case 3 -> mostrarAlumnos(listaAlumnos);
+                case 4 -> mostrarPromedio(listaAlumnos);
                 default -> {
                     System.out.println("Saliendo...");
                     opcionUsuario = 0;
                 }
             }
-        }while (opcionUsuario != 0);
+        } while (opcionUsuario != 0);
     }
 
-    public static int pedirNumeroUsuario(){
+    public static int pedirNumeroUsuario() {
         System.out.println("Introduce el numero de la opcion: ");
-        return s.nextInt();
+        return SCANNER.nextInt();
     }
 
-    public static void mostrarOpciones(){
+    public static void mostrarOpciones() {
         System.out.println("1.- Agregar Alumno");
         System.out.println("2.- Borrar Alumno");
         System.out.println("3.- Mostrar todos los Alumnos");
         System.out.println("4.- Calcular promedio de Alumno");
         System.out.println("0.- Salir");
+    }
+
+    private static void agregarAlumno(List<Alumno> listaAlumnos) {
+        List<Asignatura> notasAlumno = new ArrayList<>();
+
+        System.out.println("Introduce el Nombre del Alumno: ");
+        String nombreAlumno = SCANNER.next();
+
+        System.out.println("Introduce la edad del Alumno: ");
+        int edadAlumno = SCANNER.nextInt();
+
+        Alumno alumno = new Alumno(nombreAlumno, edadAlumno);
+
+        System.out.println("Cuantas notas quieres agregar?");
+        int cantidadNotas = SCANNER.nextInt();
+
+        for (int i = 0; i < cantidadNotas; i++) {
+            System.out.println("Introduce el nombre de la Asignatura: ");
+            String nombreAsignatura = SCANNER.next();
+
+            System.out.println("Que nota ha sacada en " + nombreAsignatura + "?: ");
+            float notaAsignatura = SCANNER.nextFloat();
+
+            notasAlumno.add(new Asignatura(nombreAsignatura, notaAsignatura));
+        }
+
+        alumno.setNotas(notasAlumno);
+        listaAlumnos.add(alumno);
+    }
+
+    private static void eliminarAlumno(List<Alumno> listaAlumnos) {
+        System.out.println("Inserta el nombre del Alumno que quieras borrar: ");
+        String nombreAlumnoABorrar = SCANNER.next();
+        String nombreNormalizado = nombreAlumnoABorrar.toLowerCase();
+        int longitudListaSinModificar = listaAlumnos.size();
+
+        for (Alumno alumno : listaAlumnos) {
+            if (coincideNombre(alumno.getNombre(), nombreNormalizado)) {
+                System.out.println("Alumno borrado!!!");
+                listaAlumnos.remove(alumno);
+                break;
+            }
+        }
+
+        int longitudListaModificada = listaAlumnos.size();
+        if (longitudListaModificada == longitudListaSinModificar) {
+            System.out.println("No se ha encontrado ningun alumno con ese nombre");
+        }
+    }
+
+    private static void mostrarAlumnos(List<Alumno> listaAlumnos) {
+        for (Alumno alumno : listaAlumnos) {
+            System.out.println(alumno.toString());
+        }
+    }
+
+    private static void mostrarPromedio(List<Alumno> listaAlumnos) {
+        System.out.println("Introduce el nombre del Alumno que quieras calcular su promedio: ");
+        String nombreAlumnoABuscar = SCANNER.next();
+        String nombreNormalizado = nombreAlumnoABuscar.toLowerCase();
+
+        for (Alumno alumno : listaAlumnos) {
+            if (coincideNombre(alumno.getNombre(), nombreNormalizado)) {
+                System.out.println("Alumno encontrado: ");
+                System.out.println(alumno.toString());
+                System.out.println("Promedio del Alumno " + alumno.getNombre() + ": " + alumno.calcularPromedio());
+                break;
+            }
+        }
+
+        // El mensaje final forma parte del comportamiento original del ejercicio.
+        System.out.println("Alumno no encontrado...");
+    }
+
+    private static boolean coincideNombre(String nombreAlumno, String nombreNormalizado) {
+        return nombreAlumno.toLowerCase().equals(nombreNormalizado);
     }
 }

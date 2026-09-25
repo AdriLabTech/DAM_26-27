@@ -1,12 +1,14 @@
 package ejercicios.model;
 
+/** Modelo de una asignatura y la nota obtenida. */
 public class Asignatura {
     private String nombre;
     private float nota;
 
-    public Asignatura(){}
+    public Asignatura() {
+    }
 
-    public Asignatura(String nombre, float nota){
+    public Asignatura(String nombre, float nota) {
         this.nombre = nombre;
         this.nota = nota;
     }
