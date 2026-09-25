@@ -3,13 +3,13 @@
     // Agrupa las respuestas de una partida y calcula su puntuacion.
     internal class Partida
     {
-        private readonly Dictionary<int, AlmacenamientoResultados> resultados = new();
+        private Dictionary<int, AlmacenamientoResultados> resultados = new();
 
-        // Numero correlativo de la partida dentro de la sesion.
+        // Numero de la partida dentro de la sesion.
         public int NumeroPartida { get; }
 
         // Expone las respuestas mediante una vista de solo lectura.
-        public IReadOnlyDictionary<int, AlmacenamientoResultados> Resultados => resultados;
+        public Dictionary<int, AlmacenamientoResultados> Resultados => resultados;
 
         // La lambda cuenta solo las respuestas marcadas como correctas.
         public int Puntuacion => resultados.Values.Count(resultado => resultado.EsCorrecto);
