@@ -14,8 +14,8 @@ public class Ejercicio2 {
         //Gestion de Estudiantes
         List<Alumno> listaAlumnos = new ArrayList<>();
         List<Asignatura> notasAlumno;
-        int opcionUsuario = 1;
-        while (opcionUsuario != 0){
+        int opcionUsuario;
+        do{
             mostrarOpciones();
             opcionUsuario = pedirNumeroUsuario();
             switch (opcionUsuario){
@@ -88,7 +88,7 @@ public class Ejercicio2 {
                     opcionUsuario = 0;
                 }
             }
-        }
+        }while (opcionUsuario != 0);
     }
 
     public static int pedirNumeroUsuario(){

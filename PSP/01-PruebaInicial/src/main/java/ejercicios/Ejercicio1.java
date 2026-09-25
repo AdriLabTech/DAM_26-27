@@ -9,8 +9,8 @@ public class Ejercicio1 {
         System.out.println("Operacion a realizar: (s/r/m/d): ");
         String operacion = s.next();
 
-        int numero1 = pedirNumeroUsuario();
-        int numero2 = pedirNumeroUsuario();
+        float numero1 = pedirNumeroUsuario();
+        float numero2 = pedirNumeroUsuario();
 
         switch (operacion){
             case "s", "suma" -> {
@@ -29,15 +29,15 @@ public class Ejercicio1 {
 
     }
 
-    public static int sumaNumeros(int numero1, int numero2){
+    public static float sumaNumeros(float numero1, float numero2){
         return numero1 + numero2;
     }
 
-    public static int restaNumeros(int numero1, int numero2){
+    public static float restaNumeros(float numero1, float numero2){
         return numero1 - numero2;
     }
 
-    public static int multiplicacionNumeros(int numero1, int numero2){
+    public static float multiplicacionNumeros(float numero1, float numero2){
         int resultado = 0;
         for(int i = 0; i < numero2; i++){
             resultado += numero1;
@@ -45,18 +45,25 @@ public class Ejercicio1 {
         return resultado;
     }
 
-    public static int divisionNumeros(int numero1, int numero2){
-        int cociente = 0;
-        while (numero1 >= numero2) {
-            numero1 -= numero2;
-            cociente++;
+    public static float divisionNumeros(float numero1, float numero2){
+        float cociente = 0;
+        try{
+            while (numero1 >= numero2) {
+                numero1 -= numero2;
+                cociente++;
+            }
+
+            return cociente;
+        } catch (Exception e){
+            System.out.println("No se puede dividir entre 0!!!");
         }
 
         return cociente;
+
     }
 
-    public static int pedirNumeroUsuario(){
+    public static float pedirNumeroUsuario(){
         System.out.println("Introduce un numero: ");
-        return s.nextInt();
+        return s.nextFloat();
     }
 }
