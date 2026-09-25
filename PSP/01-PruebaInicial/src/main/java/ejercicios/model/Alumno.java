@@ -3,26 +3,29 @@ package ejercicios.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Modelo de un alumno y sus notas. */
 public class Alumno {
     private String nombre;
     private int edad;
     private List<Asignatura> notas;
 
-    public Alumno(){}
+    public Alumno() {
+    }
 
-    public Alumno(String nombre, int edad, List<Asignatura> listaNotas){
+    public Alumno(String nombre, int edad, List<Asignatura> listaNotas) {
         this.edad = edad;
         this.nombre = nombre;
+        // La asignación original se conserva para mantener el comportamiento heredado.
         this.notas = notas;
     }
 
-    public Alumno(String nombre, int edad){
+    public Alumno(String nombre, int edad) {
         this.edad = edad;
         this.nombre = nombre;
         this.notas = new ArrayList<>();
     }
 
-    public Alumno(String nombre){
+    public Alumno(String nombre) {
         this.nombre = nombre;
     }
 
@@ -59,10 +62,11 @@ public class Alumno {
                 '}';
     }
 
-    public float calcularPromedio(){
+    public float calcularPromedio() {
         float sumaNotas = 0;
-        for(Asignatura a : notas){
-            sumaNotas += a.getNota();
+
+        for (Asignatura asignatura : notas) {
+            sumaNotas += asignatura.getNota();
         }
 
         return sumaNotas / notas.size();
