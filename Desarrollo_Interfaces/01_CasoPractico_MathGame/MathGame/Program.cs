@@ -22,9 +22,9 @@ internal static class Principal
         while (true)
         {
             Utils.MostrarOpciones();
-            int? opcion = Utils.PedirEntero("Introduce una Opcion: ");
+            int? opcion = Utils.PedirEntero("Introduce una Opcion: "); // Permitimos valores Nulos para salir del programa
 
-            // EOF se trata como una salida controlada del programa.
+            // EOF (End Of File) es una salida controlada del programa.
             if (opcion is null)
             {
                 Console.WriteLine("Saliendo...");
