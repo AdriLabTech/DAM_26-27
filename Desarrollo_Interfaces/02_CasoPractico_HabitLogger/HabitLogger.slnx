@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="HabitLogger/HabitLogger.csproj" />
+  <Project Path="HabitLoggerTui/HabitLoggerTui.csproj" />
+</Solution>
