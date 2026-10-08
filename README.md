@@ -30,6 +30,7 @@
 - [🖼️ Proyecto destacado: HabitLogger](#️-proyecto-destacado-habitlogger)
 - [🚀 Cómo ejecutar los proyectos](#-cómo-ejecutar-los-proyectos)
 - [🛠️ Tecnologías](#️-tecnologías)
+- [🧠 Mapa de conexión de conocimientos](#-mapa-de-conexión-de-conocimientos)
 - [📈 Evolución](#-evolución)
 - [🧑‍💻 Autor](#-autor)
 
@@ -213,22 +214,35 @@ dotnet run --project Desarrollo_Interfaces/02_CasoPractico_HabitLogger/HabitLogg
 
 ---
 
+## 🧠 Mapa de conexión de conocimientos
+
+Los módulos no son islas: los mismos conceptos reaparecen en lenguajes y contextos distintos. Este mapa muestra cómo se relacionan.
+
+<div align="center">
+  <img src="assets/mapa-conocimientos.svg" alt="Mapa de conexión de conocimientos entre los módulos del curso" width="100%">
+</div>
+
+| Concepto compartido | Módulos | Dónde se ve |
+|:--|:--|:--|
+| 🔀 **Lógica y control de flujo** | Python · PSP · Interfaces | Condicionales y bucles en Python; los mismos fundamentos en los ejercicios de Java y C#. |
+| 🧩 **Programación orientada a objetos** | PSP · Interfaces · Móviles | Modelo `Alumno`/`Asignatura` en Java, clases de vehículos en C# y Kotlin sobre la JVM. |
+| ☕ **Java, JVM y Maven** | PSP · Acceso a Datos · Móviles | Proyectos Maven en Java y Kotlin, con la misma estructura y ciclo de construcción. |
+| 💾 **Persistencia de datos** | Interfaces · Acceso a Datos | SQLite en HabitLogger y ficheros binarios en el editor de Acceso a Datos. |
+| 🛡️ **Excepciones y validación** | Interfaces · Acceso a Datos | Excepciones propias en Java y validación de entradas con tabla `Errores` en C#. |
+
+---
+
 ## 📈 Evolución
 
 El repositorio no muestra solo el resultado final. También conserva parte del **proceso de aprendizaje**:
 
-```mermaid
-flowchart LR
-    A[Ejercicio inicial] --> B[Versión funcional]
-    B --> C[Errores y correcciones]
-    C --> D[Refactorización]
-    D --> E[Documentación]
-```
-
-- 🧪 Código en desarrollo y distintos enfoques para un mismo problema.
-- 🐞 Errores y correcciones.
-- ♻️ Refactorizaciones y mejoras a lo largo del curso.
-- 📝 Documentación asociada a los trabajos más importantes.
+| Etapa | Qué aporta |
+|:--:|:--|
+| 1️⃣ **Ejercicio inicial** | Primer planteamiento del problema. |
+| 2️⃣ **Versión funcional** | Una solución que ya resuelve el enunciado. |
+| 3️⃣ **Errores y correcciones** | Fallos detectados y su arreglo, visibles en el historial. |
+| 4️⃣ **Refactorización** | Código más claro y optimizado. |
+| 5️⃣ **Documentación** | README y capturas de los trabajos más importantes. |
 
 El contenido crecerá conforme se incorporen nuevos módulos.
 
