@@ -8,8 +8,14 @@ también.
 lista_numeros = [4, 9, 2, -3, 8, -7]
 posicion = 0
 
-for n in range(0,len(lista_numeros)): # el metodo len() devuelve la longitud (en este caso) del array
+# Recorremos con range() usando len() como final, asi el bucle se adapta solo al
+# tamaño de la lista. Usamos el indice (n) en vez del valor para poder saber en
+# que posicion esta el negativo
+for n in range(0, len(lista_numeros)):
     if lista_numeros[n] < 0:
+        # Guardamos la posicion y con break salimos del bucle, de modo que ya no
+        # se miran los numeros siguientes aunque tambien sean negativos
         posicion = n
         break
+
 print(f"El primer numero negativo es {lista_numeros[posicion]} y se encuentra en la posicion {posicion}")

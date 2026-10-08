@@ -1,16 +1,13 @@
+"""
+# -----------------------------------------------------------
 # Actividad 11. Comprobacion de mayoria de edad y descuento
-
+# -----------------------------------------------------------
+Capturamos la entrada del usuario y la convertimos a numero
+"""
 edad_usuario = int(input("Introduzca su edad: "))
-
-# Comprobamos que la edad del usuario sea valida (mayor que 0)
-while(edad_usuario < 0):
-    edad_usuario = int(input("Introduzca una edad valida: "))
-
 
 # Pedimos al usuario que introduzca si o no y en caso de que introduzca algo no valido, volvemos a preguntar
 entrada_usuario_carnet = input("Tiene carne joven? (si/no): ")
-while(entrada_usuario_carnet != "si" and entrada_usuario_carnet != "no"):
-    entrada_usuario_carnet = input("Tiene carne joven? (si/no): ")
 
 # Si el usuario introduce si, el valor de la variable tiene_carnet es True
 tiene_carnet = entrada_usuario_carnet == "si"

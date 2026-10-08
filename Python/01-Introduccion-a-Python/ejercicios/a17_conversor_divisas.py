@@ -1,5 +1,8 @@
+"""
+# -------------------------------------------------------
 # Actividad 17. Conversor de divisas con varias salidas
-
+# -------------------------------------------------------
+"""
 # Equivalencia 1:1 con respecto a otras monedas
 valor_dolar = 1.15
 valor_yuan = 7.69

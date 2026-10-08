@@ -1,0 +1,17 @@
+<empresa>
+    <empleado>
+        <nombre>Ana García</nombre>
+        <departamento>IT</departamento>
+        <salario>35000</salario>
+    </empleado>
+    <empleado>
+        <nombre>Jorge Martínez</nombre>
+        <departamento>Ventas</departamento>
+        <salario>30000</salario>
+    </empleado>
+    <empleado>
+        <nombre>Lucía Pérez</nombre>
+        <departamento>IT</departamento>
+        <salario>45000</salario>
+    </empleado>
+</empresa>

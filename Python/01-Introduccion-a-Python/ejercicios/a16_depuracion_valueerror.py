@@ -1,5 +1,9 @@
+"""
+# ----------------------------------------------
 # Actividad 16. Depuracion de un ValueError
-
+# ----------------------------------------------
+Capturamos la entrada del usuario
+"""
 edad_texto = input("Introduce tu edad: ")
 edad = int(edad_texto)
 print(f"Dentro de 5 años tendras {edad + 5} años.")

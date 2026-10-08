@@ -1,5 +1,6 @@
+"""
 # Actividad 19(reto). Calculadora de distancia entre dos puntos
-
+"""
 # Pedimos la primera coordenada (x1 ,y1)
 x1 = float(input("Introduce el valor X de la primera coordenada: "))
 y1 = float(input("Introduce el valor Y de la primera coordenada: "))

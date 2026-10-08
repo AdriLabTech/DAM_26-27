@@ -1,5 +1,10 @@
+"""
+# -----------------------------------------------
 # Actividad 8. Calculadora de IMC (obligatoria)
+# -----------------------------------------------
 
+Capturamos las entradas del usuario y las convertimos para operar con ellas
+"""
 peso_kg = float(input("Introduce tu peso en Kilogramos: "))
 altura_metros = float(input("Introduce tu altura en metros: "))
 

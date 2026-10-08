@@ -1,4 +1,10 @@
+"""
+# ---------------------------------------
 # Actividad 6. Varias lineas con print()
+# ---------------------------------------
+
+Iniciamos las 3 variables con sus respectivos valores
+"""
 nombre = "Adrian"
 edad = 19
 ciudad = "Cordoba"
