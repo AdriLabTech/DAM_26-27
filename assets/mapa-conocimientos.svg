@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" width="1000" role="img" aria-label="Mapa de conexión de conocimientos entre módulos" font-family="Segoe UI,Helvetica,Arial,sans-serif">
+<rect width="1000" height="560" rx="18" fill="#0f172a"/>
+<text x="500" y="38" text-anchor="middle" font-size="22" font-weight="700" fill="#f8fafc">Mapa de conexión de conocimientos</text>
+<text x="500" y="60" text-anchor="middle" font-size="13" fill="#94a3b8">Qué conceptos comparten los módulos del curso</text>
+<path d="M100.0,165 C100.0,250 100.0,290 100.0,440" fill="none" stroke="#0ea5e9" stroke-width="2.5" stroke-opacity="0.75"/>
+<path d="M300.0,165 C300.0,250 100.0,290 100.0,440" fill="none" stroke="#0ea5e9" stroke-width="2.5" stroke-opacity="0.75"/>
+<path d="M500.0,165 C500.0,250 100.0,290 100.0,440" fill="none" stroke="#0ea5e9" stroke-width="2.5" stroke-opacity="0.75"/>
+<path d="M300.0,165 C300.0,250 300.0,290 300.0,440" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-opacity="0.75"/>
+<path d="M500.0,165 C500.0,250 300.0,290 300.0,440" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-opacity="0.75"/>
+<path d="M900.0,165 C900.0,250 300.0,290 300.0,440" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-opacity="0.75"/>
+<path d="M300.0,165 C300.0,250 500.0,290 500.0,440" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-opacity="0.75"/>
+<path d="M700.0,165 C700.0,250 500.0,290 500.0,440" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-opacity="0.75"/>
+<path d="M900.0,165 C900.0,250 500.0,290 500.0,440" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-opacity="0.75"/>
+<path d="M500.0,165 C500.0,250 700.0,290 700.0,440" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-opacity="0.75"/>
+<path d="M700.0,165 C700.0,250 700.0,290 700.0,440" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-opacity="0.75"/>
+<path d="M500.0,165 C500.0,250 900.0,290 900.0,440" fill="none" stroke="#a855f7" stroke-width="2.5" stroke-opacity="0.75"/>
+<path d="M700.0,165 C700.0,250 900.0,290 900.0,440" fill="none" stroke="#a855f7" stroke-width="2.5" stroke-opacity="0.75"/>
+<rect x="15" y="95" width="170" height="70" rx="12" fill="#3776AB"/>
+<text x="100.0" y="126" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">Python</text>
+<text x="100.0" y="147" text-anchor="middle" font-size="12" fill="#fff" fill-opacity="0.9">Programación e IA</text>
+<rect x="215" y="95" width="170" height="70" rx="12" fill="#ED8B00"/>
+<text x="300.0" y="126" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">PSP</text>
+<text x="300.0" y="147" text-anchor="middle" font-size="12" fill="#fff" fill-opacity="0.9">Servicios y Procesos</text>
+<rect x="415" y="95" width="170" height="70" rx="12" fill="#512BD4"/>
+<text x="500.0" y="126" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">Interfaces</text>
+<text x="500.0" y="147" text-anchor="middle" font-size="12" fill="#fff" fill-opacity="0.9">Desarrollo de Interfaces</text>
+<rect x="615" y="95" width="170" height="70" rx="12" fill="#C71A36"/>
+<text x="700.0" y="126" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">Acceso a Datos</text>
+<text x="700.0" y="147" text-anchor="middle" font-size="12" fill="#fff" fill-opacity="0.9">Ficheros y datos</text>
+<rect x="815" y="95" width="170" height="70" rx="12" fill="#7F52FF"/>
+<text x="900.0" y="126" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">Móviles</text>
+<text x="900.0" y="147" text-anchor="middle" font-size="12" fill="#fff" fill-opacity="0.9">Aplicaciones Móviles</text>
+<rect x="15" y="440" width="170" height="64" rx="32" fill="#1e293b" stroke="#0ea5e9" stroke-width="3"/>
+<text x="100.0" y="468" text-anchor="middle" font-size="13" font-weight="600" fill="#f8fafc">Lógica y control</text>
+<text x="100.0" y="486" text-anchor="middle" font-size="13" font-weight="600" fill="#f8fafc">de flujo</text>
+<rect x="215" y="440" width="170" height="64" rx="32" fill="#1e293b" stroke="#16a34a" stroke-width="3"/>
+<text x="300.0" y="468" text-anchor="middle" font-size="13" font-weight="600" fill="#f8fafc">Programación orientada</text>
+<text x="300.0" y="486" text-anchor="middle" font-size="13" font-weight="600" fill="#f8fafc">a objetos</text>
+<rect x="415" y="440" width="170" height="64" rx="32" fill="#1e293b" stroke="#f59e0b" stroke-width="3"/>
+<text x="500.0" y="468" text-anchor="middle" font-size="13" font-weight="600" fill="#f8fafc">Java, JVM</text>
+<text x="500.0" y="486" text-anchor="middle" font-size="13" font-weight="600" fill="#f8fafc">y Maven</text>
+<rect x="615" y="440" width="170" height="64" rx="32" fill="#1e293b" stroke="#ef4444" stroke-width="3"/>
+<text x="700.0" y="468" text-anchor="middle" font-size="13" font-weight="600" fill="#f8fafc">Persistencia de</text>
+<text x="700.0" y="486" text-anchor="middle" font-size="13" font-weight="600" fill="#f8fafc">datos</text>
+<rect x="815" y="440" width="170" height="64" rx="32" fill="#1e293b" stroke="#a855f7" stroke-width="3"/>
+<text x="900.0" y="468" text-anchor="middle" font-size="13" font-weight="600" fill="#f8fafc">Excepciones y</text>
+<text x="900.0" y="486" text-anchor="middle" font-size="13" font-weight="600" fill="#f8fafc">validación</text>
+<text x="500" y="540" text-anchor="middle" font-size="12" fill="#94a3b8">Arriba: módulos · Abajo: conceptos compartidos · Cada color es un concepto</text>
+</svg>
