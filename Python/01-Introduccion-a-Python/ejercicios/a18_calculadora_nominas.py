@@ -1,5 +1,8 @@
+"""
+# --------------------------------------------------------------------
 # Actividad 18. Reto integrador: calculadora de nomina simplificada
-
+# --------------------------------------------------------------------
+"""
 # Pedimos el salario burto anual
 salario_bruto_anual = float(input("Introduzca su salario bruto anual: "))
 

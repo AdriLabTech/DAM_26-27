@@ -4,18 +4,17 @@ import java.util.Scanner;
 
 /** Calculadora de consola con las cuatro operaciones básicas. */
 public class Ejercicio1 {
-    private static final Scanner SCANNER = new Scanner(System.in);
+    private static final Scanner s = new Scanner(System.in);
 
     public static void main(String[] args) {
         System.out.println("Operacion a realizar: (s/r/m/d): ");
-        String operacion = SCANNER.next();
+        String operacion = s.next();
 
         float numero1 = pedirNumeroUsuario();
         float numero2 = pedirNumeroUsuario();
 
         switch (operacion) {
             case "s", "suma" -> System.out.println(sumaNumeros(numero1, numero2));
-            // La errata se conserva para no cambiar las entradas admitidas.
             case "m", "nultiplicacion" -> System.out.println(multiplicacionNumeros(numero1, numero2));
             case "r", "resta" -> System.out.println(restaNumeros(numero1, numero2));
             case "d", "division" -> System.out.println(divisionNumeros(numero1, numero2));
@@ -60,6 +59,6 @@ public class Ejercicio1 {
 
     public static float pedirNumeroUsuario() {
         System.out.println("Introduce un numero: ");
-        return SCANNER.nextFloat();
+        return s.nextFloat();
     }
 }

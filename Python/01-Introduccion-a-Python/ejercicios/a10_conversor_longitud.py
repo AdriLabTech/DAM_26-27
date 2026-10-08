@@ -1,5 +1,10 @@
+"""
+# -------------------------------------------------
 # Actividad 10. Conversor de unidades de longitud
+# -------------------------------------------------
 
+Capturamos la entrada del usuario y la convertimos a float
+"""
 distancia_km = float(input("Ingresa la longitud en kilómetros: "))
 
 # Aplicamos las conversiones

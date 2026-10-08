@@ -1,4 +1,10 @@
-# Actividad 5. Comprobando el tipado dinámico. (Obligatoria)
+"""
+# --------------------------------------------
+# Actividad 5. Comprobando el tipado dinámico
+# --------------------------------------------
+
+Iniciamos la variable dato con un valor numero para mostrar su tipo de dato
+"""
 dato = 10
 print(f"Valor de la variable dato: {dato} | Tipo de dato: {type(dato)}")
 
