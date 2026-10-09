@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">01_Mi-Primera-Aplicacion</string>
+
+    <string name="enviar">Enviar</string>
+
+    <string name="inputTextPlaceholder">Introduce tu nombre...</string>
+
+</resources>
