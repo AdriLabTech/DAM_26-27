@@ -15,6 +15,8 @@
 <path d="M700.0,165 C700.0,250 700.0,290 700.0,440" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-opacity="0.75"/>
 <path d="M500.0,165 C500.0,250 900.0,290 900.0,440" fill="none" stroke="#a855f7" stroke-width="2.5" stroke-opacity="0.75"/>
 <path d="M700.0,165 C700.0,250 900.0,290 900.0,440" fill="none" stroke="#a855f7" stroke-width="2.5" stroke-opacity="0.75"/>
+<path d="M100.0,165 C100.0,250 700.0,290 700.0,440" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-opacity="0.75"/>
+<path d="M100.0,165 C100.0,250 900.0,290 900.0,440" fill="none" stroke="#a855f7" stroke-width="2.5" stroke-opacity="0.75"/>
 <rect x="15" y="95" width="170" height="70" rx="12" fill="#3776AB"/>
 <text x="100.0" y="126" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">Python</text>
 <text x="100.0" y="147" text-anchor="middle" font-size="12" fill="#fff" fill-opacity="0.9">Programación e IA</text>
