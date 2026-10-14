@@ -15,6 +15,7 @@
 ![Maven](https://img.shields.io/badge/Maven-C71A36?style=flat-square&logo=apachemaven&logoColor=white)
 ![SQLite](https://img.shields.io/badge/SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black)
 
 </div>
@@ -57,11 +58,13 @@ Sirve a tres propósitos:
 
 | Módulo | Carpeta | Tecnología | Contenido |
 |:--|:--|:--:|:--|
-| ⚙️ **PSP** · Programación de Servicios y Procesos | [`PSP/`](PSP) | ![Java](https://img.shields.io/badge/-Java-ED8B00?logo=openjdk&logoColor=white) | Prueba inicial con 4 ejercicios y modelo de dominio |
-| 🐍 **Python** · Programación e IA | [`Python/`](Python) | ![Python](https://img.shields.io/badge/-Python-3776AB?logo=python&logoColor=white) | 2 unidades · **61 actividades** resueltas |
+| ⚙️ **PSP** · Programación de Servicios y Procesos | [`PSP/`](PSP) | ![Java](https://img.shields.io/badge/-Java-ED8B00?logo=openjdk&logoColor=white) | Prueba inicial con 4 ejercicios y modelo de dominio, y generador de cadenas aleatorias |
+| 🐍 **Python** · Programación e IA | [`Python/`](Python) | ![Python](https://img.shields.io/badge/-Python-3776AB?logo=python&logoColor=white) | 3 unidades · **65 actividades** resueltas |
 | 🖥️ **Desarrollo de Interfaces** | [`Desarrollo_Interfaces/`](Desarrollo_Interfaces) | ![C#](https://img.shields.io/badge/-C%23-512BD4?logo=dotnet&logoColor=white) | Ejercicios de clase y 2 casos prácticos |
-| 🗄️ **Acceso a Datos** | [`Acceso_Datos/`](Acceso_Datos) | ![Java](https://img.shields.io/badge/-Java-ED8B00?logo=openjdk&logoColor=white) | Ficheros binarios, excepciones propias y pruebas |
+| 🗄️ **Acceso a Datos** | [`Acceso_Datos/`](Acceso_Datos) | ![Java](https://img.shields.io/badge/-Java-ED8B00?logo=openjdk&logoColor=white) | Editor de ficheros binarios y excepciones propias |
 | 📱 **Desarrollo de Aplicaciones Móviles** | [`Desarrollo_Aplicaciones_Moviles/`](Desarrollo_Aplicaciones_Moviles) | ![Kotlin](https://img.shields.io/badge/-Kotlin-7F52FF?logo=kotlin&logoColor=white) | Iniciación a Kotlin |
+| 🏢 **Sistemas de Gestión Empresarial** | [`Sistema_Gestion_Empresarial/`](Sistema_Gestion_Empresarial) | ![Docker](https://img.shields.io/badge/-Docker-2496ED?logo=docker&logoColor=white) | Guías de Docker y Docker Compose |
+| 🚀 **Proyecto Intermodular** | [`Proyecto_intermodular_DAM/`](Proyecto_intermodular_DAM) | ![Markdown](https://img.shields.io/badge/-Markdown-000000?logo=markdown&logoColor=white) | Investigación del sector tecnológico (RA1a) |
 
 ---
 
@@ -70,20 +73,25 @@ Sirve a tres propósitos:
 ```text
 📦 DAM_26-27
 ┣ 📂 PSP
-┃ ┗ 📂 01-PruebaInicial ............... Maven · Java
+┃ ┣ 📂 01-PruebaInicial ............... Maven · Java
+┃ ┗ 📂 02-CadenasAleatorias ........... Maven · Java
 ┣ 📂 Python
 ┃ ┣ 📂 01-Introduccion-a-Python ....... 19 actividades
-┃ ┗ 📂 02-Control-flujo-estructura-datos  42 actividades
+┃ ┣ 📂 02-Control-flujo-estructura-datos  42 actividades
+┃ ┗ 📂 03-Archivos-errores-modularizacion  4 actividades
 ┣ 📂 Desarrollo_Interfaces
 ┃ ┣ 📂 EjerciciosPresentacion ......... introducción a C#
 ┃ ┣ 📂 EjerciciosClase ................ POO y ejercicios en clase
 ┃ ┣ 📂 01_CasoPractico_MathGame ....... juego de matemáticas
 ┃ ┗ 📂 02_CasoPractico_HabitLogger .... consola + TUI + SQLite
 ┣ 📂 Acceso_Datos
-┃ ┣ 📂 EjercicioEditorBinario ......... editor de ficheros binarios
-┃ ┗ 📂 TestUnit1CreateAFile ........... creación de ficheros y pruebas
+┃ ┗ 📂 EjercicioEditorBinario ......... editor de ficheros binarios
 ┣ 📂 Desarrollo_Aplicaciones_Moviles
 ┃ ┗ 📂 IniciacionAKotlin .............. Maven · Kotlin
+┣ 📂 Sistema_Gestion_Empresarial ........ guías de Docker
+┣ 📂 Proyecto_intermodular_DAM
+┃ ┗ 📂 01-Investigacion_Sector ........ RA1a
+┣ 📂 assets ............................. mapa de conocimientos
 ┗ 📄 README.md
 ```
 
@@ -102,6 +110,8 @@ Sirve a tres propósitos:
 - Modelo de dominio con clases como `Alumno` y `Asignatura`.
 - Refactorizaciones documentadas en el historial de commits.
 
+**`PSP/02-CadenasAleatorias`** · proyecto Maven con las clases `Generador` y `Cadenas` (paquete `dev.lownoise.cadenas`).
+
 </details>
 
 <details open>
@@ -113,6 +123,7 @@ Sirve a tres propósitos:
 |:--|:--|:--:|
 | [UD1](Python/01-Introduccion-a-Python/ejercicios) | Introducción a Python: entorno, tipos, operadores y depuración | 19 |
 | [UD2](Python/02-Control-flujo-estructura-datos/ejercicios) | Control de flujo y estructuras de datos: condicionales, bucles y listas | 42 |
+| [UD3](Python/03-Archivos-errores-modularizacion/ejercicios) | Archivos, errores y modularización: lectura y escritura de ficheros, `os.path` | 4 *(en curso)* |
 
 Cada actividad es un script independiente con su enunciado comentado, por ejemplo clasificador de edades, FizzBuzz, comprobación de primos, palíndromos o calculadoras.
 
@@ -138,7 +149,6 @@ Cada actividad es un script independiente con su enunciado comentado, por ejempl
 <br>
 
 - [`EjercicioEditorBinario`](Acceso_Datos/EjercicioEditorBinario): edición de ficheros binarios con excepciones propias (`MyFileNotFoundException`, `MyPointerIsNullException`, `MyPointerOutOfBoundException`).
-- [`TestUnit1CreateAFile`](Acceso_Datos/TestUnit1CreateAFile): creación de ficheros y primeros ejercicios de la unidad.
 
 </details>
 
@@ -148,6 +158,24 @@ Cada actividad es un script independiente con su enunciado comentado, por ejempl
 <br>
 
 - [`IniciacionAKotlin`](Desarrollo_Aplicaciones_Moviles/IniciacionAKotlin): primer contacto con el lenguaje mediante un proyecto Maven.
+
+</details>
+
+<details open>
+<summary><b>🏢 Sistemas de Gestión Empresarial — Docker</b></summary>
+
+<br>
+
+- [`Sistema_Gestion_Empresarial`](Sistema_Gestion_Empresarial): guías de uso de Docker (primeros pasos, creación de imágenes) y guía completa de Docker Compose.
+
+</details>
+
+<details open>
+<summary><b>🚀 Proyecto Intermodular</b></summary>
+
+<br>
+
+- [`01-Investigacion_Sector`](Proyecto_intermodular_DAM/01-Investigacion_Sector): estado tecnológico del sector empresarial (RA1a). Investigación de 8 empresas del sector IT, con [informe en PDF](Proyecto_intermodular_DAM/01-Investigacion_Sector/RA1a_Estado_Tecnologico_Sector.pdf).
 
 </details>
 
@@ -207,9 +235,9 @@ dotnet run --project Desarrollo_Interfaces/02_CasoPractico_HabitLogger/HabitLogg
 | Área | Herramientas |
 |:--|:--|
 | **Lenguajes** | Java · Kotlin · C# · Python |
-| **Construcción** | Maven · .NET CLI |
-| **Datos** | SQLite · ficheros binarios |
-| **Calidad** | Pruebas unitarias · validación de entradas · gestión de excepciones |
+| **Construcción** | Maven · .NET CLI · Docker Compose |
+| **Datos** | SQLite · ficheros binarios · ficheros de texto |
+| **Calidad** | Validación de entradas · gestión de excepciones |
 | **Entorno** | Git · Linux · IntelliJ IDEA |
 
 ---
@@ -227,8 +255,8 @@ Los módulos no son islas: los mismos conceptos reaparecen en lenguajes y contex
 | 🔀 **Lógica y control de flujo** | Python · PSP · Interfaces | Condicionales y bucles en Python; los mismos fundamentos en los ejercicios de Java y C#. |
 | 🧩 **Programación orientada a objetos** | PSP · Interfaces · Móviles | Modelo `Alumno`/`Asignatura` en Java, clases de vehículos en C# y Kotlin sobre la JVM. |
 | ☕ **Java, JVM y Maven** | PSP · Acceso a Datos · Móviles | Proyectos Maven en Java y Kotlin, con la misma estructura y ciclo de construcción. |
-| 💾 **Persistencia de datos** | Interfaces · Acceso a Datos | SQLite en HabitLogger y ficheros binarios en el editor de Acceso a Datos. |
-| 🛡️ **Excepciones y validación** | Interfaces · Acceso a Datos | Excepciones propias en Java y validación de entradas con tabla `Errores` en C#. |
+| 💾 **Persistencia de datos** | Python · Interfaces · Acceso a Datos | SQLite en HabitLogger, ficheros binarios en el editor de Acceso a Datos y ficheros de texto en la UD3 de Python. |
+| 🛡️ **Excepciones y validación** | Python · Interfaces · Acceso a Datos | Excepciones propias en Java, validación de entradas con tabla `Errores` en C# y comprobación previa de ficheros en Python. |
 
 ---
 
