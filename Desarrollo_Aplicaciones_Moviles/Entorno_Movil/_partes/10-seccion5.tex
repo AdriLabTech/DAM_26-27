@@ -1,0 +1,207 @@
+\newpage
+\section{Establecimiento de perfiles de usuario}
+
+Este es el apartado donde todo lo anterior se cruza. Hasta aquí he hablado de dispositivos: cuántos gigabytes, qué versión, cuántos píxeles. Pero un móvil no lo usa una persona, lo usa \textbf{alguien}, y ese alguien tiene necesidades que no aparecen en ninguna ficha técnica.
+
+\campo{¿En qué consiste un perfil de usuario?}
+Para mí un perfil de usuario es, simplemente, una descripción de quién va a usar la aplicación y en qué condiciones. Y lo que hace útil un perfil es que \textbf{obliga a tomar decisiones concretas de diseño}, no solo a Describe un público.
+
+Los seis perfiles que he definido se combinan con los cinco criterios del Apartado 4, y esto es lo que más me costó hacer entrar. Un perfil no dice \enquote{persona de 67 años} y punto, sino persona de 67 años \emph{con} un móvil de gama media de hace tres años, con conectividad intermitente y de coste alto. Si separas a la persona del dispositivo te quedan dos listas de supuestos que no se hablan, y luego el diseño falla.
+
+\subsection{Tabla de perfiles}
+
+{\footnotesize
+\begin{xltabular}{\textwidth}{@{}c >{\RaggedRight\arraybackslash}p{2.4cm} >{\RaggedRight\arraybackslash}p{2.5cm} >{\RaggedRight\arraybackslash}p{2.7cm} >{\RaggedRight\arraybackslash}p{2.7cm} >{\RaggedRight\arraybackslash}X@{}}
+\caption{Tabla de perfiles de usuario}\label{tab:perfiles}\\
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries \#} & \textcolor{white}{\sffamily\bfseries Perfil} & \textcolor{white}{\sffamily\bfseries Contexto} & \textcolor{white}{\sffamily\bfseries Dispositivo esperado} & \textcolor{white}{\sffamily\bfseries Accesibilidad} & \textcolor{white}{\sffamily\bfseries Decisiones} \\
+\midrule
+\endfirsthead
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries \#} & \textcolor{white}{\sffamily\bfseries Perfil} & \textcolor{white}{\sffamily\bfseries Contexto} & \textcolor{white}{\sffamily\bfseries Dispositivo} & \textcolor{white}{\sffamily\bfseries Accesibilidad} & \textcolor{white}{\sffamily\bfseries Decisiones} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+\textbf{P1} & \textbf{Usuario general} & Uso diario de redes, banca, compras, mensajería & Gama media o alta. Android 12+. 64 GB+, 6 GB RAM & Ninguna especial & Diseño base. Descargas bajo demanda en Wi-Fi, caché razonable, \code{targetSdk} al día \\
+\rowcolor{soft}
+\textbf{P2} & \textbf{Usuario gama baja / antiguo} & Uso básico: WhatsApp, cámara, alguna app sencilla & Android 9-11. 32 GB, 3 GB RAM, 4G intermitente, \code{hdpi} & Baja agudeza visual por edad o pantalla pequeña & Imágenes comprimidas; sin \code{largeHeap}; paginación; mín. 2 hilos; textos en \code{sp} \\
+\textbf{P3} & \textbf{Persona mayor} & Llamadas, turnos médicos, calculadora, banco & Gama media, a veces baja. Android 11+ & \textbf{Tamaño de fuente grande, contraste alto, botón de emergencia} & Objetivos táctiles 48$\times$48dp; tipografía grande; contraste $\geq$ 4,5:1; sin gestos complejos \\
+\rowcolor{soft}
+\textbf{P4} & \textbf{Usuario con discapacidad visual} & Cualquiera, con lector de pantalla activo & Gama alta normalmente (no necesariamente) & \textbf{TalkBack, VoiceOver, Braille, Switch Access} & Etiquetas en todos los elementos; orden lógico; no depender solo del color; audio y vídeo descritos \\
+\textbf{P5} & \textbf{Usuario con discapacidad auditiva} & Llamadas, vídeo, videollamadas & Cualquiera & \textbf{Subtítulos, Auracast, HAP, vibración} & Subtítulos/transcripción; compatibilidad LEA desde Android 13; avisar por vibración \\
+\rowcolor{soft}
+\textbf{P6} & \textbf{Usuario en movilidad} & Tren, ascensor, sótano, viaje & Cualquiera & Compartir ubicación & Diseño \emph{offline-first}; caché local; reintentos; \code{isActiveNetworkMetered()} \\
+\end{xltabular}
+}
+
+Un apunte sobre la tabla anterior, que me parece importante: los perfiles \textbf{P2 y P6} son los que más se relacionan con los cinco criterios técnicos. Un móvil de gama baja (criterio 4.4) es, casi siempre, un móvil con poco almacenamiento (4.3), versión antigua (4.2) y pantalla \code{hdpi} (4.1). Los perfiles no son categorías de personas, sino \textbf{combinaciones de persona + dispositivo + contexto}.
+
+\subsection{Perfil de accesibilidad y diseño: los números concretos}
+
+De los seis perfiles, el \textbf{P4 (baja visión o ceguera)} se lleva un apartado propio, porque es el que tiene los números más concretos de todos y donde más se me puede exigir precisión. Estos son los cinco parámetros que hay que cumplir:
+
+\subsubsection*{1. Tamaño del objetivo táctil: 48dp $\times$ 48dp mínimo}
+
+\enquote{For touch interfaces, we recommend that each interactive UI element have a focusable area, or touch target size, of at least 48dp $\times$ 48dp. Larger is even better.}
+
+Un matiz que conviene no pasar por alto: \textbf{el área táctil no es lo que se ve}. Un icono puede aparecer como 24$\times$24dp pero el \emph{padding} alrededor completa el objetivo de 48$\times$48dp. Se recomienda además \textbf{8dp o más de separación} entre objetivos.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{@{}l l@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Guía} & \textcolor{white}{\sffamily\bfseries Tamaño mínimo del objetivo} \\
+\midrule
+\textbf{Android / Material Design} & \textbf{48 $\times$ 48 dp} \\
+\rowcolor{soft}
+\textbf{WCAG 2.2 (W3C), criterio 2.5.8} & 24 $\times$ 24 píxeles CSS \\
+\textbf{iOS (HIG)} & 44 $\times$ 44 dp \\
+\bottomrule
+\end{tabular}
+\caption{Tamaños mínimos de objetivo entre guías}
+\end{table}
+
+\subsubsection*{2. Contraste de color: 4,5:1 en texto pequeño y 3:1 en texto grande}
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{6cm} >{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Tipo de texto} & \textcolor{white}{\sffamily\bfseries Contraste mínimo} \\
+\midrule
+Texto \textbf{menor de 18sp}, o negrita \textbf{menor de 14sp} & \textbf{$\geq$ 4,5 : 1} \\
+\rowcolor{soft}
+Texto grande ($\geq$ 18sp, o $\geq$ 14sp en negrita) y gráficos & \textbf{$\geq$ 3 : 1} \\
+Elementos no textuales (marco de botón) frente al fondo & \textbf{$\geq$ 3 : 1} \\
+\bottomrule
+\end{tabularx}
+\caption{Requisitos de contraste (WCAG 2.2 / Material)}
+\end{table}
+
+\subsubsection*{3. El texto tiene que poder crecer hasta el 200\,\%}
+
+WCAG 2.2, criterio \textbf{1.4.4 Resize Text (AA)}: el texto se puede ampliar \enquote{without assistive technology up to 200 percent without loss of content or functionality}. En Android es el ajuste \textbf{Tamaño de fuente}. Para que crezca sin romper el diseño hay que escribirlo en \textbf{\code{sp}}, nunca en \code{dp} ni en \code{px}.
+
+\subsubsection*{4. Etiquetas en todo, y TalkBack tiene que poder describirlo}
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{5cm} >{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Principios oficiales} & \textcolor{white}{\sffamily\bfseries Qué significa en código} \\
+\midrule
+\textbf{Etiquetar los elementos} & \enquote{Screen readers such as TalkBack can announce these labels to users}. \code{semantics} en Compose; \code{contentDescription} en Views \\
+\rowcolor{soft}
+\textbf{Añadir acciones de accesibilidad} & \enquote{By adding accessibility actions, you can enable users of accessibility services to complete critical user flows} \\
+\textbf{Usar las funciones ya incorporadas} & \enquote{Compose offers many accessibility behaviors by default} \\
+\rowcolor{soft}
+\textbf{Usar señales además del color} & \enquote{use patterns and position, along with color, to express these differences} \\
+\textbf{Hacer el contenido multimedia accesible} & Describir audio y vídeo para que los usuarios no dependan solo de señales visuales o sonoras \\
+\bottomrule
+\end{tabularx}
+\caption{Principios oficiales de accesibilidad}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3cm} >{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Aspecto} & \textcolor{white}{\sffamily\bfseries Comportamiento oficial de TalkBack} \\
+\midrule
+Qué es & Lector de pantalla del sistema: \enquote{announces content through a synthesized voice and performs actions on an app in response to user gestures} \\
+\rowcolor{soft}
+Cómo se activa & \emph{Ajustes > Accesibilidad > TalkBack}; o pulsando los dos botones de volumen \\
+Gestos & Toque = seleccionar; doble toque = abrir; deslizar derecha = siguiente; dos dedos arriba/abajo = desplazarse \\
+\rowcolor{soft}
+Braille & Teclado Braille de 6 puntos incluido en TalkBack \\
+Servicio complementario & \textbf{Switch Access}, para \enquote{people who have motor disabilities\ldots{} controlling the device using only one or two buttons} \\
+\bottomrule
+\end{tabularx}
+\caption{Comportamiento de TalkBack}
+\end{table}
+
+\subsubsection*{5. Detalle para P5 (discapacidad auditiva)}
+
+\textbf{Bluetooth LE Audio (LEA)} está integrado en Android desde la versión 13:
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{4cm} >{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Función} & \textcolor{white}{\sffamily\bfseries Qué aporta} \\
+\midrule
+Códec \textbf{LC3} & Más calidad con menos batería que el SBC \\
+\rowcolor{soft}
+\textbf{Auracast / Broadcast Audio} & Difundir audio a audífonos, personas cercanas y terminales públicos \\
+\textbf{Hearing Aid Profile (HAP)} & \enquote{Greater accessibility and usage than previous ASHA protocols}: audífonos usables en llamadas y VoIP \\
+\rowcolor{soft}
+\textbf{EATT} & Permite enviar varios comandos a la vez a los audífonos \\
+Comprobación en código & \code{isLeAudioSupported()} y \code{isLeAudioBroadcastSourceSupported()} \\
+\bottomrule
+\end{tabularx}
+\caption{Bluetooth LE Audio y accesibilidad auditiva}
+\end{table}
+
+\begin{fuentesbox}
+\textbf{\color{muted}\faBook\ \ Fuentes del apartado 5.2:}
+\href{https://developer.android.com/guide/topics/ui/accessibility/apps}{Make your app more accessible} ·
+\href{https://developer.android.com/guide/topics/ui/accessibility/principles}{Principles for improving app accessibility} ·
+\href{https://developer.android.com/develop/ui/compose/accessibility}{Accessibility in Jetpack Compose} ·
+\href{https://support.google.com/accessibility/android/answer/6006564}{Accessibility on your Android device} ·
+\href{https://support.google.com/accessibility/android/answer/11183305}{Change font size and display size} ·
+\href{https://support.google.com/accessibility/android/answer/6007100}{Use TalkBack} ·
+\href{https://support.google.com/accessibility/android/answer/16323943}{Use braille with TalkBack} ·
+\href{https://developer.android.com/develop/connectivity/bluetooth/ble-audio/overview}{Bluetooth LE Audio} ·
+\href{https://www.w3.org/TR/WCAG22/}{WCAG 2.2 (W3C)} ·
+\href{https://m3.material.io/foundations/designing/color-contrast}{Material Design 3: color contrast} ·
+\href{https://m3.material.io/foundations/designing/structure}{Material Design 3: structure}
+\end{fuentesbox}
+
+\subsection{Reflexión final: por qué perfiles y dispositivo van juntos}
+
+La idea que más me quiero llevar de este apartado: \textbf{el dispositivo y la persona no se analizan por separado.}
+
+\begin{table}[htbp]
+\centering
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.3cm} >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries} & \textcolor{white}{\sffamily\bfseries Gama baja (P2)} & \textcolor{white}{\sffamily\bfseries Gama alta (P1)} \\
+\midrule
+\textbf{Sin necesidades especiales (P1/P6)} & El caso mayoritario, y el que casi siempre se olvida en las pruebas & El caso que todo el mundo prueba \\
+\rowcolor{soft}
+\textbf{Con necesidades de accesibilidad (P3/P4/P5)} & \textbf{El más difícil de todos}: dispositivo antiguo + TalkBack + fuente al 200\,\% & Necesidades de accesibilidad sobre un buen dispositivo: se resuelve bien casi siempre \\
+\bottomrule
+\end{tabularx}
+\caption{Matriz de combinaciones dispositivo $\times$ perfil}
+\end{table}
+
+La casilla de abajo a la izquierda resume el problema entero. Piénsate en un usuario con baja visión en un móvil antiguo:
+\begin{itemize}[leftmargin=*,itemsep=0.15em]
+  \item su móvil tiene \textbf{3 GB de RAM}: la app tiene que funcionar con la mitad de caché;
+  \item su pantalla es \code{hdpi}: los recursos tienen que estar bien optimizados;
+  \item lleva \textbf{Android 10}: los permisos son los antiguos;
+  \item tiene el \textbf{texto al 180\,\%}: todo debe estar en \code{sp} y con layouts flexibles;
+  \item y usa \textbf{TalkBack}: cada elemento necesita etiqueta y el orden de lectura importa.
+\end{itemize}
+
+De la misma matriz saco una segunda idea: \textbf{la accesibilidad no es un extra que se añade al final, es la versión más restrictiva del diseño responsive}. Si tu interfaz aguanta a la casilla de abajo a la izquierda, aguanta en todas las demás.
+
+Y una tercera, que es la que más me ayuda en el día a día: \textbf{casi todo se puede preguntar en tiempo de ejecución}. \code{DisplayMetrics}, \code{Build.VERSION.SDK\_INT}, \code{StatFs}, \code{ActivityManager}, \code{ConnectivityManager}, \code{isLeAudioSupported()}, \code{isLowRamDevice()}, \code{isActiveNetworkMetered()}. No hace falta adivinar: se pregunta.
+
+%=====================================================================
+%  CONCLUSIONES
+%=====================================================================

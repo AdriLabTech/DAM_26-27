@@ -1,0 +1,37 @@
+\subsection{Reflexión sobre la comparativa}
+
+\campo{¿Qué diferencias existen entre el desarrollo nativo y el multiplataforma?}
+
+La diferencia de fondo no es tanto técnica, sino de de dónde viene el poder. En el nativo la aplicación usa directamente los componentes del sistema; en el multiplataforma hay una capa intermedia que traduce, y de esa capa salen todas las demás diferencias:
+\begin{itemize}[leftmargin=*,itemsep=0.2em,topsep=0.2em]
+  \item El aspecto visual. El nativo se ve nativo porque lo es.
+  \item El rendimiento y el consumo. El nativo es más eficiente, siempre.
+  \item El acceso al hardware. El nativo llega a todo; el multiplataforma, a lo que alguien haya escrito un binding.
+  \item El tamaño de la aplicación. El nativo pesa menos.
+  \item El coste de desarrollo. Aquí el multiplataforma gana sin discusión, pero con una condición: si luego necesitas algo muy nativo en una de las dos plataformas, la ventaja se evapora.
+\end{itemize}
+
+Después de comparar las seis, mi conclusión es que la decisión no es técnica, es organizativa. La pregunta que de verdad importa es \enquote{¿qué equipo tengo y qué necesitan mis usuarios?}.
+
+\campo{¿Qué ventajas puede ofrecer una aplicación desarrollada específicamente para Android?}
+
+Cuatro, y las cuatro son reales:
+\begin{enumerate}[leftmargin=*,itemsep=0.1em]
+  \item Acceso completo a todas las APIs de Android sin intermediarios.
+  \item Rendimiento y consumo óptimos.
+  \item Tamaño de descarga menor.
+  \item Publicación inmediata en un solo sitio.
+\end{enumerate}
+
+\campo{¿Qué beneficios puede aportar una tecnología que permita desarrollar para varios sistemas operativos?}
+
+ Principalmente el coste, y aquí quiero ser cuidadoso con la cifra: el ahorro típico está entre el 30\,\% y el 50\,\% del coste total de desarrollo, no el 80\,\% que se repite mucho y que no se cumple. Luego la velocidad de salida al mercado, un único equipo de mantenimiento, consistencia del producto y de los valores, y actualizaciones simultáneas.
+
+\campo{¿Qué factores debería tener en cuenta una empresa antes de elegir una tecnología?}
+
+Si tuviera que ordenarlos por peso: dónde están nuestros usuarios y qué necesitan; qué sabe hacer el equipo y qué quiere aprender; requisitos técnicos muy específicos; presupuesto y plazo; mantenimiento a 5 años vista; riesgo de proveedor; y por último accesibilidad y regulación.
+
+\begin{ideabox}
+\textbf{\color{mint!70!black}\faLightbulb\ \ Si me pidieran un consejo concreto.}
+Empezaría nativo con Kotlin y Compose si el negocio es Android, y usaría KMP para compartir la lógica cuando aparezca el iOS. Empezaría con Flutter si el equipo es pequeño y la app es visual. Y evitaría .NET MAUI salvo que ya seas una casa de C\#, porque el ciclo de soporte corto y las críticas de estabilidad no compensan en un proyecto nuevo.
+\end{ideabox}

@@ -1,0 +1,115 @@
+%=====================================================================
+%  APARTADO 1
+%=====================================================================
+\section{Análisis de las limitaciones de los dispositivos móviles}
+
+\subsection{Identificación de las principales limitaciones}
+
+Un dispositivo móvil es un ordenador con unas restricciones que no aparecen en un portátil de sobremesa: los recursos no son infinitos, la energía se agota y el usuario se lo lleva a todas partes (y eso incluye ascensores, trenes y zonas sin cobertura). Las limitaciones que explico a continuación son las que más veces se repiten cuando hay un problema real.
+
+\subsubsection*{1 - Memoria RAM limitada}
+
+\campo{¿En qué consiste?}
+Sabemos que la memoria RAM se utiliza para guardar datos temporales y procesos que se usan en el móvil, además de usarse para que el sistema operativo y las aplicaciones puedan funcionar correctamente, así que al desarrollar una aplicación móvil hay que saber gestionar la memoria para que el equipo pueda funcionar bien.
+
+\campo{¿Por qué afecta a una aplicación?}
+Una aplicación que use demasiada memoria puede hacer que el sistema se vea obligado a cerrar otras aplicaciones que estaban en segundo plano (o forzar el cierre de la aplicación).
+
+\campo{Ejemplo práctico.}
+Imaginemos una aplicación de edición de imágenes que carga archivos de alta resolución en la memoria. Si se utiliza en un dispositivo con poca RAM, la aplicación puede lentizar el sistema o incluso puede cerrarse porque el sistema se vea obligado a hacerlo.
+
+\campo{¿Cómo se soluciona?}
+La solución más evidente es optimizar el consumo de memoria pero, ¿cómo se hace? Normalmente, liberar objetos del código o recursos que no se utilizan pueden reducir el consumo, aunque hay más cosas que podemos hacer, como no cargar todas las imágenes al mismo tiempo (tendríamos que cargarlas poco a poco), además de reducir la resolución de estas. También podemos usar una técnica llamada \href{https://es.wikipedia.org/wiki/Lazy_loading}{lazy loading}, que retrasa la carga de un recurso o fragmento de código hasta el momento en que se necesita.
+
+Lo que no es tan obvio es que el límite \emph{no es el mismo en todos los móviles}. Android va publicando en su documentación unas tablas de \enquote{comportamiento incorrecto} (\emph{bad behavior}) que dependen de la gama de RAM del dispositivo: para una app en primer plano el límite va desde 2,00 GB en un móvil de 4 GB hasta 4,25 GB en uno de 16 GB o más. O sea, el mismo código consume el doble de margen en un gama alta que en uno de gama baja, y el sistema lo cierra antes de que te enteres.
+
+\subsubsection*{2 - Potencia de procesamiento limitada}
+
+\campo{¿En qué consiste?}
+No todos los teléfonos tienen la misma capacidad de procesamiento ni todos gestionan de la misma manera los procesos asociados al rendimiento, al consumo ni a la temperatura. Un dispositivo con poca potencia de procesamiento puede tener dificultades para ejecutar operaciones dentro de nuestras aplicaciones, dificultades que en un dispositivo de alta gama no tendría.
+
+\campo{¿Por qué afecta a una aplicación?}
+Si dentro de nuestra aplicación se realizan demasiados cálculos, el dispositivo puede gastar muchos recursos del procesador para poder realizar estos cálculos, lo que provocaría lentitud en el móvil, poca fluidez (porque el procesador no podría ocuparse de todo al mismo tiempo y se emplearían menos recursos de lo normal en la interfaz gráfica), mucho tiempo de espera en operaciones (como abrir otras aplicaciones) y un mayor consumo de la batería (estresamos el procesador y este necesita alimentarse).
+
+Android pone dos APIs oficiales para preguntar al sistema con qué estamos jugando: \code{ActivityManager.getMemoryClass()} devuelve en megabytes la memoria disponible para tu aplicación y \code{ActivityManager.isLowRamDevice()} te dice directamente si estás en un dispositivo de gama baja. Con eso ya no hay que adivinar nada, que para mí es el cambio más grande de los últimos años.
+
+\campo{Ejemplo práctico.}
+Imaginemos que desarrollamos un juego 3D (con los renderizados y shaders de C++ y sus librerías) e intentamos renderizar la parte gráfica de forma constante: si tenemos un dispositivo potente no habrá problema, pero con un móvil de gama baja el juego podría presentar una bajada de FPS y podría reducirse la fluidez de forma considerable.
+
+\campo{¿Cómo lo solucionamos?}
+Entre otras muchas cosas (como monitorear el rendimiento en partes del mapa con alto renderizado) podemos optimizar los algoritmos de renderizado o funcionalidades con mucho cálculo (de hecho, una de las opciones que los desarrolladores de videojuegos móviles recomiendan es agrupar los objetos estáticos, para que el procesador o la gráfica pueda renderizarlos de una pasada, en vez de renderizar los objetos por separado). También podemos utilizar procesos en segundo plano para operaciones complejas, en vez de ejecutarlos en el hilo principal.
+
+\subsubsection*{3 - Consumo de batería}
+
+\campo{¿En qué consiste?}
+Casi todos los componentes de un móvil (por no decir todos) consumen batería, sobre todo la pantalla, el procesador, la gráfica, el GPS y la cámara, por lo que una aplicación que use todo eso sin preocuparse por la batería tendrá un problema de consumo importante.
+
+\campo{¿Por qué afecta a una aplicación?}
+Una aplicación con un consumo elevado de batería puede provocar una pérdida de la vida útil de un móvil pero, ¿por qué? Básicamente los móviles tienen una salud de batería, que se calcula principalmente por los ciclos de carga del dispositivo y de la carga que se le aplique cuando se usa. Esto se traduce en que si nuestra aplicación gasta mucha batería de forma rápida, independientemente de si el móvil está cargando o no, estaríamos cargando mucho la batería, lo que perjudica a la batería del móvil (por ejemplo, si te quedas en videollamada durante varias noches con la pantalla encendida, verás como tu salud de la batería baja considerablemente, y es algo que no se puede revertir\ldots).
+
+Un detalle que me costó trabajo creer la primera vez: los envíos por Bluetooth siguen siendo hoy el radio que más batería gasta del móvil, por encima del Wi-Fi. Por eso Android separa el Bluetooth clásico (transmitir audio, enviar archivos, conectar ratones) del Bluetooth Low Energy (LE), que está pensado justo para lo contrario: sensores, balizas y wearables que están casi todo el día conectados con un presupuesto de energía mínimo. Elegir el modo equivocado te puede costar horas de autonomía.
+
+\campo{Ejemplo práctico.}
+Imaginemos (otra vez) una aplicación de navegación que para consultar la ubicación necesita tener la pantalla encendida y está constantemente usando el GPS para actualizar la ubicación al instante, descargando parte del mapa alrededor del usuario: sin optimizar estos procesos, la batería del móvil se podrá gastar durante algunas pocas horas de uso constante de la aplicación.
+
+\campo{¿Cómo lo solucionamos?}
+Podemos evitar procesos innecesarios (tanto en primer plano como en segundo plano, no queremos procesos innecesarios), además de reducir el tiempo que tarda el GPS en actualizar la ubicación (no necesitamos una precisión milimétrica constante). También podemos reducir el uso de sensores cuando no sean necesarios y detener la aplicación cuando no se está utilizando (si el usuario minimiza la aplicación, no sería coherente seguir pidiendo constantemente la ubicación al GPS, podemos actualizar la ubicación una vez el usuario vuelva a la app).
+
+\subsubsection*{4 - Conectividad a Internet limitada o inexistente}
+
+\campo{¿En qué consiste?}
+Teniendo en cuenta que el móvil es un dispositivo móvil (valga la redundancia), es muy posible que nos encontremos casos donde la conexión no sea estable o no haya cobertura. Esto puede ser una limitación importante en nuestras aplicaciones, sobre todo si requerimos de Internet.
+
+\campo{¿Por qué afecta a una aplicación?}
+Si la aplicación necesita conectarse a Internet (o a algún servidor) con el objetivo de obtener recursos, ante una mala conexión podemos tener tiempos de espera elevados, archivos corruptos por la descarga a medias de un recurso, etc.
+
+\campo{Ejemplo práctico.}
+Imaginemos que nuestra aplicación necesita cada cierto tiempo actualizar y recargar recursos de la aplicación, recursos que tiene que descargar de un servidor: si nosotros usamos la aplicación en un metro, por ejemplo, y en algún momento nos quedamos sin conexión, podemos tener fallos de archivos corruptos o pantallas de carga infinitas por la mala conexión que tenemos.
+
+\campo{¿Cómo lo solucionamos?}
+Una buena práctica que podemos realizar para evitar este problema es implementar lógica y funcionamiento offline (al menos parcialmente), como guardar información importante en la caché, detectar cuando se pierde la conexión (y que no se quede la interfaz colgada esperando a que termine la operación). Otra cosa interesante que podemos hacer es separar los recursos en pequeños paquetes, de forma que si se interrumpe la conexión, está todo el recurso separado y cuando vuelva la conexión, se puede continuar con el siguiente paquete del recurso (así no tenemos archivos corruptos).
+
+Con el 5G pasa algo parecido. La documentación oficial de Android para 5G nombra tres cosas que se supone que deberías implementar en tu app y que casi nadie hace: comprobar si la red es de datos tarifada (\code{isActiveNetworkMetered()}, que evita que tu app se baje 200 MB de vídeo con los datos del usuario), detectar si la conexión es 5G, y estimar el ancho de banda. La tercera es la que más me interesa, porque la idea de \enquote{vamos a 5G} no sirve de nada: lo que importa es adaptarse a si el usuario va por el Wi-Fi de casa o por datos en la calle.
+
+\subsubsection*{5 - Almacenamiento interno limitado}
+
+Esta limitación no aparece en la lista de \enquote{pistas} como si fuera la olvidada de la lista, pero en cuanto empiezas a usarla te das cuenta de que es de las que más falla. La verdad es que es más una limitación del usuario que del móvil, pero acaba afectando a la aplicación igual.
+
+\campo{¿En qué consiste?}
+El almacenamiento interno es el espacio donde vive todo: el sistema operativo, las aplicaciones instaladas, la caché y los datos que genera cada una. Es un recurso compartido entre todas las apps del dispositivo, y a diferencia de la RAM (que se limpia sola cuando cierras), el almacenamiento solo crece (salvo que el usuario borre cosas a mano).
+
+\campo{¿Por qué afecta a una aplicación?}
+Porque la aplicación compite con el resto. Si un usuario tiene un móvil de 64 GB con 12 GB libres y tu app necesita 300 MB, la instalación funciona, pero le estás quitando un 2,5\,\% de su espacio libre a alguien que probablemente tiene 3-4 fotos y un capítulo de serie descargado. Y aquí viene lo que no se ve venir: no es solo la instalación. Una app que guarda caché de imágenes sin límite acaba ocupando 1,5 GB sola, y entonces el usuario la desinstala.
+
+\campo{Ejemplo práctico.}
+Imaginemos una aplicación de podcast que descarga automáticamente los episodios nuevos para que el usuario pueda escucharlos sin conexión. El problema aparece con los datos móviles: la app descarga un episodio de 50 MB cada día, el usuario no se entera, y en dos meses tiene 3 GB de episodios que no ha escuchado y 1,2 GB de espacio que ha perdido sin saber por qué.
+
+\campo{¿Cómo lo solucionamos?}
+De varias formas a la vez. Lo primero, darle al usuario el control: una opción de \enquote{descargar solo por Wi-Fi} y otra de \enquote{borrar descargas} dentro de la app, que es lo que hace YouTube o Spotify y que evita el 90\,\% de las quejas. Después, usar \code{MediaStore} en vez de almacenamiento interno para los medios (fotos, audio, vídeo), que es la API oficial para archivos que el usuario quiere ver desde la galería y que no se pierden al desinstalar. Y por último, cuidar la caché: usar \code{getCacheDir()} para lo desechable y \code{getFilesDir()} solo para lo que de verdad necesitas guardar.
+
+\subsubsection*{6 - Diversidad de tamaños y resoluciones de pantalla}
+
+Esta la metía yo al final, aunque en el enunciado aparece en la lista de pistas, porque creo que es la limitación que más veces ha roto las aplicaciones que he visto, y no por culpa del móvil sino del desarrollador.
+
+\campo{¿En qué consiste?}
+No es que las pantallas sean \enquote{distintas}, es que son de un montón de tipos a la vez. Hay teléfonos de 5'' y de 7'', con relaciones de aspecto de 16:9 hasta 21:9, con densidades que van desde 160 dpi (mdpi) hasta 640 dpi (xxxhdpi), y hay tablets, relojes, pantallas plegables y televisores. Android no te pide que elijas una: te pide que funciones en todas.
+
+\campo{¿Por qué afecta a una aplicación?}
+Porque rompe la suposición más básica que tiene un desarrollador al empezar: que un píxel es un píxel y que si la pantalla tiene 1440 px de ancho, mi contenido ocupa 1440 px. No es así. Un icono de 48 dp mide 96 px en un móvil xhdpi y 192 px en uno xxxhdpi. Si dibujas todo a píxeles fijos, en unos dispositivos tu interfaz se verá diminuta y en otros se verá gigante y recortada.
+
+\campo{Ejemplo práctico.}
+Imaginemos una app de lista de la compra con las filas separadas por líneas de 1 píxel y los iconos de 24 dp. En un móvil de gama media con pantalla 720p se ve perfecta. Pero el usuario la instala en una tablet de 11 pulgadas con pantalla de 2560 px de ancho: las líneas de 1 píxel se vuelven invisibles, los iconos se ven diminutos al lado de un texto gigante, y toda la interfaz queda concentrada en una franja de 300 dp a la izquierda con medio mapa de la compra en blanco a la derecha.
+
+\campo{¿Cómo lo solucionamos?}
+Con dos reglas que parecen sencillas pero mucha gente no aplica. La primera: nunca uses px para el layout; usa \code{dp} para tamaños y \code{sp} para el texto (porque \code{sp} es el único que respeta el tamaño de letra que haya elegido el usuario en los ajustes de accesibilidad). La segunda, y más moderna: no decidas el layout en función del hardware sino del espacio disponible. Y un truco extra muy útil: usa drawables vectoriales en \code{res/drawable/} en lugar de PNG en \code{drawable-hdpi/}, \code{drawable-xhdpi/}, etc.
+
+\begin{fuentesbox}
+\textbf{\color{muted}\faBook\ \ Fuentes del apartado 1.1:}
+\href{https://developer.android.com/topic/performance/vitals}{Android vitals} ·
+\href{https://developer.android.com/reference/android/app/ActivityManager}{ActivityManager} ·
+\href{https://developer.android.com/training/data-storage}{Storage overview} ·
+\href{https://developer.android.com/develop/connectivity/bluetooth}{Bluetooth} ·
+\href{https://developer.android.com/develop/connectivity/5g}{Develop for 5G} ·
+\href{https://developer.android.com/training/multiscreen/screendensities}{Screen densities} ·
+\href{https://developer.android.com/training/multiscreen/screensizes}{Screen sizes}
+\end{fuentesbox}

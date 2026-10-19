@@ -1,0 +1,16 @@
+\newpage
+\section*{Conclusiones finales}
+\addcontentsline{toc}{section}{Conclusiones finales}
+\markboth{Conclusiones finales}{Conclusiones finales}
+
+Me quedan cinco cosas después de todo esto.
+
+\textbf{1. Las limitaciones del móvil se pueden resumir en una frase y resolver en veinte decisiones.} La frase es: recursos finitos y compartidos, energía finita y conexión intermitente. Y las veinte decisiones son las que he ido comentando: tamaños en \code{dp} y texto en \code{sp}, recursos por densidad, gráficos vectoriales, \code{minSdk} conservador y \code{targetSdk} actualizado, App Bundle en vez de un APK gigante, contenido pesado descargado bajo demanda, caché de bitmaps acotada, \code{isLowRamDevice()} como interruptor, paginación en lugar de listas interminables, \emph{offline-first}, \code{isActiveNetworkMetered()} como puerta de las descargas, objetivos de 48 dp, contraste de 4,5:1, texto ampliable al 200\,\%, etiquetas para TalkBack, alternativas a los gestos y subtítulos. Ninguna de las limitaciones es un motivo para no hacer una app; son una lista de requisitos.
+
+\textbf{2. Elegir tecnología es elegir qué problemas quieres tener.} Entre Java, Kotlin, Flutter, React Native, .NET MAUI y Swift la decisión no es \enquote{cuál es mejor}, porque esa respuesta no existe, sino \enquote{qué estoy dispuesto a aceptar}. Ninguna opción es la correcta: cada una mueve el coste a un sitio distinto.
+
+\textbf{3. El entorno de desarrollo también es una decisión de diseño.} Instalar Android Studio, fijar \code{minSdk} = 24, elegir Kotlin, comprobar que el emulador arranca con aceleración por hardware y capturar la evidencia: eso no es \enquote{preparar la máquina}, es decidir contra qué se va a desarrollar. En el enunciado además hay una contradicción (Java o Kotlin) y me quedo con Kotlin, que es el lenguaje oficial recomendado por Google desde 2019.
+
+\textbf{4. Lo que no se mide en el dispositivo se mide en la persona.} Esta es la conclusión del Apartado 5 y la que más me ha cambiado el planteamiento. Repartir el trabajo en un 20\,\% para densidad, API, RAM y conectividad, y el otro 80\,\% en pensar para quién se programa (edad, baja visión, movilidad, conectividad intermitente) es lo que separa una app funcional de una app buena.
+
+\textbf{5. Lo que más me llevo: preguntar en vez de suponer.} Cada apartado termina con la misma idea desde un ángulo distinto. Android vitals publica umbrales de memoria en función de la RAM del dispositivo, para que no tengas que adivinar cuánto puede usar tu app. El sistema expone \code{isLowRamDevice()}, \code{getMemoryClass()}, \code{isActiveNetworkMetered()} y \code{isLeAudioSupported()} para lo mismo. TalkBack existe para probar tu app sin vista. El Accessibility Scanner existe para encontrar contraste bajo y objetivos táctiles demasiado pequeños automáticamente. Y el emulador existe para crear un dispositivo de gama baja en tu ordenador. Ninguna de estas herramientas sustituye a pensar; todas evitan tener que adivinar, y eso es lo que me llevo de esta actividad.

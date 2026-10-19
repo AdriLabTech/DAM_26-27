@@ -1,2 +1,0 @@
-# Crear imagen en Docker
-

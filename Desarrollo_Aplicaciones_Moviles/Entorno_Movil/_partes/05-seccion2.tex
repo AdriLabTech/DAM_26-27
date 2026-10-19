@@ -1,0 +1,156 @@
+\newpage
+\section{Identificación de tecnologías de desarrollo móvil}
+
+Elegir tecnología me parece la decisión más importante de un proyecto y también la más cara de revertir: cambiar de framework con la app a medio hacer es casi empezar otra vez. Por eso en este apartado no me limito a listar opciones, sino que intento explicar por qué existe cada una y en qué situación concreta sería la mejor elección.
+
+He mirado seis: las que son solución de facto en Android (Java y Kotlin, con Jetpack Compose como contexto) y las multiplataformas o nativas de iOS que más se usan (Flutter, React Native, .NET MAUI y Swift). El enunciado pide al menos cuatro, así que me ha dado para comparar de verdad en vez de listar sin criterio.
+
+Antes de entrar, una aclaración que creo que evita bastante confusión: \textbf{Java y Kotlin no son competidoras la una de la otra}, porque en la práctica se usan juntas. Java es el lenguaje histórico de Android y hay millones de líneas de código ahí; Kotlin es el que Google recomienda para todo lo nuevo y está pensado justamente para convivir con el Java antiguo. Las alternativas reales entre sí son Kotlin, Flutter, React Native y MAUI.
+
+\subsection{Java (desarrollo nativo de Android)}
+
+\campo{Nombre de la tecnología.} Java, el lenguaje original y oficial del desarrollo Android.
+
+\campo{Lenguaje.} Java (y Kotlin, que convive con él).
+
+\campo{Tipo de desarrollo.} Nativo. El código compila a bytecode y se ejecuta en la máquina virtual de Android (ART), sobre las APIs del sistema.
+
+\campo{Sistemas operativos compatibles.} Android. Y aquí está lo que hay que tener claro: solo Android. Si compilas con Java para Android no te sirve para nada en iOS.
+
+\campo{Principales características.}
+\begin{itemize}[leftmargin=*,itemsep=0.2em,topsep=0.2em]
+  \item Acceso completo y directo a todas las APIs del sistema (cámara, GPS, Bluetooth, sensores, notificaciones, Wear OS\ldots).
+  \item Interfaz de dos formas: con \textbf{vistas XML} (\code{res/layout/*.xml}) o de forma declarativa con \textbf{Jetpack Compose}.
+  \item Herramienta oficial: \textbf{Android Studio}, que trae compilador (Gradle), emulador, inspector de memoria y de red, y un perfilador de CPU.
+  \item Un dato que me llamó la atención: en mayo de 2026 Google publicó una entrada de blog titulada literalmente \enquote{Android UI development is Compose-first}. El sistema de vistas clásico entra en modo mantenimiento.
+\end{itemize}
+
+\campo{Ventajas.} Rendimiento máximo, porque no hay capas intermedias; cobertura total de la plataforma; ecosistema maduro; estabilidad a largo plazo.
+
+\campo{Desventajas.} Solo sirve para Android; mucho código repetitivo con el sistema de vistas; fragmentación, que son miles de fabricantes; mantenimiento costoso.
+
+\campo{Ejemplo o situación adecuada.} Una app de banca o de salud que necesite leer el NFC de la tarjeta sanitaria, abrir la cámara para escanear recetas y funcionar en el \emph{longtail} de Android barato, donde el rendimiento y el tamaño del APK importan mucho.
+
+\subsection{Kotlin (desarrollo nativo de Android, moderno)}
+
+\campo{Nombre de la tecnología.} Kotlin, el lenguaje oficial preferido por Google para Android.
+
+\campo{Lenguaje.} Kotlin.
+
+\campo{Tipo de desarrollo.} Nativo para Android y además multiplataforma mediante \textbf{Kotlin Multiplatform (KMP)}.
+
+\campo{Sistemas operativos compatibles.} Android de forma nativa; y mediante KMP, la misma lógica de negocio se puede compartir con iOS, macOS, Windows, Linux, web (Wasm/JS), tvOS y watchOS.
+
+\campo{Principales características.}
+\begin{itemize}[leftmargin=*,itemsep=0.2em,topsep=0.2em]
+  \item Conciso y seguro: el tipado nulo es del lenguaje, y eso ya elimina muchísimos errores en tiempo de ejecución.
+  \item Coroutines, que es la forma oficial de hacer asincronía sin bloquear la interfaz.
+  \item Interoperabilidad total con Java: puedes llamar a Java desde Kotlin y al revés.
+  \item Jetpack Compose para la interfaz moderna declarativa. Y también Compose Multiplatform.
+  \item Google mantiene una estrategia \textbf{Kotlin-first}: la documentación nueva sale primero en Kotlin.
+\end{itemize}
+
+\campo{Ventajas.} Menos código y menos errores que Java; las coroutines resuelven muy bien el trabajo en segundo plano; KMP permite reutilizar la lógica entre Android e iOS; herramientas excelentes.
+
+\campo{Desventajas.} Curva de aprendizaje; KMP todavía está madurando; interoperabilidad con el ecosistema antiguo; dependencia de Google.
+
+\campo{Ejemplo o situación adecuada.} Una app de comercio electrónico que nace para Android, tiene una lógica de precios, stock y carrito complicada, y en un año quiere publicar en iOS. Con KMP se comparte el 70-80\,\% del código de negocio.
+
+\subsection{Flutter}
+
+\campo{Nombre de la tecnología.} Flutter, el framework multiplataforma de Google.
+
+\campo{Lenguaje.} Dart.
+
+\campo{Tipo de desarrollo.} Multiplataforma, con una única base de código.
+
+\campo{Sistemas operativos compatibles.} Android (API 24+), iOS/iPadOS (15.0+), Windows, macOS, Linux y web. Es la lista más amplia de las seis.
+
+\campo{Principales características.}
+\begin{itemize}[leftmargin=*,itemsep=0.2em,topsep=0.2em]
+  \item Flutter no usa los botones ni las vistas nativas: dibuja todos los píxeles él mismo a través de su propio árbol de widgets.
+  \item Impeller es su renderizador por defecto desde la 3.27 en iOS, y en Android a partir de la API 29.
+  \item Hot reload de verdad: cambias un \code{Text} y lo ves en el móvil en menos de un segundo.
+  \item Ecosistema en \code{pub.dev} con más de 1.300 millones de descargas en los últimos 30 días.
+  \item Versión actual: Flutter 3.47 (agosto de 2026).
+\end{itemize}
+
+\campo{Ventajas.} Una sola base de código para todo; interfaz visual idéntica en todas partes; rendimiento muy cercano al nativo; hot reload excelente; consistencia.
+
+\campo{Desventajas.} La aplicación resultante pesa más; dependencia de plugins; el aspecto nativo no es exacto; Dart es un lenguaje \enquote{nuevo}; riesgo de quedarte atado a una sola plataforma.
+
+\campo{Ejemplo o situación adecuada.} Una startup que quiere lanzar la misma app en iOS, Android, web y escritorio en tres meses con un equipo pequeño.
+
+\subsection{React Native}
+
+\campo{Nombre de la tecnología.} React Native, el framework multiplataforma de Meta.
+
+\campo{Lenguaje.} JavaScript o TypeScript.
+
+\campo{Tipo de desarrollo.} Multiplataforma, sobre todo Android e iOS.
+
+\campo{Sistemas operativos compatibles.} Android, iOS y, mediante proyectos externos (\emph{out-of-tree}), macOS, Windows, visionOS, tvOS, web y HarmonyOS.
+
+\campo{Principales características.}
+\begin{itemize}[leftmargin=*,itemsep=0.2em,topsep=0.2em]
+  \item Al revés que Flutter, sí usa las vistas nativas de cada sistema.
+  \item La Nueva Arquitectura (Fabric y Turbo Native Modules) es el modo por defecto desde la 0.76, y desde la 0.82 (octubre de 2025) es la única arquitectura.
+  \item Fast Refresh activado por defecto.
+  \item Versión actual: React Native 0.87 (agosto de 2026), que exige Node 22+.
+  \item Ecosistema npm: cualquier librería de JavaScript probablemente ya tiene bindings.
+\end{itemize}
+
+\campo{Ventajas.} Enorme mercado de desarrolladores; ecosistema npm gigantesco; integración incremental; buen rendimiento con la Nueva Arquitectura; plataformas adicionales.
+
+\campo{Desventajas.} Los módulos nativos son fuente de problemas; las actualizaciones mayores duelen; rendimiento variable; depurar es más complejo; tiene menos presencia que Flutter en el mercado de frameworks.
+
+\campo{Ejemplo o situación adecuada.} Una empresa que ya tiene un equipo web grande y quiere sacar la app móvil sin contratar gente nueva.
+
+\subsection{.NET MAUI}
+
+\campo{Nombre de la tecnología.} .NET MAUI (Multi-platform App UI), el sucesor de Xamarin.Forms dentro del ecosistema .NET de Microsoft.
+
+\campo{Lenguaje.} C\#.
+
+\campo{Tipo de desarrollo.} Multiplataforma.
+
+\campo{Sistemas operativos compatibles.} Android (API 24+), iOS 11+, macOS (Mac Catalyst), Windows 10 1809+ con WinUI 3, y tvOS.
+
+\campo{Principales características.}
+\begin{itemize}[leftmargin=*,itemsep=0.2em,topsep=0.2em]
+  \item Usa los controles nativos de cada plataforma mediante un modelo de handlers.
+  \item XAML para declarar la interfaz y C\# para la lógica.
+  \item Hot Reload, incluido el XAML Hot Reload.
+  \item Estado actual: .NET MAUI 10 (noviembre de 2025). .NET MAUI 9 dejó de soportarse en mayo de 2026 y la versión 10 termina su soporte en mayo de 2027.
+\end{itemize}
+
+\campo{Ventajas.} Un solo lenguaje y un solo IDE (Visual Studio); controles nativos reales; buena integración con .NET; cubre escritorio; C\# es muy productivo.
+
+\campo{Desventajas.} Las críticas de la comunidad sobre estabilidad y fiabilidad son serias y están documentadas; ecosistema de UI más pequeño; rendimiento irregular en apps grandes; ciclo de soporte más corto (12 meses por versión); comunidad más pequeña.
+
+\campo{Ejemplo o situación adecuada.} Una empresa mediana con un equipo de C\#/.NET que ya tiene una aplicación de escritorio Windows y quiere sacar la versión móvil y la de macOS con el mismo equipo.
+
+\subsection{Swift (desarrollo nativo de iOS)}
+
+\campo{Nombre de la tecnología.} Swift, el lenguaje oficial de Apple.
+
+\campo{Lenguaje.} Swift.
+
+\campo{Tipo de desarrollo.} Nativo, y solo del ecosistema Apple.
+
+\campo{Sistemas operativos compatibles.} iOS, iPadOS, macOS, tvOS, visionOS y watchOS. No hay versión para Android.
+
+\campo{Principales características.}
+\begin{itemize}[leftmargin=*,itemsep=0.2em,topsep=0.2em]
+  \item Dos formas de hacer interfaz: SwiftUI (declarativo) y UIKit (imperativo). Apple dice que conviven y que se adopte \enquote{a tu propio ritmo}.
+  \item Concurrencia moderna: la versión actual es Swift 6.4 (septiembre de 2026), con \emph{strict concurrency}.
+  \item Xcode Previews: ves la pantalla en el canvas lateral sin arrancar la app.
+  \item Integración profunda: Core Data, SwiftUI, Metal, Core ML, HealthKit, ARKit\ldots
+  \item Seguridad de memoria gestionada (ARC).
+\end{itemize}
+
+\campo{Ventajas.} Máximo rendimiento y fidelidad en plataforma Apple; acceso completo a cada API; lenguaje moderno y seguro; herramientas excelentes (Xcode + SwiftUI Previews); soporte a largo plazo coherente.
+
+\campo{Desventajas.} Lock-in total; cuesta aprender dos cosas (SwiftUI y UIKit); ecosistema de herramientas más estrecho; la API evoluciona muy rápido.
+
+\campo{Ejemplo o situación adecuada.} Cualquier app de calidad o de prestigio en el ecosistema Apple. Siri, Things, Fantastical, Bear, Overcast\ldots todas están escritas en Swift.

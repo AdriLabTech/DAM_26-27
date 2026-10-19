@@ -1,0 +1,123 @@
+%--- Tabla 3.1 Requisitos (verbatim) ---
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.5cm} >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Requisito} & \textcolor{white}{\sffamily\bfseries Windows (mínimo)} & \textcolor{white}{\sffamily\bfseries Windows (recomendado)} \\
+\midrule
+Sistema operativo & Windows 10 de 64 bits & Última versión de Windows de 64 bits \\
+\rowcolor{soft}
+RAM & 8 GB (solo Studio) · \textbf{16 GB (Studio + emulador)} & \textbf{32 GB} \\
+Procesador & Con virtualización activada (Intel VT-x o AMD-V) en la BIOS; microarquitectura posterior a 2017 & Intel Core i5/i7/i9 de 8.ª gen o Ryzen 5/6/7/9 \\
+\rowcolor{soft}
+Disco & 8 GB libres (Studio) · 16 GB libres (Studio + emulador) & SSD con 32 GB o más \\
+Resolución & 1280 $\times$ 800 & 1920 $\times$ 1080 \\
+\rowcolor{soft}
+Tarjeta gráfica & Ninguna (solo Studio) · 4 GB de VRAM (con emulador) & 8 GB de VRAM \\
+\bottomrule
+\end{tabularx}
+\caption{Requisitos de Android Studio (Windows)}
+\end{table}
+%--- Tabla 3.2 Campos (verbatim) ---
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3cm} >{\RaggedRight\arraybackslash}p{5cm} >{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Campo} & \textcolor{white}{\sffamily\bfseries Valor a introducir} & \textcolor{white}{\sffamily\bfseries Por qué} \\
+\midrule
+\textbf{Name} & \archivo{PracticaEntornoMovil} & Nombre del proyecto y de la carpeta \\
+\rowcolor{soft}
+\textbf{Package name} & \archivo{com.ejemplo.practicaentornomovil} & Identificador único. No se puede cambiar después \\
+\textbf{Save location} & Carpeta con espacio & El proyecto + emulador se llevan bastante \\
+\rowcolor{soft}
+\textbf{Language} & \textbf{Kotlin} & El enunciado es explícito: debe ser Kotlin, no Java \\
+\textbf{Minimum API level} & \textbf{API 24 (Android 7.0 Nougat)} & Valor que usa el codelab oficial de Google \\
+\bottomrule
+\end{tabularx}
+\caption{Campos de configuración del nuevo proyecto}
+\end{table}
+%--- Arbol del proyecto (verbatim) ---
+\begin{verbatim}
+PracticaEntornoMovil/
+|-- app/
+|   |-- build.gradle.kts
+|   |-- proguard-rules.pro
+|   `-- src/main/
+|       |-- AndroidManifest.xml
+|       |-- java/com/ejemplo/practicaentornomovil/
+|       |   `-- MainActivity.kt            <-- ACTIVIDAD PRINCIPAL
+|       `-- res/
+|           |-- layout/
+|           |   `-- activity_main.xml      <-- DISEÑO DE LA INTERFAZ
+|           |-- mipmap-anydpi-v26/
+|           |-- values/
+|           `-- xml/
+|-- build.gradle.kts
+|-- gradle.properties
+`-- settings.gradle.kts
+\end{verbatim}
+%--- Tabla 3.3 Archivos (verbatim) ---
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.5cm} >{\RaggedRight\arraybackslash}p{5.5cm} >{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Archivo} & \textcolor{white}{\sffamily\bfseries Ruta} & \textcolor{white}{\sffamily\bfseries Qué contiene} \\
+\midrule
+\textbf{Actividad principal} & \archivo{app/src/main/java/.../MainActivity.kt} & La clase \code{MainActivity} y su \code{onCreate}, que llama a \code{setContentView} \\
+\rowcolor{soft}
+\textbf{Diseño} & \archivo{app/src/main/res/layout/activity\_main.xml} & El XML con la jerarquía de vistas \\
+\bottomrule
+\end{tabularx}
+\caption{Archivos principales del proyecto}
+\end{table}
+%--- Tabla 3.4 Problemas + fuentes (verbatim) ---
+\begin{xltabular}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.3cm} >{\RaggedRight\arraybackslash}p{4.5cm} >{\RaggedRight\arraybackslash}X@{}}
+\caption{Problemas frecuentes durante la instalación y su solución}\label{tab:problemas}\\
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Problema} & \textcolor{white}{\sffamily\bfseries Causa} & \textcolor{white}{\sffamily\bfseries Solución} \\
+\midrule
+\endfirsthead
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Problema} & \textcolor{white}{\sffamily\bfseries Causa} & \textcolor{white}{\sffamily\bfseries Solución} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+El emulador \textbf{no arranca} & No hay virtualización por hardware activada en la BIOS & Activar Intel VT-x o AMD-V en la BIOS y reiniciar. Comprobar con \code{emulator -accel-check} \\
+\rowcolor{soft}
+El emulador va \textbf{muy lento} o se cuelga & Funciona sin aceleración de VM & Con virtualización activada se multiplica la velocidad. Alternativa: \code{emulator -gpu software}, dispositivo físico por USB, o Android Device Streaming \\
+Error \enquote{Connection to the Internet denied} & Bloqueo de red al descargar dependencias de Gradle & Añadir a \archivo{gradle.properties}: \code{org.gradle.jvmargs=-Djava.net.preferIPv4Stack=true} y reiniciar \\
+\rowcolor{soft}
+\textbf{No arranca por falta de espacio} & El emulador no arranca con menos de 5 GB libres & Liberar espacio en disco \\
+Las apps de Google \textbf{fallan en API reciente} & Imagen de sistema sin el parche de certificación & Actualizar la imagen del sistema a la revisión 5 o posterior de la API 37 \\
+\rowcolor{soft}
+El \textbf{antivirus ralentiza} el emulador & El antivirus intercepta lecturas y escrituras & Añadir el emulador a la lista de aplicaciones de confianza \\
+La \textbf{multitáctil no funciona} & La ventana de herramientas no soporta multitáctil & Ejecutar el emulador en su propia ventana separada \\
+\rowcolor{soft}
+El emulador \textbf{no arranca anidado} en otra VM & Los emuladores con aceleración no pueden correr dentro de VirtualBox, VMware o Docker & Ejecutarlo en la máquina real, no en una VM \\
+El proyecto aparece con \textbf{errores en rojo} & Las dependencias aún no se han descargado & Esperar a la sincronización. Si persiste: \textbf{File > Invalidate Caches and Restart} \\
+\rowcolor{soft}
+La resolución DPI se detecta \textbf{mal} & Detección automática de DPI fallida & Añadir \code{hidpi=true} o \code{hidpi=false} en \archivo{gradle.properties} \\
+\end{xltabular}
+
+\begin{fuentesbox}
+\textbf{\color{muted}\faBook\ \ Fuentes del apartado 3:}
+\href{https://developer.android.com/studio}{Android Studio} ·
+\href{https://developer.android.com/studio/install}{Install Android Studio} ·
+\href{https://developer.android.com/studio/projects/create-project}{Create a new project} ·
+\href{https://developer.android.com/studio/projects/templates}{Project templates} ·
+\href{https://developer.android.com/guide/topics/manifest/uses-sdk-element}{uses-sdk element} ·
+\href{https://developer.android.com/studio/run/emulator}{Run the Android Emulator} ·
+\href{https://developer.android.com/studio/run/emulator-acceleration}{Hardware acceleration} ·
+\href{https://developer.android.com/studio/run/managing-avds}{Create and manage AVDs} ·
+\href{https://developer.android.com/studio/run/emulator-troubleshooting}{Emulator troubleshooting} ·
+\href{https://developer.android.com/studio/troubleshoot}{Android Studio troubleshooting}
+\end{fuentesbox}

@@ -1,0 +1,55 @@
+%--- Tabla 2.1 + fuentes (verbatim) ---
+\subsection*{Tabla 2.1 --- Comparativa de las seis tecnologías}
+
+{\footnotesize
+\begin{xltabular}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{2.5cm} >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X@{}}
+\caption{Comparativa técnica de las seis tecnologías}\label{tab:tec-comparativa}\\
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries} & \textcolor{white}{\sffamily\bfseries Java} & \textcolor{white}{\sffamily\bfseries Kotlin} & \textcolor{white}{\sffamily\bfseries Flutter} & \textcolor{white}{\sffamily\bfseries React Native} & \textcolor{white}{\sffamily\bfseries .NET MAUI} & \textcolor{white}{\sffamily\bfseries Swift} \\
+\midrule
+\endfirsthead
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries} & \textcolor{white}{\sffamily\bfseries Java} & \textcolor{white}{\sffamily\bfseries Kotlin} & \textcolor{white}{\sffamily\bfseries Flutter} & \textcolor{white}{\sffamily\bfseries React Native} & \textcolor{white}{\sffamily\bfseries .NET MAUI} & \textcolor{white}{\sffamily\bfseries Swift} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+\textbf{Lenguaje} & Java & Kotlin & Dart & JS/TS & C\# & Swift \\
+\rowcolor{soft}
+\textbf{Tipo} & Nativo & Nativo (+KMP) & Multiplataforma & Multiplataforma & Multiplataforma & Nativo \\
+\textbf{Android} & Sí & Sí & Sí & Sí & Sí & \textbf{No} \\
+\rowcolor{soft}
+\textbf{iOS} & \textbf{No} & Con KMP & Sí & Sí & Sí & Sí \\
+\textbf{Escritorio} & \textbf{No} & Con KMP & Win/mac/Linux & Proyectos externos & Win/mac nativo & macOS \\
+\rowcolor{soft}
+\textbf{Web} & \textbf{No} & Experimental & Sí & Proyectos externos & \textbf{No} & \textbf{No} \\
+\textbf{Cómo dibuja la UI} & Vistas XML o Compose & Compose o XML & Motor propio & Vistas nativas & Controles nativos & SwiftUI o UIKit \\
+\rowcolor{soft}
+\textbf{Rendimiento} & Máximo & Máximo & Muy alto & Alto & Medio-alto & Máximo \\
+\textbf{Tamaño de la app} & Bajo & Bajo & \textbf{Alto} & Medio & Medio-alto & Bajo \\
+\rowcolor{soft}
+\textbf{Hot reload} & Limitado & Sí (Compose) & Excelente & Fast Refresh & Sí (XAML) & Previews Xcode \\
+\textbf{Curva de aprendizaje} & Alta & Media & Media & Media (web) & Media-alta & Media \\
+\rowcolor{soft}
+\textbf{Comunidad} & Muy grande & Muy grande & Grande & Muy grande & Media-pequeña & Grande \\
+\textbf{Coste de cambiar} & Medio & Medio & Alto & Alto & Alto & Medio \\
+\end{xltabular}
+}
+
+\begin{fuentesbox}
+\textbf{\color{muted}\faBook\ \ Fuentes del apartado 2:}
+\href{https://developer.android.com/kotlin/first}{Kotlin for Android} ·
+\href{https://kotlinlang.org/docs/releases.html}{Kotlin releases} ·
+\href{https://developer.android.com/blog/posts/android-ui-development-is-compose-first}{Compose-first (19/05/2026)} ·
+\href{https://docs.flutter.dev/reference/supported-platforms}{Flutter platforms} ·
+\href{https://docs.flutter.dev/perf/impeller}{Impeller} ·
+\href{https://docs.flutter.dev/release/whats-new}{Flutter 3.47} ·
+\href{https://reactnative.dev/blog/2025/10/08/react-native-0.82}{React Native 0.82} ·
+\href{https://learn.microsoft.com/dotnet/maui/what-is-maui}{.NET MAUI} ·
+\href{https://www.swift.org/blog/swift-6.4-released/}{Swift 6.4} ·
+\href{https://developer.apple.com/swiftui/}{SwiftUI} ·
+\href{https://bitrise.io/reports/state-of-mobile-development-2026}{Bitrise State of Mobile 2026} ·
+\href{https://survey.stackoverflow.co/2024/technology/}{Stack Overflow Survey 2024}
+\end{fuentesbox}

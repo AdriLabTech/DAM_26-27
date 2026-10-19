@@ -1,0 +1,8 @@
+4. Lo que te queda — PENDIENTES.md
+
+- 8 capturas del apartado 3. Es lo que bloquea la entrega. La tabla del fichero dice qué tiene que verse en cada una y cuáles necesitan versión ampliada aparte (3.4 y 3.6, las que demuestran que el proyecto es en Kotlin). Guárdalas en figs/.
+
+
+- \texttt{FECHA DE CONSULTA} en Referencias.
+
+- Contrastar los datos técnicos. Las fichas de los 5 móviles, las versiones (Flutter 3.47, RN 0.87, Swift 6.4, MAUI 10, Android Studio Quail 4) y los umbrales de Android vitals los puse yo y no los he verificado contra la fuente. Hay enlaces en las cajas Fuentes de cada apartado. Revísalos antes de entregar: un dato mal en una tabla de 5 columnas se ve mucho.
