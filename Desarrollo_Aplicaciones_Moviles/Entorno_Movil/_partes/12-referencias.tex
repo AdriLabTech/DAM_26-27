@@ -1,0 +1,134 @@
+%--- Referencias: cabecera + nota de fechas (reescrita) ---
+\newpage
+\section*{Referencias bibliográficas}
+\addcontentsline{toc}{section}{Referencias bibliográficas}
+\markboth{Referencias bibliográficas}{Referencias bibliográficas}
+
+Todas las fuentes que aparecen en este trabajo son \textbf{documentación oficial del fabricante o de la plataforma} (Android Developers, Google Play Console, Apple, Material Design, W3C, Bluetooth SIG).
+\begin{warnbox}
+\textbf{\color{accent!80!black}\faExclamationTriangle\ \ Las fechas de esta parte hay que revisarlas.}
+Los datos de versiones que aparecen en el trabajo (niveles de API, políticas de Google Play,
+requisitos de Android Studio, umbrales de memoria) cambian con frecuencia. Las páginas que cito
+están consultadas a fecha de \textbf{\texttt{FECHA DE CONSULTA}}, y antes de entregar las vuelvo
+a abrir para que las cifras del apartado 1 y del apartado 4 sigan siendo correctas. Las cuatro que
+más se mueven son estas:
+\begin{itemize}[leftmargin=*,itemsep=0.15em,topsep=0.2em]
+  \item \href{https://developer.android.com/tools/releases/platforms}{\emph{Android API levels}}
+  \item \href{https://support.google.com/googleplay/android-developer/answer/11926878}{\emph{Target API level requirements} (Google Play)}
+  \item \href{https://developer.android.com/studio}{\emph{Android Studio} (versión y requisitos)}
+  \item \href{https://developer.android.com/topic/performance/vitals}{\emph{Android vitals} (umbrales de memoria)}
+\end{itemize}
+\end{warnbox}
+%--- Lista de referencias + mapa de fuentes (verbatim, sin el aviso final) ---
+\subsection*{Fuentes de Android Developers (documentación técnica)}
+{\small
+\begin{itemize}[leftmargin=*,itemsep=0.1em,label={}]
+  \item Android Developers. (2026). \emph{Android vitals}. \url{https://developer.android.com/topic/performance/vitals}
+  \item Android Developers. (2026). \emph{Support different screen densities}. \url{https://developer.android.com/training/multiscreen/screendensities}
+  \item Android Developers. (2026). \emph{Screen sizes}. \url{https://developer.android.com/training/multiscreen/screensizes}
+  \item Android Developers. (2026). \emph{Configuration.screenLayout}. \url{https://developer.android.com/reference/android/content/res/Configuration}
+  \item Android Developers. (2026). \emph{Android API levels}. \url{https://developer.android.com/tools/releases/platforms}
+  \item Android Developers. (2026). \emph{uses-sdk element}. \url{https://developer.android.com/guide/topics/manifest/uses-sdk-element}
+  \item Android Developers. (2026). \emph{Android 17 is here}. \url{https://developer.android.com/blog/posts/android-17-is-here}
+  \item Android Developers. (2026). \emph{Behavior changes: all apps}. \url{https://developer.android.com/about/versions/17/behavior-changes-all}
+  \item Android Developers. (2026). \emph{Android 17 release notes}. \url{https://developer.android.com/about/versions/17/release-notes}
+  \item Android Developers. (2026). \emph{Storage overview}. \url{https://developer.android.com/training/data-storage}
+  \item Android Developers. (2026). \emph{APK Analyzer}. \url{https://developer.android.com/studio/debug/apk-analyzer}
+  \item Android Developers. (2026). \emph{Android App Bundles}. \url{https://developer.android.com/guide/app-bundle/dynamic-delivery}
+  \item Android Developers. (2026). \emph{ActivityManager}. \url{https://developer.android.com/reference/android/app/ActivityManager}
+  \item Android Developers. (2026). \emph{Guide to Android app architecture}. \url{https://developer.android.com/topic/libraries/architecture}
+  \item Android Developers. (2026). \emph{5G}. \url{https://developer.android.com/develop/connectivity/5g}
+  \item Android Developers. (2026). \emph{Bluetooth}. \url{https://developer.android.com/develop/connectivity/bluetooth}
+  \item Android Developers. (2026). \emph{Bluetooth LE Audio overview}. \url{https://developer.android.com/develop/connectivity/bluetooth/ble-audio/overview}
+  \item Android Developers. (2026). \emph{Near Field Communication}. \url{https://developer.android.com/develop/connectivity/nfc}
+  \item Android Developers. (2026). \emph{Wi-Fi}. \url{https://developer.android.com/develop/connectivity/wifi}
+  \item Android Studio Community. (2026). \emph{Wi-Fi 7}. \url{https://source.android.com/docs/core/connect/wifi-7}
+\end{itemize}
+}
+
+\subsection*{Fuentes de Android Studio (Apartado 3)}
+{\small
+\begin{itemize}[leftmargin=*,itemsep=0.1em,label={}]
+  \item Android Developers. (2026). \emph{Android Studio}. \url{https://developer.android.com/studio}
+  \item Android Developers. (2026). \emph{Install Android Studio}. \url{https://developer.android.com/studio/install}
+  \item Android Developers. (2026). \emph{Create a new Android Studio project}. \url{https://developer.android.com/studio/projects/create-project}
+  \item Android Developers. (2026). \emph{Android Studio project templates}. \url{https://developer.android.com/studio/projects/templates}
+  \item Android Developers. (2026). \emph{Run the Android Emulator}. \url{https://developer.android.com/studio/run/emulator}
+  \item Android Developers. (2026). \emph{Configure hardware acceleration}. \url{https://developer.android.com/studio/run/emulator-acceleration}
+  \item Android Developers. (2026). \emph{Create and manage Android virtual devices}. \url{https://developer.android.com/studio/run/managing-avds}
+  \item Android Developers. (2026). \emph{Android Emulator troubleshooting}. \url{https://developer.android.com/studio/run/emulator-troubleshooting}
+  \item Android Developers. (2026). \emph{Android Studio troubleshooting}. \url{https://developer.android.com/studio/troubleshoot}
+  \item Android Developers. (2026). \emph{Android UI development is Compose-first} [blog, 19/05/2026]. \url{https://developer.android.com/blog/posts/android-ui-development-is-compose-first}
+\end{itemize}
+}
+
+\subsection*{Fuentes de accesibilidad y diseño}
+{\small
+\begin{itemize}[leftmargin=*,itemsep=0.1em,label={}]
+  \item Android Developers. (2026). \emph{Make your app more accessible}. \url{https://developer.android.com/guide/topics/ui/accessibility/apps}
+  \item Android Developers. (2026). \emph{Principles for improving app accessibility}. \url{https://developer.android.com/guide/topics/ui/accessibility/principles}
+  \item Android Developers. (2026). \emph{Accessibility in Jetpack Compose}. \url{https://developer.android.com/develop/ui/compose/accessibility}
+  \item Android Developers. (2026). \emph{TalkBack y accesibilidad en Android}. \url{https://support.google.com/accessibility/android/answer/6006564}
+  \item Android Developers. (2026). \emph{Use TalkBack}. \url{https://support.google.com/accessibility/android/answer/6007100}
+  \item Android Developers. (2026). \emph{Use braille with TalkBack}. \url{https://support.google.com/accessibility/android/answer/16323943}
+  \item Android Developers. (2026). \emph{Change font size and display size}. \url{https://support.google.com/accessibility/android/answer/11183305}
+  \item Google. (2026). \emph{Target API level requirements}. \url{https://support.google.com/googleplay/android-developer/answer/11926878}
+\end{itemize}
+}
+
+\subsection*{Fuentes de estándares de diseño y accesibilidad}
+{\small
+\begin{itemize}[leftmargin=*,itemsep=0.1em,label={}]
+  \item World Wide Web Consortium (W3C). (2023). \emph{Web Content Accessibility Guidelines (WCAG) 2.2}. \url{https://www.w3.org/TR/WCAG22/}
+  \item Material Design 3. (2026). \emph{Color contrast}. \url{https://m3.material.io/foundations/designing/color-contrast}
+  \item Material Design 3. (2026). \emph{Structure}. \url{https://m3.material.io/foundations/designing/structure}
+  \item Material Design 3. (2026). \emph{Grids and spacing}. \url{https://m3.material.io/foundations/layout/grids-spacing/density}
+\end{itemize}
+}
+
+\subsection*{Fuentes de fabricantes}
+{\small
+\begin{itemize}[leftmargin=*,itemsep=0.1em,label={}]
+  \item Samsung Electronics. (2026). \emph{Galaxy S26 Ultra --- Especificaciones técnicas}. \url{https://www.samsung.com/}
+  \item Google. (2026). \emph{Pixel 10 Pro XL --- Especificaciones técnicas}. \url{https://store.google.com/}
+  \item OnePlus. (2026). \emph{OnePlus 13 --- Especificaciones}. \url{https://www.oneplus.com/}
+  \item Apple Inc. (2026). \emph{iPhone 17 Pro Max --- Especificaciones técnicas}. \url{https://www.apple.com/iphone-17-pro-max/technical-specs/}
+  \item Motorola. (2026). \emph{moto g47 --- Especificaciones técnicas}. \url{https://www.motorola.com/}
+  \item Apple Inc. (2026). \emph{Apple Security Releases}. \url{https://support.apple.com/en-us/148282}
+\end{itemize}
+}
+
+\subsection*{Fuentes de lenguajes y frameworks del Apartado 2}
+{\small
+\begin{itemize}[leftmargin=*,itemsep=0.1em,label={}]
+  \item Kotlin Foundation. (2026). \emph{Kotlin documentation}. \url{https://kotlinlang.org/docs/home.html}
+  \item Oracle. (2026). \emph{Java Documentation}. \url{https://docs.oracle.com/en/java/}
+  \item Flutter. (2026). \emph{Flutter documentation}. \url{https://docs.flutter.dev/}
+  \item Meta Open Source. (2026). \emph{React Native documentation}. \url{https://reactnative.dev/docs/getting-started}
+  \item Microsoft. (2026). \emph{Build mobile apps with .NET MAUI}. \url{https://learn.microsoft.com/dotnet/maui/}
+  \item Apple Inc. (2026). \emph{Swift Documentation}. \url{https://developer.apple.com/documentation/swift/}
+\end{itemize}
+}
+
+\subsection*{Mapa de fuentes por apartado}
+
+{\small
+\begin{table}[htbp]
+\centering
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.5cm} >{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Apartado} & \textcolor{white}{\sffamily\bfseries Fuentes principales} \\
+\midrule
+\textbf{1. Limitaciones} & Android vitals · \emph{Guide to Android app architecture} · Bluetooth LE Audio · fichas técnicas de los cinco fabricantes \\
+\rowcolor{soft}
+\textbf{2. Tecnologías} & Documentación de Kotlin, Oracle, Flutter, React Native, Microsoft y Apple · blog Compose (19/05/2026) \\
+\textbf{3. Entorno} & Android Studio · Install · Create project · Emulator · Hardware acceleration · AVDs · Troubleshooting · uses-sdk \\
+\rowcolor{soft}
+\textbf{4. Config. dispositivos} & Screen densities · Screen sizes · Configuration.screenLayout · API levels · Target API · Storage · App Bundles · APK Analyzer · vitals · ActivityManager · 5G · Bluetooth · NFC · Wi-Fi · Wi-Fi 7 · Behavior changes \\
+\textbf{5. Perfiles} & Make your app more accessible · Principles · Accessibility in Compose · TalkBack · WCAG 2.2 · Material Design 3 · Bluetooth LE Audio \\
+\bottomrule
+\end{tabularx}
+\caption{Mapa de fuentes por apartado}
+\end{table}
+}

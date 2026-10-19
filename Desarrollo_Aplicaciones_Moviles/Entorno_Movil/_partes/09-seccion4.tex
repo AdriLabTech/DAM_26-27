@@ -1,0 +1,498 @@
+\newpage
+\section{Identificación de configuraciones de dispositivos móviles}
+
+En el Apartado 1 hablé de las limitaciones en abstracto y en el Apartado 2 de las herramientas. Este es el apartado que junta las dos cosas: qué datos concretos hay que mirar en un dispositivo para saber si una aplicación va a funcionar bien en él. Son cinco criterios, y voy en el mismo orden en el que un desarrollador acabaría preguntándoselos a un móvil: resolución y densidad, sistema operativo y versión, almacenamiento interno, memoria RAM y potencia de procesamiento, y conectividad.
+
+Un aviso sobre cómo está hecho este apartado: en lo que sigue separo lo que dice literalmente la documentación oficial de lo que es criterio mío. Cuando es mío, lo digo.
+
+\subsection{Resolución de pantalla y densidad}
+
+\campo{¿En qué consiste?}
+Una pantalla no se mide solo en píxeles. Se mide en \textbf{píxeles físicos}, en \textbf{densidad} y en \textbf{dp}. La cuenta oficial:
+\begin{center}\code{px = dp × (dpi / 160)}\end{center}
+La documentación lo dice así: \enquote{One dp is a virtual pixel unit that's roughly equal to one pixel on a medium-density screen (160 dpi, or the 'baseline' density)}.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{@{}l l c c c@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Grupo} & \textcolor{white}{\sffamily\bfseries Nombre} & \textcolor{white}{\sffamily\bfseries dpi aprox.} & \textcolor{white}{\sffamily\bfseries Factor} & \textcolor{white}{\sffamily\bfseries Icono 48dp} \\
+\midrule
+\code{ldpi} & Baja densidad & $\sim$120 & 0,75$\times$ & 36$\times$36 px \\
+\rowcolor{soft}
+\code{mdpi} & Densidad media (\textbf{ref.}) & $\sim$160 & 1,0$\times$ & 48$\times$48 px \\
+\code{hdpi} & Alta densidad & $\sim$240 & 1,5$\times$ & 72$\times$72 px \\
+\rowcolor{soft}
+\code{xhdpi} & Extra alta & $\sim$320 & 2,0$\times$ & 96$\times$96 px \\
+\code{xxhdpi} & Extra extra alta & $\sim$480 & 3,0$\times$ & 144$\times$144 px \\
+\rowcolor{soft}
+\code{xxxhdpi} & Extra extra extra alta & $\sim$640 & 4,0$\times$ & 192$\times$192 px \\
+\bottomrule
+\end{tabular}
+\caption{Grupos de densidad de Android}
+\end{table}
+
+\campo{¿Por qué afecta a una aplicación?}
+Porque \textbf{el mismo número de píxeles no significa lo mismo en dos teléfonos distintos}.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{4cm} >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries} & \textcolor{white}{\sffamily\bfseries Móvil antiguo gama baja} & \textcolor{white}{\sffamily\bfseries Móvil gama alta actual} \\
+\midrule
+Resolución típica & 720 $\times$ 1440 px & 1344 $\times$ 2992 px \\
+\rowcolor{soft}
+Densidad típica & \code{xhdpi} ($\sim$320 dpi) $\to$ 2,0$\times$ & \code{xxxhdpi} ($\sim$640 dpi) $\to$ 4,0$\times$ \\
+\code{DisplayMetrics.density} & 2,0 & 4,0 \\
+\rowcolor{soft}
+Un icono de 48dp se dibuja en & 96 $\times$ 96 px & 192 $\times$ 192 px \\
+Consecuencia & Se ve correcto & Si falta la versión alta, \textbf{escala y se ve borroso} \\
+\bottomrule
+\end{tabularx}
+\caption{Comparación de un mismo icono en dos densidades}
+\end{table}
+
+\textbf{\color{primary}¿Cómo lo clasifico?}
+Android agrupa las pantallas por \textbf{tamaño en dp}:
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{@{}l l l@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Constante} & \textcolor{white}{\sffamily\bfseries Etiqueta} & \textcolor{white}{\sffamily\bfseries Tamaño mínimo} \\
+\midrule
+\code{SCREENLAYOUT\_SIZE\_SMALL} & \code{small} & 320 $\times$ 426 dp \\
+\rowcolor{soft}
+\code{SCREENLAYOUT\_SIZE\_NORMAL} & \code{normal} & 320 $\times$ 470 dp \\
+\code{SCREENLAYOUT\_SIZE\_LARGE} & \code{large} & 480 $\times$ 640 dp \\
+\rowcolor{soft}
+\code{SCREENLAYOUT\_SIZE\_XLARGE} & \code{xlarge} & 720 $\times$ 960 dp \\
+\bottomrule
+\end{tabular}
+\caption{Tamaños de pantalla en Android}
+\end{table}
+
+Desde \textbf{Android 17 (API 37)} ya no se pueden declarar bloqueos de orientación o de redimensionado en pantallas grandes (\code{sw} $\geq$ 600dp).
+
+\campo{Conclusión del criterio.} La resolución por sí sola sirve poco; lo que hay que mirar es la \textbf{densidad} y el \textbf{tamaño en dp}.
+
+\begin{fuentesbox}
+\href{https://developer.android.com/training/multiscreen/screendensities}{Support different screen densities} ·
+\href{https://developer.android.com/reference/android/content/res/Configuration}{Configuration.screenLayout} ·
+\href{https://developer.android.com/training/multiscreen/screensizes}{Screen sizes} ·
+\href{https://developer.android.com/blog/posts/android-17-is-here}{Android 17 is here}
+\end{fuentesbox}
+
+\subsection{Sistema operativo y versión}
+
+\campo{¿En qué consiste?}
+El sistema operativo es lo primero que hay que mirar. En Android hay dos números distintos: \textbf{el nombre de la versión} y \textbf{el nivel de API}. La documentación avisa: \enquote{The API level is always a single integer. You can't derive the API level from its associated Android version number}.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{@{}l c@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Versión de Android} & \textcolor{white}{\sffamily\bfseries Nivel de API} \\
+\midrule
+Android 17 & \textbf{37} \\
+\rowcolor{soft}
+Android 16 & \textbf{36} \\
+Android 15 & \textbf{35} \\
+\rowcolor{soft}
+Android 14 & \textbf{34} \\
+Android 13 & \textbf{33} \\
+\rowcolor{soft}
+Android 12L / 12 & 32 / \textbf{31} \\
+Android 11 & \textbf{30} \\
+\rowcolor{soft}
+Android 10 & \textbf{29} \\
+Android 9 & \textbf{28} \\
+\rowcolor{soft}
+Android 8.1 / 8.0 & 27 / 26 \\
+Android 7.1 / 7.0 & 25 / 24 \\
+\bottomrule
+\end{tabular}
+\caption{Correspondencia versión de Android y nivel de API}
+\end{table}
+
+\campo{¿Por qué afecta a una aplicación?}
+Por tres cosas, y la primera es la que más duele si no la tienes en cuenta:
+\begin{enumerate}[leftmargin=*,itemsep=0.15em]
+  \item \textbf{Si no subes el \code{targetSdkVersion}, Google Play te deja fuera.} Desde el \textbf{31 de agosto de 2026}, las aplicaciones nuevas y actualizaciones tienen que apuntar a Android 16 (API 36) o superior.
+  \item \textbf{Las apps antiguas se vuelven invisibles.} Para seguir siendo visibles a usuarios nuevos: mínimo \textbf{Android 15 (API 35)}.
+  \item \textbf{El sistema cambia de comportamiento sin avisar.}
+\end{enumerate}
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{@{}l l@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Versión} & \textcolor{white}{\sffamily\bfseries Permiso necesario para fotos/vídeos} \\
+\midrule
+Android 10 (API 29) & \code{READ\_EXTERNAL\_STORAGE} / \code{WRITE\_EXTERNAL\_STORAGE} \\
+\rowcolor{soft}
+Android 11+ (API 30+) & \code{READ\_EXTERNAL\_STORAGE} (vía \code{MediaStore}) \\
+API $\leq$ 28 & Acceso directo a todos los archivos \\
+\bottomrule
+\end{tabular}
+\caption{Permisos cambiantes según versión}
+\end{table}
+
+\campo{¿Cómo lo clasifico?}
+Yo lo reparto en cuatro tramos, según lo que te esperas de un usuario de cada uno:
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.5cm} >{\RaggedRight\arraybackslash}p{4cm} >{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Tramo} & \textcolor{white}{\sffamily\bfseries Versión aproximada} & \textcolor{white}{\sffamily\bfseries Qué esperar} \\
+\midrule
+\textbf{Antiguo / mantenimiento} & Android 9-11 (API 28-30) & Mucha gente lo usa. Evitar APIs modernas sin \code{if} de compatibilidad \\
+\rowcolor{soft}
+\textbf{Estable / mayoritario} & Android 12-15 (API 31-35) & La base razonable de usuarios hoy \\
+\textbf{Reciente} & Android 16-17 (API 36-37) & Novedades, límites de memoria por RAM \\
+\rowcolor{soft}
+\textbf{Futuro / riesgo} & API $\geq$ 38 (sin publicar) & Leer \emph{behavior changes} en cuanto salga \\
+\bottomrule
+\end{tabularx}
+\caption{Tramos de antigüedad del SO}
+\end{table}
+
+En el proyecto de prueba me quedo con \textbf{\code{minSdk} = 24}, \textbf{\code{targetSdk} = el del SDK instalado} y \textbf{\code{compileSdk}} igual al \code{targetSdk}. El 24 es conservador a propósito: pierdes funciones modernas, pero a cambio la app abre en muchísimos más móviles.
+
+\begin{fuentesbox}
+\href{https://developer.android.com/tools/releases/platforms}{Android API levels} ·
+\href{https://developer.android.com/about/versions/17/release-notes}{Android 17 release notes} ·
+\href{https://developer.android.com/about/versions/17/behavior-changes-all}{Behavior changes} ·
+\href{https://developer.android.com/guide/topics/manifest/uses-sdk-element}{uses-sdk} ·
+\href{https://support.google.com/googleplay/android-developer/answer/11926878}{Target API requirements} ·
+\href{https://support.apple.com/en-us/148282}{Apple Security Releases}
+\end{fuentesbox}
+
+\subsection{Almacenamiento interno}
+
+\campo{¿En qué consiste?}
+El almacenamiento interno es el espacio del teléfono donde van las apps y sus datos. Hay que distinguir \textbf{la capacidad del dispositivo} y \textbf{el espacio disponible para una aplicación concreta}. Android no publica tabla oficial de \enquote{gamas de almacenamiento}, así que las franjas son \textbf{convención de mercado}.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}l l l >{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Gama} & \textcolor{white}{\sffamily\bfseries Total} & \textcolor{white}{\sffamily\bfseries Útil} & \textcolor{white}{\sffamily\bfseries Perfil típico} \\
+\midrule
+\textbf{Baja} & 16-32 GB & 8-10 GB & Móvil antiguo o de entrada \\
+\rowcolor{soft}
+\textbf{Media} & 64-128 GB & 40-70 GB & La gama mayoritaria \\
+\textbf{Alta} & 256 GB - 1 TB & 200 GB+ & Gama alta \\
+\bottomrule
+\end{tabularx}
+\caption{Gamas de almacenamiento (convención)}
+\end{table}
+
+La documentación oficial avisa: \enquote{Internal storage has limited space for app-specific data. Use other types of storage if you need to save a substantial amount of data}.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{2.8cm} >{\RaggedRight\arraybackslash}p{3cm} >{\RaggedRight\arraybackslash}p{3cm} c c@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Contenido} & \textcolor{white}{\sffamily\bfseries Acceso} & \textcolor{white}{\sffamily\bfseries Permisos} & \textcolor{white}{\sffamily\bfseries ¿Otras apps?} & \textcolor{white}{\sffamily\bfseries ¿Se borra?} \\
+\midrule
+Archivos propios & \code{getFilesDir()}, \code{getCacheDir()} & Nunca & No & \textbf{Sí} \\
+\rowcolor{soft}
+Multimedia & API \code{MediaStore} & \code{READ\_EXTERNAL\_STORAGE} & Sí, con permiso & \textbf{No} \\
+Documentos & Storage Access Framework & Ninguno & Sí, vía selector & No \\
+\rowcolor{soft}
+Preferencias & Jetpack Preferences & Ninguno & No & Sí \\
+Bases de datos & Room & Ninguno & No & Sí \\
+\bottomrule
+\end{tabularx}
+\caption{Tipos de almacenamiento y comportamiento}
+\end{table}
+
+\campo{¿Cómo lo clasifico?} Por el tamaño del APK/AAB. Aquí los números son míos, no salen de la documentación:
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}l l >{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Gama} & \textcolor{white}{\sffamily\bfseries Tamaño aceptable} & \textcolor{white}{\sffamily\bfseries Estrategia} \\
+\midrule
+\textbf{Baja} & Máx. $\sim$100 MB & Todo lo pesado descargado bajo demanda \\
+\rowcolor{soft}
+\textbf{Media} & Hasta $\sim$500 MB & Descarga bajo demanda + AAB \\
+\textbf{Alta} & Limitado por red, no disco & Más contenido local permitido \\
+\bottomrule
+\end{tabularx}
+\caption{Estrategia de tamaño por gama}
+\end{table}
+
+\begin{fuentesbox}
+\href{https://developer.android.com/training/data-storage}{Storage overview} ·
+\href{https://developer.android.com/studio/debug/apk-analyzer}{APK Analyzer} ·
+\href{https://developer.android.com/guide/app-bundle/dynamic-delivery}{App Bundles} ·
+\href{https://developer.android.com/studio/install}{Install Android Studio} ·
+\href{https://developer.android.com/studio/run/emulator-troubleshooting}{Emulator troubleshooting}
+\end{fuentesbox}
+
+\subsection{Memoria RAM y potencia de procesamiento}
+
+\campo{¿En qué consiste?}
+La RAM es el espacio donde se ejecutan los procesos. Android tiene una \textbf{tabla oficial de umbrales de \enquote{mal comportamiento} según la gama de RAM}.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{@{}c c c c@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries RAM física} & \textcolor{white}{\sffamily\bfseries Primer plano} & \textcolor{white}{\sffamily\bfseries Servicios visibles} & \textcolor{white}{\sffamily\bfseries Segundo plano} \\
+\midrule
+4 GB & \textbf{2,00 GB} & 1,00 GB & 1,00 GB \\
+\rowcolor{soft}
+6 GB & \textbf{2,25 GB} & 1,25 GB & 1,25 GB \\
+8 GB & \textbf{2,25 GB} & 1,50 GB & 1,50 GB \\
+\rowcolor{soft}
+12 GB & \textbf{3,25 GB} & 1,75 GB & 1,75 GB \\
+16 GB & \textbf{4,25 GB} & 2,00 GB & 2,00 GB \\
+\bottomrule
+\end{tabular}
+\caption{Umbrales de \emph{Android vitals} para apps}
+\end{table}
+
+Y un dato que me parecía importante y ya no lo es tanto: \textbf{los límites de memoria para imágenes (\emph{bitmaps}) no varían con la gama de RAM}. Son 200 MB en servicios y segundo plano, y 400 MB en caché, \textbf{siempre}.
+
+\campo{¿Por qué afecta a una aplicación?}
+Android da las herramientas para preguntarle al dispositivo cómo es. Yo lo agrupo en cuatro tramos, y en la tabla siguiente pongo a qué API toca cada uno y qué haría con esa memoria.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{6cm} >{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries API} & \textcolor{white}{\sffamily\bfseries Qué te dice} \\
+\midrule
+\code{ActivityManager.getMemoryClass()} & \enquote{Return the approximate per-application memory class of the current device} \\
+\rowcolor{soft}
+\code{ActivityManager.getLargeMemoryClass()} & El límite si declaras \code{android:largeHeap="true"} \\
+\code{ActivityManager.isLowRamDevice()} & Si el dispositivo es de poca memoria \\
+\rowcolor{soft}
+\code{ActivityManager.getMemoryInfo(outInfo)} & Estado general de la memoria del sistema \\
+\bottomrule
+\end{tabularx}
+\caption{APIs de Android para consultar la memoria}
+\end{table}
+
+\campo{¿Cómo lo clasifico?}
+El criterio que uso es el que devuelve \code{isLowRamDevice()}, porque es el que de verdad decide cómo tengo que comportarme:
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}l l l >{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Tramo} & \textcolor{white}{\sffamily\bfseries RAM física} & \textcolor{white}{\sffamily\bfseries \code{isLowRamDevice()}} & \textcolor{white}{\sffamily\bfseries Qué hacer} \\
+\midrule
+\textbf{Crítico} & $\leq$ 2 GB & \code{true} & Cachés mínimos, sin \code{largeHeap}, una imagen cada vez \\
+\rowcolor{soft}
+\textbf{Bajo} & 3-4 GB & \code{true} & Imágenes reducidas, paginación, 2 hilos máx. \\
+\textbf{Medio} & 6-8 GB & \code{false} & Comportamiento estándar \\
+\rowcolor{soft}
+\textbf{Alto} & 12 GB+ & \code{false} & Todo con margen para más trabajo concurrente \\
+\bottomrule
+\end{tabularx}
+\caption{Clasificación por gama de RAM}
+\end{table}
+
+\begin{fuentesbox}
+\href{https://developer.android.com/topic/performance/vitals}{Android vitals} ·
+\href{https://developer.android.com/reference/android/app/ActivityManager}{ActivityManager} ·
+\href{https://developer.android.com/about/versions/17/behavior-changes-all}{Behavior changes Android 17} ·
+\href{https://developer.android.com/topic/libraries/architecture}{Guide to Android app architecture} ·
+\href{https://developer.android.com/studio/install}{Install Android Studio}
+\end{fuentesbox}
+
+\subsection{Conectividad}
+
+\campo{¿En qué consiste?}
+La conectividad es, con diferencia, \textbf{el recurso más variable de los cinco}. Hay cuatro familias: \textbf{datos móviles}, \textbf{Wi-Fi}, \textbf{Bluetooth} (dos variantes) y \textbf{NFC}. Y un quinto factor transversal: \textbf{el hecho de que la red sea \enquote{medida} (\emph{metered})}.
+
+\textbf{\color{primary}¿Por qué afecta a una aplicación?}
+
+\textbf{Red de datos.} Android soporta 5G desde Android 10:
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{4.5cm} >{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Caso de uso oficial} & \textcolor{white}{\sffamily\bfseries Qué implica para la app} \\
+\midrule
+\emph{Indoor $\to$ Outdoor} & Videollamada en movimiento, descargas bajo demanda \\
+\rowcolor{soft}
+\emph{Photo AR} & Pasar de foto a vídeo o RA sin salir de la app \\
+\emph{Prefetch} & \enquote{Use increased bandwidth to prefetch content --- delight rather than buffer} \\
+\rowcolor{soft}
+\emph{Niche $\to$ mainstream} & El streaming deja de ser el caso raro \\
+\bottomrule
+\end{tabularx}
+\caption{Casos de uso oficiales del 5G}
+\end{table}
+
+Los tres \enquote{trabajos} oficiales: \textbf{comprobar si la red es medida} (\code{isActiveNetworkMetered()}), \textbf{detectar 5G} y \textbf{estimar el ancho de banda}.
+
+\textbf{Bluetooth.} Dos cosas: \textbf{clásico} (streaming, archivos) y \textbf{Bluetooth Low Energy (BLE)} (sensores, beacons, wearables). Modelo de emparejamiento: descubrible $\to$ descubrimiento de servicios $\to$ \emph{bonding}.
+
+\textbf{Bluetooth LE Audio (LEA)} está en Android 13 (API 33): códec \textbf{LC3}, audio compartido, \textbf{Auracast}, \textbf{Hearing Aid Profile} y \textbf{EATT}.
+
+\textbf{Wi-Fi.}
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{@{}l l l l@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Estándar} & \textcolor{white}{\sffamily\bfseries Norma IEEE} & \textcolor{white}{\sffamily\bfseries Desde} & \textcolor{white}{\sffamily\bfseries API} \\
+\midrule
+Wi-Fi 6 & 802.11ax & Android 9+ & \code{ScanResults.WIFI\_STANDARD\_11AX} \\
+\rowcolor{soft}
+Wi-Fi 6E & 802.11ax (6 GHz) & Compatibles & \code{WifiManager.is6GHzBandSupported()} \\
+Wi-Fi 7 & 802.11be & Android 13+ & \code{ScanResults.WIFI\_STANDARD\_11BE} \\
+\bottomrule
+\end{tabular}
+\caption{Estándares Wi-Fi en Android}
+\end{table}
+
+\textbf{NFC.} \enquote{A set of short-range wireless technologies, typically requiring a distance of 4 cm or less}. Tres modos: lector/escritor, emulación de tarjeta e interoperabilidad entre dispositivos.
+
+\campo{¿Cómo lo clasifico?} Como tabla de decisiones, que es como de verdad lo usaría en un proyecto:
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{5cm} >{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Situación} & \textcolor{white}{\sffamily\bfseries Decisión de diseño} \\
+\midrule
+Solo datos móviles medidos & No descargar nada grande sin preguntar. \code{isActiveNetworkMetered()} \\
+\rowcolor{soft}
+Wi-Fi sin coste & Permitir descargas pesadas y \emph{prefetch} \\
+Ancho de banda bajo & Bajar la calidad del vídeo automáticamente \\
+\rowcolor{soft}
+Bluetooth clásico & Reproducción de audio de alta calidad \\
+Solo BLE & Sensores y beacons; nada de audio alta fidelidad \\
+\rowcolor{soft}
+LE Audio (API 33+) & Ofrecer Auracast y perfil de audífonos \\
+NFC disponible & Pagos contactless y lectura de etiquetas \\
+\rowcolor{soft}
+Sin conexión & Diseño \emph{offline-first} \\
+Android 17+ & Migrar de \code{usesCleartextTraffic} a config. de seguridad de red \\
+\bottomrule
+\end{tabularx}
+\caption{Tabla de decisiones según la conectividad}
+\end{table}
+
+\begin{fuentesbox}
+\href{https://developer.android.com/develop/connectivity/5g}{5G} ·
+\href{https://developer.android.com/develop/connectivity/bluetooth}{Bluetooth} ·
+\href{https://developer.android.com/develop/connectivity/bluetooth/ble-audio/overview}{Bluetooth LE Audio} ·
+\href{https://developer.android.com/develop/connectivity/nfc}{NFC} ·
+\href{https://developer.android.com/develop/connectivity/wifi}{Wi-Fi} ·
+\href{https://source.android.com/docs/core/connect/wifi-7}{Wi-Fi 7}
+\end{fuentesbox}
+
+\subsection{Tabla resumen de los cinco criterios}
+
+{\footnotesize
+\begin{xltabular}{\textwidth}{@{}c >{\RaggedRight\arraybackslash}p{2.2cm} >{\RaggedRight\arraybackslash}p{3.3cm} >{\RaggedRight\arraybackslash}p{3.5cm} >{\RaggedRight\arraybackslash}X@{}}
+\caption{Resumen de los cinco criterios}\label{tab:resumen}\\
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries \#} & \textcolor{white}{\sffamily\bfseries Criterio} & \textcolor{white}{\sffamily\bfseries Dato a mirar} & \textcolor{white}{\sffamily\bfseries Umbral / referencia} & \textcolor{white}{\sffamily\bfseries Si falla, síntoma} \\
+\midrule
+\endfirsthead
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries \#} & \textcolor{white}{\sffamily\bfseries Criterio} & \textcolor{white}{\sffamily\bfseries Dato a mirar} & \textcolor{white}{\sffamily\bfseries Umbral / referencia} & \textcolor{white}{\sffamily\bfseries Si falla, síntoma} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+1 & \textbf{Resolución y densidad} & Densidad, tamaño en \code{dp} & \code{small} 320$\times$426, \code{normal} 320$\times$470, \code{large} 480$\times$640, \code{xlarge} 720$\times$960 & Imágenes borrosas o desproporcionadas; texto ilegible \\
+\rowcolor{soft}
+2 & \textbf{SO y versión} & API del dispositivo, \code{minSdk}, \code{targetSdk} & Play exige \code{targetSdk} $\geq$ 36 desde 31/08/2026; $\geq$ 35 visible & La app no aparece en Play o no se ve en teléfonos nuevos \\
+3 & \textbf{Almacenamiento} & Espacio libre, tamaño AAB & Emulador: mín. 5 GB libres. Studio: 8 GB (16 GB con emulador) & Fallo al instalar; pérdida de datos al desinstalar \\
+\rowcolor{soft}
+4 & \textbf{RAM y CPU} & Gama de RAM, \code{getMemoryClass()}, \code{isLowRamDevice()} & Vitals (primer plano): 2,00 GB en 4 GB $\to$ 4,25 GB en 16 GB. Imágenes: 200/400 MB fijos & Cierre automático, interfaz a saltos, \code{OutOfMemoryError} \\
+5 & \textbf{Conectividad} & 4G/5G, Wi-Fi, BT, NFC, si es medida & Wi-Fi 7 desde Android 13; LE Audio desde Android 13; NFC $\leq$ 4 cm & Buffers, descargas que consumen datos, funciones inservibles \\
+\end{xltabular}
+}
+
+\begin{ideabox}
+\textbf{\color{mint!70!black}\faLightbulb\ \ Una sola regla.}
+\textbf{Todos estos criterios se pueden consultar en tiempo de ejecución.} \code{DisplayMetrics} para la pantalla, \code{Build.VERSION.SDK\_INT} para la versión, \code{StatFs} para el espacio, \code{ActivityManager} para la memoria, \code{ConnectivityManager} para la red. Una aplicación bien hecha \textbf{pregunta al dispositivo}, no asume.
+\end{ideabox}
+
+\begin{fuentesbox}
+\textbf{\color{muted}\faBook\ \ Fuentes del apartado 4:}
+\href{https://developer.android.com/training/multiscreen/screendensities}{Screen densities} ·
+\href{https://developer.android.com/training/multiscreen/screensizes}{Screen sizes} ·
+\href{https://developer.android.com/reference/android/content/res/Configuration}{Configuration.screenLayout} ·
+\href{https://developer.android.com/blog/posts/android-17-is-here}{Android 17 is here} ·
+\href{https://developer.android.com/tools/releases/platforms}{API levels} ·
+\href{https://developer.android.com/about/versions/17/behavior-changes-all}{Behavior changes} ·
+\href{https://developer.android.com/guide/topics/manifest/uses-sdk-element}{uses-sdk} ·
+\href{https://support.google.com/googleplay/android-developer/answer/11926878}{Target API requirements} ·
+\href{https://developer.android.com/training/data-storage}{Storage overview} ·
+\href{https://developer.android.com/studio/debug/apk-analyzer}{APK Analyzer} ·
+\href{https://developer.android.com/guide/app-bundle/dynamic-delivery}{App Bundles} ·
+\href{https://developer.android.com/topic/performance/vitals}{Android vitals} ·
+\href{https://developer.android.com/reference/android/app/ActivityManager}{ActivityManager} ·
+\href{https://developer.android.com/develop/connectivity/5g}{5G} ·
+\href{https://developer.android.com/develop/connectivity/bluetooth}{Bluetooth} ·
+\href{https://developer.android.com/develop/connectivity/bluetooth/ble-audio/overview}{Bluetooth LE Audio} ·
+\href{https://developer.android.com/develop/connectivity/nfc}{NFC} ·
+\href{https://developer.android.com/develop/connectivity/wifi}{Wi-Fi} ·
+\href{https://source.android.com/docs/core/connect/wifi-7}{Wi-Fi 7}
+\end{fuentesbox}
+
+\subsection{Conclusión del apartado 4}
+
+Si me quedo con cuatro ideas de todo este apartado, son estas:
+
+\textbf{Primera: el número grande no sirve, la medida correcta sí.}
+
+\textbf{Segunda: los límites de Android no son los mismos para todos, pero algunos sí.} Los límites de memoria \emph{totales} suben con la gama de RAM (de 2,00 GB a 4,25 GB), pero \textbf{los límites de memoria para imágenes son idénticos en todos los dispositivos: 200 MB y 400 MB}. Consecuencia práctica: \textbf{optimizar el consumo de \emph{bitmaps} es la optimización que mejora a todos los usuarios a la vez}.
+
+\textbf{Tercera: hay fechas, y las fechas mandan.} El 31 de agosto de 2026 Google Play exige \code{targetSdk} $\geq$ 36.
+
+\textbf{Cuarta: el mejor diseño es el que pregunta.} Ninguno de estos cinco criterios obliga a hacer una apuesta: todos se pueden consultar en tiempo de ejecución.
+
+Con esto ya sé \textbf{qué mirar del dispositivo}. Falta la otra mitad: \textbf{para quién se programa}.
+
+%=====================================================================
+%  APARTADO 5
+%=====================================================================

@@ -1,0 +1,1485 @@
+%=====================================================================
+%  ANÁLISIS DEL ENTORNO Y DESARROLLO DE APLICACIONES MÓVILES
+%  Informe técnico — estilo Ryoku (papel y tinta: hueso sobre negro)
+%  Compilar con pdfLaTeX:  latexmk -pdf main.tex   (o ./build.sh)   (o ./build.sh)
+%=====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot,es-noindentfirst]{babel}
+
+%--- Tipografía (pdfLaTeX): serif editorial para titulares, IBM Plex Sans para UI
+%    (grotesca, en la línea de Space Grotesk) y mono para datos y código -----
+\usepackage[sfdefault]{plex-sans}       % texto de cuerpo
+\usepackage[varqu,varl]{inconsolata}   % datos, etiquetas y código
+\newcommand{\fraunces}{\fontfamily{qpl}\selectfont}  % TeX Gyre Pagella
+\newcommand{\mono}{\ttfamily}
+\newcommand{\kanji}[1]{}
+\usepackage{microtype}
+\usepackage{parskip}
+\setlength{\parskip}{0.65em}
+\linespread{1.07}
+
+\usepackage[a4paper,top=2.6cm,bottom=2.4cm,left=2.3cm,right=2.1cm,headheight=18pt]{geometry}
+
+%--- Paleta: PAPER #000000 · INK #cdc4ba (4 tonos de la rampa) -----------
+\usepackage[table]{xcolor}
+\definecolor{paper}{HTML}{000000}
+\definecolor{paperraised}{HTML}{0A0A0A}
+\definecolor{ink}{HTML}{CDC4BA}
+\definecolor{inkdim}{HTML}{B0A9A0}
+\definecolor{inkmuted}{HTML}{958F87}
+\definecolor{inkfaint}{HTML}{7A756E}
+\definecolor{line}{HTML}{36322F}      % hueso al 13 %
+\definecolor{linestrong}{HTML}{69635D} % hueso al 42 %
+\definecolor{tint}{HTML}{121110}      % hueso al 5 %
+\definecolor{tinthigh}{HTML}{1C1B19}  % hueso al 10 %
+\definecolor{vermilion}{HTML}{E2342A} % marca 力, constante de marca
+% alias para el cuerpo del documento
+\colorlet{primary}{ink}
+\colorlet{primarydark}{inkdim}
+\colorlet{accent}{inkmuted}
+\colorlet{soft}{tint}
+\colorlet{muted}{inkmuted}
+\colorlet{mid}{linestrong}
+\pagecolor{paper}
+\color{ink}
+
+%--- Gráficos y cajas ---------------------------------------------------
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage[most]{tcolorbox}
+\usepackage{fontawesome5}
+\usepackage[font={small,color=inkdim},labelfont={bf,color=ink},
+  labelsep=period,skip=6pt]{caption}
+
+%--- Tablas -------------------------------------------------------------
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{xltabular}
+\usepackage{longtable}
+\usepackage{makecell}
+\renewcommand{\arraystretch}{1.32}
+\setlength{\tabcolsep}{6pt}
+\setlength{\arrayrulewidth}{0.3pt}
+\arrayrulecolor{linestrong}
+\setlength{\heavyrulewidth}{0.6pt}
+\setlength{\lightrulewidth}{0.3pt}
+
+%--- Varios -------------------------------------------------------------
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{fancyhdr}
+\usepackage{ragged2e}
+\usepackage{csquotes}
+\usepackage{amssymb}
+
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=ink,
+	urlcolor=inkdim,
+	citecolor=ink,
+	pdftitle={Análisis del entorno y desarrollo de aplicaciones móviles},
+	pdfauthor={Adrián Velasco Mañas},
+	pdfsubject={Análisis del entorno de desarrollo de aplicaciones móviles},
+	bookmarksnumbered=true,
+	breaklinks=true
+}
+
+%--- Secciones: micro-etiqueta mono + titular Fraunces --------------------
+\newcommand{\eyebrow}[1]{{\mono\footnotesize\color{inkmuted}#1}}
+\titleformat{\section}
+{\fraunces\LARGE\color{ink}}
+{\eyebrow{\thesection\ //}\hspace{0.8em}}
+{0pt}
+{}
+[\vspace{0.3em}{\color{linestrong}\rule{\linewidth}{0.6pt}}]
+
+\titleformat{name=\section,numberless}
+{\fraunces\LARGE\color{ink}}
+{}
+{0pt}
+{}
+[\vspace{0.3em}{\color{linestrong}\rule{\linewidth}{0.6pt}}]
+
+\titleformat{\subsection}
+{\fraunces\Large\color{ink}}
+{\eyebrow{\thesubsection}}
+{0.7em}
+{}
+[\vspace{-0.3em}{\color{line}\rule{\linewidth}{0.6pt}}]
+
+\titleformat{\subsubsection}
+{\bfseries\large\color{ink}}
+{\eyebrow{\thesubsubsection}}
+{0.6em}
+{}
+[]
+
+\titlespacing*{\section}{0pt}{2.4ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\titlespacing*{\subsection}{0pt}{2ex plus 1ex minus .2ex}{1ex plus .2ex}
+\titlespacing*{\subsubsection}{0pt}{1.6ex plus 1ex minus .2ex}{0.8ex plus .2ex}
+
+%--- Índice -------------------------------------------------------------
+\contentsmargin{1.2em}
+\titlecontents{section}
+[0em]
+{\vspace{0.5em}\bfseries\color{ink}}
+{\makebox[2.6em][l]{\mono\footnotesize\color{inkmuted}\thecontentslabel}}
+{\hspace*{2.6em}}
+{\titlerule*[0.5pc]{\color{line}.}\mono\footnotesize\color{ink}\contentspage}
+[\vspace{0.1em}]
+
+\titlecontents{subsection}
+[2.6em]
+{\vspace{0.1em}\small\color{inkdim}}
+{\mono\scriptsize\color{inkmuted}\thecontentslabel\hspace{0.7em}}
+{}
+{\titlerule*[0.5pc]{\color{line}.}\mono\scriptsize\color{inkmuted}\contentspage}
+
+%--- Encabezado y pie ---------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\mono\scriptsize\color{inkmuted}ANÁLISIS DEL ENTORNO MÓVIL}
+\fancyhead[R]{\mono\scriptsize\color{inkmuted}\nouppercase{\leftmark}}
+\fancyfoot[C]{\mono\scriptsize\color{inkmuted}\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{line}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancypagestyle{plain}{
+	\fancyhf{}
+	\fancyfoot[C]{\mono\scriptsize\color{inkmuted}\thepage}
+	\renewcommand{\headrulewidth}{0pt}
+}
+
+%--- Cajas: radio 2 pt, sin sombra, borde fino --------------------------
+\tcbset{ryoku/.style={enhanced jigsaw, breakable, boxrule=0.5pt, arc=2pt,
+	left=12pt, right=12pt, top=9pt, bottom=9pt, fontupper=\small,
+	colback=tint, colupper=ink, leftrule=2.5pt}}
+
+\newtcolorbox{notabox}[1][]{ryoku, colframe=inkdim, #1}
+\newtcolorbox{warnbox}[1][]{ryoku, colframe=ink, colback=tinthigh, #1}
+\newtcolorbox{ideabox}[1][]{ryoku, colframe=inkmuted, #1}
+\newtcolorbox{capturabox}[1][]{ryoku, colframe=inkmuted, #1}
+\newtcolorbox{fuentesbox}[1][]{ryoku, colframe=linestrong, leftrule=0.5pt,
+	top=7pt, bottom=7pt, fontupper=\footnotesize, #1}
+
+%--- Comandos rápidos ---------------------------------------------------
+\newcommand{\code}[1]{\texttt{\color{ink}#1}}
+\newcommand{\archivo}[1]{\texttt{\color{inkdim}#1}}
+\newcommand{\flecha}{\,$\rightarrow$\,}
+\newcommand{\campo}[1]{\textbf{\color{ink}#1}}
+
+%--- Capturas: marco fino de hueso, pie en mono ---------------------------
+\newcommand{\captura}[4][]{%
+	\begin{figure}[H]
+		\centering
+		\setlength{\fboxsep}{0pt}
+		\setlength{\fboxrule}{0.6pt}
+		{\color{linestrong}\fbox{\color{ink}\includegraphics[#1]{figs/#2}}}
+		\caption{#3}
+		\label{#4}
+	\end{figure}%
+}
+
+%--- Inicio -------------------------------------------------------------
+\begin{document}
+	
+	%=====================================================================
+	%  PORTADA
+	%=====================================================================
+	\begin{titlepage}
+		\begin{tikzpicture}[remember picture, overlay]
+			\fill[paper] (current page.north west) rectangle (current page.south east);
+			% disco-sol plano de tinta (16 %), sin trama
+			\fill[ink, opacity=0.16] ([xshift=-6.2cm, yshift=-8.2cm]current page.north east) circle (4.4cm);
+			% marcas +—
+			\foreach \x/\y in {2.1/2.1, 19/2.1, 2.1/27.6, 19/27.6} {
+				\draw[linestrong, line width=0.5pt] ([xshift=\x cm-0.18cm, yshift=-\y cm]current page.north west) -- ++(0.36,0);
+				\draw[linestrong, line width=0.5pt] ([xshift=\x cm, yshift=-\y cm-0.18cm]current page.north west) -- ++(0,0.36);
+			}
+			% texto vertical lateral
+			\node[rotate=90, inkfaint, font=\ttfamily\tiny, anchor=south] at ([xshift=1.1cm, yshift=-14.8cm]current page.north west)
+				{SHOT ON BLACK \quad // \quad PAPER ON INK};
+			% marca de color de la identidad: sol rojo
+			\fill[vermilion] ([xshift=-3.3cm, yshift=-2.1cm]current page.north east) circle (0.22cm);
+			% linea fina inferior
+			\draw[line, line width=0.6pt] ([xshift=2.3cm, yshift=4.1cm]current page.south west) -- ([xshift=-2.1cm, yshift=4.1cm]current page.south east);
+		\end{tikzpicture}
+
+		\vspace*{0.8cm}
+		{\mono\footnotesize\color{inkmuted}00 // MÓDULO PROFESIONAL}\\[0.3em]
+		{\color{inkdim}Desarrollo de Aplicaciones Móviles}
+
+		\vspace{3.2cm}
+		{\fraunces\fontsize{50}{54}\selectfont\color{ink} Análisis del\\ entorno y\\ desarrollo de\\ aplicaciones\\ móviles.}
+
+		\vspace{1.0cm}
+		{\mono\small\color{inkmuted}$\sim$\ Investigación, análisis y configuración\\ \phantom{$\sim$\ }de un entorno de desarrollo.}
+
+		\vfill
+		{\color{linestrong}\rule{\linewidth}{0.6pt}}\par\vspace{0.2em}
+		\begin{tabular}{@{}>{\mono\scriptsize\color{inkmuted}}p{3.2cm} >{\color{ink}}p{11cm}@{}}
+			NOMBRE   & Adrián Velasco Mañas \\[0.35em]
+			CURSO    & 2º DAMP (Desarrollo de Aplicaciones Multiplataforma) \\[0.35em]
+			MÓDULO   & Programación multimedia y dispositivos móviles \\[0.35em]
+			ENTREGA  & 04/10/2026 \\
+		\end{tabular}
+
+		\vspace{1.9cm}
+	\end{titlepage}
+	
+	%=====================================================================
+	%  ÍNDICE
+	%=====================================================================
+	\newpage
+	{\sffamily
+		\renewcommand{\contentsname}{\fraunces\color{ink}\Huge Índice}
+		\tableofcontents
+	}
+	\thispagestyle{plain}
+	
+	%=====================================================================
+	%  APARTADO 1
+	%=====================================================================
+	\section{Análisis de las limitaciones de los dispositivos móviles}
+	
+	\subsection{Identificación de las principales limitaciones}
+	
+	Un dispositivo móvil es un ordenador con unas restricciones que no aparecen en un portátil de sobremesa: los recursos no son infinitos, la energía se agota y el usuario se lo lleva a todas partes (y eso incluye ascensores, trenes y zonas sin cobertura). Las limitaciones que explico a continuación son las que más veces se repiten cuando hay un problema real.
+	
+	\subsubsection*{1 - Memoria RAM limitada}
+	
+	\campo{¿En qué consiste?}
+	Sabemos que la memoria RAM se utiliza para guardar datos temporales y procesos que se usan en el móvil, además de usarse para que el sistema operativo y las aplicaciones puedan funcionar correctamente, así que al desarrollar una aplicación móvil hay que saber gestionar la memoria para que el equipo pueda funcionar bien.
+	
+	\campo{¿Por qué afecta a una aplicación?}
+	Una aplicación que use demasiada memoria puede hacer que el sistema se vea obligado a cerrar otras aplicaciones que estaban en segundo plano (o forzar el cierre de la aplicación).
+	
+	\campo{Ejemplo práctico.}
+	Imaginemos una aplicación de edición de imágenes que carga archivos de alta resolución en la memoria. Si se utiliza en un dispositivo con poca RAM, la aplicación puede lentizar el sistema o incluso puede cerrarse porque el sistema se vea obligado a hacerlo.
+	
+	\campo{¿Cómo se soluciona?}
+	La solución más evidente es optimizar el consumo de memoria pero, ¿cómo se hace? Normalmente, liberar objetos del código o recursos que no se utilizan pueden reducir el consumo, aunque hay más cosas que podemos hacer, como no cargar todas las imágenes al mismo tiempo (tendríamos que cargarlas poco a poco), además de reducir la resolución de estas. También podemos usar una técnica llamada \href{https://es.wikipedia.org/wiki/Lazy_loading}{lazy loading}, que retrasa la carga de un recurso o fragmento de código hasta el momento en que se necesita.
+	
+	Lo que no es tan obvio es que el límite \emph{no es el mismo en todos los móviles}. Android va publicando en su documentación unas tablas de \enquote{comportamiento incorrecto} (\emph{bad behavior}) que dependen de la gama de RAM del dispositivo: para una app en primer plano el límite va desde 2,00 GB en un móvil de 4 GB hasta 4,25 GB en uno de 16 GB o más. O sea, el mismo código consume el doble de margen en un gama alta que en uno de gama baja, y el sistema lo cierra antes de que te enteres.
+	
+	\subsubsection*{2 - Potencia de procesamiento limitada}
+	
+	\campo{¿En qué consiste?}
+	No todos los teléfonos tienen la misma capacidad de procesamiento ni todos gestionan de la misma manera los procesos asociados al rendimiento, al consumo ni a la temperatura. Un dispositivo con poca potencia de procesamiento puede tener dificultades para ejecutar operaciones dentro de nuestras aplicaciones, dificultades que en un dispositivo de alta gama no tendría.
+	
+	\campo{¿Por qué afecta a una aplicación?}
+	Si dentro de nuestra aplicación se realizan demasiados cálculos, el dispositivo puede gastar muchos recursos del procesador para poder realizar estos cálculos, lo que provocaría lentitud en el móvil, poca fluidez (porque el procesador no podría ocuparse de todo al mismo tiempo y se emplearían menos recursos de lo normal en la interfaz gráfica), mucho tiempo de espera en operaciones (como abrir otras aplicaciones) y un mayor consumo de la batería (estresamos el procesador y este necesita alimentarse).
+	
+	Android pone dos APIs oficiales para preguntar al sistema con qué elementos o componentes estamos jugando:
+	\code{ActivityManager.getMemoryClass()} devuelve en megabytes la memoria disponible para tu aplicación y \code{ActivityManager.isLowRamDevice()} te dice directamente si estás en un dispositivo de gama baja. Con eso ya no hay que adivinar nada, que no está nada mal para conocer en que dispositivos usan tu aplicaicón.
+	
+	\campo{Ejemplo práctico.}
+	Imaginemos que desarrollamos un juego 3D (con los renderizados y shaders de C++ y sus librerías) e intentamos renderizar la parte gráfica de forma constante: si tenemos un dispositivo potente no habrá problema, pero con un móvil de gama baja el juego podría presentar una bajada de FPS y podría reducirse la fluidez de forma considerable.
+	
+	\campo{¿Cómo lo solucionamos?}
+	Entre otras muchas cosas (como monitorear el rendimiento en partes del mapa con alto renderizado) podemos optimizar los algoritmos de renderizado o funcionalidades con mucho cálculo (de hecho, una de las opciones que los desarrolladores de videojuegos móviles recomiendan es agrupar los objetos estáticos, para que el procesador o la gráfica pueda renderizarlos de una pasada, en vez de renderizar los objetos por separado). También podemos utilizar procesos en segundo plano para operaciones complejas, en vez de ejecutarlos en el hilo principal.
+	
+	\subsubsection*{3 - Consumo de batería}
+	
+	\campo{¿En qué consiste?}
+	Casi todos los componentes de un móvil (por no decir todos) consumen batería, sobre todo la pantalla, el procesador, la gráfica, el GPS y la cámara, por lo que una aplicación que use todo eso sin preocuparse por la batería tendrá un problema de consumo importante.
+	
+	\campo{¿Por qué afecta a una aplicación?}
+	Una aplicación con un consumo elevado de batería puede provocar una pérdida de la vida útil de un móvil pero, ¿por qué? Básicamente los móviles tienen una salud de batería, que se calcula principalmente por los ciclos de carga del dispositivo y de la carga que se le aplique cuando se usa. Esto se traduce en que si nuestra aplicación gasta mucha batería de forma rápida, independientemente de si el móvil está cargando o no, estaríamos cargando mucho la batería, lo que perjudica a la batería del móvil (por ejemplo, si te quedas en videollamada durante varias noches con la pantalla encendida, verás como tu salud de la batería baja considerablemente, y es algo que no se puede revertir\ldots).
+	
+	Un detalle que me no me creía la primera vez: los envíos por Bluetooth siguen siendo hoy el metodo que más batería gasta del móvil, por encima del Wi-Fi. Por eso Android separa el Bluetooth clásico (transmitir audio, enviar archivos, conectar ratones) del Bluetooth Low Energy (LE), que está pensado justo para lo contrario: sensores, balizas y wearables que están casi todo el día conectados con un presupuesto de energía mínimo. Elegir el modo equivocado te puede costar horas de autonomía (y dolores de cabeza).
+	
+	\campo{Ejemplo práctico.}
+	Imaginemos (otra vez) una aplicación de navegación que para consultar la ubicación necesita tener la pantalla encendida y está constantemente usando el GPS para actualizar la ubicación al instante, descargando parte del mapa alrededor del usuario: sin optimizar estos procesos, la batería del móvil se podrá gastar durante algunas pocas horas de uso constante de la aplicación.
+	
+	\campo{¿Cómo lo solucionamos?}
+	Podemos evitar procesos innecesarios (tanto en primer plano como en segundo plano, no queremos procesos innecesarios), además de reducir el tiempo que tarda el GPS en actualizar la ubicación (no necesitamos una precisión milimétrica constante). También podemos reducir el uso de sensores cuando no sean necesarios y detener la aplicación cuando no se está utilizando (si el usuario minimiza la aplicación, no sería coherente seguir pidiendo constantemente la ubicación al GPS, podemos actualizar la ubicación una vez el usuario vuelva a la app).
+	
+	%--- intro 1.2 (reescrita) ---
+	\subsection{Comparativa de 5 dispositivos móviles}
+	
+	Para poder comparar algo primero hay que decidir qué se compara. He cogido cinco teléfonos que sean intencionadamente distintos entre sí: tres de gama alta Android y de fabricantes distintos (Samsung, Google y OnePlus), un iPhone de gama alta, que además es el único iOS de la lista y me sirve para ver las diferencias de plataforma, y un Motorola de gama media-baja (que es el que más se parece a lo que usa la gente que no se compra un móvil cada dos años). Los datos salen de la ficha técnica de cada fabricante (casi todos...).
+	
+	%--- tablas 1.2.1 ---
+	\subsubsection*{Tabla 1.2.1 --- Comparativa general}
+	
+	\begin{xltabular}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{2.4cm} >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}p{1.3cm}@{}}
+		\caption{Comparativa general de los cinco dispositivos}\label{tab:comparativa-general}\\
+		\toprule
+		\rowcolor{primary}
+		\textcolor{paper}{\sffamily\bfseries Dispositivo} & \textcolor{paper}{\sffamily\bfseries Procesamiento} & \textcolor{paper}{\sffamily\bfseries Tamaño} & \textcolor{paper}{\sffamily\bfseries Autonomía} & \textcolor{paper}{\sffamily\bfseries Conectividad} & \textcolor{paper}{\sffamily\bfseries Fuente} \\
+		\midrule
+		\endfirsthead
+		\toprule
+		\rowcolor{primary}
+		\textcolor{paper}{\sffamily\bfseries Dispositivo} & \textcolor{paper}{\sffamily\bfseries Procesamiento} & \textcolor{paper}{\sffamily\bfseries Tamaño} & \textcolor{paper}{\sffamily\bfseries Autonomía} & \textcolor{paper}{\sffamily\bfseries Conectividad} & \textcolor{paper}{\sffamily\bfseries Fuente} \\
+		\midrule
+		\endhead
+		\bottomrule
+		\endlastfoot
+		\textbf{Samsung Galaxy S26 Ultra} &
+		Snapdragon 8 Elite Gen 5, 2$\times$4,74 + 6$\times$3,62 GHz · 12-16 GB RAM · 256 GB-1 TB &
+		6,9'' · 1440$\times$3120 · Dynamic AMOLED 2X · 163,6$\times$78,1$\times$7,9 mm · 214 g &
+		5.000 mAh · 60 W · hasta 31 h de vídeo &
+		5G, Wi-Fi 7, BT 6.0, NFC, UWB, USB-C 3.2, satélite &
+		\href{https://www.samsung.com/es/smartphones/galaxy-s26-ultra/}{Samsung} \\
+		\rowcolor{soft}
+		\textbf{Google Pixel 10 Pro XL} &
+		Tensor G5, 1$\times$3,78 + 5$\times$3,05 + 2$\times$2,25 GHz · 16 GB RAM · 256 GB-1 TB &
+		6,8'' · 1344$\times$2992 · LTPO OLED · 162,8$\times$76,6$\times$8,5 mm · 232 g &
+		5.200 mAh · 45 W · más de 24 h &
+		5G, Wi-Fi 7, BT 6.0, NFC, UWB, Thread, USB-C 3.2, satélite &
+		\href{https://store.google.com/product/pixel_10_pro_specs}{Google} \\
+		\textbf{OnePlus 13} &
+		Snapdragon 8 Elite, 2$\times$4,32 + 6$\times$3,53 GHz · 12-16 GB RAM · 256-512 GB &
+		6,82'' · 1440$\times$3168 · LTPO ProXDR 120 Hz · 162,9$\times$76,5$\times$8,5 mm · 213 g &
+		6.000 mAh · 80 W (100 W opcional) · sin cifra oficial &
+		5G, Wi-Fi 7, BT 5,4, NFC, mando IR, USB 3.2 &
+		\href{https://www.oneplus.com/es/13/specs}{OnePlus} \\
+		\rowcolor{soft}
+		\textbf{iPhone 17 Pro Max} &
+		A19 Pro, 6 núcleos (2 rendimiento + 4 eficiencia) · 12 GB RAM · 256 GB-2 TB &
+		6,9'' · 1320$\times$2868 · Super Retina XDR OLED · 163,4$\times$78$\times$8,75 mm · 233 g &
+		$\sim$5.088 mAh (no publicado) · MagSafe 25 W · hasta 39 h de vídeo &
+		5G, Wi-Fi 7, BT 6, NFC, UWB, Thread, USB-C 10 Gb/s, satélite; solo eSIM en EE.UU. &
+		\href{https://support.apple.com/es-es/125091}{Apple} \\
+		\textbf{Motorola Moto G47} &
+		MediaTek Dimensity 6300, 8 núcleos a 2,4 GHz · 8 GB RAM (+16 GB virtual) · 128 GB + microSD 1 TB &
+		6,67'' · 720$\times$1604 · LCD · 166,2$\times$76,5$\times$7,85 mm · 191 g &
+		5.200 mAh · 20 W · hasta 43 h &
+		5G, Wi-Fi 5, BT 5,4, NFC, jack 3,5 mm, USB-C 2.0 &
+		\href{https://www.motorola.com/sa/en/p/phones/moto-g/47/pmipmjs44mz}{Motorola} \\
+	\end{xltabular}
+	
+	\begin{warnbox}
+		\textbf{\color{accent!80!black}\faExclamationTriangle\ \ Sobre los datos:}
+		De todo lo que he ido metiendo en las tablas hay dos detalles que tengo que comentar:
+		La primera es que \textbf{Apple no publica ni los mAh de la batería ni los GB de RAM del
+			iPhone 17 Pro Max (muy tacaños por su parte)}; esas dos cifras vienen de desmontajes de terceros.
+		La segunda es el \textbf{RAM Boost del Moto G47}, que no es RAM real: Motorola usa parte del
+		almacenamiento interno como memoria virtual para anunciar hasta 24 GB. ¿Sirve para algo? si, pero no es lo
+		mismo que 24 GB de RAM reales (habia que aclararlo).
+	\end{warnbox}
+	
+	%--- tablas 1.2.2 y 1.2.3 ---
+	\subsubsection*{Tabla 1.2.2 --- A. Capacidad de procesamiento}
+	
+	\begin{xltabular}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{2.3cm} >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X@{}}
+		\caption{Comparativa de capacidad de procesamiento}\label{tab:proc}\\
+		\toprule
+		\rowcolor{primary}
+		\textcolor{paper}{\sffamily\bfseries} & \textcolor{paper}{\sffamily\bfseries Samsung S26 Ultra} & \textcolor{paper}{\sffamily\bfseries Pixel 10 Pro XL} & \textcolor{paper}{\sffamily\bfseries OnePlus 13} & \textcolor{paper}{\sffamily\bfseries iPhone 17 Pro Max} & \textcolor{paper}{\sffamily\bfseries Moto G47} \\
+		\midrule
+		\endfirsthead
+		\toprule
+		\rowcolor{primary}
+		\textcolor{paper}{\sffamily\bfseries} & \textcolor{paper}{\sffamily\bfseries Samsung} & \textcolor{paper}{\sffamily\bfseries Pixel 10 Pro XL} & \textcolor{paper}{\sffamily\bfseries OnePlus 13} & \textcolor{paper}{\sffamily\bfseries iPhone 17 Pro Max} & \textcolor{paper}{\sffamily\bfseries Moto G47} \\
+		\midrule
+		\endhead
+		\bottomrule
+		\endlastfoot
+		\textbf{Procesador / SoC} &
+		Qualcomm Snapdragon 8 Elite Gen 5 for Galaxy (TSMC 3 nm) &
+		Google Tensor G5 (TSMC 3 nm) + coprocesador Titan M2 &
+		Qualcomm Snapdragon 8 Elite (TSMC 3 nm), módem X80 &
+		Apple A19 Pro (TSMC 3 nm, según terceros) &
+		MediaTek Dimensity 6300 (6 nm) \\
+		\rowcolor{soft}
+		\textbf{Núcleos} &
+		Octa-core: 2$\times$ Oryon V3 a 4,74 GHz + 6$\times$ Oryon V3 a 3,62 GHz &
+		Octa-core: 1$\times$ Cortex-X4 3,78 GHz + 5$\times$ Cortex-A725 3,05 GHz + 2$\times$ A520 2,25 GHz &
+		Octa-core: 2$\times$ Oryon a 4,32 GHz + 6$\times$ Oryon a 3,53 GHz &
+		Hexa-core: 2 rendimiento + 4 eficiencia &
+		Octa-core: 2$\times$ A76 2,4 GHz + 6$\times$ A55 2,0 GHz \\
+		\textbf{GPU} & Adreno 840 & PowerVR DXT-48-1536 & Adreno 830 & 6 núcleos con ray tracing & Arm Mali-G57 M2C \\
+		\rowcolor{soft}
+		\textbf{RAM} &
+		12 GB (256/512 GB) · 16 GB (1 TB) &
+		16 GB en todas las versiones &
+		12 / 16 GB LPDDR5X &
+		12 GB (no publicado) &
+		8 GB LPDDR4X (+16 GB virtuales) \\
+		\textbf{Almacenamiento} & 256 GB / 512 GB / 1 TB (UFS 4.x) & 256 GB / 512 GB / 1 TB (UFS 4.0) & 256 GB / 512 GB (UFS 4.0) & 256 GB / 512 GB / 1 TB / 2 TB & 128 GB + microSD hasta 1 TB \\
+		\rowcolor{soft}
+		\textbf{Ampliable} & No & No & No & No & \textbf{Sí (único de los cinco)} \\
+	\end{xltabular}
+	
+	\subsubsection*{Tabla 1.2.3 --- B. Tamaño}
+	
+	\begin{xltabular}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{2.3cm} >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X@{}}
+		\caption{Comparativa de tamaño y pantalla}\label{tab:tamano}\\
+		\toprule
+		\rowcolor{primary}
+		\textcolor{paper}{\sffamily\bfseries} & \textcolor{paper}{\sffamily\bfseries Samsung} & \textcolor{paper}{\sffamily\bfseries Pixel 10 Pro XL} & \textcolor{paper}{\sffamily\bfseries OnePlus 13} & \textcolor{paper}{\sffamily\bfseries iPhone 17 Pro Max} & \textcolor{paper}{\sffamily\bfseries Moto G47} \\
+		\midrule
+		\endfirsthead
+		\toprule
+		\rowcolor{primary}
+		\textcolor{paper}{\sffamily\bfseries} & \textcolor{paper}{\sffamily\bfseries Samsung} & \textcolor{paper}{\sffamily\bfseries Pixel 10 Pro XL} & \textcolor{paper}{\sffamily\bfseries OnePlus 13} & \textcolor{paper}{\sffamily\bfseries iPhone 17 Pro Max} & \textcolor{paper}{\sffamily\bfseries Moto G47} \\
+		\midrule
+		\endhead
+		\bottomrule
+		\endlastfoot
+		\textbf{Pulgadas} & 6,9'' & 6,8'' & 6,82'' & 6,9'' & 6,67'' \\
+		\rowcolor{soft}
+		\textbf{Resolución} & 1440$\times$3120 (QHD+) & 1344$\times$2992 (QHD+) & 1440$\times$3168 (QHD+) & 1320$\times$2868 & \textbf{720$\times$1604 (HD+)} \\
+		\textbf{Densidad aprox.} & $\sim$500 ppi & $\sim$486 ppi & $\sim$510 ppi & 460 ppi & \textbf{264 ppi} \\
+		\rowcolor{soft}
+		\textbf{Tecnología} & Dynamic AMOLED 2X (LTPO), 2.600 nits, Gorilla Armor 2 & LTPO OLED, 3.300 nits, Victus 2 & ProXDR LTPO 4.1, 4.500 nits, 10 bits & Super Retina XDR OLED, 3.000 nits & \textbf{LCD de 8 bits}, 1.050 nits \\
+		\textbf{Refresco} & 120 Hz adaptativo & 1-120 Hz & 1-120 Hz dinámico & ProMotion hasta 120 Hz & 120 Hz \\
+		\rowcolor{soft}
+		\textbf{Dimensiones} & 163,6$\times$78,1$\times$7,9 mm & 162,8$\times$76,6$\times$8,5 mm & 162,9$\times$76,5$\times$8,5 mm & 163,4$\times$78,0$\times$8,75 mm & 166,2$\times$76,5$\times$7,85 mm \\
+		\textbf{Peso} & 214 g & 232 g & 213 g & \textbf{233 g (el más pesado)} & \textbf{191 g (el más ligero)} \\
+	\end{xltabular}
+	
+	%--- tablas 1.2.4, 1.2.5 y fuentes ---
+	\subsubsection*{Tabla 1.2.4 --- C. Autonomía}
+	
+	\begin{xltabular}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{2.7cm} >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X@{}}
+		\caption{Comparativa de autonomía y carga}\label{tab:bateria}\\
+		\toprule
+		\rowcolor{primary}
+		\textcolor{paper}{\sffamily\bfseries} & \textcolor{paper}{\sffamily\bfseries Samsung} & \textcolor{paper}{\sffamily\bfseries Pixel 10 Pro XL} & \textcolor{paper}{\sffamily\bfseries OnePlus 13} & \textcolor{paper}{\sffamily\bfseries iPhone 17 Pro Max} & \textcolor{paper}{\sffamily\bfseries Moto G47} \\
+		\midrule
+		\endfirsthead
+		\toprule
+		\rowcolor{primary}
+		\textcolor{paper}{\sffamily\bfseries} & \textcolor{paper}{\sffamily\bfseries Samsung} & \textcolor{paper}{\sffamily\bfseries Pixel 10 Pro XL} & \textcolor{paper}{\sffamily\bfseries OnePlus 13} & \textcolor{paper}{\sffamily\bfseries iPhone 17 Pro Max} & \textcolor{paper}{\sffamily\bfseries Moto G47} \\
+		\midrule
+		\endhead
+		\bottomrule
+		\endlastfoot
+		\textbf{Batería} & 5.000 mAh & 5.200 mAh & \textbf{6.000 mAh (el más grande)} & $\sim$5.088 mAh (terceros) & 5.200 mAh \\
+		\rowcolor{soft}
+		\textbf{Carga con cable} & 60 W (75\,\% en 30 min) & 45 W (70\,\% en 30 min) & \textbf{80 W, hasta 100 W con adaptador} & 50\,\% en 20 min con 40 W & 20 W \\
+		\textbf{Carga inalámbrica} & 25 W & 25 W (con imanes) & \textbf{50 W} & MagSafe 25 W / Qi2 25 W & \textbf{No tiene} \\
+		\rowcolor{soft}
+		\textbf{Declaración} & Hasta \textbf{31 h} de vídeo & Más de \textbf{24 h} & \textbf{No publica horas} & Hasta \textbf{39 h} de vídeo & Hasta \textbf{43 h} (varía) \\
+		\textbf{Extra} & Carga inversa 4,5 W & Carga inversa 10 W & Carga inversa 10 W & Sin cargador en la caja & Carga inversa 6 W \\
+	\end{xltabular}
+	
+	\subsubsection*{Tabla 1.2.5 --- D. Conectividad}
+	
+	\begin{xltabular}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{2.4cm} >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X@{}}
+		\caption{Comparativa de conectividad}\label{tab:conectividad}\\
+		\toprule
+		\rowcolor{primary}
+		\textcolor{paper}{\sffamily\bfseries} & \textcolor{paper}{\sffamily\bfseries Samsung} & \textcolor{paper}{\sffamily\bfseries Pixel 10 Pro XL} & \textcolor{paper}{\sffamily\bfseries OnePlus 13} & \textcolor{paper}{\sffamily\bfseries iPhone 17 Pro Max} & \textcolor{paper}{\sffamily\bfseries Moto G47} \\
+		\midrule
+		\endfirsthead
+		\toprule
+		\rowcolor{primary}
+		\textcolor{paper}{\sffamily\bfseries} & \textcolor{paper}{\sffamily\bfseries Samsung} & \textcolor{paper}{\sffamily\bfseries Pixel 10 Pro XL} & \textcolor{paper}{\sffamily\bfseries OnePlus 13} & \textcolor{paper}{\sffamily\bfseries iPhone 17 Pro Max} & \textcolor{paper}{\sffamily\bfseries Moto G47} \\
+		\midrule
+		\endhead
+		\bottomrule
+		\endlastfoot
+		\textbf{Redes móviles} & 2G/3G/4G/5G (SA y NSA) + mmWave EE.UU. & 2G/3G/4G/5G (SA y NSA) & 2G/3G/4G/5G (solo Sub-6) & 5G sub-6 + mmWave, LTE gigabit & 2G/3G/4G/5G (solo Sub-6) \\
+		\rowcolor{soft}
+		\textbf{Wi-Fi} & Wi-Fi 7 (802.11be) & Wi-Fi 7 (802.11be) & Wi-Fi 7 (802.11be) & Wi-Fi 7 (802.11be) & \textbf{Wi-Fi 5 (802.11ac)} \\
+		\textbf{Bluetooth} & \textbf{6.0} & \textbf{6.0} & 5,4 & \textbf{6} & 5,4 \\
+		\rowcolor{soft}
+		\textbf{NFC} & Sí (con UWB) & Sí & Sí (con eSE) & Sí (modo lector) & Sí (según mercado) \\
+		\textbf{UWB} & Sí & Sí & \textbf{No} & Sí (chip 2.ª gen.) & \textbf{No} \\
+		\rowcolor{soft}
+		\textbf{Otros detalles} & Satélite (SOS y mensajes) & Satélite SOS, Thread/Matter & \textbf{Mando IR}, BeaconLink & Satélite, Thread, USB-C 10 Gb/s & \textbf{Jack 3,5 mm}, IP64, MIL-STD-810H \\
+		\textbf{SIM} & Nano-SIM + eSIM & Nano-SIM + eSIM & Doble nano-SIM & \textbf{Solo eSIM EE.UU.}, nano+eSIM Europa & 2$\times$ nano-SIM, \textbf{sin eSIM} \\
+		\rowcolor{soft}
+		\textbf{USB} & USB-C 3.2 & USB-C 3.2 & USB 3.2 & USB-C hasta 10 Gb/s & USB-C 2.0 \\
+	\end{xltabular}
+	
+	\subsubsection*{Conclusión de la comparativa}
+	
+	\campo{¿Qué dispositivo presenta una mayor capacidad de procesamiento?}
+	
+	Depende (como todo): si hablamos de frecuencia del procesador y su arquitectura, ganaria el Samsung galaxy-s26-ultra; pero si hablamos de cantidad de RAM (real) ganaria el Pixel. Lo unico que tenemos seguro de esta comparación es que Motorola se queda al final de la lista por obvias razones.
+	
+	\campo{¿Cuál tiene una pantalla de mayor tamaño?}
+	
+	El Samsung Galaxy S26 Ultra y el iPhone 17 Pro Max empatan en 6,9 pulgadas, y en centímetros son prácticamente el mismo teléfono (163,6 mm frente a 163,4 mm de alto). Pisandole los talones tenemos el OnePlus 13 con 6,82'', el Pixel 10 Pro XL con 6,8'' y el Motorola Moto G47 con 6,67''.
+	
+	\campo{¿Qué diferencias encuentras en la capacidad de las baterías?}
+	
+	Principalmente veo que en capacidad gana el OnePlus 13 con sus 6.000 mAh, seguido del Pixel y el Motorola (los dos con 5.200 mAh); el Iphone con sus 5.088 y el Samsung, en última posicion con 5.000 mAh clavados. Tambien podemos destacar que la velocidad de carga de los dispositivos se llevan mucha diferencia, como por ejemplo el Motorola con 20 W y el OnePlus con 80 W (y 100 W si compras el cargador aparte y te sobra el dinero).
+	
+	\campo{¿Qué dispositivos ofrecen más opciones de conectividad?}
+	
+	El más completo es el Samsung Galaxy S26 Ultra: 5G con mmWave, Wi-Fi 7, Bluetooth 6.0, NFC, UWB, USB 3.2, eSIM y satélite. El iPhone 17 Pro Max y el Pixel 10 Pro XL están casi a su nivel. El OnePlus 13 es el raro de la lista, porque trae mando IR y se queda sin UWB. Y el Motorola Moto G47 es el que más se aleja de todo: Wi-Fi 5 en vez de Wi-Fi 7, sin UWB, sin eSIM, sin satélite y USB 2.0.
+	
+	\campo{¿Cómo podrían influir estas diferencias en la ejecución de una misma aplicación móvil?}
+	
+	Ejecutando la misma aplicación en los 5 dispositivos, lo que cambia son los componentes que unos tienen y otros no (como el NFC). Si la app usa UWB, funcionara en 3 de los 5 dispositivos; si la aplicacion usa 5G para precargar un video, en el Motorola habira que desarrollarlo de otra forma.
+	
+	\section{Identificación de tecnologías de desarrollo móvil}
+	
+	Elegir tecnología me parece la decisión más importante de un proyecto y también la más cara de revertir: cambiar de framework con la app a medio hacer es casi empezar otra vez. Por eso en este apartado quiero explicar por qué existe cada una y en qué situación concreta sería la mejor elección.
+	
+	He mirado seis: las que son herramientas nativas en Android (Java y Kotlin, con Jetpack Compose como contexto) y las multiplataformas o nativas de iOS que más se usan (Flutter, React Native, .NET MAUI y Swift).
+	
+	\subsection{Java (desarrollo nativo de Android)}
+	
+  \campo{Nombre de la tecnología.} Java (El lenguaje original para el desarrollo en Android).
+	
+	\campo{Lenguaje.} Java.
+	
+	\campo{Tipo de desarrollo.} Nativo. El código compila a bytecode y se ejecuta en la máquina virtual de Android sobre las APIs del sistema.
+	
+	\campo{Sistemas operativos compatibles.} Android solamente (no funciona para iOS).
+	
+	\campo{Principales características.}
+	\begin{itemize}[leftmargin=*,itemsep=0.2em,topsep=0.2em]
+		\item Acceso completo y directo a todas las APIs del sistema (cámara, GPS, Bluetooth, sensores, notificaciones, Wear OS\ldots).
+		\item Interfaz de dos formas: con \textbf{vistas XML} (\code{res/layout/*.xml}) o de forma declarativa con \textbf{Jetpack Compose}.
+		\item Herramienta oficial: \textbf{Android Studio}, que trae compilador (Gradle), emulador, inspector de memoria y de red, y un perfilador de CPU.
+		\item Un dato que me llamó la atención: en mayo de 2026 Google publicó una entrada de blog titulada literalmente \enquote{Android UI development is Compose-first}. El sistema de vistas clásico entra en modo mantenimiento.
+	\end{itemize}
+	
+	\campo{Ventajas.} Rendimiento máximo, porque no hay capas intermedias; cobertura total de la plataforma; ecosistema maduro y estabilidad a largo plazo.
+	
+	\campo{Desventajas.} Solo sirve para Android y su mantenimiento no es tan comodo como otros lenguajes.
+	
+  \campo{Ejemplo o situación adecuada.} Una app de banco (como es el caso de CaixaBank) o de salud que necesite leer el NFC de la tarjeta sanitaria, abrir la cámara para escanear recetas y funcionar en el \emph{longtail} de Android barato, donde el rendimiento y el tamaño del APK importan mucho.
+	
+	\subsection{Kotlin (desarrollo nativo de Android, moderno)}
+	
+  \campo{Nombre de la tecnología.} Kotlin (Mi favorito de los lenaguajes de desarrollo en Android).
+	
+	\campo{Lenguaje.} Kotlin.
+	
+	\campo{Tipo de desarrollo.} Nativo para Android y además multiplataforma mediante \textbf{Kotlin Multiplatform (KMP)}.
+	
+  \campo{Sistemas operativos compatibles.} Android de forma nativa; y mediante KMP, la misma lógica de negocio se puede compartir con iOS, macOS, Windows, Linux, web (Wasm/JS), tvOS y watchOS (y compatible con Java).
+	
+	\campo{Principales características.}
+	\begin{itemize}[leftmargin=*,itemsep=0.2em,topsep=0.2em]
+		\item Conciso y seguro: tiene tipado nulo, que eso ya elimina muchísimos errores en tiempo de ejecución.
+		\item Coroutines, que es la forma oficial de hacer asincronía sin bloquear la interfaz.
+		\item Interoperabilidad total con Java: puedes llamar a Java desde Kotlin y al revés.
+    \item Jetpack Compose para la interfaz moderna declarativa (Aunque también está Compose Multiplatform).
+		\item Google mantiene una estrategia \textbf{Kotlin-first}: la documentación nueva sale primero en Kotlin.
+	\end{itemize}
+	
+	\campo{Ventajas.} Menos código y menos errores que Java; las coroutines resuelven muy bien el trabajo en segundo plano y KMP permite reutilizar la lógica entre Android e iOS.
+	
+  \campo{Desventajas.} Curva de aprendizaje mas alta que en Java (por lo menos en mi experiencia); KMP todavía está madurando y dependende mucho de Google.
+	
+	\campo{Ejemplo o situación adecuada.} Una app de comercio electrónico que nace para Android, tiene una lógica de precios, stock y carrito complicada, y en un año quiere publicar en iOS. Con KMP se comparte el 70-80\,\% del código de negocio.
+	
+	\subsection{Flutter}
+	
+  \campo{Nombre de la tecnología.} Flutter (El que sirve en cualquier sitio).
+	
+	\campo{Lenguaje.} Dart.
+	
+	\campo{Tipo de desarrollo.} Multiplataforma, con una única base de código.
+	
+	\campo{Sistemas operativos compatibles.} Android (API 24+), iOS/iPadOS (15.0+), Windows, macOS, Linux y web. Es la lista más amplia de las seis.
+	
+	\campo{Principales características.}
+	\begin{itemize}[leftmargin=*,itemsep=0.2em,topsep=0.2em]
+		\item Flutter no usa los botones ni las vistas nativas: dibuja todos los píxeles él mismo a través de su propio árbol de widgets.
+		\item Impeller es su renderizador por defecto desde la 3.27 en iOS, y en Android a partir de la API 29.
+		\item Hot reload de verdad: cambias un \code{Text} y lo ves en el móvil en menos de un segundo.
+		\item Ecosistema en \code{pub.dev} con más de 1.300 millones de descargas en los últimos 30 días.
+		\item Versión actual: Flutter 3.47 (agosto de 2026).
+	\end{itemize}
+	
+	\campo{Ventajas.} Una sola base de código para todo, es decir, interfaz visual idéntica en todas partes; rendimiento muy cercano al nativo y hot reload al instante.
+	
+	\campo{Desventajas.} La aplicación resultante pesa más, dependencdes de plugins; el aspecto nativo no es exacto; Dart es un lenguaje relativamente nuevo; riesgo de quedarte atado a una sola plataforma.
+	
+	\campo{Ejemplo o situación adecuada.} Una startup que quiere lanzar la misma app en iOS, Android, web y escritorio en tres meses con un equipo pequeño.
+	
+	\subsection{React Native}
+	
+	\campo{Nombre de la tecnología.} React Native, el framework multiplataforma de Meta.
+	
+  \campo{Lenguaje.} JavaScript o TypeScript. (Si me preguntan a mi, mejor Typescript)
+	
+	\campo{Tipo de desarrollo.} Multiplataforma, sobre todo Android e iOS.
+	
+	\campo{Sistemas operativos compatibles.} Android, iOS y, mediante proyectos externos (\emph{out-of-tree}), macOS, Windows, visionOS, tvOS, web y HarmonyOS.
+	
+	\campo{Principales características.}
+	\begin{itemize}[leftmargin=*,itemsep=0.2em,topsep=0.2em]
+		\item Al revés que Flutter, sí usa las vistas nativas de cada sistema.
+		\item La Nueva Arquitectura (Fabric y Turbo Native Modules) es el modo por defecto desde la 0.76, y desde la 0.82 (octubre de 2025) es la única arquitectura.
+		\item Fast Refresh activado por defecto.
+		\item Versión actual: React Native 0.87 (agosto de 2026), que exige Node 22+.
+		\item Ecosistema npm: cualquier librería de JavaScript probablemente ya tiene versiones LTS.
+	\end{itemize}
+	
+  \campo{Ventajas.} Enorme mercado de desarrolladores (gracias a su ecosistema npm gigantesco); integración incremental y buen rendimiento con la Nueva Arquitectura.
+	
+	\campo{Desventajas.} Los módulos nativos son fuente de problemas; las actualizaciones mayores son complejas, el rendimiento es variable; depurar es más complejo; tiene menos presencia que Flutter en el mercado de frameworks.
+	
+	\campo{Ejemplo o situación adecuada.} Una empresa que ya tiene un equipo web grande y quiere sacar la app móvil sin contratar gente nueva.
+	
+	\subsection{.NET MAUI}
+	
+	\campo{Nombre de la tecnología.} .NET MAUI (Multi-platform App UI), el sucesor de Xamarin.Forms dentro del ecosistema .NET de Microsoft.
+	
+	\campo{Lenguaje.} C\#.
+	
+	\campo{Tipo de desarrollo.} Multiplataforma.
+	
+	\campo{Sistemas operativos compatibles.} Android (API 24+), iOS 11+, macOS (Mac Catalyst), Windows 10 1809+ con WinUI 3, y tvOS.
+	
+	\campo{Principales características.}
+	\begin{itemize}[leftmargin=*,itemsep=0.2em,topsep=0.2em]
+		\item Usa los controles nativos de cada plataforma mediante un modelo de handlers.
+		\item XAML para declarar la interfaz y C\# para la lógica.
+		\item Hot Reload, incluido el XAML Hot Reload.
+		\item Estado actual: .NET MAUI 10 (noviembre de 2025). .NET MAUI 9 dejó de soportarse en mayo de 2026 y la versión 10 termina su soporte en mayo de 2027.
+	\end{itemize}
+	
+	\campo{Ventajas.} Un solo lenguaje y un solo IDE (Visual Studio); controles nativos reales; buena integración con .NET; cubre escritorio; C\# es muy productivo.
+	
+	\campo{Desventajas.} Las críticas de la comunidad sobre estabilidad y fiabilidad son serias y están documentadas; ecosistema de UI más pequeño; rendimiento irregular en apps grandes; ciclo de soporte más corto (12 meses por versión); comunidad más pequeña.
+	
+	\campo{Ejemplo o situación adecuada.} Una empresa mediana con un equipo de C\#/.NET que ya tiene una aplicación de escritorio Windows y quiere sacar la versión móvil y la de macOS con el mismo equipo.
+	
+	\subsection{Swift (desarrollo nativo de iOS)}
+	
+	\campo{Nombre de la tecnología.} Swift, el lenguaje oficial de Apple.
+	
+	\campo{Lenguaje.} Swift.
+	
+	\campo{Tipo de desarrollo.} Nativo, y solo del ecosistema Apple.
+	
+	\campo{Sistemas operativos compatibles.} iOS, iPadOS, macOS, tvOS, visionOS y watchOS. No hay versión para Android.
+	
+	\campo{Principales características.}
+	\begin{itemize}[leftmargin=*,itemsep=0.2em,topsep=0.2em]
+		\item Dos formas de hacer interfaz: SwiftUI (declarativo) y UIKit (imperativo). Apple dice que conviven y que se adopte \enquote{a tu propio ritmo}.
+		\item Concurrencia moderna: la versión actual es Swift 6.4 (septiembre de 2026), con \emph{strict concurrency}.
+		\item Xcode Previews: ves la pantalla en el canvas lateral sin arrancar la app.
+		\item Integración profunda: Core Data, SwiftUI, Metal, Core ML, HealthKit, ARKit\ldots
+		\item Seguridad de memoria gestionada (ARC).
+	\end{itemize}
+	
+	\campo{Ventajas.} Máximo rendimiento y fidelidad en plataforma Apple; acceso completo a cada API; lenguaje moderno y seguro; herramientas excelentes (Xcode + SwiftUI Previews); soporte a largo plazo coherente.
+	
+	\campo{Desventajas.} Lock-in total; cuesta aprender dos cosas (SwiftUI y UIKit); ecosistema de herramientas más estrecho; la API evoluciona muy rápido.
+	
+	\campo{Ejemplo o situación adecuada.} Cualquier app de calidad o de prestigio en el ecosistema Apple. Siri, Things, Fantastical, Bear, Overcast\ldots todas están escritas en Swift.
+	
+	%--- Tabla 2.1 + fuentes ---
+	\subsection*{Tabla 2.1 --- Comparativa de las seis tecnologías}
+	
+	{\footnotesize
+		\begin{xltabular}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{2.5cm} >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X@{}}
+			\caption{Comparativa técnica de las seis tecnologías}\label{tab:tec-comparativa}\\
+			\toprule
+			\rowcolor{primary}
+			\textcolor{paper}{\sffamily\bfseries} & \textcolor{paper}{\sffamily\bfseries Java} & \textcolor{paper}{\sffamily\bfseries Kotlin} & \textcolor{paper}{\sffamily\bfseries Flutter} & \textcolor{paper}{\sffamily\bfseries React Native} & \textcolor{paper}{\sffamily\bfseries .NET MAUI} & \textcolor{paper}{\sffamily\bfseries Swift} \\
+			\midrule
+			\endfirsthead
+			\toprule
+			\rowcolor{primary}
+			\textcolor{paper}{\sffamily\bfseries} & \textcolor{paper}{\sffamily\bfseries Java} & \textcolor{paper}{\sffamily\bfseries Kotlin} & \textcolor{paper}{\sffamily\bfseries Flutter} & \textcolor{paper}{\sffamily\bfseries React Native} & \textcolor{paper}{\sffamily\bfseries .NET MAUI} & \textcolor{paper}{\sffamily\bfseries Swift} \\
+			\midrule
+			\endhead
+			\bottomrule
+			\endlastfoot
+			\textbf{Lenguaje} & Java & Kotlin & Dart & JS/TS & C\# & Swift \\
+			\rowcolor{soft}
+			\textbf{Tipo} & Nativo & Nativo (+KMP) & Multiplataforma & Multiplataforma & Multiplataforma & Nativo \\
+			\textbf{Android} & Sí & Sí & Sí & Sí & Sí & \textbf{No} \\
+			\rowcolor{soft}
+			\textbf{iOS} & \textbf{No} & Con KMP & Sí & Sí & Sí & Sí \\
+			\textbf{Escritorio} & \textbf{No} & Con KMP & Win/mac/Linux & Proyectos externos & Win/mac nativo & macOS \\
+			\rowcolor{soft}
+			\textbf{Web} & \textbf{No} & Experimental & Sí & Proyectos externos & \textbf{No} & \textbf{No} \\
+			\textbf{Cómo dibuja la UI} & Vistas XML o Compose & Compose o XML & Motor propio & Vistas nativas & Controles nativos & SwiftUI o UIKit \\
+			\rowcolor{soft}
+			\textbf{Rendimiento} & Máximo & Máximo & Muy alto & Alto & Medio-alto & Máximo \\
+			\textbf{Tamaño de la app} & Bajo & Bajo & \textbf{Alto} & Medio & Medio-alto & Bajo \\
+			\rowcolor{soft}
+			\textbf{Hot reload} & Limitado & Sí (Compose) & Excelente & Fast Refresh & Sí (XAML) & Previews Xcode \\
+			\textbf{Curva de aprendizaje} & Alta & Media & Media & Media (web) & Media-alta & Media \\
+			\rowcolor{soft}
+			\textbf{Comunidad} & Muy grande & Muy grande & Grande & Muy grande & Media-pequeña & Grande \\
+			\textbf{Coste de cambiar} & Medio & Medio & Alto & Alto & Alto & Medio \\
+		\end{xltabular}
+	}
+	
+	\subsection{Reflexión sobre la comparativa}
+	
+	\campo{¿Qué diferencias existen entre el desarrollo nativo y el multiplataforma?}
+	
+	La diferencia realamente no es tanto técnica, sino de de como se organizan a nivel de componentes. En el nativo la aplicación usa directamente los componentes del sistema; en el multiplataforma hay una capa intermedia que traduce, y de esa capa salen todas las demás diferencias:
+	\begin{itemize}[leftmargin=*,itemsep=0.2em,topsep=0.2em]
+		\item El aspecto visual. El nativo se ajusta mas al entorno.
+		\item El rendimiento y el consumo. El nativo es más eficiente, siempre.
+		\item El acceso al hardware. El nativo llega a todo; el multiplataforma, a lo que alguien haya escrito un binding.
+		\item El tamaño de la aplicación. El nativo pesa menos.
+		\item El coste de desarrollo. Aquí el multiplataforma gana sin discusión, pero con una condición: si luego necesitas algo muy nativo en una de las dos plataformas, la ventaja se evapora.
+	\end{itemize}
+	
+	Después de comparar las seis, mi conclusión es que la decisión no es técnica, es organizativa. La pregunta que de verdad importa es \enquote{¿qué equipo tengo y qué necesitan mis usuarios?}.
+	
+	\campo{¿Qué ventajas puede ofrecer una aplicación desarrollada específicamente para Android?}
+	
+	Cuatro, y las cuatro son reales:
+	\begin{enumerate}[leftmargin=*,itemsep=0.1em]
+		\item Acceso completo a todas las APIs de Android sin intermediarios.
+		\item Rendimiento y consumo óptimos.
+		\item Tamaño de descarga menor.
+		\item Publicación inmediata en un solo sitio.
+	\end{enumerate}
+	
+	\campo{¿Qué beneficios puede aportar una tecnología que permita desarrollar para varios sistemas operativos?}
+	
+	Principalmente el coste: el ahorro típico está entre el 30\,\% y el 50\,\% del coste total de desarrollo, no el 80\,\% que se repite mucho y que no se cumple. Luego la velocidad de salida al mercado, un único equipo de mantenimiento, consistencia del producto y de los valores, y actualizaciones simultáneas.
+	
+	\campo{¿Qué factores debería tener en cuenta una empresa antes de elegir una tecnología?}
+	
+	Si tuviera que ordenarlos por peso: dónde están nuestros usuarios y qué necesitan; qué sabe hacer el equipo y qué quiere aprender; requisitos técnicos muy específicos; presupuesto y plazo; mantenimiento a 5 años vista; riesgo de proveedor; y por último accesibilidad y regulación.
+	
+	
+	\newpage
+	\section{Configuración del entorno de desarrollo Android}
+	
+	\subsection{Requisitos e instalación de Android Studio}
+	
+	\campo{Paso 0 --- Comprobar los requisitos del equipo.}
+	Antes de descargar nada hay que mirar lo que publica Google, porque hay una cosa que puede hacer que todo lo demás falle después. En mi caso el punto crítico es siempre el mismo: la \textbf{virtualización por hardware}. Si no está activada en la BIOS, el emulador no arranca y no hay arreglo por software.
+	
+	\begin{table}[htbp]
+		\centering
+		\small
+		\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.5cm} >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X@{}}
+			\toprule
+			\rowcolor{primary}
+			\textcolor{paper}{\sffamily\bfseries Requisito} & \textcolor{paper}{\sffamily\bfseries Windows (mínimo)} & \textcolor{paper}{\sffamily\bfseries Windows (recomendado)} \\
+			\midrule
+			Sistema operativo & Windows 10 de 64 bits & Última versión de Windows de 64 bits \\
+			\rowcolor{soft}
+			RAM & 8 GB (solo Studio) · \textbf{16 GB (Studio + emulador)} & \textbf{32 GB} \\
+			Procesador & Con virtualización activada (Intel VT-x o AMD-V) en la BIOS; microarquitectura posterior a 2017 & Intel Core i5/i7/i9 de 8.ª gen o Ryzen 5/6/7/9 \\
+			\rowcolor{soft}
+			Disco & 8 GB libres (Studio) · 16 GB libres (Studio + emulador) & SSD con 32 GB o más \\
+			Resolución & 1280 $\times$ 800 & 1920 $\times$ 1080 \\
+			\rowcolor{soft}
+			Tarjeta gráfica & Ninguna (solo Studio) · 4 GB de VRAM (con emulador) & 8 GB de VRAM \\
+			\bottomrule
+		\end{tabularx}
+		\caption{Requisitos de Android Studio (Windows)}
+	\end{table}
+	
+	En macOS los mínimos son macOS 12, 8 GB de RAM y un Apple M1 o un Intel de 6.ª generación en adelante; en Linux, cualquier distribución de 64 bits y \textbf{glibc 2.31 o superior}. Tres advertencias que están en la propia documentación: \textbf{Windows con procesador ARM no está soportado}, los \textbf{Intel Core N-Series y U-Series no se recomiendan}, y cada emulador adicional que creo consume unos \textbf{4 GB de RAM} y \textbf{6 GB de disco}.
+	
+	\campo{Paso 1 --- Descargar el instalador.}
+	Se descarga desde \url{https://developer.android.com/studio}. La versión estable es \textbf{Quail 4 | 2026.1.4 Patch 1}, y el instalador ocupa unos \textbf{1,5 GB} (pero nosotros instalaremos Rabbit 1, que es la mas nueva):
+	\begin{itemize}[leftmargin=*,itemsep=0.15em]
+		\item \textbf{Windows}: \archivo{android-studio-quail4-patch1-windows.exe}.
+		\item \textbf{macOS}: \archivo{...-mac.dmg} o \archivo{...-mac\_arm.dmg}.
+		\item \textbf{Linux}: \archivo{...-linux.tar.gz}.
+		\item \textbf{ChromeOS}: \archivo{...-cros.deb}.
+	\end{itemize}
+
+	\captura[width=1\linewidth]{Descarga_AS_Rabbit1}{Instalador de Android Studio (Rabbit 1)}{fig:descargaasrabbit1}
+
+	
+	\campo{Paso 2 --- Ejecutar el instalador.}
+	\begin{itemize}[leftmargin=*,itemsep=0.15em]
+		\item \textbf{Windows}: doble clic en el \archivo{.exe} y seguir el asistente.
+		\item \textbf{macOS}: abrir el \archivo{.dmg} y \textbf{arrastrar el icono a Aplicaciones}.
+		\item \textbf{Linux}: descomprimir en \archivo{/opt/} y lanzar \archivo{android-studio/bin/studio}.
+	\end{itemize}
+	
+	\captura[width=0.65\linewidth]{Instalacion_AS_1}{Instalador de Android Studio en Windows: pantalla \emph{Choose Components}, con \textbf{Android Studio} y \textbf{Android Virtual Device} marcados (4,3 GB de espacio necesario).}{fig:inst-componentes}
+
+	\captura[width=0.8\linewidth]{Instalacion_AS_3}{Pantalla de arranque de Android Studio Rabbit 1 (2026.2.1), que confirma la versión instalada.}{fig:arranque}
+
+	\campo{Paso 3 --- El asistente de configuración inicial (Setup Wizard).}
+	El asistente ofrece dos modos de instalación:
+	\begin{itemize}[leftmargin=*,itemsep=0.15em]
+		\item \textbf{Standard (estándard)}: instala automáticamente el conjunto recomendado.
+		\item \textbf{Custom (personalizado)}: permite elegir componente a componente.
+	\end{itemize}
+	
+	\captura[width=1\linewidth]{Instalacion_AS_4}{Asistente de configuración inicial (\emph{Setup Wizard}): pantalla \emph{Install Type} con el modo \textbf{Standard} seleccionado.}{fig:wizard-tipo}
+
+	\captura[width=1\linewidth]{Instalacion_AS_6}{\emph{Setup Wizard}: descarga de componentes terminada. El registro indica que el SDK está actualizado y que se ha creado el dispositivo virtual \texttt{Medium\_Phone\_API\_37.0}.}{fig:wizard-descarga}
+
+	
+	\captura[width=1\linewidth]{AndroidStudio_1}{Pantalla principal de Android Studio con el proyecto \texttt{MiPrimeraAplicacion} abierto: panel \emph{Project} a la izquierda, editor en el centro y panel de Gradle a la derecha.}{fig:pantalla-principal}
+
+	
+	\subsection{Creación de un proyecto de prueba}
+	
+	\campo{Paso 1 --- Abrir el asistente de nuevo proyecto.}
+	Botón \textbf{New Project} en la pantalla de bienvenida, o \textbf{File > New > New Project}.
+	
+	\campo{Paso 2 --- Elegir la plantilla.}
+	En el panel de plantillas, dentro de \textbf{Phone and Tablet}, hay que seleccionar \textbf{\texttt{Empty Views Activity}}.
+
+	\captura[width=1\linewidth]{Creacion_PrimerProyecto_1}{Asistente \emph{New Project}: plantilla \textbf{Empty Views Activity} seleccionada en la categoría \emph{Phone and large screens}.}{fig:plantilla}
+
+	
+	\begin{warnbox}
+		\textbf{\color{accent!80!black}\faExclamationTriangle\ \ Ojo con la plantilla.}
+		En Android Studio conviven dos plantillas que se parecen mucho y elegir la equivocada cambia todo lo que viene después:
+		\begin{itemize}[leftmargin=*,itemsep=0.15em]
+			\item \textbf{\texttt{Empty Views Activity}} \flecha genera la interfaz con \textbf{vistas XML} en \archivo{res/layout/}.
+			\item \textbf{\texttt{Empty Activity}} \flecha genera la interfaz con \textbf{Jetpack Compose}, sin ningún XML.
+		\end{itemize}
+		El enunciado pide la de vistas XML, así que esa es la que uso. Aun así, desde mayo de 2026 la posición oficial de Android Developers es que el desarrollo de interfaces en Android es \enquote{Compose-first}, así que el sistema de vistas que nos piden aquí ya está en mantenimiento.
+	\end{warnbox}
+	
+	\campo{Paso 3 --- Configurar el proyecto.}
+	
+	\begin{table}[htbp]
+		\centering
+		\small
+		\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3cm} >{\RaggedRight\arraybackslash}p{5cm} >{\RaggedRight\arraybackslash}X@{}}
+			\toprule
+			\rowcolor{primary}
+			\textcolor{paper}{\sffamily\bfseries Campo} & \textcolor{paper}{\sffamily\bfseries Valor a introducir} & \textcolor{paper}{\sffamily\bfseries Por qué} \\
+			\midrule
+			\textbf{Name} & \archivo{PracticaEntornoMovil} & Nombre del proyecto y de la carpeta \\
+			\rowcolor{soft}
+			\textbf{Package name} & \archivo{com.ejemplo.practicaentornomovil} & Identificador único. No se puede cambiar después \\
+			\textbf{Save location} & Carpeta con espacio & El proyecto + emulador se llevan bastante \\
+			\rowcolor{soft}
+			\textbf{Language} & \textbf{Kotlin} & El enunciado es explícito: debe ser Kotlin, no Java \\
+			\textbf{Minimum API level} & \textbf{API 24 (Android 7.0 Nougat)} & Valor que usa el codelab oficial de Google \\
+			\bottomrule
+		\end{tabularx}
+		\caption{Campos de configuración del nuevo proyecto}
+	\end{table}
+	
+	\begin{warnbox}
+		\textbf{\color{accent!80!black}\faExclamationTriangle\ \ Sobre una contradicción del enunciado.}
+		En el punto 3.4 aparece \enquote{la selección de Java}, mientras que en el 3.2 se dice explícitamente que el proyecto debe ser en Kotlin, no en Java. Es una errata y lo dejo escrito aquí porque me parece que conviene subirlo. Yo me quedo con \textbf{Kotlin}, que además es el lenguaje oficial desde 2019, y por eso el archivo se llama \archivo{MainActivity.kt} y no \archivo{MainActivity.java}.
+	\end{warnbox}
+	
+	\captura[width=1\linewidth]{Creacion_PrimerProyecto_2}{Asistente \emph{New Project} con los campos rellenos: nombre \texttt{MiPrimeraAplicacion}, \textbf{Language = Kotlin} y SDK mínimo API 36.}{fig:nuevo-proyecto}
+
+	
+	\campo{Paso 4 --- Esperar a la sincronización.}
+	Al pulsar \textbf{Finish}, Android Studio crea el proyecto y lanza una sincronización de Gradle en segundo plano. En la parte inferior se ve la barra de progreso, y conviene esperar a que termine antes de tocar nada más.
+	
+	\captura[width=1\linewidth,trim=40 29 37 501,clip]{VentanaBuild_PanelProjectDesplegado}{Panel \emph{Build} tras crear el proyecto: la sincronización de Gradle termina con \texttt{BUILD SUCCESSFUL in 18s} y sin errores en rojo.}{fig:gradle}
+	
+	\subsection{Comprobación del funcionamiento}
+	
+	\campo{Paso 1 --- Localizar la estructura del proyecto.}
+	Nada más abrir el proyecto, lo primero que hago es mirar el árbol de archivos, que es donde se ve si Android Studio ha generado lo que se le ha pedido:
+	
+	\begin{verbatim}
+		PracticaEntornoMovil/
+		|-- app/
+		|   |-- build.gradle.kts
+		|   |-- proguard-rules.pro
+		|   `-- src/main/
+		|       |-- AndroidManifest.xml
+		|       |-- java/com/ejemplo/practicaentornomovil/
+		|       |   `-- MainActivity.kt            <-- ACTIVIDAD PRINCIPAL
+		|       `-- res/
+		|           |-- layout/
+		|           |   `-- activity_main.xml      <-- DISEÑO DE LA INTERFAZ
+		|           |-- mipmap-anydpi-v26/
+		|           |-- values/
+		|           `-- xml/
+		|-- build.gradle.kts
+		|-- gradle.properties
+		`-- settings.gradle.kts
+	\end{verbatim}
+
+	\captura[width=1\linewidth]{VentanaBuild_PanelProjectDesplegado}{Android Studio con el panel \emph{Project} desplegado (vista \emph{Android}): \texttt{manifests}, \texttt{kotlin+java}, \texttt{res} y \texttt{Gradle Scripts}.}{fig:arbol}
+
+	\captura[width=0.45\linewidth,trim=40 314 1150 75,clip]{VentanaBuild_PanelProjectDesplegado}{Detalle ampliado del árbol del proyecto: \texttt{MainActivity} dentro de \texttt{kotlin+java} y las carpetas de \texttt{res}.}{fig:arbol-detalle}
+
+	
+	\campo{Paso 2 --- Identificar la actividad principal y el diseño.}
+	Son los dos archivos que tengo que enseñar como evidencia, porque son los que demuestran que el proyecto está bien creado:
+	
+	\begin{table}[htbp]
+		\centering
+		\small
+		\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.2cm} >{\RaggedRight\arraybackslash}p{5.4cm} >{\RaggedRight\arraybackslash}X@{}}
+			\toprule
+			\rowcolor{primary}
+			\textcolor{paper}{\sffamily\bfseries Archivo} & \textcolor{paper}{\sffamily\bfseries Ruta} & \textcolor{paper}{\sffamily\bfseries Qué contiene} \\
+			\midrule
+			\textbf{Actividad principal} & \archivo{app/src/main/java/.../\allowbreak MainActivity.kt} & La clase \code{MainActivity} y su \code{onCreate}, que llama a \code{setContentView} \\
+			\rowcolor{soft}
+			\textbf{Diseño} & \archivo{app/src/main/res/layout/\allowbreak activity\_main.xml} & El XML con la jerarquía de vistas \\
+			\bottomrule
+		\end{tabularx}
+		\caption{Archivos principales del proyecto}
+	\end{table}
+
+	\captura[width=1\linewidth,trim=292 314 280 41,clip]{VentanaBuild_PanelProjectDesplegado}{Editor con \archivo{MainActivity.kt}: la extensión \archivo{.kt} y la declaración \code{class MainActivity : AppCompatActivity()} confirman que la actividad principal está escrita en Kotlin.}{fig:mainactivity}
+
+	\captura[width=1\linewidth]{ActivityMain}{Archivo \archivo{activity\_main.xml} en vista \emph{Split}: el XML con la jerarquía de vistas (\code{ConstraintLayout} con un \code{TextView}) y su vista previa.}{fig:layout}
+
+
+	
+		
+	\campo{Paso 3 --- Ejecutar en el emulador.}
+	Antes de nada, confirmar que la \textbf{virtualización por hardware está activada en la BIOS}:
+	\begin{verbatim}
+		emulator -accel-check
+	\end{verbatim}
+	Los requisitos oficiales del emulador son \textbf{16 GB de RAM} y \textbf{16 GB de espacio en disco}, así que el equipo tiene que estar a la altura. Para crear el dispositivo virtual:
+	\begin{enumerate}[leftmargin=*,itemsep=0.15em]
+		\item Abrir \textbf{Device Manager}.
+		\item Pulsar \textbf{+} y elegir \textbf{Create Virtual Device}.
+		\item Elegir un perfil de \textbf{Pixel}.
+		\item Elegir la \textbf{imagen de sistema}.
+		\item Revisar la configuración y pulsar \textbf{Finish}.
+	\end{enumerate}
+	Para ejecutar: botón \textbf{Run} (o \textbf{Shift + F10}).
+	
+	\captura[width=1\linewidth]{ProgramaEjecutadoEmulador}{Aplicación ejecutada en el emulador \texttt{Medium Phone API 37.0}: se muestra el \emph{Hello World!} definido en \texttt{activity\_main.xml}.}{fig:emulador}
+	
+	\subsection{Problemas frecuentes y cómo solucionarlos}
+	
+	Estos son los que me he encontrado al montar el entorno, y los que creo que se le van a aparecer a cualquiera que lo monte por primera vez. Los pongo en tabla porque es más fácil buscarlos así.
+	
+	\begin{xltabular}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.3cm} >{\RaggedRight\arraybackslash}p{4.5cm} >{\RaggedRight\arraybackslash}X@{}}
+		\caption{Problemas frecuentes durante la instalación y su solución}\label{tab:problemas}\\
+		\toprule
+		\rowcolor{primary}
+		\textcolor{paper}{\sffamily\bfseries Problema} & \textcolor{paper}{\sffamily\bfseries Causa} & \textcolor{paper}{\sffamily\bfseries Solución} \\
+		\midrule
+		\endfirsthead
+		\toprule
+		\rowcolor{primary}
+		\textcolor{paper}{\sffamily\bfseries Problema} & \textcolor{paper}{\sffamily\bfseries Causa} & \textcolor{paper}{\sffamily\bfseries Solución} \\
+		\midrule
+		\endhead
+		\bottomrule
+		\endlastfoot
+		El emulador \textbf{no arranca} & No hay virtualización por hardware activada en la BIOS & Activar Intel VT-x o AMD-V en la BIOS y reiniciar. Comprobar con \code{emulator -accel-check} \\
+		\rowcolor{soft}
+		El emulador va \textbf{muy lento} o se cuelga & Funciona sin aceleración de VM & Con virtualización activada se multiplica la velocidad. Alternativa: \code{emulator -gpu software}, dispositivo físico por USB, o Android Device Streaming \\
+		Error \enquote{Connection to the Internet denied} & Bloqueo de red al descargar dependencias de Gradle & Añadir a \archivo{gradle.properties}: \code{org.gradle.jvmargs=-Djava.net.preferIPv4Stack=true} y reiniciar \\
+		\rowcolor{soft}
+		\textbf{No arranca por falta de espacio} & El emulador no arranca con menos de 5 GB libres & Liberar espacio en disco \\
+		Las apps de Google \textbf{fallan en API reciente} & Imagen de sistema sin el parche de certificación & Actualizar la imagen del sistema a la revisión 5 o posterior de la API 37 \\
+		\rowcolor{soft}
+		El \textbf{antivirus ralentiza} el emulador & El antivirus intercepta lecturas y escrituras & Añadir el emulador a la lista de aplicaciones de confianza \\
+		La \textbf{multitáctil no funciona} & La ventana de herramientas no soporta multitáctil & Ejecutar el emulador en su propia ventana separada \\
+		\rowcolor{soft}
+		El emulador \textbf{no arranca anidado} en otra VM & Los emuladores con aceleración no pueden correr dentro de VirtualBox, VMware o Docker & Ejecutarlo en la máquina real, no en una VM \\
+		El proyecto aparece con \textbf{errores en rojo} & Las dependencias aún no se han descargado & Esperar a la sincronización. Si persiste: \textbf{File > Invalidate Caches and Restart} \\
+		\rowcolor{soft}
+		La resolución DPI se detecta \textbf{mal} & Detección automática de DPI fallida & Añadir \code{hidpi=true} o \code{hidpi=false} en \archivo{gradle.properties} \\
+	\end{xltabular}
+	
+	\section{Identificación de configuraciones de dispositivos móviles}
+	
+	En el Apartado 1 hablé de las limitaciones en abstracto y en el Apartado 2 de las herramientas. Este es el apartado que junta las dos cosas: qué datos concretos hay que mirar en un dispositivo para saber si una aplicación va a funcionar bien en él. Son cinco criterios, y voy en el mismo orden en el que un desarrollador acabaría preguntándoselos a un móvil: resolución y densidad, sistema operativo y versión, almacenamiento interno, memoria RAM y potencia de procesamiento, y conectividad.
+	
+	\subsection{Resolución de pantalla y densidad}
+	
+	\campo{¿En qué consiste?}
+	Una pantalla no se mide solo en píxeles. Se mide en \textbf{píxeles físicos}, en \textbf{densidad} y en \textbf{dp}. La cuenta oficial:
+	\begin{center}\code{px = dp × (dpi / 160)}\end{center}
+	La documentación lo dice así: \enquote{One dp is a virtual pixel unit that's roughly equal to one pixel on a medium-density screen (160 dpi, or the 'baseline' density)}.
+	
+	\begin{table}[htbp]
+		\centering
+		\small
+		\begin{tabular}{@{}l l c c c@{}}
+			\toprule
+			\rowcolor{primary}
+			\textcolor{paper}{\sffamily\bfseries Grupo} & \textcolor{paper}{\sffamily\bfseries Nombre} & \textcolor{paper}{\sffamily\bfseries dpi aprox.} & \textcolor{paper}{\sffamily\bfseries Factor} & \textcolor{paper}{\sffamily\bfseries Icono 48dp} \\
+			\midrule
+			\code{ldpi} & Baja densidad & $\sim$120 & 0,75$\times$ & 36$\times$36 px \\
+			\rowcolor{soft}
+			\code{mdpi} & Densidad media (\textbf{ref.}) & $\sim$160 & 1,0$\times$ & 48$\times$48 px \\
+			\code{hdpi} & Alta densidad & $\sim$240 & 1,5$\times$ & 72$\times$72 px \\
+			\rowcolor{soft}
+			\code{xhdpi} & Extra alta & $\sim$320 & 2,0$\times$ & 96$\times$96 px \\
+			\code{xxhdpi} & Extra extra alta & $\sim$480 & 3,0$\times$ & 144$\times$144 px \\
+			\rowcolor{soft}
+			\code{xxxhdpi} & Extra extra extra alta & $\sim$640 & 4,0$\times$ & 192$\times$192 px \\
+			\bottomrule
+		\end{tabular}
+		\caption{Grupos de densidad de Android}
+	\end{table}
+	
+	\campo{¿Por qué afecta a una aplicación?}
+	Porque \textbf{el mismo número de píxeles no significa lo mismo en dos teléfonos distintos}.
+	
+	\textbf{\color{primary}¿Cómo lo clasifico?}
+	Android agrupa las pantallas por \textbf{tamaño en dp}:
+	
+	\begin{table}[htbp]
+		\centering
+		\small
+		\begin{tabular}{@{}l l l@{}}
+			\toprule
+			\rowcolor{primary}
+			\textcolor{paper}{\sffamily\bfseries Constante} & \textcolor{paper}{\sffamily\bfseries Etiqueta} & \textcolor{paper}{\sffamily\bfseries Tamaño mínimo} \\
+			\midrule
+			\code{SCREENLAYOUT\_SIZE\_SMALL} & \code{small} & 320 $\times$ 426 dp \\
+			\rowcolor{soft}
+			\code{SCREENLAYOUT\_SIZE\_NORMAL} & \code{normal} & 320 $\times$ 470 dp \\
+			\code{SCREENLAYOUT\_SIZE\_LARGE} & \code{large} & 480 $\times$ 640 dp \\
+			\rowcolor{soft}
+			\code{SCREENLAYOUT\_SIZE\_XLARGE} & \code{xlarge} & 720 $\times$ 960 dp \\
+			\bottomrule
+		\end{tabular}
+		\caption{Tamaños de pantalla en Android}
+	\end{table}
+	
+	Desde \textbf{Android 17 (API 37)} ya no se pueden declarar bloqueos de orientación o de redimensionado en pantallas grandes (\code{sw} $\geq$ 600dp).
+	
+	\campo{Conclusión del criterio.} La resolución por sí sola sirve poco; lo que hay que mirar es la \textbf{densidad} y el \textbf{tamaño en dp}.
+	
+	\subsection{Sistema operativo y versión}
+	
+	\campo{¿En qué consiste?}
+	El sistema operativo es lo primero que hay que mirar. En Android hay dos números distintos: \textbf{el nombre de la versión} y \textbf{el nivel de API}. La documentación avisa: \enquote{The API level is always a single integer. You can't derive the API level from its associated Android version number}.
+	
+	\begin{table}[htbp]
+		\centering
+		\small
+		\begin{tabular}{@{}l c@{}}
+			\toprule
+			\rowcolor{primary}
+			\textcolor{paper}{\sffamily\bfseries Versión de Android} & \textcolor{paper}{\sffamily\bfseries Nivel de API} \\
+			\midrule
+			Android 17 & \textbf{37} \\
+			\rowcolor{soft}
+			Android 16 & \textbf{36} \\
+			Android 15 & \textbf{35} \\
+			\rowcolor{soft}
+			Android 14 & \textbf{34} \\
+			Android 13 & \textbf{33} \\
+			\rowcolor{soft}
+			Android 12L / 12 & 32 / \textbf{31} \\
+			Android 11 & \textbf{30} \\
+			\rowcolor{soft}
+			Android 10 & \textbf{29} \\
+			Android 9 & \textbf{28} \\
+			\rowcolor{soft}
+			Android 8.1 / 8.0 & 27 / 26 \\
+			Android 7.1 / 7.0 & 25 / 24 \\
+			\bottomrule
+		\end{tabular}
+		\caption{Correspondencia versión de Android y nivel de API}
+	\end{table}
+	
+	\campo{¿Por qué afecta a una aplicación?}
+	Por tres cosas, y la primera es la que más duele si no la tienes en cuenta:
+	\begin{enumerate}[leftmargin=*,itemsep=0.15em]
+		\item \textbf{Si no subes el \code{targetSdkVersion}, Google Play te deja fuera.} Desde el \textbf{31 de agosto de 2026}, las aplicaciones nuevas y actualizaciones tienen que apuntar a Android 16 (API 36) o superior.
+		\item \textbf{Las apps antiguas se vuelven invisibles.} Para seguir siendo visibles a usuarios nuevos: mínimo \textbf{Android 15 (API 35)}.
+		\item \textbf{El sistema cambia de comportamiento sin avisar.}
+	\end{enumerate}
+	
+	En el proyecto de prueba me quedo con \textbf{\code{minSdk} = 24}, \textbf{\code{targetSdk} = el del SDK instalado} y \textbf{\code{compileSdk}} igual al \code{targetSdk}. El 24 es conservador a propósito: pierdes funciones modernas, pero a cambio la app abre en muchísimos más móviles.
+	
+	\subsection{Almacenamiento interno}
+	
+	\campo{¿En qué consiste?}
+	El almacenamiento interno es el espacio del teléfono donde van las apps y sus datos. Hay que distinguir \textbf{la capacidad del dispositivo} y \textbf{el espacio disponible para una aplicación concreta}. Android no publica tabla oficial de \enquote{gamas de almacenamiento}, así que las franjas son \textbf{convención de mercado}.
+	
+	\begin{table}[htbp]
+		\centering
+		\small
+		\begin{tabularx}{\textwidth}{@{}l l l >{\RaggedRight\arraybackslash}X@{}}
+			\toprule
+			\rowcolor{primary}
+			\textcolor{paper}{\sffamily\bfseries Gama} & \textcolor{paper}{\sffamily\bfseries Total} & \textcolor{paper}{\sffamily\bfseries Útil} & \textcolor{paper}{\sffamily\bfseries Perfil típico} \\
+			\midrule
+			\textbf{Baja} & 16-32 GB & 8-10 GB & Móvil antiguo o de entrada \\
+			\rowcolor{soft}
+			\textbf{Media} & 64-128 GB & 40-70 GB & La gama mayoritaria \\
+			\textbf{Alta} & 256 GB - 1 TB & 200 GB+ & Gama alta \\
+			\bottomrule
+		\end{tabularx}
+		\caption{Gamas de almacenamiento (convención)}
+	\end{table}
+	
+	La documentación oficial avisa: \enquote{Internal storage has limited space for app-specific data. Use other types of storage if you need to save a substantial amount of data}.
+	
+	\subsection{Memoria RAM y potencia de procesamiento}
+	
+	\campo{¿En qué consiste?}
+	La RAM es el espacio donde se ejecutan los procesos. Android tiene una \textbf{tabla oficial de umbrales de \enquote{mal comportamiento} según la gama de RAM}.
+	
+	\begin{table}[htbp]
+		\centering
+		\small
+		\begin{tabular}{@{}c c c c@{}}
+			\toprule
+			\rowcolor{primary}
+			\textcolor{paper}{\sffamily\bfseries RAM física} & \textcolor{paper}{\sffamily\bfseries Primer plano} & \textcolor{paper}{\sffamily\bfseries Servicios visibles} & \textcolor{paper}{\sffamily\bfseries Segundo plano} \\
+			\midrule
+			4 GB & \textbf{2,00 GB} & 1,00 GB & 1,00 GB \\
+			\rowcolor{soft}
+			6 GB & \textbf{2,25 GB} & 1,25 GB & 1,25 GB \\
+			8 GB & \textbf{2,25 GB} & 1,50 GB & 1,50 GB \\
+			\rowcolor{soft}
+			12 GB & \textbf{3,25 GB} & 1,75 GB & 1,75 GB \\
+			16 GB & \textbf{4,25 GB} & 2,00 GB & 2,00 GB \\
+			\bottomrule
+		\end{tabular}
+		\caption{Umbrales de \emph{Android vitals} para apps}
+	\end{table}
+	
+	Y un dato que me parecía importante y ya no lo es tanto: \textbf{los límites de memoria para imágenes (\emph{bitmaps}) no varían con la gama de RAM}. Son 200 MB en servicios y segundo plano, y 400 MB en caché, \textbf{siempre}.
+	
+	\campo{¿Por qué afecta a una aplicación?}
+	Android da las herramientas para preguntarle al dispositivo cómo es: \code{ActivityManager.getMemoryClass()} para la memoria disponible e \code{isLowRamDevice()} para saber si es de gama baja.
+	
+	\campo{¿Cómo lo clasifico?}
+	El criterio que uso es el que devuelve \code{isLowRamDevice()}, porque es el que de verdad decide cómo tengo que comportarme:
+	
+	\begin{table}[htbp]
+		\centering
+		\small
+		\begin{tabularx}{\textwidth}{@{}l l l >{\RaggedRight\arraybackslash}X@{}}
+			\toprule
+			\rowcolor{primary}
+			\textcolor{paper}{\sffamily\bfseries Tramo} & \textcolor{paper}{\sffamily\bfseries RAM física} & \textcolor{paper}{\sffamily\bfseries \code{isLowRamDevice()}} & \textcolor{paper}{\sffamily\bfseries Qué hacer} \\
+			\midrule
+			\textbf{Crítico} & $\leq$ 2 GB & \code{true} & Cachés mínimos, sin \code{largeHeap}, una imagen cada vez \\
+			\rowcolor{soft}
+			\textbf{Bajo} & 3-4 GB & \code{true} & Imágenes reducidas, paginación, 2 hilos máx. \\
+			\textbf{Medio} & 6-8 GB & \code{false} & Comportamiento estándar \\
+			\rowcolor{soft}
+			\textbf{Alto} & 12 GB+ & \code{false} & Todo con margen para más trabajo concurrente \\
+			\bottomrule
+		\end{tabularx}
+		\caption{Clasificación por gama de RAM}
+	\end{table}
+	
+	\subsection{Conectividad}
+	
+	\campo{¿En qué consiste?}
+	La conectividad es, con diferencia, \textbf{el recurso más variable de los cinco}. Hay cuatro familias: \textbf{datos móviles}, \textbf{Wi-Fi}, \textbf{Bluetooth} (dos variantes) y \textbf{NFC}. Y un quinto factor transversal: \textbf{el hecho de que la red sea \enquote{medida} (\emph{metered})}.
+	
+	\textbf{\color{primary}¿Por qué afecta a una aplicación?}
+	
+	\textbf{Red de datos.} Android soporta 5G desde Android 10:
+	
+	Los tres \enquote{trabajos} oficiales: \textbf{comprobar si la red es medida} (\code{isActiveNetworkMetered()}), \textbf{detectar 5G} y \textbf{estimar el ancho de banda}.
+	
+	\textbf{Bluetooth.} Dos cosas: \textbf{clásico} (streaming, archivos) y \textbf{Bluetooth Low Energy (BLE)} (sensores, beacons, wearables). Modelo de emparejamiento: descubrible $\to$ descubrimiento de servicios $\to$ \emph{bonding}.
+	
+	\textbf{Bluetooth LE Audio (LEA)} está en Android 13 (API 33): códec \textbf{LC3}, audio compartido, \textbf{Auracast}, \textbf{Hearing Aid Profile} y \textbf{EATT}.
+	
+	\textbf{NFC.} \enquote{A set of short-range wireless technologies, typically requiring a distance of 4 cm or less}. Tres modos: lector/escritor, emulación de tarjeta e interoperabilidad entre dispositivos.
+	
+	\subsection{Tabla resumen de los cinco criterios}
+	
+	{\footnotesize
+		\begin{xltabular}{\textwidth}{@{}c >{\RaggedRight\arraybackslash}p{2.2cm} >{\RaggedRight\arraybackslash}p{3.3cm} >{\RaggedRight\arraybackslash}p{3.5cm} >{\RaggedRight\arraybackslash}X@{}}
+			\caption{Resumen de los cinco criterios}\label{tab:resumen}\\
+			\toprule
+			\rowcolor{primary}
+			\textcolor{paper}{\sffamily\bfseries \#} & \textcolor{paper}{\sffamily\bfseries Criterio} & \textcolor{paper}{\sffamily\bfseries Dato a mirar} & \textcolor{paper}{\sffamily\bfseries Umbral / referencia} & \textcolor{paper}{\sffamily\bfseries Si falla, síntoma} \\
+			\midrule
+			\endfirsthead
+			\toprule
+			\rowcolor{primary}
+			\textcolor{paper}{\sffamily\bfseries \#} & \textcolor{paper}{\sffamily\bfseries Criterio} & \textcolor{paper}{\sffamily\bfseries Dato a mirar} & \textcolor{paper}{\sffamily\bfseries Umbral / referencia} & \textcolor{paper}{\sffamily\bfseries Si falla, síntoma} \\
+			\midrule
+			\endhead
+			\bottomrule
+			\endlastfoot
+			1 & \textbf{Resolución y densidad} & Densidad, tamaño en \code{dp} & \code{small} 320$\times$426, \code{normal} 320$\times$470, \code{large} 480$\times$640, \code{xlarge} 720$\times$960 & Imágenes borrosas o desproporcionadas; texto ilegible \\
+			\rowcolor{soft}
+			2 & \textbf{SO y versión} & API del dispositivo, \code{minSdk}, \code{targetSdk} & Play exige \code{targetSdk} $\geq$ 36 desde 31/08/2026; $\geq$ 35 visible & La app no aparece en Play o no se ve en teléfonos nuevos \\
+			3 & \textbf{Almacenamiento} & Espacio libre, tamaño AAB & Emulador: mín. 5 GB libres. Studio: 8 GB (16 GB con emulador) & Fallo al instalar; pérdida de datos al desinstalar \\
+			\rowcolor{soft}
+			4 & \textbf{RAM y CPU} & Gama de RAM, \code{getMemoryClass()}, \code{isLowRamDevice()} & Vitals (primer plano): 2,00 GB en 4 GB $\to$ 4,25 GB en 16 GB. Imágenes: 200/400 MB fijos & Cierre automático, interfaz a saltos, \code{OutOfMemoryError} \\
+			5 & \textbf{Conectividad} & 4G/5G, Wi-Fi, BT, NFC, si es medida & Wi-Fi 7 desde Android 13; LE Audio desde Android 13; NFC $\leq$ 4 cm & Buffers, descargas que consumen datos, funciones inservibles \\
+		\end{xltabular}
+	}
+	
+	\begin{ideabox}
+		\textbf{\color{inkdim}\faLightbulb\ \ Una sola regla.}
+		\textbf{Todos estos criterios se pueden consultar en tiempo de ejecución.} \code{DisplayMetrics} para la pantalla, \code{Build.VERSION.SDK\_INT} para la versión, \code{StatFs} para el espacio, \code{ActivityManager} para la memoria, \code{ConnectivityManager} para la red. Una aplicación bien hecha \textbf{pregunta al dispositivo}, no asume.
+	\end{ideabox}
+	
+	%=====================================================================
+	%  APARTADO 5
+	%=====================================================================
+	\section{Establecimiento de perfiles de usuario}
+	
+	Este es el apartado donde todo lo anterior se cruza. Hasta aquí he hablado de dispositivos: cuántos gigabytes, qué versión, cuántos píxeles. Pero un móvil no lo usa una persona, lo usa \textbf{alguien}, y ese alguien tiene necesidades que no aparecen en ninguna ficha técnica.
+	
+	\campo{¿En qué consiste un perfil de usuario?}
+	Para mí un perfil de usuario es, simplemente, una descripción de quién va a usar la aplicación y en qué condiciones. Y lo que hace útil un perfil es que \textbf{obliga a tomar decisiones concretas de diseño}, no solo a Describe un público.
+	
+	Los seis perfiles que he definido se combinan con los cinco criterios del Apartado 4, y esto es lo que más me costó hacer entrar. Un perfil no dice \enquote{persona de 67 años} y punto, sino persona de 67 años \emph{con} un móvil de gama media de hace tres años, con conectividad intermitente y de coste alto. Si separas a la persona del dispositivo te quedan dos listas de supuestos que no se hablan, y luego el diseño falla.
+	
+	\subsection{Tabla de perfiles}
+	
+	{\footnotesize
+		\begin{xltabular}{\textwidth}{@{}c >{\RaggedRight\arraybackslash}p{2.4cm} >{\RaggedRight\arraybackslash}p{2.5cm} >{\RaggedRight\arraybackslash}p{2.7cm} >{\RaggedRight\arraybackslash}p{2.7cm} >{\RaggedRight\arraybackslash}X@{}}
+			\caption{Tabla de perfiles de usuario}\label{tab:perfiles}\\
+			\toprule
+			\rowcolor{primary}
+			\textcolor{paper}{\sffamily\bfseries \#} & \textcolor{paper}{\sffamily\bfseries Perfil} & \textcolor{paper}{\sffamily\bfseries Contexto} & \textcolor{paper}{\sffamily\bfseries Dispositivo esperado} & \textcolor{paper}{\sffamily\bfseries Accesibilidad} & \textcolor{paper}{\sffamily\bfseries Decisiones} \\
+			\midrule
+			\endfirsthead
+			\toprule
+			\rowcolor{primary}
+			\textcolor{paper}{\sffamily\bfseries \#} & \textcolor{paper}{\sffamily\bfseries Perfil} & \textcolor{paper}{\sffamily\bfseries Contexto} & \textcolor{paper}{\sffamily\bfseries Dispositivo} & \textcolor{paper}{\sffamily\bfseries Accesibilidad} & \textcolor{paper}{\sffamily\bfseries Decisiones} \\
+			\midrule
+			\endhead
+			\bottomrule
+			\endlastfoot
+			\textbf{P1} & \textbf{Usuario general} & Uso diario de redes, banca, compras, mensajería & Gama media o alta. Android 12+. 64 GB+, 6 GB RAM & Ninguna especial & Diseño base. Descargas bajo demanda en Wi-Fi, caché razonable, \code{targetSdk} al día \\
+			\rowcolor{soft}
+			\textbf{P2} & \textbf{Usuario gama baja / antiguo} & Uso básico: WhatsApp, cámara, alguna app sencilla & Android 9-11. 32 GB, 3 GB RAM, 4G intermitente, \code{hdpi} & Baja agudeza visual por edad o pantalla pequeña & Imágenes comprimidas; sin \code{largeHeap}; paginación; mín. 2 hilos; textos en \code{sp} \\
+			\textbf{P3} & \textbf{Persona mayor} & Llamadas, turnos médicos, calculadora, banco & Gama media, a veces baja. Android 11+ & \textbf{Tamaño de fuente grande, contraste alto, botón de emergencia} & Objetivos táctiles 48$\times$48dp; tipografía grande; contraste $\geq$ 4,5:1; sin gestos complejos \\
+			\rowcolor{soft}
+			\textbf{P4} & \textbf{Usuario con discapacidad visual} & Cualquiera, con lector de pantalla activo & Gama alta normalmente (no necesariamente) & \textbf{TalkBack, VoiceOver, Braille, Switch Access} & Etiquetas en todos los elementos; orden lógico; no depender solo del color; audio y vídeo descritos \\
+			\textbf{P5} & \textbf{Usuario con discapacidad auditiva} & Llamadas, vídeo, videollamadas & Cualquiera & \textbf{Subtítulos, Auracast, HAP, vibración} & Subtítulos/transcripción; compatibilidad LEA desde Android 13; avisar por vibración \\
+			\rowcolor{soft}
+			\textbf{P6} & \textbf{Usuario en movilidad} & Tren, ascensor, sótano, viaje & Cualquiera & Compartir ubicación & Diseño \emph{offline-first}; caché local; reintentos; \code{isActiveNetworkMetered()} \\
+		\end{xltabular}
+	}
+	
+	Un apunte sobre la tabla anterior, que me parece importante: los perfiles \textbf{P2 y P6} son los que más se relacionan con los cinco criterios técnicos. Un móvil de gama baja (criterio 4.4) es, casi siempre, un móvil con poco almacenamiento (4.3), versión antigua (4.2) y pantalla \code{hdpi} (4.1). Los perfiles no son categorías de personas, sino \textbf{combinaciones de persona + dispositivo + contexto}.
+	
+	\subsection{Perfil de accesibilidad y diseño: los números concretos}
+	
+	De los seis perfiles, el \textbf{P4 (baja visión o ceguera)} se lleva un apartado propio, porque es el que tiene los números más concretos de todos y donde más se me puede exigir precisión. Estos son los cinco parámetros que hay que cumplir:
+	
+	\subsubsection*{1. Tamaño del objetivo táctil: 48dp $\times$ 48dp mínimo}
+	
+	\enquote{For touch interfaces, we recommend that each interactive UI element have a focusable area, or touch target size, of at least 48dp $\times$ 48dp. Larger is even better.}
+	
+	Un matiz que conviene no pasar por alto: \textbf{el área táctil no es lo que se ve}. Un icono puede aparecer como 24$\times$24dp pero el \emph{padding} alrededor completa el objetivo de 48$\times$48dp. Se recomienda además \textbf{8dp o más de separación} entre objetivos.
+	
+	\begin{table}[htbp]
+		\centering
+		\small
+		\begin{tabular}{@{}l l@{}}
+			\toprule
+			\rowcolor{primary}
+			\textcolor{paper}{\sffamily\bfseries Guía} & \textcolor{paper}{\sffamily\bfseries Tamaño mínimo del objetivo} \\
+			\midrule
+			\textbf{Android / Material Design} & \textbf{48 $\times$ 48 dp} \\
+			\rowcolor{soft}
+			\textbf{WCAG 2.2 (W3C), criterio 2.5.8} & 24 $\times$ 24 píxeles CSS \\
+			\textbf{iOS (HIG)} & 44 $\times$ 44 dp \\
+			\bottomrule
+		\end{tabular}
+		\caption{Tamaños mínimos de objetivo entre guías}
+	\end{table}
+	
+	\subsubsection*{2. Contraste de color: 4,5:1 en texto pequeño y 3:1 en texto grande}
+	
+	\subsubsection*{3. El texto tiene que poder crecer hasta el 200\,\%}
+	
+	WCAG 2.2, criterio \textbf{1.4.4 Resize Text (AA)}: el texto se puede ampliar \enquote{without assistive technology up to 200 percent without loss of content or functionality}. En Android es el ajuste \textbf{Tamaño de fuente}. Para que crezca sin romper el diseño hay que escribirlo en \textbf{\code{sp}}, nunca en \code{dp} ni en \code{px}.
+	
+	\subsubsection*{4. Etiquetas en todo, y TalkBack tiene que poder describirlo}
+	
+	\subsubsection*{5. Detalle para P5 (discapacidad auditiva)}
+	
+	\textbf{Bluetooth LE Audio (LEA)} está integrado en Android desde la versión 13.
+	
+	\subsection{Reflexión final: por qué perfiles y dispositivo van juntos}
+	
+	La idea que más me quiero llevar de este apartado: \textbf{el dispositivo y la persona no se analizan por separado.}
+	
+	\begin{table}[htbp]
+		\centering
+		\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.3cm} >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X@{}}
+			\toprule
+			\rowcolor{primary}
+			\textcolor{paper}{\sffamily\bfseries} & \textcolor{paper}{\sffamily\bfseries Gama baja (P2)} & \textcolor{paper}{\sffamily\bfseries Gama alta (P1)} \\
+			\midrule
+			\textbf{Sin necesidades especiales (P1/P6)} & El caso mayoritario, y el que casi siempre se olvida en las pruebas & El caso que todo el mundo prueba \\
+			\rowcolor{soft}
+			\textbf{Con necesidades de accesibilidad (P3/P4/P5)} & \textbf{El más difícil de todos}: dispositivo antiguo + TalkBack + fuente al 200\,\% & Necesidades de accesibilidad sobre un buen dispositivo: se resuelve bien casi siempre \\
+			\bottomrule
+		\end{tabularx}
+		\caption{Matriz de combinaciones dispositivo $\times$ perfil}
+	\end{table}
+	
+	La casilla de abajo a la izquierda resume el problema entero. Piénsate en un usuario con baja visión en un móvil antiguo:
+	\begin{itemize}[leftmargin=*,itemsep=0.15em]
+		\item su móvil tiene \textbf{3 GB de RAM}: la app tiene que funcionar con la mitad de caché;
+		\item su pantalla es \code{hdpi}: los recursos tienen que estar bien optimizados;
+		\item lleva \textbf{Android 10}: los permisos son los antiguos;
+		\item tiene el \textbf{texto al 180\,\%}: todo debe estar en \code{sp} y con layouts flexibles;
+		\item y usa \textbf{TalkBack}: cada elemento necesita etiqueta y el orden de lectura importa.
+	\end{itemize}
+	
+	De la misma matriz saco una segunda idea: \textbf{la accesibilidad no es un extra que se añade al final, es la versión más restrictiva del diseño responsive}. Si tu interfaz aguanta a la casilla de abajo a la izquierda, aguanta en todas las demás.
+	
+	Y una tercera, que es la que más me ayuda en el día a día: \textbf{casi todo se puede preguntar en tiempo de ejecución}. \code{DisplayMetrics}, \code{Build.VERSION.SDK\_INT}, \code{StatFs}, \code{ActivityManager}, \code{ConnectivityManager}, \code{isLeAudioSupported()}, \code{isLowRamDevice()}, \code{isActiveNetworkMetered()}. No hace falta adivinar: se pregunta.
+	
+	%=====================================================================
+	%  CONCLUSIONES
+	%=====================================================================
+	\newpage
+	\section*{Conclusiones finales}
+	\addcontentsline{toc}{section}{Conclusiones finales}
+	\markboth{Conclusiones finales}{Conclusiones finales}
+	
+	Me quedan cinco cosas después de todo esto.
+	
+	\textbf{1. Las limitaciones del móvil se pueden resumir en una frase y resolver en veinte decisiones.} La frase es: recursos finitos y compartidos, energía finita y conexión intermitente. Y las veinte decisiones son las que he ido comentando: tamaños en \code{dp} y texto en \code{sp}, recursos por densidad, gráficos vectoriales, \code{minSdk} conservador y \code{targetSdk} actualizado, App Bundle en vez de un APK gigante, contenido pesado descargado bajo demanda, caché de bitmaps acotada, \code{isLowRamDevice()} como interruptor, paginación en lugar de listas interminables, \emph{offline-first}, \code{isActiveNetworkMetered()} como puerta de las descargas, objetivos de 48 dp, contraste de 4,5:1, texto ampliable al 200\,\%, etiquetas para TalkBack, alternativas a los gestos y subtítulos. Ninguna de las limitaciones es un motivo para no hacer una app; son una lista de requisitos.
+	
+	\textbf{2. Elegir tecnología es elegir qué problemas quieres tener.} Entre Java, Kotlin, Flutter, React Native, .NET MAUI y Swift la decisión no es \enquote{cuál es mejor}, porque esa respuesta no existe, sino \enquote{qué estoy dispuesto a aceptar}. Ninguna opción es la correcta: cada una mueve el coste a un sitio distinto.
+	
+	\textbf{3. El entorno de desarrollo también es una decisión de diseño.} Instalar Android Studio, fijar \code{minSdk} = 24, elegir Kotlin, comprobar que el emulador arranca con aceleración por hardware y capturar la evidencia: eso no es \enquote{preparar la máquina}, es decidir contra qué se va a desarrollar. En el enunciado además hay una contradicción (Java o Kotlin) y me quedo con Kotlin, que es el lenguaje oficial recomendado por Google desde 2019.
+	
+	\textbf{4. Lo que no se mide en el dispositivo se mide en la persona.} Esta es la conclusión del Apartado 5 y la que más me ha cambiado el planteamiento. Repartir el trabajo en un 20\,\% para densidad, API, RAM y conectividad, y el otro 80\,\% en pensar para quién se programa (edad, baja visión, movilidad, conectividad intermitente) es lo que separa una app funcional de una app buena.
+	
+	\textbf{5. Lo que más me llevo: preguntar en vez de suponer.} Cada apartado termina con la misma idea desde un ángulo distinto. Android vitals publica umbrales de memoria en función de la RAM del dispositivo, para que no tengas que adivinar cuánto puede usar tu app. El sistema expone \code{isLowRamDevice()}, \code{getMemoryClass()}, \code{isActiveNetworkMetered()} y \code{isLeAudioSupported()} para lo mismo. TalkBack existe para probar tu app sin vista. El Accessibility Scanner existe para encontrar contraste bajo y objetivos táctiles demasiado pequeños automáticamente. Y el emulador existe para crear un dispositivo de gama baja en tu ordenador. Ninguna de estas herramientas sustituye a pensar; todas evitan tener que adivinar, y eso es lo que me llevo de esta actividad.
+	
+	%--- Referencias: cabecera + nota de fechas ---
+	\newpage
+	\section*{Referencias bibliográficas}
+	\addcontentsline{toc}{section}{Referencias bibliográficas}
+	\markboth{Referencias bibliográficas}{Referencias bibliográficas}
+	
+	Todas las fuentes que aparecen en este trabajo son \textbf{documentación oficial del fabricante o de la plataforma} (Android Developers, Google Play Console, Apple, Material Design, W3C, Bluetooth SIG).
+	
+	\begin{warnbox}
+		\textbf{\color{accent!80!black}\faExclamationTriangle\ \ Las fechas de esta parte hay que revisarlas.}
+		Los datos de versiones que aparecen en el trabajo (niveles de API, políticas de Google Play,
+		requisitos de Android Studio, umbrales de memoria) cambian con frecuencia. Las páginas que cito
+		están consultadas a fecha de \textbf{\texttt{FECHA DE CONSULTA}}, y antes de entregar las vuelvo
+		a abrir para que las cifras del apartado 1 y del apartado 4 sigan siendo correctas. Las cuatro que
+		más se mueven son estas:
+		\begin{itemize}[leftmargin=*,itemsep=0.15em,topsep=0.2em]
+			\item \href{https://developer.android.com/tools/releases/platforms}{\emph{Android API levels}}
+			\item \href{https://support.google.com/googleplay/android-developer/answer/11926878}{\emph{Target API level requirements} (Google Play)}
+			\item \href{https://developer.android.com/studio}{\emph{Android Studio} (versión y requisitos)}
+			\item \href{https://developer.android.com/topic/performance/vitals}{\emph{Android vitals} (umbrales de memoria)}
+		\end{itemize}
+	\end{warnbox}
+	
+	\subsection*{Fuentes de Android Developers (documentación técnica)}
+	{\small
+		\begin{itemize}[leftmargin=*,itemsep=0.1em,label={}]
+			\item Android Developers. (2026). \emph{Android vitals}. \url{https://developer.android.com/topic/performance/vitals}
+			\item Android Developers. (2026). \emph{Support different screen densities}. \url{https://developer.android.com/training/multiscreen/screendensities}
+			\item Android Developers. (2026). \emph{Screen sizes}. \url{https://developer.android.com/training/multiscreen/screensizes}
+			\item Android Developers. (2026). \emph{Configuration.screenLayout}. \url{https://developer.android.com/reference/android/content/res/Configuration}
+			\item Android Developers. (2026). \emph{Android API levels}. \url{https://developer.android.com/tools/releases/platforms}
+			\item Android Developers. (2026). \emph{uses-sdk element}. \url{https://developer.android.com/guide/topics/manifest/uses-sdk-element}
+			\item Android Developers. (2026). \emph{Android 17 is here}. \url{https://developer.android.com/blog/posts/android-17-is-here}
+			\item Android Developers. (2026). \emph{Behavior changes: all apps}. \url{https://developer.android.com/about/versions/17/behavior-changes-all}
+			\item Android Developers. (2026). \emph{Android 17 release notes}. \url{https://developer.android.com/about/versions/17/release-notes}
+			\item Android Developers. (2026). \emph{Storage overview}. \url{https://developer.android.com/training/data-storage}
+			\item Android Developers. (2026). \emph{APK Analyzer}. \url{https://developer.android.com/studio/debug/apk-analyzer}
+			\item Android Developers. (2026). \emph{Android App Bundles}. \url{https://developer.android.com/guide/app-bundle/dynamic-delivery}
+			\item Android Developers. (2026). \emph{ActivityManager}. \url{https://developer.android.com/reference/android/app/ActivityManager}
+			\item Android Developers. (2026). \emph{Guide to Android app architecture}. \url{https://developer.android.com/topic/libraries/architecture}
+			\item Android Developers. (2026). \emph{5G}. \url{https://developer.android.com/develop/connectivity/5g}
+			\item Android Developers. (2026). \emph{Bluetooth}. \url{https://developer.android.com/develop/connectivity/bluetooth}
+			\item Android Developers. (2026). \emph{Bluetooth LE Audio overview}. \url{https://developer.android.com/develop/connectivity/bluetooth/ble-audio/overview}
+			\item Android Developers. (2026). \emph{Near Field Communication}. \url{https://developer.android.com/develop/connectivity/nfc}
+			\item Android Developers. (2026). \emph{Wi-Fi}. \url{https://developer.android.com/develop/connectivity/wifi}
+			\item Android Studio Community. (2026). \emph{Wi-Fi 7}. \url{https://source.android.com/docs/core/connect/wifi-7}
+		\end{itemize}
+	}
+	
+	\subsection*{Fuentes de Android Studio (Apartado 3)}
+	{\small
+		\begin{itemize}[leftmargin=*,itemsep=0.1em,label={}]
+			\item Android Developers. (2026). \emph{Android Studio}. \url{https://developer.android.com/studio}
+			\item Android Developers. (2026). \emph{Install Android Studio}. \url{https://developer.android.com/studio/install}
+			\item Android Developers. (2026). \emph{Create a new Android Studio project}. \url{https://developer.android.com/studio/projects/create-project}
+			\item Android Developers. (2026). \emph{Android Studio project templates}. \url{https://developer.android.com/studio/projects/templates}
+			\item Android Developers. (2026). \emph{Run the Android Emulator}. \url{https://developer.android.com/studio/run/emulator}
+			\item Android Developers. (2026). \emph{Configure hardware acceleration}. \url{https://developer.android.com/studio/run/emulator-acceleration}
+			\item Android Developers. (2026). \emph{Create and manage Android virtual devices}. \url{https://developer.android.com/studio/run/managing-avds}
+			\item Android Developers. (2026). \emph{Android Emulator troubleshooting}. \url{https://developer.android.com/studio/run/emulator-troubleshooting}
+			\item Android Developers. (2026). \emph{Android Studio troubleshooting}. \url{https://developer.android.com/studio/troubleshoot}
+			\item Android Developers. (2026). \emph{Android UI development is Compose-first} [blog, 19/05/2026]. \url{https://developer.android.com/blog/posts/android-ui-development-is-compose-first}
+		\end{itemize}
+	}
+	
+	\subsection*{Fuentes de accesibilidad y diseño}
+	{\small
+		\begin{itemize}[leftmargin=*,itemsep=0.1em,label={}]
+			\item Android Developers. (2026). \emph{Make your app more accessible}. \url{https://developer.android.com/guide/topics/ui/accessibility/apps}
+			\item Android Developers. (2026). \emph{Principles for improving app accessibility}. \url{https://developer.android.com/guide/topics/ui/accessibility/principles}
+			\item Android Developers. (2026). \emph{Accessibility in Jetpack Compose}. \url{https://developer.android.com/develop/ui/compose/accessibility}
+			\item Android Developers. (2026). \emph{TalkBack y accesibilidad en Android}. \url{https://support.google.com/accessibility/android/answer/6006564}
+			\item Android Developers. (2026). \emph{Use TalkBack}. \url{https://support.google.com/accessibility/android/answer/6007100}
+			\item Android Developers. (2026). \emph{Use braille with TalkBack}. \url{https://support.google.com/accessibility/android/answer/16323943}
+			\item Android Developers. (2026). \emph{Change font size and display size}. \url{https://support.google.com/accessibility/android/answer/11183305}
+			\item Google. (2026). \emph{Target API level requirements}. \url{https://support.google.com/googleplay/android-developer/answer/11926878}
+		\end{itemize}
+	}
+	
+	\subsection*{Fuentes de estándares de diseño y accesibilidad}
+	{\small
+		\begin{itemize}[leftmargin=*,itemsep=0.1em,label={}]
+			\item World Wide Web Consortium (W3C). (2023). \emph{Web Content Accessibility Guidelines (WCAG) 2.2}. \url{https://www.w3.org/TR/WCAG22/}
+			\item Material Design 3. (2026). \emph{Color contrast}. \url{https://m3.material.io/foundations/designing/color-contrast}
+			\item Material Design 3. (2026). \emph{Structure}. \url{https://m3.material.io/foundations/designing/structure}
+			\item Material Design 3. (2026). \emph{Grids and spacing}. \url{https://m3.material.io/foundations/layout/grids-spacing/density}
+		\end{itemize}
+	}
+	
+	\subsection*{Fuentes de fabricantes}
+	{\small
+		\begin{itemize}[leftmargin=*,itemsep=0.1em,label={}]
+			\item Samsung Electronics. (2026). \emph{Galaxy S26 Ultra --- Especificaciones técnicas}. \url{https://www.samsung.com/}
+			\item Google. (2026). \emph{Pixel 10 Pro XL --- Especificaciones técnicas}. \url{https://store.google.com/}
+			\item OnePlus. (2026). \emph{OnePlus 13 --- Especificaciones}. \url{https://www.oneplus.com/}
+			\item Apple Inc. (2026). \emph{iPhone 17 Pro Max --- Especificaciones técnicas}. \url{https://www.apple.com/iphone-17-pro-max/technical-specs/}
+			\item Motorola. (2026). \emph{moto g47 --- Especificaciones técnicas}. \url{https://www.motorola.com/}
+			\item Apple Inc. (2026). \emph{Apple Security Releases}. \url{https://support.apple.com/en-us/148282}
+		\end{itemize}
+	}
+	
+	\subsection*{Fuentes de lenguajes y frameworks del Apartado 2}
+	{\small
+		\begin{itemize}[leftmargin=*,itemsep=0.1em,label={}]
+			\item Kotlin Foundation. (2026). \emph{Kotlin documentation}. \url{https://kotlinlang.org/docs/home.html}
+			\item Oracle. (2026). \emph{Java Documentation}. \url{https://docs.oracle.com/en/java/}
+			\item Flutter. (2026). \emph{Flutter documentation}. \url{https://docs.flutter.dev/}
+			\item Meta Open Source. (2026). \emph{React Native documentation}. \url{https://reactnative.dev/docs/getting-started}
+			\item Microsoft. (2026). \emph{Build mobile apps with .NET MAUI}. \url{https://learn.microsoft.com/dotnet/maui/}
+			\item Apple Inc. (2026). \emph{Swift Documentation}. \url{https://developer.apple.com/documentation/swift/}
+		\end{itemize}
+	}
+	
+	\subsection*{Mapa de fuentes por apartado}
+	
+	{\small
+		\begin{table}[htbp]
+			\centering
+			\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.5cm} >{\RaggedRight\arraybackslash}X@{}}
+				\toprule
+				\rowcolor{primary}
+				\textcolor{paper}{\sffamily\bfseries Apartado} & \textcolor{paper}{\sffamily\bfseries Fuentes principales} \\
+				\midrule
+				\textbf{1. Limitaciones} & Android vitals · \emph{Guide to Android app architecture} · Bluetooth LE Audio · fichas técnicas de los cinco fabricantes \\
+				\rowcolor{soft}
+				\textbf{2. Tecnologías} & Documentación de Kotlin, Oracle, Flutter, React Native, Microsoft y Apple · blog Compose (19/05/2026) \\
+				\textbf{3. Entorno} & Android Studio · Install · Create project · Emulator · Hardware acceleration · AVDs · Troubleshooting · uses-sdk \\
+				\rowcolor{soft}
+				\textbf{4. Config. dispositivos} & Screen densities · Screen sizes · Configuration.screenLayout · API levels · Target API · Storage · App Bundles · APK Analyzer · vitals · ActivityManager · 5G · Bluetooth · NFC · Wi-Fi · Wi-Fi 7 · Behavior changes \\
+				\textbf{5. Perfiles} & Make your app more accessible · Principles · Accessibility in Compose · TalkBack · WCAG 2.2 · Material Design 3 · Bluetooth LE Audio \\
+				\bottomrule
+			\end{tabularx}
+			\caption{Mapa de fuentes por apartado}
+		\end{table}
+	}
+	
+\end{document}

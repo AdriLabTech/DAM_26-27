@@ -1,0 +1,13 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Objetivo y entorno}{3}{section.1}%
+\contentsline {section}{\numberline {2}Configuraci\'on de red de la VM}{3}{section.2}%
+\contentsline {section}{\numberline {3}Instalaci\'on de Docker}{5}{section.3}%
+\contentsline {section}{\numberline {4}Fichero docker-compose.yaml}{6}{section.4}%
+\contentsline {section}{\numberline {5}Arranque y estado de los contenedores}{7}{section.5}%
+\contentsline {section}{\numberline {6}Acceso desde el anfitri\'on}{9}{section.6}%
+\contentsline {section}{\numberline {7}Creaci\'on de la base de datos e instalaci\'on de CRM}{9}{section.7}%
+\contentsline {section}{\numberline {8}Versi\'on de PostgreSQL}{11}{section.8}%
+\contentsline {section}{\numberline {9}Problemas encontrados y soluciones}{11}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Docker}{11}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Permisos}{12}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Odoo}{12}{subsection.9.3}%

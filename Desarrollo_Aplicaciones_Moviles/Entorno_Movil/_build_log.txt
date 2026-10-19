@@ -1,0 +1,963 @@
+Rc files read (in order):
+  NONE
+Latexmk: This is Latexmk, John Collins, 9 March 2026. Version 4.88.
+Latexmk: applying rule 'pdflatex'...
+Rule 'pdflatex':  Reasons for rerun
+Changed files or newly in use/created:
+  main_con_capturas.tex
+Category 'changed_user':
+  main_con_capturas.tex
+
+------------
+Run number 1 of rule 'pdflatex'
+------------
+------------
+Running 'pdflatex  -interaction=nonstopmode -file-line-error -recorder -output-directory="_build"  "main_con_capturas.tex"'
+------------
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex.fmt)
+ restricted \write18 enabled.
+entering extended mode
+(main_con_capturas.tex
+LaTeX2e <2026-06-01>
+L3 programming layer <2026-09-09>
+(C:\Program Files\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(C:\Program Files\MiKTeX\tex/latex/base\size11.clo))
+(C:\Program Files\MiKTeX\tex/latex/base\fontenc.sty)
+(C:\Program Files\MiKTeX\tex/latex/base\inputenc.sty)
+(C:\Program Files\MiKTeX\tex/generic/babel\babel.sty
+(C:\Program Files\MiKTeX\tex/generic/babel\txtbabel.def)
+*************************************
+* Local config file bblopts.cfg used
+*
+(C:\Program Files\MiKTeX\tex/latex/arabi\bblopts.cfg)
+(C:\Program Files\MiKTeX\tex/generic/babel/locale/es\babel-spanish.tex)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/babel-spanish\spanish.ldf))
+(C:\Program Files\MiKTeX\tex/latex/lm\lmodern.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/inconsolata\inconsolata.sty
+`inconsolata-zi4' v1.12, 2019/05/17 Text macros for Inconsolata (msharpe)
+(C:\Program Files\MiKTeX\tex/latex/base\textcomp.sty)
+(C:\Program Files\MiKTeX\tex/latex/xkeyval\xkeyval.sty
+(C:\Program Files\MiKTeX\tex/generic/xkeyval\xkeyval.tex
+(C:\Program Files\MiKTeX\tex/generic/xkeyval\xkvutils.tex
+(C:\Program Files\MiKTeX\tex/generic/xkeyval\keyval.tex)))))
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/microtype\microtype.sty
+(C:\Program Files\MiKTeX\tex/latex/etoolbox\etoolbox.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/microtype\microtype-pdftex.de
+f) (C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/microtype\microtype.cfg))
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/parskip\parskip.sty
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/kvoptions\kvoptions.sty
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty)))
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/geometry\geometry.sty
+(C:\Program Files\MiKTeX\tex/generic/iftex\ifvtex.sty
+(C:\Program Files\MiKTeX\tex/generic/iftex\iftex.sty))
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/geometry\geometry.cfg))
+(C:\Program Files\MiKTeX\tex/latex/xcolor\xcolor.sty
+(C:\Program Files\MiKTeX\tex/latex/graphics-cfg\color.cfg)
+(C:\Program Files\MiKTeX\tex/latex/graphics-def\pdftex.def)
+(C:\Program Files\MiKTeX\tex/latex/graphics\mathcolor.ltx))
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/colortbl\colortbl.sty
+(C:\Program Files\MiKTeX\tex/latex/tools\array.sty)
+new hooks used!!
+) (C:\Program Files\MiKTeX\tex/latex/graphics\graphicx.sty
+(C:\Program Files\MiKTeX\tex/latex/graphics\graphics.sty
+(C:\Program Files\MiKTeX\tex/latex/graphics\trig.sty)
+(C:\Program Files\MiKTeX\tex/latex/graphics-cfg\graphics.cfg)))
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/float\float.sty)
+(C:\Program Files\MiKTeX\tex/latex/pgf/frontendlayer\tikz.sty
+(C:\Program Files\MiKTeX\tex/latex/pgf/basiclayer\pgf.sty
+(C:\Program Files\MiKTeX\tex/latex/pgf/utilities\pgfrcs.sty
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfutil-common.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfutil-latex.def)
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfrcs.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf\pgf.revision.tex)))
+(C:\Program Files\MiKTeX\tex/latex/pgf/basiclayer\pgfcore.sty
+(C:\Program Files\MiKTeX\tex/latex/pgf/systemlayer\pgfsys.sty
+(C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsys.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfkeys.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfkeyslibraryfiltered.code.
+tex)) (C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgf.cfg)
+(C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsys-pdftex.def
+(C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsys-common-pdf.def)))
+(C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsyssoftpath.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsysprotocol.code.tex))
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcore.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathutil.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathparser.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.basic.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.trigonometric.co
+de.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.random.code.tex)
+
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.comparison.code.
+tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.base.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.round.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.misc.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.integerarithmeti
+cs.code.tex) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathcalc.code.tex
+) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfloat.code.tex))
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfint.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepoints.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathconstruct.code.t
+ex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathusage.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorescopes.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoregraphicstate.code.te
+x)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransformations.code
+.tex) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorequick.code.tex
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreobjects.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathprocessing.code.
+tex) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorearrows.code.tex
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreshade.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreimage.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreexternal.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorelayers.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransparency.code.te
+x) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepatterns.code.tex
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorerdf.code.tex)))
+(C:\Program Files\MiKTeX\tex/generic/pgf/modules\pgfmoduleshapes.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/modules\pgfmoduleplot.code.tex)
+(C:\Program Files\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-0-65.sty)
+(C:\Program Files\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-1-18.sty))
+ (C:\Program Files\MiKTeX\tex/latex/pgf/utilities\pgffor.sty
+(C:\Program Files\MiKTeX\tex/latex/pgf/utilities\pgfkeys.sty
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfkeys.code.tex))
+(C:\Program Files\MiKTeX\tex/latex/pgf/math\pgfmath.sty
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex))
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgffor.code.tex))
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz\tikz.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/libraries\pgflibraryplothandlers.code.
+tex) (C:\Program Files\MiKTeX\tex/generic/pgf/modules\pgfmodulematrix.code.tex)
+
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+rytopaths.code.tex)))
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+rycalc.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+rypositioning.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+ryshapes.geometric.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/libraries/shapes\pgflibraryshapes.geom
+etric.code.tex))
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+rybackgrounds.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+rypatterns.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/libraries\pgflibrarypatterns.code.tex)
+)
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+ryshadows.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+ryfadings.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/libraries\pgflibraryfadings.code.tex))
+) (C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcolorbox.sty
+(C:\Program Files\MiKTeX\tex/latex/tools\verbatim.sty)
+(C:\Program Files\MiKTeX\tex/latex/environ\environ.sty
+(C:\Program Files\MiKTeX\tex/latex/trimspaces\trimspaces.sty))
+(C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbraster.code.tex
+Library (tcolorbox): 'tcbraster.code.tex' version '6.10.0'
+) (C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbskins.code.tex
+Library (tcolorbox): 'tcbskins.code.tex' version '6.10.0'
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/tikzfill\tikzfill.image.sty
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/tikzfill\tikzlibraryfill.imag
+e.code.tex))
+(C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbskinsjigsaw.code.tex
+Library (tcolorbox): 'tcbskinsjigsaw.code.tex' version '6.10.0'
+)) (C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbbreakable.code.tex
+Library (tcolorbox): 'tcbbreakable.code.tex' version '6.10.0'
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/pdfcol\pdfcol.sty
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/generic/infwarerr\infwarerr.sty)))
+(C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbhooks.code.tex
+Library (tcolorbox): 'tcbhooks.code.tex' version '6.10.0'
+) (C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbtheorems.code.tex
+Library (tcolorbox): 'tcbtheorems.code.tex' version '6.10.0'
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsmath.sty
+For additional information on amsmath, use the `?' option.
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amstext.sty
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsgen.sty))
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsbsy.sty)
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsopn.sty)))
+(C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbfitting.code.tex
+Library (tcolorbox): 'tcbfitting.code.tex' version '6.10.0'
+) (C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcblistingsutf8.code.tex
+Library (tcolorbox): 'tcblistingsutf8.code.tex' version '6.10.0'
+(C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcblistings.code.tex
+Library (tcolorbox): 'tcblistings.code.tex' version '6.10.0'
+(C:\Program Files\MiKTeX\tex/latex/listings\listings.sty
+(C:\Program Files\MiKTeX\tex/latex/listings\lstpatch.sty)
+(C:\Program Files\MiKTeX\tex/latex/listings\lstmisc.sty)
+(C:\Program Files\MiKTeX\tex/latex/listings\listings.cfg))
+(C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcblistingscore.code.tex
+Library (tcolorbox): 'tcblistingscore.code.tex' version '6.10.0'
+(C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbprocessing.code.tex
+Library (tcolorbox): 'tcbprocessing.code.tex' version '6.10.0'
+)))
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/listingsutf8\listingsutf8.sty
+(C:\Program Files\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/generic/stringenc\stringenc.sty
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/generic/pdfescape\pdfescape.sty))))
+ (C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbexternal.code.tex
+Library (tcolorbox): 'tcbexternal.code.tex' version '6.10.0'
+) (C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbmagazine.code.tex
+Library (tcolorbox): 'tcbmagazine.code.tex' version '6.10.0'
+) (C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbvignette.code.tex
+Library (tcolorbox): 'tcbvignette.code.tex' version '6.10.0'
+) (C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbposter.code.tex
+Library (tcolorbox): 'tcbposter.code.tex' version '6.10.0'
+))
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/fontawesome5\fontawesome5.sty
+(C:\Program Files\MiKTeX\tex/latex/l3kernel\expl3.sty
+(C:\Program Files\MiKTeX\tex/latex/l3kernel\l3backend-pdftex.def))
+(C:\Program Files\MiKTeX\tex/latex/l3packages/l3keys2e\l3keys2e.sty)
+(C:\Program Files\MiKTeX\tex/latex/l3packages/xparse\xparse.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/fontawesome5\fontawesome5-gen
+eric-helper.sty
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/fontawesome5\fontawesome5-map
+ping.def)))
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/booktabs\booktabs.sty)
+(C:\Program Files\MiKTeX\tex/latex/tools\tabularx.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/xltabular\xltabular.sty
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/ltablex\ltablex.sty
+(C:\Program Files\MiKTeX\tex/latex/tools\longtable.sty)))
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/makecell\makecell.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/enumitem\enumitem.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/titlesec\titlesec.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/titlesec\titletoc.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty)
+(C:\Program Files\MiKTeX\tex/latex/ragged2e\ragged2e.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/csquotes\csquotes.sty
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/csquotes\csquotes.def)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/csquotes\csquotes.cfg))
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\amssymb.sty
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\amsfonts.sty))
+(C:\Program Files\MiKTeX\tex/latex/hyperref\hyperref.sty
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/generic/kvdefinekeys\kvdefinekeys.s
+ty) (C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/hycolor\hycolor.sty)
+(C:\Program Files\MiKTeX\tex/latex/hyperref\nameref.sty
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/refcount\refcount.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/generic/gettitlestring\gettitlestri
+ng.sty)) (C:\Program Files\MiKTeX\tex/latex/hyperref\pd1enc.def)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/generic/intcalc\intcalc.sty)
+(C:\Program Files\MiKTeX\tex/latex/hyperref\puenc.def)
+(C:\Program Files\MiKTeX\tex/latex/url\url.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/generic/bitset\bitset.sty
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/generic/bigintcalc\bigintcalc.sty))
+) (C:\Program Files\MiKTeX\tex/latex/hyperref\hpdftex.def
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck
+.sty
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/generic/uniquecounter\uniquecounter
+.sty))) (C:\Program Files\MiKTeX\tex/latex/lm\t1lmss.fd)
+(D:\entorno-movil\_build\main_con_capturas.aux)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/upquote\upquote.sty)
+
+Package microtype Warning: Unable to apply patch `toc' on input line 239.
+
+Couldn't patch \ttl@straight@ii
+Couldn't patch \ttl@straight@ii
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(C:\Program Files\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (C:\Program Files\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
+(C:\Program Files\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg))
+(D:\entorno-movil\_build\main_con_capturas.out)
+(D:\entorno-movil\_build\main_con_capturas.out)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/fontawesome5\ufontawesomefree
+2.fd) (C:\Program Files\MiKTeX\tex/latex/lm\ot1lmr.fd)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/microtype\mt-cmr.cfg)
+(C:\Program Files\MiKTeX\tex/latex/lm\omllmm.fd)
+(C:\Program Files\MiKTeX\tex/latex/lm\omslmsy.fd)
+(C:\Program Files\MiKTeX\tex/latex/lm\omxlmex.fd)
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\umsa.fd)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/microtype\mt-msa.cfg)
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/microtype\mt-msb.cfg)
+(C:\Program Files\MiKTeX\tex/latex/lm\ts1lmss.fd) [1{C:/Users/Adrian/AppData/Lo
+cal/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Adrian/AppData/Roaming/MiKTeX/
+fonts/enc/dvips/fontawesome5/fa5free2.enc}{C:/Program Files/MiKTeX/fonts/enc/dv
+ips/lm/lm-ec.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
+(D:\entorno-movil\_build\main_con_capturas.toc)
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.345 	
+        [1]
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/inconsolata\t1zi4.fd)
+[2{C:/Users/Adrian/AppData/Roaming/MiKTeX/fonts/enc/dvips/inconsolata/i4-t1-5.e
+nc}]
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/fontawesome5\ufontawesomefree
+0.fd) [3{C:/Users/Adrian/AppData/Roaming/MiKTeX/fonts/enc/dvips/fontawesome5/fa
+5free0.enc}]
+Overfull \hbox (3.22269pt too wide) in paragraph at lines 460--460
+[]|[][]\T1/lmss/m/n/10.95 (-20) Samsung[][]|  
+
+Overfull \hbox (1.17427pt too wide) in paragraph at lines 460--460
+\T1/lmss/m/n/10.95 (-20) 166,2$\OMS/lmsy/m/n/10.95 ^^B$\T1/lmss/m/n/10.95 (-20)
+ 76,5$\OMS/lmsy/m/n/10.95 ^^B$\T1/lmss/m/n/10.95 (-20) 7,85 
+
+Overfull \hbox (3.455pt too wide) in paragraph at lines 460--460
+[]|[][]\T1/lmss/m/n/10.95 (-20) Motorola[][]|  
+
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/fontawesome5\ufontawesomefree
+1.fd) [4{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}]
+Overfull \hbox (16.27788pt too wide) in paragraph at lines 513--513
+[]|\T1/lmss/bx/n/10.95 (-20) Almacenamiento|  
+
+Overfull \hbox (3.75232pt too wide) in paragraph at lines 541--541
+[]|\T1/lmss/m/n/10.95 (-20) 163,6$\OMS/lmsy/m/n/10.95 ^^B$\T1/lmss/m/n/10.95 (-
+20) 78,1$\OMS/lmsy/m/n/10.95 ^^B$\T1/lmss/m/n/10.95 (-20) 7,9 
+
+Overfull \hbox (3.75232pt too wide) in paragraph at lines 541--541
+[]|\T1/lmss/m/n/10.95 (-20) 162,8$\OMS/lmsy/m/n/10.95 ^^B$\T1/lmss/m/n/10.95 (-
+20) 76,6$\OMS/lmsy/m/n/10.95 ^^B$\T1/lmss/m/n/10.95 (-20) 8,5 
+
+Overfull \hbox (3.75232pt too wide) in paragraph at lines 541--541
+[]|\T1/lmss/m/n/10.95 (-20) 162,9$\OMS/lmsy/m/n/10.95 ^^B$\T1/lmss/m/n/10.95 (-
+20) 76,5$\OMS/lmsy/m/n/10.95 ^^B$\T1/lmss/m/n/10.95 (-20) 8,5 
+
+Overfull \hbox (9.11781pt too wide) in paragraph at lines 541--541
+[]|\T1/lmss/m/n/10.95 (-20) 163,4$\OMS/lmsy/m/n/10.95 ^^B$\T1/lmss/m/n/10.95 (-
+20) 78,0$\OMS/lmsy/m/n/10.95 ^^B$\T1/lmss/m/n/10.95 (-20) 8,75 
+
+Overfull \hbox (9.11781pt too wide) in paragraph at lines 541--541
+[]|\T1/lmss/m/n/10.95 (-20) 166,2$\OMS/lmsy/m/n/10.95 ^^B$\T1/lmss/m/n/10.95 (-
+20) 76,5$\OMS/lmsy/m/n/10.95 ^^B$\T1/lmss/m/n/10.95 (-20) 7,85 
+[5{C:/Users/Adrian/AppData/Roaming/MiKTeX/fonts/enc/dvips/fontawesome5/fa5free1
+.enc}] [6] [7] [8] [9] [10] [11]
+Overfull \hbox (4.92128pt too wide) in paragraph at lines 822--822
+[]|\T1/lmss/m/n/9 (-20) Multiplataforma|  
+
+Overfull \hbox (4.92128pt too wide) in paragraph at lines 822--822
+[]|\T1/lmss/m/n/9 (-20) Multiplataforma|  
+
+Overfull \hbox (4.92128pt too wide) in paragraph at lines 822--822
+[]|\T1/lmss/m/n/9 (-20) Multiplataforma|  
+
+Overfull \hbox (4.90625pt too wide) in paragraph at lines 822--822
+[]|\T1/lmss/m/n/9 (-20) Win/mac/Linux|  
+[12] [13]
+Overfull \hbox (14.0pt too wide) in paragraph at lines 918--919
+ [][] 
+[14] [15 <./figs/Descarga_AS_Rabbit1.png> <./figs/Instalacion_AS_1.png>]
+Overfull \hbox (14.0pt too wide) in paragraph at lines 969--970
+ [][] 
+[16 <./figs/Instalacion_AS_2.png> <./figs/Instalacion_AS_3.png>]
+Overfull \hbox (14.0pt too wide) in paragraph at lines 978--979
+ [][] 
+[17 <./figs/Instalacion_AS_4.png>]
+Overfull \hbox (14.0pt too wide) in paragraph at lines 987--988
+ [][] 
+[18 <./figs/Instalacion_AS_5.png>]
+Overfull \hbox (14.0pt too wide) in paragraph at lines 997--998
+ [][] 
+[19 <./figs/Instalacion_AS_6.png>]
+Overfull \hbox (14.0pt too wide) in paragraph at lines 1015--1016
+ [][] 
+[20 <./figs/AndroidStudio_1.png>]
+Overfull \hbox (17.73622pt too wide) in paragraph at lines 1049--1049
+[]|[]\T1/zi4/m/n/10 com.ejemplo.practicaentornomovil[]|  
+[21 <./figs/Creacion_PrimerProyecto_1.png>]
+Overfull \hbox (14.0pt too wide) in paragraph at lines 1062--1063
+ [][] 
+[22 <./figs/Creacion_PrimerProyecto_2.png>]
+Overfull \hbox (28.50986pt too wide) in paragraph at lines 1113--1113
+[]|[]\T1/zi4/m/n/10 app/src/main/java/.../MainActivity.kt[]|  
+
+Overfull \hbox (48.50986pt too wide) in paragraph at lines 1113--1113
+[]|[]\T1/zi4/m/n/10 app/src/main/res/layout/activity_main.xml[]|  
+
+Overfull \hbox (14.0pt too wide) in paragraph at lines 1121--1122
+ [][] 
+[23]
+Underfull \hbox (badness 8000) in paragraph at lines 1181--1181
+[]|\T1/lmss/m/n/10.95 (+20) Añadir a []\T1/zi4/m/n/10.95 gradle.properties[]\T1
+/lmss/m/n/10.95 (+20) : 
+
+Overfull \hbox (41.67514pt too wide) in paragraph at lines 1181--1181
+[]\T1/zi4/m/n/10.95 org.gradle.jvmargs=-Djava.net.preferIPv4Stack=true[] 
+
+Underfull \hbox (badness 1622) in paragraph at lines 1181--1181
+[]|\T1/lmss/m/n/10.95 (+20) Añadir []\T1/zi4/m/n/10.95 hidpi=true[] \T1/lmss/m/
+n/10.95 (+20) o []\T1/zi4/m/n/10.95 hidpi=false[] \T1/lmss/m/n/10.95 (+20) en 
+[24] [25]
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/inconsolata\ts1zi4.fd)
+[26{C:/Users/Adrian/AppData/Roaming/MiKTeX/fonts/enc/dvips/inconsolata/i4-ts1.e
+nc}] [27]
+Overfull \hbox (9.14174pt too wide) in paragraph at lines 1421--1421
+[]|[]\T1/zi4/m/n/9 READ_EXTERNAL_STORAGE[]|  
+
+Underfull \hbox (badness 10000) in alignment at lines 1421--1421
+[][][][][] 
+[28]
+Overfull \hbox (14.28348pt too wide) in paragraph at lines 1497--1497
+[]|[]\T1/zi4/m/n/10 ActivityManager.getLargeMemoryClass()[]|  
+
+Overfull \hbox (19.28348pt too wide) in paragraph at lines 1497--1497
+[]|[]\T1/zi4/m/n/10 ActivityManager.getMemoryInfo(outInfo)[]|  
+[29] [30]
+Overfull \hbox (4.57059pt too wide) in paragraph at lines 1647--1647
+[]|\T1/lmss/bx/n/9 (-20) Almacenamiento|  
+[31] [32] [33] [34] [35] [36] [37] [38]
+Overfull \hbox (5.716pt too wide) in paragraph at lines 1947--1948
+[]\T1/lmss/m/n/10 (-20) Android De-ve-lo-pers. (2026). \T1/lmss/m/sl/10 (-20) S
+creen si-zes\T1/lmss/m/n/10 (-20) . [][]$\T1/zi4/m/n/10 https : / / developer .
+ android . com / training / multiscreen / screensizes$[][] 
+
+Overfull \hbox (56.92885pt too wide) in paragraph at lines 1950--1951
+[]\T1/lmss/m/n/10 (-20) Android De-ve-lo-pers. (2026). \T1/lmss/m/sl/10 (-20) u
+ses-sdk ele-ment\T1/lmss/m/n/10 (-20) . [][]$\T1/zi4/m/n/10 https : / / develop
+er . android . com / guide / topics / manifest / uses-[]sdk-[]element$[][] 
+
+Overfull \hbox (16.6013pt too wide) in paragraph at lines 1951--1952
+[]\T1/lmss/m/n/10 (-20) Android De-ve-lo-pers. (2026). \T1/lmss/m/sl/10 (-20) A
+n-dro-id 17 is he-re\T1/lmss/m/n/10 (-20) . [][]$\T1/zi4/m/n/10 https : / / dev
+eloper . android . com / blog / posts / android-[]17-[]is-[]here$[][] 
+
+Overfull \hbox (49.44579pt too wide) in paragraph at lines 1956--1957
+[]\T1/lmss/m/n/10 (-20) Android De-ve-lo-pers. (2026). \T1/lmss/m/sl/10 (-20) A
+n-dro-id App Bund-les\T1/lmss/m/n/10 (-20) . [][]$\T1/zi4/m/n/10 https : / / de
+veloper . android . com / guide / app-[]bundle / dynamic-[]delivery$[][] 
+
+Overfull \hbox (49.64291pt too wide) in paragraph at lines 1957--1958
+[]\T1/lmss/m/n/10 (-20) Android De-ve-lo-pers. (2026). \T1/lmss/m/sl/10 (-20) A
+c-ti-vity-Ma-na-ger\T1/lmss/m/n/10 (-20) . [][]$\T1/zi4/m/n/10 https : / / deve
+loper . android . com / reference / android / app / ActivityManager$[][] 
+
+Overfull \hbox (13.03093pt too wide) in paragraph at lines 1958--1959
+[]\T1/lmss/m/n/10 (-20) Android De-ve-lo-pers. (2026). \T1/lmss/m/sl/10 (-20) G
+ui-de to An-dro-id app ar-chi-tec-tu-re\T1/lmss/m/n/10 (-20) . [][]$\T1/zi4/m/n
+/10 https : / / developer . android . com / topic / libraries /
+
+Overfull \hbox (19.09796pt too wide) in paragraph at lines 1961--1962
+[]\T1/lmss/m/n/10 (-20) Android De-ve-lo-pers. (2026). \T1/lmss/m/sl/10 (-20) B
+lue-tooth LE Au-dio over-view\T1/lmss/m/n/10 (-20) . [][]$\T1/zi4/m/n/10 https 
+: / / developer . android . com / develop / connectivity /
+
+Overfull \hbox (9.41267pt too wide) in paragraph at lines 1962--1963
+[]\T1/lmss/m/n/10 (-20) Android De-ve-lo-pers. (2026). \T1/lmss/m/sl/10 (-20) N
+ear Field Com-mu-ni-ca-tion\T1/lmss/m/n/10 (-20) . [][]$\T1/zi4/m/n/10 https : 
+/ / developer . android . com / develop / connectivity /
+[39]
+Overfull \hbox (9.77382pt too wide) in paragraph at lines 1974--1975
+[]\T1/lmss/m/n/10 (-20) Android De-ve-lo-pers. (2026). \T1/lmss/m/sl/10 (-20) A
+n-dro-id Stu-dio pro-ject tem-pla-tes\T1/lmss/m/n/10 (-20) . [][]$\T1/zi4/m/n/1
+0 https : / / developer . android . com / studio / projects /
+
+Overfull \hbox (19.5611pt too wide) in paragraph at lines 1979--1980
+[]\T1/lmss/m/n/10 (-20) Android De-ve-lo-pers. (2026). \T1/lmss/m/sl/10 (-20) A
+n-dro-id Stu-dio trou-bleshoo-ting\T1/lmss/m/n/10 (-20) . [][]$\T1/zi4/m/n/10 h
+ttps : / / developer . android . com / studio / troubleshoot$[][] 
+[40] [41] [42] (D:\entorno-movil\_build\main_con_capturas.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ )
+(see the transcript file for additional information) <C:\Users\Adrian\AppData\L
+ocal\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tctt1095.pk><C:/Users/Adrian/App
+Data/Roaming/MiKTeX/fonts/type1/public/fontawesome5/FontAwesome5Free-Solid.pfb>
+<C:/Users/Adrian/AppData/Roaming/MiKTeX/fonts/type1/public/inconsolata/Inconsol
+ata-zi4b.pfb><C:/Users/Adrian/AppData/Roaming/MiKTeX/fonts/type1/public/inconso
+lata/Inconsolata-zi4r.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmss10
+.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmss12.pfb><C:/Program File
+s/MiKTeX/fonts/type1/public/lm/lmss9.pfb><C:/Program Files/MiKTeX/fonts/type1/p
+ublic/lm/lmssbo10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmssbx10.p
+fb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmsso10.pfb><C:/Program Files
+/MiKTeX/fonts/type1/public/lm/lmsso9.pfb><C:/Program Files/MiKTeX/fonts/type1/p
+ublic/lm/lmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmsy9.pfb>
+Output written on D:\entorno-movil\_build\main_con_capturas.pdf (43 pages, 4256
+943 bytes).
+Transcript written on D:\entorno-movil\_build\main_con_capturas.log.
+pdflatex: major issue: So far, you have not checked for updates as a MiKTeX user.
+Latexmk: Getting log file '_build/main_con_capturas.log'
+Latexmk: Examining '_build/main_con_capturas.fls'
+Latexmk: Examining '_build/main_con_capturas.log'
+Latexmk: References changed.
+Latexmk: Log file says output to 'D:/entorno-movil/_build/main_con_capturas.pdf'
+Latexmk: Log file says output to 'D:/entorno-movil/_build/main_con_capturas.pdf'
+Latexmk: applying rule 'pdflatex'...
+Rule 'pdflatex':  Reasons for rerun
+Changed files or newly in use/created:
+  D:/entorno-movil/_build/main_con_capturas.aux
+  D:/entorno-movil/_build/main_con_capturas.toc
+  _build/main_con_capturas.aux
+  _build/main_con_capturas.toc
+Category 'changed_user':
+  D:/entorno-movil/_build/main_con_capturas.aux
+  D:/entorno-movil/_build/main_con_capturas.toc
+
+------------
+Run number 2 of rule 'pdflatex'
+------------
+------------
+Running 'pdflatex  -interaction=nonstopmode -file-line-error -recorder -output-directory="_build"  "main_con_capturas.tex"'
+------------
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex.fmt)
+ restricted \write18 enabled.
+entering extended mode
+(main_con_capturas.tex
+LaTeX2e <2026-06-01>
+L3 programming layer <2026-09-09>
+(C:\Program Files\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(C:\Program Files\MiKTeX\tex/latex/base\size11.clo))
+(C:\Program Files\MiKTeX\tex/latex/base\fontenc.sty)
+(C:\Program Files\MiKTeX\tex/latex/base\inputenc.sty)
+(C:\Program Files\MiKTeX\tex/generic/babel\babel.sty
+(C:\Program Files\MiKTeX\tex/generic/babel\txtbabel.def)
+*************************************
+* Local config file bblopts.cfg used
+*
+(C:\Program Files\MiKTeX\tex/latex/arabi\bblopts.cfg)
+(C:\Program Files\MiKTeX\tex/generic/babel/locale/es\babel-spanish.tex)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/babel-spanish\spanish.ldf))
+(C:\Program Files\MiKTeX\tex/latex/lm\lmodern.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/inconsolata\inconsolata.sty
+`inconsolata-zi4' v1.12, 2019/05/17 Text macros for Inconsolata (msharpe)
+(C:\Program Files\MiKTeX\tex/latex/base\textcomp.sty)
+(C:\Program Files\MiKTeX\tex/latex/xkeyval\xkeyval.sty
+(C:\Program Files\MiKTeX\tex/generic/xkeyval\xkeyval.tex
+(C:\Program Files\MiKTeX\tex/generic/xkeyval\xkvutils.tex
+(C:\Program Files\MiKTeX\tex/generic/xkeyval\keyval.tex)))))
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/microtype\microtype.sty
+(C:\Program Files\MiKTeX\tex/latex/etoolbox\etoolbox.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/microtype\microtype-pdftex.de
+f) (C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/microtype\microtype.cfg))
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/parskip\parskip.sty
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/kvoptions\kvoptions.sty
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty)))
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/geometry\geometry.sty
+(C:\Program Files\MiKTeX\tex/generic/iftex\ifvtex.sty
+(C:\Program Files\MiKTeX\tex/generic/iftex\iftex.sty))
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/geometry\geometry.cfg))
+(C:\Program Files\MiKTeX\tex/latex/xcolor\xcolor.sty
+(C:\Program Files\MiKTeX\tex/latex/graphics-cfg\color.cfg)
+(C:\Program Files\MiKTeX\tex/latex/graphics-def\pdftex.def)
+(C:\Program Files\MiKTeX\tex/latex/graphics\mathcolor.ltx))
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/colortbl\colortbl.sty
+(C:\Program Files\MiKTeX\tex/latex/tools\array.sty)
+new hooks used!!
+) (C:\Program Files\MiKTeX\tex/latex/graphics\graphicx.sty
+(C:\Program Files\MiKTeX\tex/latex/graphics\graphics.sty
+(C:\Program Files\MiKTeX\tex/latex/graphics\trig.sty)
+(C:\Program Files\MiKTeX\tex/latex/graphics-cfg\graphics.cfg)))
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/float\float.sty)
+(C:\Program Files\MiKTeX\tex/latex/pgf/frontendlayer\tikz.sty
+(C:\Program Files\MiKTeX\tex/latex/pgf/basiclayer\pgf.sty
+(C:\Program Files\MiKTeX\tex/latex/pgf/utilities\pgfrcs.sty
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfutil-common.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfutil-latex.def)
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfrcs.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf\pgf.revision.tex)))
+(C:\Program Files\MiKTeX\tex/latex/pgf/basiclayer\pgfcore.sty
+(C:\Program Files\MiKTeX\tex/latex/pgf/systemlayer\pgfsys.sty
+(C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsys.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfkeys.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfkeyslibraryfiltered.code.
+tex)) (C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgf.cfg)
+(C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsys-pdftex.def
+(C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsys-common-pdf.def)))
+(C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsyssoftpath.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsysprotocol.code.tex))
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcore.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathutil.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathparser.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.basic.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.trigonometric.co
+de.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.random.code.tex)
+
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.comparison.code.
+tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.base.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.round.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.misc.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.integerarithmeti
+cs.code.tex) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathcalc.code.tex
+) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfloat.code.tex))
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfint.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepoints.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathconstruct.code.t
+ex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathusage.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorescopes.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoregraphicstate.code.te
+x)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransformations.code
+.tex) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorequick.code.tex
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreobjects.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathprocessing.code.
+tex) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorearrows.code.tex
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreshade.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreimage.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreexternal.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorelayers.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransparency.code.te
+x) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepatterns.code.tex
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorerdf.code.tex)))
+(C:\Program Files\MiKTeX\tex/generic/pgf/modules\pgfmoduleshapes.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/modules\pgfmoduleplot.code.tex)
+(C:\Program Files\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-0-65.sty)
+(C:\Program Files\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-1-18.sty))
+ (C:\Program Files\MiKTeX\tex/latex/pgf/utilities\pgffor.sty
+(C:\Program Files\MiKTeX\tex/latex/pgf/utilities\pgfkeys.sty
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfkeys.code.tex))
+(C:\Program Files\MiKTeX\tex/latex/pgf/math\pgfmath.sty
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex))
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgffor.code.tex))
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz\tikz.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/libraries\pgflibraryplothandlers.code.
+tex) (C:\Program Files\MiKTeX\tex/generic/pgf/modules\pgfmodulematrix.code.tex)
+
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+rytopaths.code.tex)))
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+rycalc.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+rypositioning.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+ryshapes.geometric.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/libraries/shapes\pgflibraryshapes.geom
+etric.code.tex))
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+rybackgrounds.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+rypatterns.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/libraries\pgflibrarypatterns.code.tex)
+)
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+ryshadows.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+ryfadings.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/libraries\pgflibraryfadings.code.tex))
+) (C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcolorbox.sty
+(C:\Program Files\MiKTeX\tex/latex/tools\verbatim.sty)
+(C:\Program Files\MiKTeX\tex/latex/environ\environ.sty
+(C:\Program Files\MiKTeX\tex/latex/trimspaces\trimspaces.sty))
+(C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbraster.code.tex
+Library (tcolorbox): 'tcbraster.code.tex' version '6.10.0'
+) (C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbskins.code.tex
+Library (tcolorbox): 'tcbskins.code.tex' version '6.10.0'
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/tikzfill\tikzfill.image.sty
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/tikzfill\tikzlibraryfill.imag
+e.code.tex))
+(C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbskinsjigsaw.code.tex
+Library (tcolorbox): 'tcbskinsjigsaw.code.tex' version '6.10.0'
+)) (C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbbreakable.code.tex
+Library (tcolorbox): 'tcbbreakable.code.tex' version '6.10.0'
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/pdfcol\pdfcol.sty
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/generic/infwarerr\infwarerr.sty)))
+(C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbhooks.code.tex
+Library (tcolorbox): 'tcbhooks.code.tex' version '6.10.0'
+) (C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbtheorems.code.tex
+Library (tcolorbox): 'tcbtheorems.code.tex' version '6.10.0'
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsmath.sty
+For additional information on amsmath, use the `?' option.
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amstext.sty
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsgen.sty))
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsbsy.sty)
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsopn.sty)))
+(C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbfitting.code.tex
+Library (tcolorbox): 'tcbfitting.code.tex' version '6.10.0'
+) (C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcblistingsutf8.code.tex
+Library (tcolorbox): 'tcblistingsutf8.code.tex' version '6.10.0'
+(C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcblistings.code.tex
+Library (tcolorbox): 'tcblistings.code.tex' version '6.10.0'
+(C:\Program Files\MiKTeX\tex/latex/listings\listings.sty
+(C:\Program Files\MiKTeX\tex/latex/listings\lstpatch.sty)
+(C:\Program Files\MiKTeX\tex/latex/listings\lstmisc.sty)
+(C:\Program Files\MiKTeX\tex/latex/listings\listings.cfg))
+(C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcblistingscore.code.tex
+Library (tcolorbox): 'tcblistingscore.code.tex' version '6.10.0'
+(C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbprocessing.code.tex
+Library (tcolorbox): 'tcbprocessing.code.tex' version '6.10.0'
+)))
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/listingsutf8\listingsutf8.sty
+(C:\Program Files\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/generic/stringenc\stringenc.sty
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/generic/pdfescape\pdfescape.sty))))
+ (C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbexternal.code.tex
+Library (tcolorbox): 'tcbexternal.code.tex' version '6.10.0'
+) (C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbmagazine.code.tex
+Library (tcolorbox): 'tcbmagazine.code.tex' version '6.10.0'
+) (C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbvignette.code.tex
+Library (tcolorbox): 'tcbvignette.code.tex' version '6.10.0'
+) (C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbposter.code.tex
+Library (tcolorbox): 'tcbposter.code.tex' version '6.10.0'
+))
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/fontawesome5\fontawesome5.sty
+(C:\Program Files\MiKTeX\tex/latex/l3kernel\expl3.sty
+(C:\Program Files\MiKTeX\tex/latex/l3kernel\l3backend-pdftex.def))
+(C:\Program Files\MiKTeX\tex/latex/l3packages/l3keys2e\l3keys2e.sty)
+(C:\Program Files\MiKTeX\tex/latex/l3packages/xparse\xparse.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/fontawesome5\fontawesome5-gen
+eric-helper.sty
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/fontawesome5\fontawesome5-map
+ping.def)))
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/booktabs\booktabs.sty)
+(C:\Program Files\MiKTeX\tex/latex/tools\tabularx.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/xltabular\xltabular.sty
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/ltablex\ltablex.sty
+(C:\Program Files\MiKTeX\tex/latex/tools\longtable.sty)))
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/makecell\makecell.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/enumitem\enumitem.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/titlesec\titlesec.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/titlesec\titletoc.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty)
+(C:\Program Files\MiKTeX\tex/latex/ragged2e\ragged2e.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/csquotes\csquotes.sty
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/csquotes\csquotes.def)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/csquotes\csquotes.cfg))
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\amssymb.sty
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\amsfonts.sty))
+(C:\Program Files\MiKTeX\tex/latex/hyperref\hyperref.sty
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/generic/kvdefinekeys\kvdefinekeys.s
+ty) (C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/hycolor\hycolor.sty)
+(C:\Program Files\MiKTeX\tex/latex/hyperref\nameref.sty
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/refcount\refcount.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/generic/gettitlestring\gettitlestri
+ng.sty)) (C:\Program Files\MiKTeX\tex/latex/hyperref\pd1enc.def)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/generic/intcalc\intcalc.sty)
+(C:\Program Files\MiKTeX\tex/latex/hyperref\puenc.def)
+(C:\Program Files\MiKTeX\tex/latex/url\url.sty)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/generic/bitset\bitset.sty
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/generic/bigintcalc\bigintcalc.sty))
+) (C:\Program Files\MiKTeX\tex/latex/hyperref\hpdftex.def
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck
+.sty
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/generic/uniquecounter\uniquecounter
+.sty))) (C:\Program Files\MiKTeX\tex/latex/lm\t1lmss.fd)
+(D:\entorno-movil\_build\main_con_capturas.aux)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/upquote\upquote.sty)
+
+Package microtype Warning: Unable to apply patch `toc' on input line 239.
+
+Couldn't patch \ttl@straight@ii
+Couldn't patch \ttl@straight@ii
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(C:\Program Files\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (C:\Program Files\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
+(C:\Program Files\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg))
+(D:\entorno-movil\_build\main_con_capturas.out)
+(D:\entorno-movil\_build\main_con_capturas.out)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/fontawesome5\ufontawesomefree
+2.fd) (C:\Program Files\MiKTeX\tex/latex/lm\ot1lmr.fd)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/microtype\mt-cmr.cfg)
+(C:\Program Files\MiKTeX\tex/latex/lm\omllmm.fd)
+(C:\Program Files\MiKTeX\tex/latex/lm\omslmsy.fd)
+(C:\Program Files\MiKTeX\tex/latex/lm\omxlmex.fd)
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\umsa.fd)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/microtype\mt-msa.cfg)
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd)
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/microtype\mt-msb.cfg)
+(C:\Program Files\MiKTeX\tex/latex/lm\ts1lmss.fd) [1{C:/Users/Adrian/AppData/Lo
+cal/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Adrian/AppData/Roaming/MiKTeX/
+fonts/enc/dvips/fontawesome5/fa5free2.enc}{C:/Program Files/MiKTeX/fonts/enc/dv
+ips/lm/lm-ec.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
+(D:\entorno-movil\_build\main_con_capturas.toc)
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.345 	
+        [1]
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/inconsolata\t1zi4.fd)
+[2{C:/Users/Adrian/AppData/Roaming/MiKTeX/fonts/enc/dvips/inconsolata/i4-t1-5.e
+nc}]
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/fontawesome5\ufontawesomefree
+0.fd) [3{C:/Users/Adrian/AppData/Roaming/MiKTeX/fonts/enc/dvips/fontawesome5/fa
+5free0.enc}]
+Overfull \hbox (3.22269pt too wide) in paragraph at lines 460--460
+[]|[][]\T1/lmss/m/n/10.95 (-20) Samsung[][]|  
+
+Overfull \hbox (1.17427pt too wide) in paragraph at lines 460--460
+\T1/lmss/m/n/10.95 (-20) 166,2$\OMS/lmsy/m/n/10.95 ^^B$\T1/lmss/m/n/10.95 (-20)
+ 76,5$\OMS/lmsy/m/n/10.95 ^^B$\T1/lmss/m/n/10.95 (-20) 7,85 
+
+Overfull \hbox (3.455pt too wide) in paragraph at lines 460--460
+[]|[][]\T1/lmss/m/n/10.95 (-20) Motorola[][]|  
+
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/fontawesome5\ufontawesomefree
+1.fd) [4{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}]
+Overfull \hbox (16.27788pt too wide) in paragraph at lines 513--513
+[]|\T1/lmss/bx/n/10.95 (-20) Almacenamiento|  
+
+Overfull \hbox (3.75232pt too wide) in paragraph at lines 541--541
+[]|\T1/lmss/m/n/10.95 (-20) 163,6$\OMS/lmsy/m/n/10.95 ^^B$\T1/lmss/m/n/10.95 (-
+20) 78,1$\OMS/lmsy/m/n/10.95 ^^B$\T1/lmss/m/n/10.95 (-20) 7,9 
+
+Overfull \hbox (3.75232pt too wide) in paragraph at lines 541--541
+[]|\T1/lmss/m/n/10.95 (-20) 162,8$\OMS/lmsy/m/n/10.95 ^^B$\T1/lmss/m/n/10.95 (-
+20) 76,6$\OMS/lmsy/m/n/10.95 ^^B$\T1/lmss/m/n/10.95 (-20) 8,5 
+
+Overfull \hbox (3.75232pt too wide) in paragraph at lines 541--541
+[]|\T1/lmss/m/n/10.95 (-20) 162,9$\OMS/lmsy/m/n/10.95 ^^B$\T1/lmss/m/n/10.95 (-
+20) 76,5$\OMS/lmsy/m/n/10.95 ^^B$\T1/lmss/m/n/10.95 (-20) 8,5 
+
+Overfull \hbox (9.11781pt too wide) in paragraph at lines 541--541
+[]|\T1/lmss/m/n/10.95 (-20) 163,4$\OMS/lmsy/m/n/10.95 ^^B$\T1/lmss/m/n/10.95 (-
+20) 78,0$\OMS/lmsy/m/n/10.95 ^^B$\T1/lmss/m/n/10.95 (-20) 8,75 
+
+Overfull \hbox (9.11781pt too wide) in paragraph at lines 541--541
+[]|\T1/lmss/m/n/10.95 (-20) 166,2$\OMS/lmsy/m/n/10.95 ^^B$\T1/lmss/m/n/10.95 (-
+20) 76,5$\OMS/lmsy/m/n/10.95 ^^B$\T1/lmss/m/n/10.95 (-20) 7,85 
+[5{C:/Users/Adrian/AppData/Roaming/MiKTeX/fonts/enc/dvips/fontawesome5/fa5free1
+.enc}] [6] [7] [8] [9] [10] [11]
+Overfull \hbox (4.92128pt too wide) in paragraph at lines 822--822
+[]|\T1/lmss/m/n/9 (-20) Multiplataforma|  
+
+Overfull \hbox (4.92128pt too wide) in paragraph at lines 822--822
+[]|\T1/lmss/m/n/9 (-20) Multiplataforma|  
+
+Overfull \hbox (4.92128pt too wide) in paragraph at lines 822--822
+[]|\T1/lmss/m/n/9 (-20) Multiplataforma|  
+
+Overfull \hbox (4.90625pt too wide) in paragraph at lines 822--822
+[]|\T1/lmss/m/n/9 (-20) Win/mac/Linux|  
+[12] [13]
+Overfull \hbox (14.0pt too wide) in paragraph at lines 918--919
+ [][] 
+[14] [15 <./figs/Descarga_AS_Rabbit1.png> <./figs/Instalacion_AS_1.png>]
+Overfull \hbox (14.0pt too wide) in paragraph at lines 969--970
+ [][] 
+[16 <./figs/Instalacion_AS_2.png> <./figs/Instalacion_AS_3.png>]
+Overfull \hbox (14.0pt too wide) in paragraph at lines 978--979
+ [][] 
+[17 <./figs/Instalacion_AS_4.png>]
+Overfull \hbox (14.0pt too wide) in paragraph at lines 987--988
+ [][] 
+[18 <./figs/Instalacion_AS_5.png>]
+Overfull \hbox (14.0pt too wide) in paragraph at lines 997--998
+ [][] 
+[19 <./figs/Instalacion_AS_6.png>]
+Overfull \hbox (14.0pt too wide) in paragraph at lines 1015--1016
+ [][] 
+[20 <./figs/AndroidStudio_1.png>]
+Overfull \hbox (17.73622pt too wide) in paragraph at lines 1049--1049
+[]|[]\T1/zi4/m/n/10 com.ejemplo.practicaentornomovil[]|  
+[21 <./figs/Creacion_PrimerProyecto_1.png>]
+Overfull \hbox (14.0pt too wide) in paragraph at lines 1062--1063
+ [][] 
+[22 <./figs/Creacion_PrimerProyecto_2.png>]
+Overfull \hbox (28.50986pt too wide) in paragraph at lines 1113--1113
+[]|[]\T1/zi4/m/n/10 app/src/main/java/.../MainActivity.kt[]|  
+
+Overfull \hbox (48.50986pt too wide) in paragraph at lines 1113--1113
+[]|[]\T1/zi4/m/n/10 app/src/main/res/layout/activity_main.xml[]|  
+
+Overfull \hbox (14.0pt too wide) in paragraph at lines 1121--1122
+ [][] 
+[23]
+Underfull \hbox (badness 8000) in paragraph at lines 1181--1181
+[]|\T1/lmss/m/n/10.95 (+20) Añadir a []\T1/zi4/m/n/10.95 gradle.properties[]\T1
+/lmss/m/n/10.95 (+20) : 
+
+Overfull \hbox (41.67514pt too wide) in paragraph at lines 1181--1181
+[]\T1/zi4/m/n/10.95 org.gradle.jvmargs=-Djava.net.preferIPv4Stack=true[] 
+
+Underfull \hbox (badness 1622) in paragraph at lines 1181--1181
+[]|\T1/lmss/m/n/10.95 (+20) Añadir []\T1/zi4/m/n/10.95 hidpi=true[] \T1/lmss/m/
+n/10.95 (+20) o []\T1/zi4/m/n/10.95 hidpi=false[] \T1/lmss/m/n/10.95 (+20) en 
+[24] [25]
+(C:\Users\Adrian\AppData\Roaming\MiKTeX\tex/latex/inconsolata\ts1zi4.fd)
+[26{C:/Users/Adrian/AppData/Roaming/MiKTeX/fonts/enc/dvips/inconsolata/i4-ts1.e
+nc}] [27]
+Overfull \hbox (9.14174pt too wide) in paragraph at lines 1421--1421
+[]|[]\T1/zi4/m/n/9 READ_EXTERNAL_STORAGE[]|  
+
+Underfull \hbox (badness 10000) in alignment at lines 1421--1421
+[][][][][] 
+[28]
+Overfull \hbox (14.28348pt too wide) in paragraph at lines 1497--1497
+[]|[]\T1/zi4/m/n/10 ActivityManager.getLargeMemoryClass()[]|  
+
+Overfull \hbox (19.28348pt too wide) in paragraph at lines 1497--1497
+[]|[]\T1/zi4/m/n/10 ActivityManager.getMemoryInfo(outInfo)[]|  
+[29] [30]
+Overfull \hbox (4.57059pt too wide) in paragraph at lines 1647--1647
+[]|\T1/lmss/bx/n/9 (-20) Almacenamiento|  
+[31] [32] [33] [34] [35] [36] [37] [38]
+Overfull \hbox (5.716pt too wide) in paragraph at lines 1947--1948
+[]\T1/lmss/m/n/10 (-20) Android De-ve-lo-pers. (2026). \T1/lmss/m/sl/10 (-20) S
+creen si-zes\T1/lmss/m/n/10 (-20) . [][]$\T1/zi4/m/n/10 https : / / developer .
+ android . com / training / multiscreen / screensizes$[][] 
+
+Overfull \hbox (56.92885pt too wide) in paragraph at lines 1950--1951
+[]\T1/lmss/m/n/10 (-20) Android De-ve-lo-pers. (2026). \T1/lmss/m/sl/10 (-20) u
+ses-sdk ele-ment\T1/lmss/m/n/10 (-20) . [][]$\T1/zi4/m/n/10 https : / / develop
+er . android . com / guide / topics / manifest / uses-[]sdk-[]element$[][] 
+
+Overfull \hbox (16.6013pt too wide) in paragraph at lines 1951--1952
+[]\T1/lmss/m/n/10 (-20) Android De-ve-lo-pers. (2026). \T1/lmss/m/sl/10 (-20) A
+n-dro-id 17 is he-re\T1/lmss/m/n/10 (-20) . [][]$\T1/zi4/m/n/10 https : / / dev
+eloper . android . com / blog / posts / android-[]17-[]is-[]here$[][] 
+
+Overfull \hbox (49.44579pt too wide) in paragraph at lines 1956--1957
+[]\T1/lmss/m/n/10 (-20) Android De-ve-lo-pers. (2026). \T1/lmss/m/sl/10 (-20) A
+n-dro-id App Bund-les\T1/lmss/m/n/10 (-20) . [][]$\T1/zi4/m/n/10 https : / / de
+veloper . android . com / guide / app-[]bundle / dynamic-[]delivery$[][] 
+
+Overfull \hbox (49.64291pt too wide) in paragraph at lines 1957--1958
+[]\T1/lmss/m/n/10 (-20) Android De-ve-lo-pers. (2026). \T1/lmss/m/sl/10 (-20) A
+c-ti-vity-Ma-na-ger\T1/lmss/m/n/10 (-20) . [][]$\T1/zi4/m/n/10 https : / / deve
+loper . android . com / reference / android / app / ActivityManager$[][] 
+
+Overfull \hbox (13.03093pt too wide) in paragraph at lines 1958--1959
+[]\T1/lmss/m/n/10 (-20) Android De-ve-lo-pers. (2026). \T1/lmss/m/sl/10 (-20) G
+ui-de to An-dro-id app ar-chi-tec-tu-re\T1/lmss/m/n/10 (-20) . [][]$\T1/zi4/m/n
+/10 https : / / developer . android . com / topic / libraries /
+
+Overfull \hbox (19.09796pt too wide) in paragraph at lines 1961--1962
+[]\T1/lmss/m/n/10 (-20) Android De-ve-lo-pers. (2026). \T1/lmss/m/sl/10 (-20) B
+lue-tooth LE Au-dio over-view\T1/lmss/m/n/10 (-20) . [][]$\T1/zi4/m/n/10 https 
+: / / developer . android . com / develop / connectivity /
+
+Overfull \hbox (9.41267pt too wide) in paragraph at lines 1962--1963
+[]\T1/lmss/m/n/10 (-20) Android De-ve-lo-pers. (2026). \T1/lmss/m/sl/10 (-20) N
+ear Field Com-mu-ni-ca-tion\T1/lmss/m/n/10 (-20) . [][]$\T1/zi4/m/n/10 https : 
+/ / developer . android . com / develop / connectivity /
+[39]
+Overfull \hbox (9.77382pt too wide) in paragraph at lines 1974--1975
+[]\T1/lmss/m/n/10 (-20) Android De-ve-lo-pers. (2026). \T1/lmss/m/sl/10 (-20) A
+n-dro-id Stu-dio pro-ject tem-pla-tes\T1/lmss/m/n/10 (-20) . [][]$\T1/zi4/m/n/1
+0 https : / / developer . android . com / studio / projects /
+
+Overfull \hbox (19.5611pt too wide) in paragraph at lines 1979--1980
+[]\T1/lmss/m/n/10 (-20) Android De-ve-lo-pers. (2026). \T1/lmss/m/sl/10 (-20) A
+n-dro-id Stu-dio trou-bleshoo-ting\T1/lmss/m/n/10 (-20) . [][]$\T1/zi4/m/n/10 h
+ttps : / / developer . android . com / studio / troubleshoot$[][] 
+[40] [41] [42] (D:\entorno-movil\_build\main_con_capturas.aux) )
+(see the transcript file for additional information) <C:\Users\Adrian\AppData\L
+ocal\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tctt1095.pk><C:/Users/Adrian/App
+Data/Roaming/MiKTeX/fonts/type1/public/fontawesome5/FontAwesome5Free-Solid.pfb>
+<C:/Users/Adrian/AppData/Roaming/MiKTeX/fonts/type1/public/inconsolata/Inconsol
+ata-zi4b.pfb><C:/Users/Adrian/AppData/Roaming/MiKTeX/fonts/type1/public/inconso
+lata/Inconsolata-zi4r.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmss10
+.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmss12.pfb><C:/Program File
+s/MiKTeX/fonts/type1/public/lm/lmss9.pfb><C:/Program Files/MiKTeX/fonts/type1/p
+ublic/lm/lmssbo10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmssbx10.p
+fb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmsso10.pfb><C:/Program Files
+/MiKTeX/fonts/type1/public/lm/lmsso9.pfb><C:/Program Files/MiKTeX/fonts/type1/p
+ublic/lm/lmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmsy9.pfb>
+Output written on D:\entorno-movil\_build\main_con_capturas.pdf (43 pages, 4256
+940 bytes).
+Transcript written on D:\entorno-movil\_build\main_con_capturas.log.
+pdflatex: major issue: So far, you have not checked for updates as a MiKTeX user.
+Latexmk: Getting log file '_build/main_con_capturas.log'
+Latexmk: Examining '_build/main_con_capturas.fls'
+Latexmk: Examining '_build/main_con_capturas.log'
+Latexmk: Log file says output to 'D:/entorno-movil/_build/main_con_capturas.pdf'
+Latexmk: Log file says output to 'D:/entorno-movil/_build/main_con_capturas.pdf'
+Latexmk: All targets (_build/main_con_capturas.pdf) are up-to-date
+
+latexmk: major issue: So far, you have not checked for updates as a MiKTeX user.

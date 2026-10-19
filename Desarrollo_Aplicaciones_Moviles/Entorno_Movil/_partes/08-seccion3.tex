@@ -1,0 +1,227 @@
+\newpage
+\section{Configuración del entorno de desarrollo Android}
+
+\subsection{Requisitos e instalación de Android Studio}
+
+\campo{Paso 0 --- Comprobar los requisitos del equipo.}
+Antes de descargar nada hay que mirar lo que publica Google, porque hay una cosa que puede hacer que todo lo demás falle después. En mi caso el punto crítico es siempre el mismo: la \textbf{virtualización por hardware}. Si no está activada en la BIOS, el emulador no arranca y no hay arreglo por software.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.5cm} >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Requisito} & \textcolor{white}{\sffamily\bfseries Windows (mínimo)} & \textcolor{white}{\sffamily\bfseries Windows (recomendado)} \\
+\midrule
+Sistema operativo & Windows 10 de 64 bits & Última versión de Windows de 64 bits \\
+\rowcolor{soft}
+RAM & 8 GB (solo Studio) · \textbf{16 GB (Studio + emulador)} & \textbf{32 GB} \\
+Procesador & Con virtualización activada (Intel VT-x o AMD-V) en la BIOS; microarquitectura posterior a 2017 & Intel Core i5/i7/i9 de 8.ª gen o Ryzen 5/6/7/9 \\
+\rowcolor{soft}
+Disco & 8 GB libres (Studio) · 16 GB libres (Studio + emulador) & SSD con 32 GB o más \\
+Resolución & 1280 $\times$ 800 & 1920 $\times$ 1080 \\
+\rowcolor{soft}
+Tarjeta gráfica & Ninguna (solo Studio) · 4 GB de VRAM (con emulador) & 8 GB de VRAM \\
+\bottomrule
+\end{tabularx}
+\caption{Requisitos de Android Studio (Windows)}
+\end{table}
+
+En macOS los mínimos son macOS 12, 8 GB de RAM y un Apple M1 o un Intel de 6.ª generación en adelante; en Linux, cualquier distribución de 64 bits y \textbf{glibc 2.31 o superior}. Tres advertencias que están en la propia documentación: \textbf{Windows con procesador ARM no está soportado}, los \textbf{Intel Core N-Series y U-Series no se recomiendan}, y cada emulador adicional que creo consume unos \textbf{4 GB de RAM} y \textbf{6 GB de disco}.
+
+\campo{Paso 1 --- Descargar el instalador.}
+Se descarga desde \url{https://developer.android.com/studio}. La versión estable es \textbf{Quail 4 | 2026.1.4 Patch 1}, y el instalador ocupa unos \textbf{1,5 GB}:
+\begin{itemize}[leftmargin=*,itemsep=0.15em]
+  \item \textbf{Windows}: \archivo{android-studio-quail4-patch1-windows.exe}.
+  \item \textbf{macOS}: \archivo{...-mac.dmg} o \archivo{...-mac\_arm.dmg}.
+  \item \textbf{Linux}: \archivo{...-linux.tar.gz}.
+  \item \textbf{ChromeOS}: \archivo{...-cros.deb}.
+\end{itemize}
+
+\figpend{3.1}{Captura de \url{developer.android.com/studio} en la que se vea la versión disponible y la lista de sistemas operativos. Si se puede, que se vea el botón de descarga y la versión al lado.}
+
+\campo{Paso 2 --- Ejecutar el instalador.}
+\begin{itemize}[leftmargin=*,itemsep=0.15em]
+  \item \textbf{Windows}: doble clic en el \archivo{.exe} y seguir el asistente.
+  \item \textbf{macOS}: abrir el \archivo{.dmg} y \textbf{arrastrar el icono a Aplicaciones}.
+  \item \textbf{Linux}: descomprimir en \archivo{/opt/} y lanzar \archivo{android-studio/bin/studio}.
+\end{itemize}
+
+\campo{Paso 3 --- El asistente de configuración inicial (Setup Wizard).}
+El asistente ofrece dos modos de instalación:
+\begin{itemize}[leftmargin=*,itemsep=0.15em]
+  \item \textbf{Standard (estándard)}: instala automáticamente el conjunto recomendado.
+  \item \textbf{Custom (personalizado)}: permite elegir componente a componente.
+\end{itemize}
+
+\figpend{3.2}{Captura del \emph{Setup Wizard}. Lo ideal es la pantalla de elección entre \textbf{Standard} y \textbf{Custom}, o la de resumen de componentes.}
+
+\figpend{3.3}{Captura de la pantalla principal de Android Studio. Que se vea el árbol de proyectos a la izquierda.}
+
+\subsection{Creación de un proyecto de prueba}
+
+\campo{Paso 1 --- Abrir el asistente de nuevo proyecto.}
+Botón \textbf{New Project} en la pantalla de bienvenida, o \textbf{File > New > New Project}.
+
+\campo{Paso 2 --- Elegir la plantilla.}
+En el panel de plantillas, dentro de \textbf{Phone and Tablet}, hay que seleccionar \textbf{\texttt{Empty Views Activity}}.
+
+\begin{warnbox}
+\textbf{\color{accent!80!black}\faExclamationTriangle\ \ Ojo con la plantilla.}
+En Android Studio conviven dos plantillas que se parecen mucho y elegir la equivocada cambia todo lo que viene después:
+\begin{itemize}[leftmargin=*,itemsep=0.15em]
+  \item \textbf{\texttt{Empty Views Activity}} \flecha genera la interfaz con \textbf{vistas XML} en \archivo{res/layout/}.
+  \item \textbf{\texttt{Empty Activity}} \flecha genera la interfaz con \textbf{Jetpack Compose}, sin ningún XML.
+\end{itemize}
+El enunciado pide la de vistas XML, así que esa es la que uso. Aun así, desde mayo de 2026 la posición oficial de Android Developers es que el desarrollo de interfaces en Android es \enquote{Compose-first}, así que el sistema de vistas que nos piden aquí ya está en mantenimiento.
+\end{warnbox}
+
+\campo{Paso 3 --- Configurar el proyecto.}
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3cm} >{\RaggedRight\arraybackslash}p{5cm} >{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Campo} & \textcolor{white}{\sffamily\bfseries Valor a introducir} & \textcolor{white}{\sffamily\bfseries Por qué} \\
+\midrule
+\textbf{Name} & \archivo{PracticaEntornoMovil} & Nombre del proyecto y de la carpeta \\
+\rowcolor{soft}
+\textbf{Package name} & \archivo{com.ejemplo.practicaentornomovil} & Identificador único. No se puede cambiar después \\
+\textbf{Save location} & Carpeta con espacio & El proyecto + emulador se llevan bastante \\
+\rowcolor{soft}
+\textbf{Language} & \textbf{Kotlin} & El enunciado es explícito: debe ser Kotlin, no Java \\
+\textbf{Minimum API level} & \textbf{API 24 (Android 7.0 Nougat)} & Valor que usa el codelab oficial de Google \\
+\bottomrule
+\end{tabularx}
+\caption{Campos de configuración del nuevo proyecto}
+\end{table}
+
+\begin{warnbox}
+\textbf{\color{accent!80!black}\faExclamationTriangle\ \ Sobre una contradicción del enunciado.}
+En el punto 3.4 aparece \enquote{la selección de Java}, mientras que en el 3.2 se dice explícitamente que el proyecto debe ser en Kotlin, no en Java. Es una errata y lo dejo escrito aquí porque me parece que conviene subirlo. Yo me quedo con \textbf{Kotlin}, que además es el lenguaje oficial desde 2019, y por eso el archivo se llama \archivo{MainActivity.kt} y no \archivo{MainActivity.java}.
+\end{warnbox}
+
+\figpend{3.4}{Captura a pantalla completa de la ventana de \textbf{New Project} con los campos rellenos. Añadir una imagen ampliada (un recorte) de la zona del desplegable de \textbf{Language} con \textbf{Kotlin} seleccionado. Esta es la figura que más demuestra que el proyecto es en Kotlin.}
+
+\campo{Paso 4 --- Esperar a la sincronización.}
+Al pulsar \textbf{Finish}, Android Studio crea el proyecto y lanza una sincronización de Gradle en segundo plano. En la parte inferior se ve la barra de progreso, y conviene esperar a que termine antes de tocar nada más.
+
+\figpend{3.5}{Captura de la barra inferior de Android Studio con la tarea de Gradle en curso, o ya completada y sin errores en rojo.}
+
+\subsection{Comprobación del funcionamiento}
+
+\campo{Paso 1 --- Localizar la estructura del proyecto.}
+Nada más abrir el proyecto, lo primero que hago es mirar el árbol de archivos, que es donde se ve si Android Studio ha generado lo que se le ha pedido:
+
+\begin{verbatim}
+PracticaEntornoMovil/
+|-- app/
+|   |-- build.gradle.kts
+|   |-- proguard-rules.pro
+|   `-- src/main/
+|       |-- AndroidManifest.xml
+|       |-- java/com/ejemplo/practicaentornomovil/
+|       |   `-- MainActivity.kt            <-- ACTIVIDAD PRINCIPAL
+|       `-- res/
+|           |-- layout/
+|           |   `-- activity_main.xml      <-- DISEÑO DE LA INTERFAZ
+|           |-- mipmap-anydpi-v26/
+|           |-- values/
+|           `-- xml/
+|-- build.gradle.kts
+|-- gradle.properties
+`-- settings.gradle.kts
+\end{verbatim}
+
+\campo{Paso 2 --- Identificar la actividad principal y el diseño.}
+Son los dos archivos que tengo que enseñar como evidencia, porque son los que demuestran que el proyecto está bien creado:
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.5cm} >{\RaggedRight\arraybackslash}p{5.5cm} >{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Archivo} & \textcolor{white}{\sffamily\bfseries Ruta} & \textcolor{white}{\sffamily\bfseries Qué contiene} \\
+\midrule
+\textbf{Actividad principal} & \archivo{app/src/main/java/.../MainActivity.kt} & La clase \code{MainActivity} y su \code{onCreate}, que llama a \code{setContentView} \\
+\rowcolor{soft}
+\textbf{Diseño} & \archivo{app/src/main/res/layout/activity\_main.xml} & El XML con la jerarquía de vistas \\
+\bottomrule
+\end{tabularx}
+\caption{Archivos principales del proyecto}
+\end{table}
+
+\campo{Paso 3 --- Ejecutar en el emulador.}
+Antes de nada, confirmar que la \textbf{virtualización por hardware está activada en la BIOS}:
+\begin{verbatim}
+emulator -accel-check
+\end{verbatim}
+Los requisitos oficiales del emulador son \textbf{16 GB de RAM} y \textbf{16 GB de espacio en disco}, así que el equipo tiene que estar a la altura. Para crear el dispositivo virtual:
+\begin{enumerate}[leftmargin=*,itemsep=0.15em]
+  \item Abrir \textbf{Device Manager}.
+  \item Pulsar \textbf{+} y elegir \textbf{Create Virtual Device}.
+  \item Elegir un perfil de \textbf{Pixel}.
+  \item Elegir la \textbf{imagen de sistema}.
+  \item Revisar la configuración y pulsar \textbf{Finish}.
+\end{enumerate}
+Para ejecutar: botón \textbf{Run} (o \textbf{Shift + F10}).
+
+\figpend{3.6}{Captura del panel izquierdo con la vista \textbf{Project} desplegada. Añadir una \textbf{imagen ampliada} de la zona del árbol, porque los nombres de archivo tienen que leerse con claridad.}
+
+\figpend{3.7}{Dos capturas en las que se vea el contenido de cada archivo. En \archivo{MainActivity.kt} se ve que la extensión es \archivo{.kt}, que es la prueba de que el proyecto es en Kotlin.}
+
+\figpend{3.8}{Captura del emulador con la aplicación abierta. Si el emulador no funciona, pongo en su lugar la captura del \textbf{Device Manager} y explico el problema en el apartado 3.4.}
+
+\subsection{Problemas frecuentes y cómo solucionarlos}
+
+ Estos son los que me he encontrado al montar el entorno, y los que creo que se le van a aparecer a cualquiera que lo monte por primera vez. Los pongo en tabla porque es más fácil buscarlos así.
+
+\begin{xltabular}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.3cm} >{\RaggedRight\arraybackslash}p{4.5cm} >{\RaggedRight\arraybackslash}X@{}}
+\caption{Problemas frecuentes durante la instalación y su solución}\label{tab:problemas}\\
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Problema} & \textcolor{white}{\sffamily\bfseries Causa} & \textcolor{white}{\sffamily\bfseries Solución} \\
+\midrule
+\endfirsthead
+\toprule
+\rowcolor{primary}
+\textcolor{white}{\sffamily\bfseries Problema} & \textcolor{white}{\sffamily\bfseries Causa} & \textcolor{white}{\sffamily\bfseries Solución} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+El emulador \textbf{no arranca} & No hay virtualización por hardware activada en la BIOS & Activar Intel VT-x o AMD-V en la BIOS y reiniciar. Comprobar con \code{emulator -accel-check} \\
+\rowcolor{soft}
+El emulador va \textbf{muy lento} o se cuelga & Funciona sin aceleración de VM & Con virtualización activada se multiplica la velocidad. Alternativa: \code{emulator -gpu software}, dispositivo físico por USB, o Android Device Streaming \\
+Error \enquote{Connection to the Internet denied} & Bloqueo de red al descargar dependencias de Gradle & Añadir a \archivo{gradle.properties}: \code{org.gradle.jvmargs=-Djava.net.preferIPv4Stack=true} y reiniciar \\
+\rowcolor{soft}
+\textbf{No arranca por falta de espacio} & El emulador no arranca con menos de 5 GB libres & Liberar espacio en disco \\
+Las apps de Google \textbf{fallan en API reciente} & Imagen de sistema sin el parche de certificación & Actualizar la imagen del sistema a la revisión 5 o posterior de la API 37 \\
+\rowcolor{soft}
+El \textbf{antivirus ralentiza} el emulador & El antivirus intercepta lecturas y escrituras & Añadir el emulador a la lista de aplicaciones de confianza \\
+La \textbf{multitáctil no funciona} & La ventana de herramientas no soporta multitáctil & Ejecutar el emulador en su propia ventana separada \\
+\rowcolor{soft}
+El emulador \textbf{no arranca anidado} en otra VM & Los emuladores con aceleración no pueden correr dentro de VirtualBox, VMware o Docker & Ejecutarlo en la máquina real, no en una VM \\
+El proyecto aparece con \textbf{errores en rojo} & Las dependencias aún no se han descargado & Esperar a la sincronización. Si persiste: \textbf{File > Invalidate Caches and Restart} \\
+\rowcolor{soft}
+La resolución DPI se detecta \textbf{mal} & Detección automática de DPI fallida & Añadir \code{hidpi=true} o \code{hidpi=false} en \archivo{gradle.properties} \\
+\end{xltabular}
+
+\begin{fuentesbox}
+\textbf{\color{muted}\faBook\ \ Fuentes del apartado 3:}
+\href{https://developer.android.com/studio}{Android Studio} ·
+\href{https://developer.android.com/studio/install}{Install Android Studio} ·
+\href{https://developer.android.com/studio/projects/create-project}{Create a new project} ·
+\href{https://developer.android.com/studio/projects/templates}{Project templates} ·
+\href{https://developer.android.com/guide/topics/manifest/uses-sdk-element}{uses-sdk element} ·
+\href{https://developer.android.com/studio/run/emulator}{Run the Android Emulator} ·
+\href{https://developer.android.com/studio/run/emulator-acceleration}{Hardware acceleration} ·
+\href{https://developer.android.com/studio/run/managing-avds}{Create and manage AVDs} ·
+\href{https://developer.android.com/studio/run/emulator-troubleshooting}{Emulator troubleshooting} ·
+\href{https://developer.android.com/studio/troubleshoot}{Android Studio troubleshooting}
+\end{fuentesbox}
+

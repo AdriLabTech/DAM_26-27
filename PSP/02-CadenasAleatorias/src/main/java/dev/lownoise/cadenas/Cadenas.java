@@ -7,22 +7,25 @@ package dev.lownoise.cadenas;
  */
 public class Cadenas {
 
-    static final int LONGITUD_MAXIMA = 20;
-    static final String ALFABETO = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    static final int longitudMaxima = 20;
+    static final String alfabeto = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     public static void main(String[] args) {
+        // En caso de que la cantidad de argumentos no sea 1, se cierra la ejecuccion
         if (args.length != 1) {
-            System.err.println("Uso: Cadenas <numeroDeCadenas>");
+            System.err.println("Error. Usa: Cadenas <numeroDeCadenas>");
             System.exit(1);
         }
 
         int cantidad = 0;
         try {
+            // Verificamos que el argumento pasado sea un numero (y nos salimos)
             cantidad = Integer.parseInt(args[0].trim());
         } catch (NumberFormatException e) {
             System.err.println("Error: '" + args[0] + "' no es un número entero válido.");
             System.exit(1);
         }
+        // Verificamos que la cantidad de cadenas sea minimo 1
         if (cantidad < 1) {
             System.err.println("Error: el número de cadenas debe ser al menos 1.");
             System.exit(1);
@@ -33,12 +36,12 @@ public class Cadenas {
         }
     }
 
-    /** Devuelve una cadena de letras con longitud aleatoria entre 1 y LONGITUD_MAXIMA. */
+    // Devuelve una cadena de letras con longitud aleatoria entre 1 y 20
     static String generarCadena() {
-        int longitud = 1 + (int) (Math.random() * LONGITUD_MAXIMA);
+        int longitud = 1 + (int) (Math.random() * longitudMaxima);
         String cadena = "";
         for (int i = 0; i < longitud; i++) {
-            cadena += ALFABETO.charAt((int) (Math.random() * ALFABETO.length()));
+            cadena += alfabeto.charAt((int) (Math.random() * alfabeto.length()));
         }
         return cadena;
     }

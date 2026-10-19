@@ -1,0 +1,18 @@
+NO EDITES ESTA CARPETA.
+
+Aquí están las partes en las que se ensambló `main.tex` (portada + 10 bloques de cuerpo).
+Se conservó solo por si hay que rehacer el ensamblaje o revisar de dónde salió algo.
+
+Para trabajar, edita únicamente  ../main.tex
+
+Si necesitas volver a ensamblar (solo si has tocado estos ficheros a mano):
+    cat _partes/01-seccion1.tex _partes/02-seccion1b.tex _partes/03-conclusion1b.tex \
+        _partes/05-seccion2.tex _partes/04-tabla2.tex _partes/06-reflexion2.tex \
+        _partes/08-seccion3.tex _partes/09-seccion4.tex _partes/10-seccion5.tex \
+        _partes/11-conclusiones.tex _partes/12-referencias.tex > _body.tex
+    head -n 260 main.tex > _preamb.tex   # el preambulo, hasta justo antes de \begin{document}
+    cat _preamb.tex _body.tex > main.tex
+
+Ojo: `head -n 260` assumes que the preamble still ends at line 260.
+El orden de concatenación importa: 08-seccion3.tex ya lleva las tablas intercaladas dentro
+(antes estaban en 07-tablas3.tex y se ensamblaban al final, lo que descuadraba el apartado 3).
