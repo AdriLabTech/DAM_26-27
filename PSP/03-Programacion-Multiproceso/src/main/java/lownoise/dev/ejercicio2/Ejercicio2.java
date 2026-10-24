@@ -66,7 +66,7 @@ public class Ejercicio2 {
 
     /**
      * Lee un alumno completo. Devuelve {nombre, edad}, {"*", null} si se
-     * introdujo el centinela, o null si la entrada se agotó.
+     * introdujo el *, o null si la entrada se agotó.
      */
     private static String[] leerAlumno(Scanner s) {
         while (true) {
