@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/hero.svg" alt="DAM_26-27" width="100%"></p>
+
 <div align="center">
 
 # 📚 DAM · Segundo Curso
