@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="220" viewBox="0 0 900 220" role="img" aria-label="MathGame">
+<title>MathGame</title>
+<style>@keyframes blink { 0%,49% { opacity: 1 } 50%,100% { opacity: 0 } }
+.cur { animation: blink 1.1s steps(1) infinite }
+text { font-family: "JetBrains Mono", "Fira Code", ui-monospace, Menlo, Consolas, monospace }</style>
+<rect width="900" height="220" fill="#000"/>
+<circle cx="780" cy="110" r="95" fill="#cdc4ba" fill-opacity=".08"/>
+<path d="M36 0V220" stroke="#cdc4ba" stroke-opacity=".16"/>
+<path d="M10 14H20M15 9V19" stroke="#cdc4ba" stroke-opacity=".42"/><path d="M880 14H890M885 9V19" stroke="#cdc4ba" stroke-opacity=".42"/><path d="M10 206H20M15 201V211" stroke="#cdc4ba" stroke-opacity=".42"/><path d="M880 206H890M885 201V211" stroke="#cdc4ba" stroke-opacity=".42"/>
+<text x="64" y="58" font-size="14" fill="#958f87">// Desarrollo de Interfaces · UD0</text>
+<text x="64" y="118" font-size="48" font-weight="700" fill="#cdc4ba">MathGame</text>
+<rect class="cur" x="300" y="81" width="22" height="41" fill="#cdc4ba"/>
+<text x="64" y="170" font-size="15" fill="#958f87"><tspan fill="#cdc4ba">$</tspan> dotnet run --project MathGame</text>
+<rect x="716" y="168" width="128" height="6" rx="2" fill="#cdc4ba" fill-opacity=".16"/>
+<image x="724" y="36" width="120" height="138" image-rendering="pixelated" style="image-rendering:pixelated" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAuCAYAAABap1twAAACcElEQVR4nO2YMWgTURjH/y0iDsXEGmoxgtYLKUKXuhqxSBchUwudla7FKZOIQymdOmYoQmiXLoKbWwlENGtcXCy5aqFnU7nGJHQQB+v0Hu/uXu/u+16u0Da/6b3/9z6+f7/e9/ooMGDAgAGXmyFuYjaTPhFrx+0MqfswLXGDoui9sRsAALd7jExqBABgZUdhO22tXv1is0ySDmcz6ROdMb+5sPiPX79JJocpBlXU7gCA7bThdo8DcZ15CmyDArWwauq0M1SucBM33yySzj9frrDqsDpINcfNAZgdtHd2sfruo0ervH7h2S+ubHj2rxaecErRp7hWLsHpNfTx6w8BIDQ+s7RGmmL2N5h6to6R+lu5d3oNjzFhVo1zYE9xcTov1zNLa9KUMCY0/5oKu4O1ckkW1v3ao+KJG3R6DWytPpVrajwuLIP+70tg7+wCAKy8Ps6BPMXW+E0A3mvFf6UIdGfs1hFpitkG/QYAoP11HwAwOnXHo6s/wJkaFNzOpPDT7UZqiRsUiDehzqwOu3UEIOEHq/91DACpdDpWbrfTCWhxzZIu6vliAfPFgtzPFqYic9Qz/vw4kAxO5KxQA1ExXX4UpHvwe9MOaBM5C7PKertaR+7uuNyrObr8KIxf1Crb1bpnzzHkx9hgP0yE0dcOJgHpG3z/4bNRMU4+qYOVl3OolUserbnXQnOvFTir03X5UZA6aOXvBzQxsXF0XX4UJIMmL2Nufl/+eRQHzt9hwGCKRcEHjxZwa/Kx1E7TuXWMr5m2e0DSqVyse1DH4bdPJJ0Ku4OUIaEOlIpRB4evXpPrf3//xI5RMDIYVtjE1LniP9wfG8u1t+bhAAAAAElFTkSuQmCC"/>
+<rect x=".5" y=".5" width="899" height="219" rx="2" fill="none" stroke="#cdc4ba" stroke-opacity=".13"/>
+</svg>

@@ -1,3 +1,5 @@
+<p align="center"><img src="docs/banner.svg" alt="01_CasoPractico_MathGame" width="100%"></p>
+
 # 🧮 MathGame
 
 **Juego de matemáticas por consola escrito en C#.**

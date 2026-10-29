@@ -1,3 +1,5 @@
+<p align="center"><img src="docs/banner.svg" alt="HabitLogger" width="100%"></p>
+
 # 📝 HabitLogger (versión consola)
 
 **Registro de hábitos por consola escrito en C#.**

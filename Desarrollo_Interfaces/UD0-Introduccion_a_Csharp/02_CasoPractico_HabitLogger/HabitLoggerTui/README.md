@@ -1,3 +1,5 @@
+<p align="center"><img src="docs/banner.svg" alt="HabitLoggerTui" width="100%"></p>
+
 # 🖥️ HabitLogger TUI (versión terminal)
 
 **Registro de hábitos con interfaz de terminal (TUI) escrito en C#.**

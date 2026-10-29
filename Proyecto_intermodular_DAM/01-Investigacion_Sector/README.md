@@ -1,3 +1,5 @@
+<p align="center"><img src="docs/banner.svg" alt="01-Investigacion_Sector" width="100%"></p>
+
 # RA1a · Estado tecnológico del sector empresarial
 
 Actividad del módulo de Proyecto Intermodular (DAM). Investigación de 8 empresas del sector IT: 2 startups, 2 pymes, 2 grandes empresas y 2 multinacionales, siguiendo la ficha del enunciado.
