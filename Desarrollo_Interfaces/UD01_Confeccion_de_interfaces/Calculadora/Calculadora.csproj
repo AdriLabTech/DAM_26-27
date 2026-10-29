@@ -1,0 +1,20 @@
+<!--
+  LibreWPF: el atributo Sdk de abajo es lo que hace que este proyecto WPF se pueda
+  compilar y ejecutar en Linux. LibreWPF.Sdk sustituye al SDK estandar de .NET y aporta
+  una reimplementacion multiplataforma de las APIs de WPF (System.Windows.*), de modo que
+  el mismo XAML y C# funcionan sin Windows. La version "0.1.0-preview.45" es una preview.
+
+  Para ejecutarlo en Windows con WPF nativo, hay que cambiar el Sdk por el estandar de
+  .NET (el resto del fichero se mantiene igual). La linea equivalente seria:
+
+  <Project Sdk="Microsoft.NET.Sdk">
+-->
+<Project Sdk="LibreWPF.Sdk/0.1.0-preview.45">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+</Project>
