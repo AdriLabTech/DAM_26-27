@@ -61,7 +61,7 @@ Sirve a tres propósitos:
 | Módulo | Carpeta | Tecnología | Contenido |
 |:--|:--|:--:|:--|
 | ⚙️ **PSP** · Programación de Servicios y Procesos | [`PSP/`](PSP) | ![Java](https://img.shields.io/badge/-Java-ED8B00?logo=openjdk&logoColor=white) | Prueba inicial con 4 ejercicios y modelo de dominio, y generador de cadenas aleatorias |
-| 🐍 **Python** · Programación e IA | [`Python/`](Python) | ![Python](https://img.shields.io/badge/-Python-3776AB?logo=python&logoColor=white) | 3 unidades · **65 actividades** resueltas |
+| 🐍 **Python** · Programación e IA | [`Python/`](Python) | ![Python](https://img.shields.io/badge/-Python-3776AB?logo=python&logoColor=white) | 3 unidades · **78 actividades** resueltas |
 | 🖥️ **Desarrollo de Interfaces** | [`Desarrollo_Interfaces/`](Desarrollo_Interfaces) | ![C#](https://img.shields.io/badge/-C%23-512BD4?logo=dotnet&logoColor=white) | Ejercicios de clase y 2 casos prácticos |
 | 🗄️ **Acceso a Datos** | [`Acceso_Datos/`](Acceso_Datos) | ![Java](https://img.shields.io/badge/-Java-ED8B00?logo=openjdk&logoColor=white) | Editor de ficheros binarios y excepciones propias |
 | 📱 **Desarrollo de Aplicaciones Móviles** | [`Desarrollo_Aplicaciones_Moviles/`](Desarrollo_Aplicaciones_Moviles) | ![Kotlin](https://img.shields.io/badge/-Kotlin-7F52FF?logo=kotlin&logoColor=white) | Iniciación a Kotlin |
@@ -76,26 +76,34 @@ Sirve a tres propósitos:
 📦 DAM_26-27
 ┣ 📂 PSP
 ┃ ┣ 📂 01-PruebaInicial ............... Maven · Java
-┃ ┗ 📂 02-CadenasAleatorias ........... Maven · Java
+┃ ┣ 📂 02-CadenasAleatorias ........... procesos hijos
+┃ ┗ 📂 03-Programacion-Multiproceso ... padre/hijo con redirección
 ┣ 📂 Python
 ┃ ┣ 📂 01-Introduccion-a-Python ....... 19 actividades
 ┃ ┣ 📂 02-Control-flujo-estructura-datos  42 actividades
-┃ ┗ 📂 03-Archivos-errores-modularizacion  4 actividades
+┃ ┣ 📂 03-Archivos-errores-modularizacion 17 actividades
+┃ ┣ 📂 Examen_UD2
+┃ ┗ 📂 utilidades · pruebas ........... librería y tests
 ┣ 📂 Desarrollo_Interfaces
 ┃ ┣ 📂 EjerciciosPresentacion ......... introducción a C#
 ┃ ┣ 📂 EjerciciosClase ................ POO y ejercicios en clase
-┃ ┣ 📂 01_CasoPractico_MathGame ....... juego de matemáticas
-┃ ┗ 📂 02_CasoPractico_HabitLogger .... consola + TUI + SQLite
+┃ ┣ 📂 UD0-Introduccion_a_Csharp ...... MathGame · HabitLogger
+┃ ┗ 📂 UD01_Confeccion_de_interfaces .. Calculadora (WPF)
 ┣ 📂 Acceso_Datos
-┃ ┗ 📂 EjercicioEditorBinario ......... editor de ficheros binarios
+┃ ┣ 📂 Editor_Binario ................. ficheros binarios
+┃ ┗ 📂 Make_a_Duplicate_Image ......... copia de imágenes
 ┣ 📂 Desarrollo_Aplicaciones_Moviles
-┃ ┗ 📂 IniciacionAKotlin .............. Maven · Kotlin
-┣ 📂 Sistema_Gestion_Empresarial ........ guías de Docker
+┃ ┣ 📂 IniciacionAKotlin .............. Maven · Kotlin
+┃ ┗ 📂 Entorno_Movil .................. informe LaTeX
+┣ 📂 Sistema_Gestion_Empresarial ........ Docker · Odoo
 ┣ 📂 Proyecto_intermodular_DAM
-┃ ┗ 📂 01-Investigacion_Sector ........ RA1a
-┣ 📂 assets ............................. mapa de conocimientos
+┃ ┗ 📂 01-Investigacion_Sector ........ RA1a · RA1b · RA1c
+┣ 📂 assets ............................. hero y mapa de conocimientos
+┣ 📄 LICENSE
 ┗ 📄 README.md
 ```
+
+Cada módulo tiene su propio README con el detalle de lo que contiene y cómo ejecutarlo: [PSP](PSP/README.md) · [Python](Python/README.md) · [Interfaces](Desarrollo_Interfaces/README.md) · [Acceso a Datos](Acceso_Datos/README.md) · [Móviles](Desarrollo_Aplicaciones_Moviles/README.md) · [SGE](Sistema_Gestion_Empresarial/README.md) · [Intermodular](Proyecto_intermodular_DAM/README.md).
 
 ---
 
@@ -114,6 +122,8 @@ Sirve a tres propósitos:
 
 **`PSP/02-CadenasAleatorias`** · proyecto Maven con las clases `Generador` y `Cadenas` (paquete `dev.lownoise.cadenas`).
 
+**`PSP/03-Programacion-Multiproceso`** · dos ejercicios padre/hijo con `ProcessBuilder` y redirección de entrada, salida y error a ficheros.
+
 </details>
 
 <details open>
@@ -125,7 +135,7 @@ Sirve a tres propósitos:
 |:--|:--|:--:|
 | [UD1](Python/01-Introduccion-a-Python/ejercicios) | Introducción a Python: entorno, tipos, operadores y depuración | 19 |
 | [UD2](Python/02-Control-flujo-estructura-datos/ejercicios) | Control de flujo y estructuras de datos: condicionales, bucles y listas | 42 |
-| [UD3](Python/03-Archivos-errores-modularizacion/ejercicios) | Archivos, errores y modularización: lectura y escritura de ficheros, `os.path` | 4 *(en curso)* |
+| [UD3](Python/03-Archivos-errores-modularizacion/ejercicios) | Archivos, errores y modularización: lectura y escritura de ficheros, `os.path` | 17 |
 
 Cada actividad es un script independiente con su enunciado comentado, por ejemplo clasificador de edades, FizzBuzz, comprobación de primos, palíndromos o calculadoras.
 
@@ -140,8 +150,8 @@ Cada actividad es un script independiente con su enunciado comentado, por ejempl
 |:--|:--|
 | [`EjerciciosPresentacion`](Desarrollo_Interfaces/EjerciciosPresentacion) | Primer programa, entorno de desarrollo, estructura sintáctica, variables y tipos de datos. |
 | [`EjerciciosClase`](Desarrollo_Interfaces/EjerciciosClase) | Cálculo de área, día de la semana y programación orientada a objetos (vehículos). |
-| [`01_CasoPractico_MathGame`](Desarrollo_Interfaces/01_CasoPractico_MathGame) | 🧮 Juego de matemáticas por consola con historial y estadísticas. |
-| [`02_CasoPractico_HabitLogger`](Desarrollo_Interfaces/02_CasoPractico_HabitLogger) | 📝 Registro de hábitos con SQLite, en versión **consola** y versión **TUI**. |
+| [`01_CasoPractico_MathGame`](Desarrollo_Interfaces/UD0-Introduccion_a_Csharp/01_CasoPractico_MathGame) | 🧮 Juego de matemáticas por consola con historial y estadísticas. |
+| [`02_CasoPractico_HabitLogger`](Desarrollo_Interfaces/UD0-Introduccion_a_Csharp/02_CasoPractico_HabitLogger) | 📝 Registro de hábitos con SQLite, en versión **consola** y versión **TUI**. |
 
 </details>
 
@@ -150,7 +160,7 @@ Cada actividad es un script independiente con su enunciado comentado, por ejempl
 
 <br>
 
-- [`EjercicioEditorBinario`](Acceso_Datos/EjercicioEditorBinario): edición de ficheros binarios con excepciones propias (`MyFileNotFoundException`, `MyPointerIsNullException`, `MyPointerOutOfBoundException`).
+- [`Editor_Binario`](Acceso_Datos/Editor_Binario): edición de ficheros binarios con excepciones propias (`MyFileNotFoundException`, `MyPointerIsNullException`, `MyPointerOutOfBoundException`).
 
 </details>
 
@@ -189,17 +199,17 @@ Registro de hábitos (agua, lectura, ejercicio…) donde cada hábito es una tab
 
 | Versión | Descripción | Documentación |
 |:--|:--|:--|
-| 💻 Consola | Menú numerado | [README](Desarrollo_Interfaces/02_CasoPractico_HabitLogger/HabitLogger/README.md) |
-| 🖥️ TUI | Interfaz de terminal con formularios | [README](Desarrollo_Interfaces/02_CasoPractico_HabitLogger/HabitLoggerTui/README.md) |
+| 💻 Consola | Menú numerado | [README](Desarrollo_Interfaces/UD0-Introduccion_a_Csharp/02_CasoPractico_HabitLogger/HabitLogger/README.md) |
+| 🖥️ TUI | Interfaz de terminal con formularios | [README](Desarrollo_Interfaces/UD0-Introduccion_a_Csharp/02_CasoPractico_HabitLogger/HabitLoggerTui/README.md) |
 
 <table>
   <tr>
-    <td align="center"><img src="Desarrollo_Interfaces/02_CasoPractico_HabitLogger/HabitLoggerTui/docs/01-menu.png" alt="Menú principal de HabitLogger TUI" width="400"><br><sub>Menú principal</sub></td>
-    <td align="center"><img src="Desarrollo_Interfaces/02_CasoPractico_HabitLogger/HabitLoggerTui/docs/02-ver-registros.png" alt="Lista de registros" width="400"><br><sub>Lista de registros</sub></td>
+    <td align="center"><img src="Desarrollo_Interfaces/UD0-Introduccion_a_Csharp/02_CasoPractico_HabitLogger/HabitLoggerTui/docs/01-menu.png" alt="Menú principal de HabitLogger TUI" width="400"><br><sub>Menú principal</sub></td>
+    <td align="center"><img src="Desarrollo_Interfaces/UD0-Introduccion_a_Csharp/02_CasoPractico_HabitLogger/HabitLoggerTui/docs/02-ver-registros.png" alt="Lista de registros" width="400"><br><sub>Lista de registros</sub></td>
   </tr>
   <tr>
-    <td align="center"><img src="Desarrollo_Interfaces/02_CasoPractico_HabitLogger/HabitLoggerTui/docs/03-formulario-error.png" alt="Formulario con error de validación" width="400"><br><sub>Validación de formularios</sub></td>
-    <td align="center"><img src="Desarrollo_Interfaces/02_CasoPractico_HabitLogger/HabitLoggerTui/docs/05-actualizar.png" alt="Actualizar un registro" width="400"><br><sub>Actualizar registro</sub></td>
+    <td align="center"><img src="Desarrollo_Interfaces/UD0-Introduccion_a_Csharp/02_CasoPractico_HabitLogger/HabitLoggerTui/docs/03-formulario-error.png" alt="Formulario con error de validación" width="400"><br><sub>Validación de formularios</sub></td>
+    <td align="center"><img src="Desarrollo_Interfaces/UD0-Introduccion_a_Csharp/02_CasoPractico_HabitLogger/HabitLoggerTui/docs/05-actualizar.png" alt="Actualizar un registro" width="400"><br><sub>Actualizar registro</sub></td>
   </tr>
 </table>
 
@@ -224,7 +234,7 @@ cd DAM_26-27
 Ejemplo con HabitLogger:
 
 ```bash
-dotnet run --project Desarrollo_Interfaces/02_CasoPractico_HabitLogger/HabitLogger
+dotnet run --project Desarrollo_Interfaces/UD0-Introduccion_a_Csharp/02_CasoPractico_HabitLogger/HabitLogger
 ```
 
 > [!TIP]
@@ -289,3 +299,9 @@ Desarrollo de Aplicaciones Multiplataforma · 2º DAM · Curso 2026 – 2027
 [![GitHub](https://img.shields.io/badge/GitHub-AdriLabTech-181717?style=for-the-badge&logo=github)](https://github.com/AdriLabTech)
 
 </div>
+
+---
+
+## 📄 Licencia
+
+Código y documentos publicados bajo licencia [MIT](LICENSE).
