@@ -1,0 +1,40 @@
+# C# / .NET
+**/bin/
+**/obj/
+.vs/
+
+# Java / Maven / Gradle
+**/target/
+**/*.class
+.gradle/
+build/
+
+# Python
+**/__pycache__/
+**/*.py[cod]
+**/.venv/
+**/venv/
+**/env/
+
+# LaTeX (auxiliares de compilación)
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.tex~
+
+# IDEs y editores
+.idea/
+.vscode/
+*.iml
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Entorno local
+.env
+.obsidian/
