@@ -6,14 +6,14 @@ Actividad del módulo de Proyecto Intermodular (DAM). Investigación de 8 empres
 
 | # | Empresa | Tipo | Modelo | Stack destacado | Cloud |
 |---|---|---|---|---|---|
-| 1 | [Factorial](01-Factorial.md) | Startup | SaaS | Rails + React/TS, MySQL | AWS |
-| 2 | [Holded](02-Holded.md) | Startup | SaaS | PHP + Go, React, MongoDB | No verificado |
-| 3 | [Autentia](03-Autentia.md) | Pyme | Consultoría | Java, ágil | No verificado |
-| 4 | [Plain Concepts](04-Plain_Concepts.md) | Pyme/mediana | Consultoría | .NET, Angular/React/Vue | Azure |
-| 5 | [Indra](05-Indra.md) | Grande | Consultoría / defensa | No verificado | No verificado |
-| 6 | [Amadeus](06-Amadeus.md) | Grande | SaaS B2B | Java Spring Boot, Angular | Azure |
-| 7 | [Netflix](07-Netflix.md) | Multinacional | Streaming B2C | Java Spring Boot, React, Cassandra | AWS |
-| 8 | [SAP](08-SAP.md) | Multinacional | SaaS/ERP | ABAP, HANA, Fiori | BTP |
+| 1 | Factorial | Startup | SaaS | Rails + React/TS, MySQL | AWS |
+| 2 | Holded | Startup | SaaS | PHP + Go, React, MongoDB | No verificado |
+| 3 | Autentia | Pyme | Consultoría | Java, ágil | No verificado |
+| 4 | Plain Concepts | Pyme/mediana | Consultoría | .NET, Angular/React/Vue | Azure |
+| 5 | Indra | Grande | Consultoría / defensa | No verificado | No verificado |
+| 6 | Amadeus | Grande | SaaS B2B | Java Spring Boot, Angular | Azure |
+| 7 | Netflix | Multinacional | Streaming B2C | Java Spring Boot, React, Cassandra | AWS |
+| 8 | SAP | Multinacional | SaaS/ERP | ABAP, HANA, Fiori | BTP |
 
 ## Conclusiones
 
