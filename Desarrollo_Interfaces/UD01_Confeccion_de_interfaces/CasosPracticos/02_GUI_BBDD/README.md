@@ -1,3 +1,4 @@
+<p align="center"><img src="docs/banner.svg" alt="GUI_BBDD" width="100%"></p>
 # 📅 Registro de hábitos
 
 Aplicación de escritorio WPF (C#) que guarda hábitos en una base de datos **SQLite local** y los muestra en una tabla. Aplica lo visto en *UD01 – Parte 2*: MVVM con `CommunityToolkit.Mvvm`, `ObservableCollection`, `ICollectionView` (filtro), `DataGrid` y comandos con `CanExecute`, sin manejadores de eventos en la ventana.
@@ -31,7 +32,7 @@ registros (habito_id FK → habitos ON DELETE CASCADE, fecha 'yyyy-MM-dd', PK(ha
 ## 🧩 Estructura
 
 | Archivo | Responsabilidad |
-|---|---|
+| --- | --- |
 | `Models/Habito.cs` | Modelo observable (`HechoHoy`, `Racha`, `Total`) |
 | `Data/HabitoRepositorio.cs` | Acceso a SQLite (Microsoft.Data.Sqlite) y cálculo de la racha |
 | `ViewModels/MainViewModel.cs` | Lista, filtro, selección y comandos |
