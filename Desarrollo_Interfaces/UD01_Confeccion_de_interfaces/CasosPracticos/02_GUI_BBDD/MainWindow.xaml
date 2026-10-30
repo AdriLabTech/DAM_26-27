@@ -1,0 +1,81 @@
+<Window
+    x:Class="gui_bbdd.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Registro de hábitos"
+    Width="760"
+    Height="480"
+    MinWidth="600"
+    MinHeight="360">
+
+    <DockPanel Margin="12">
+
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem Content="{Binding Estado}"/>
+        </StatusBar>
+
+        <!-- Alta de un hábito nuevo -->
+        <Grid DockPanel.Dock="Top" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                <TextBlock Text="Nombre"/>
+                <TextBox
+                    MaxLength="60"
+                    Text="{Binding NuevoNombre, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Margin="0,0,8,0">
+                <TextBlock Text="Descripción"/>
+                <TextBox
+                    MaxLength="200"
+                    Text="{Binding NuevaDescripcion, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+
+            <Button
+                Grid.Column="2"
+                Content="Añadir"
+                Width="90"
+                VerticalAlignment="Bottom"
+                Command="{Binding AnadirCommand}"/>
+        </Grid>
+
+        <!-- Buscador y acciones sobre el hábito seleccionado -->
+        <DockPanel DockPanel.Dock="Top" Margin="0,0,0,8">
+            <Button
+                DockPanel.Dock="Right"
+                Content="Eliminar"
+                Width="90"
+                Margin="8,0,0,0"
+                Command="{Binding EliminarCommand}"/>
+            <Button
+                DockPanel.Dock="Right"
+                Content="Hecho hoy / Deshacer"
+                Padding="10,0"
+                Margin="8,0,0,0"
+                Command="{Binding AlternarHoyCommand}"/>
+            <TextBlock DockPanel.Dock="Left" Text="Buscar: " VerticalAlignment="Center"/>
+            <TextBox Text="{Binding Filtro, UpdateSourceTrigger=PropertyChanged}"/>
+        </DockPanel>
+
+        <DataGrid
+            ItemsSource="{Binding Vista}"
+            SelectedItem="{Binding Seleccionado}"
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Hábito" Binding="{Binding Nombre}" Width="*"/>
+                <DataGridTextColumn Header="Descripción" Binding="{Binding Descripcion}" Width="2*"/>
+                <DataGridCheckBoxColumn Header="Hoy" Binding="{Binding HechoHoy, Mode=OneWay}" Width="60"/>
+                <DataGridTextColumn Header="Racha" Binding="{Binding Racha, StringFormat='{}{0} d'}" Width="70"/>
+                <DataGridTextColumn Header="Total" Binding="{Binding Total}" Width="60"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </DockPanel>
+</Window>

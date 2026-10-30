@@ -1,0 +1,81 @@
+<Window
+    x:Class="Ficha_de_Usuario.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Ficha de Usuario"
+    Width="500"
+    Height="360">
+
+    <!-- Un solo Margin en el contenedor raíz en vez de uno por control -->
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>  <!-- Formulario: lo que ocupe su contenido -->
+            <RowDefinition Height="Auto"/>  <!-- CheckBox de condiciones -->
+            <RowDefinition Height="Auto"/>  <!-- Resumen: altura según contenido -->
+            <RowDefinition Height="Auto"/>  <!-- Botón Guardar -->
+        </Grid.RowDefinitions>
+
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>  <!--larga, común a todas las filas -->
+                <ColumnDefinition Width="*"/>     <!-- Los campos ocupan todo el resto -->
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Fila 0: Nombre -->
+            <Label Grid.Row="0" Grid.Column="0" Content="Nombre: "
+                   VerticalAlignment="Center" Margin="0,0,10,10"/>
+            <TextBox x:Name="nombre" Grid.Row="0" Grid.Column="1"
+                     Margin="0,0,0,10" Padding="4"/>
+
+            <!-- Fila 1: Correo -->
+            <Label Grid.Row="1" Grid.Column="0" Content="Correo: "
+                   VerticalAlignment="Center" Margin="0,0,10,10"/>
+            <TextBox x:Name="correo" Grid.Row="1" Grid.Column="1"
+                     Margin="0,0,0,10" Padding="4"/>
+
+            <!-- Fila 2: Ciudad -->
+            <Label Grid.Row="2" Grid.Column="0" Content="Ciudad:"
+                   VerticalAlignment="Center" Margin="0,0,10,10"/>
+            <ComboBox x:Name="ciudad" Grid.Row="2" Grid.Column="1"
+                      SelectedIndex="0" Margin="0,0,0,10">
+                <ComboBoxItem Content="Córdoba"/>
+                <ComboBoxItem Content="Sevilla"/>
+                <ComboBoxItem Content="Málaga"/>
+                <ComboBoxItem Content="Granada"/>
+                <ComboBoxItem Content="Cádiz"/>
+                <ComboBoxItem Content="Huelva"/>
+                <ComboBoxItem Content="Almería"/>
+                <ComboBoxItem Content="Jaén"/>
+            </ComboBox>
+
+            <!-- Fila 3: Fecha -->
+            <Label Grid.Row="3" Grid.Column="0" Content="Fecha: "
+                   VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <DatePicker x:Name="fechaSeleccionada" Grid.Row="3" Grid.Column="1" />
+        </Grid>
+
+        <!-- ===== Aceptación de condiciones ===== -->
+        <CheckBox x:Name="aceptar" Grid.Row="1" Margin="0,10,0,0"
+                  Content="Acepto las condiciones"/>
+
+        <!-- ===== Resumen ===== -->
+        <!-- Border para enmarcarlo; el TextBlock con TextWrapping evita que el texto se corte -->
+        <Border Grid.Row="2" Margin="0,35,0,20" Padding="10" MinHeight="80"
+                BorderBrush="DimGray" BorderThickness="2"
+                UseLayoutRounding="True" SnapsToDevicePixels="True">
+            <TextBlock x:Name="resumen" TextWrapping="Wrap"  />
+        </Border>
+
+        <!-- ===== Botón: deshabilitado hasta marcar la casilla (sin código) ===== -->
+        <Button Grid.Row="3" Content="Guardar"
+                HorizontalAlignment="Right" Padding="20,6"
+                IsEnabled="{Binding IsChecked, ElementName=aceptar}"/>
+    </Grid>
+</Window>
