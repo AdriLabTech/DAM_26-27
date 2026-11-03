@@ -1,4 +1,3 @@
-using System.Globalization;
 using gui_bbdd.Models;
 using Microsoft.Data.Sqlite;
 
@@ -6,7 +5,7 @@ namespace gui_bbdd.Data;
 
 public class HabitoRepositorio
 {
-    private const string FormatoFecha = "yyyy-MM-dd";
+    private static DateOnly Hoy => DateOnly.FromDateTime(DateTime.Today);
 
     private readonly string _cadenaConexion;
 
@@ -16,7 +15,12 @@ public class HabitoRepositorio
         if (!string.IsNullOrEmpty(carpeta))
             Directory.CreateDirectory(carpeta);
 
-        _cadenaConexion = new SqliteConnectionStringBuilder { DataSource = ruta }.ToString();
+        _cadenaConexion = new SqliteConnectionStringBuilder
+        {
+            DataSource = ruta,
+            ForeignKeys = true,
+        }.ToString();
+
         CrearTablas();
     }
 
@@ -40,7 +44,7 @@ public class HabitoRepositorio
                 var id = lector.GetInt32(0);
                 if (!fechasPorHabito.TryGetValue(id, out var fechas))
                     fechasPorHabito[id] = fechas = [];
-                fechas.Add(DateOnly.ParseExact(lector.GetString(1), FormatoFecha, CultureInfo.InvariantCulture));
+                fechas.Add(lector.GetFieldValue<DateOnly>(1));
             }
         }
 
@@ -71,7 +75,7 @@ public class HabitoRepositorio
         cmd.CommandText = "INSERT INTO habitos (nombre, descripcion) VALUES ($nombre, $descripcion) RETURNING id";
         cmd.Parameters.AddWithValue("$nombre", nombre);
         cmd.Parameters.AddWithValue("$descripcion", descripcion);
-        var id = Convert.ToInt32(cmd.ExecuteScalar(), CultureInfo.InvariantCulture);
+        var id = Convert.ToInt32(cmd.ExecuteScalar());
         return new Habito { Id = id, Nombre = nombre, Descripcion = descripcion };
     }
 
@@ -87,7 +91,6 @@ public class HabitoRepositorio
     /// <summary>Marca o desmarca el hábito para hoy y actualiza sus contadores.</summary>
     public void AlternarHoy(Habito habito)
     {
-        var hoy = DateOnly.FromDateTime(DateTime.Today);
         using var conexion = Abrir();
 
         using (var cmd = conexion.CreateCommand())
@@ -96,25 +99,28 @@ public class HabitoRepositorio
                 ? "DELETE FROM registros WHERE habito_id = $id AND fecha = $fecha"
                 : "INSERT OR IGNORE INTO registros (habito_id, fecha) VALUES ($id, $fecha)";
             cmd.Parameters.AddWithValue("$id", habito.Id);
-            cmd.Parameters.AddWithValue("$fecha", hoy.ToString(FormatoFecha, CultureInfo.InvariantCulture));
+            cmd.Parameters.AddWithValue("$fecha", Hoy);
             cmd.ExecuteNonQuery();
         }
 
+        Recalcular(habito, LeerFechas(conexion, habito.Id));
+    }
+
+    private static HashSet<DateOnly> LeerFechas(SqliteConnection conexion, int habitoId)
+    {
         var fechas = new HashSet<DateOnly>();
-        using (var cmd = conexion.CreateCommand())
-        {
-            cmd.CommandText = "SELECT fecha FROM registros WHERE habito_id = $id";
-            cmd.Parameters.AddWithValue("$id", habito.Id);
-            using var lector = cmd.ExecuteReader();
-            while (lector.Read())
-                fechas.Add(DateOnly.ParseExact(lector.GetString(0), FormatoFecha, CultureInfo.InvariantCulture));
-        }
-        Recalcular(habito, fechas);
+        using var cmd = conexion.CreateCommand();
+        cmd.CommandText = "SELECT fecha FROM registros WHERE habito_id = $id";
+        cmd.Parameters.AddWithValue("$id", habitoId);
+        using var lector = cmd.ExecuteReader();
+        while (lector.Read())
+            fechas.Add(lector.GetFieldValue<DateOnly>(0));
+        return fechas;
     }
 
     private static void Recalcular(Habito habito, HashSet<DateOnly> fechas)
     {
-        var hoy = DateOnly.FromDateTime(DateTime.Today);
+        var hoy = Hoy;
         habito.HechoHoy = fechas.Contains(hoy);
         habito.Total = fechas.Count;
 
@@ -133,9 +139,6 @@ public class HabitoRepositorio
     {
         var conexion = new SqliteConnection(_cadenaConexion);
         conexion.Open();
-        using var cmd = conexion.CreateCommand();
-        cmd.CommandText = "PRAGMA foreign_keys = ON";
-        cmd.ExecuteNonQuery();
         return conexion;
     }
 

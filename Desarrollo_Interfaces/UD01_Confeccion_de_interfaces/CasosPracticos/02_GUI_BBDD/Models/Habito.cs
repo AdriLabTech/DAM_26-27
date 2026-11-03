@@ -2,20 +2,33 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace gui_bbdd.Models;
 
-public partial class Habito : ObservableObject
+public class Habito : ObservableObject
 {
+    private bool _hechoHoy;
+    private int _racha;
+    private int _total;
+
     public int Id { get; init; }
 
     public string Nombre { get; init; } = "";
 
     public string Descripcion { get; init; } = "";
 
-    [ObservableProperty]
-    private bool _hechoHoy;
+    public bool HechoHoy
+    {
+        get => _hechoHoy;
+        set => SetProperty(ref _hechoHoy, value);
+    }
 
-    [ObservableProperty]
-    private int _racha;
+    public int Racha
+    {
+        get => _racha;
+        set => SetProperty(ref _racha, value);
+    }
 
-    [ObservableProperty]
-    private int _total;
+    public int Total
+    {
+        get => _total;
+        set => SetProperty(ref _total, value);
+    }
 }

@@ -8,47 +8,84 @@ using gui_bbdd.Models;
 
 namespace gui_bbdd.ViewModels;
 
-public partial class MainViewModel : ObservableObject
+public class MainViewModel : ObservableObject
 {
     private readonly HabitoRepositorio _repositorio;
+
+    private string _nuevoNombre = "";
+    private string _nuevaDescripcion = "";
+    private string _filtro = "";
+    private Habito? _seleccionado;
+    private string _estado = "";
 
     public ObservableCollection<Habito> Habitos { get; }
 
     public ICollectionView Vista { get; }
 
-    [ObservableProperty]
-    [NotifyCanExecuteChangedFor(nameof(AnadirCommand))]
-    private string _nuevoNombre = "";
+    public IRelayCommand AnadirCommand { get; }
+    public IRelayCommand AlternarHoyCommand { get; }
+    public IRelayCommand EliminarCommand { get; }
 
-    [ObservableProperty]
-    private string _nuevaDescripcion = "";
+    public string NuevoNombre
+    {
+        get => _nuevoNombre;
+        set
+        {
+            if (SetProperty(ref _nuevoNombre, value))
+                AnadirCommand.NotifyCanExecuteChanged();
+        }
+    }
 
-    [ObservableProperty]
-    private string _filtro = "";
+    public string NuevaDescripcion
+    {
+        get => _nuevaDescripcion;
+        set => SetProperty(ref _nuevaDescripcion, value);
+    }
 
-    [ObservableProperty]
-    [NotifyCanExecuteChangedFor(nameof(AlternarHoyCommand))]
-    [NotifyCanExecuteChangedFor(nameof(EliminarCommand))]
-    private Habito? _seleccionado;
+    public string Filtro
+    {
+        get => _filtro;
+        set
+        {
+            if (SetProperty(ref _filtro, value))
+                Vista.Refresh();
+        }
+    }
 
-    [ObservableProperty]
-    private string _estado = "";
+    public Habito? Seleccionado
+    {
+        get => _seleccionado;
+        set
+        {
+            if (!SetProperty(ref _seleccionado, value))
+                return;
+
+            AlternarHoyCommand.NotifyCanExecuteChanged();
+            EliminarCommand.NotifyCanExecuteChanged();
+        }
+    }
+
+    public string Estado
+    {
+        get => _estado;
+        set => SetProperty(ref _estado, value);
+    }
 
     public MainViewModel(HabitoRepositorio repositorio)
     {
         _repositorio = repositorio;
+
+        AnadirCommand = new RelayCommand(Anadir, PuedeAnadir);
+        AlternarHoyCommand = new RelayCommand(AlternarHoy, HaySeleccion);
+        EliminarCommand = new RelayCommand(Eliminar, HaySeleccion);
+
         Habitos = new ObservableCollection<Habito>(repositorio.Cargar());
         Vista = CollectionViewSource.GetDefaultView(Habitos);
-        Vista.Filter = Coincide;
+        Vista.Filter = o => o is Habito h &&
+            h.Nombre.Contains(Filtro, StringComparison.CurrentCultureIgnoreCase);
         ActualizarEstado();
     }
 
-    partial void OnFiltroChanged(string value) => Vista.Refresh();
-
-    private bool Coincide(object o) =>
-        o is Habito h && h.Nombre.Contains(Filtro, StringComparison.CurrentCultureIgnoreCase);
-
-    [RelayCommand(CanExecute = nameof(PuedeAnadir))]
     private void Anadir()
     {
         var habito = _repositorio.Insertar(NuevoNombre.Trim(), NuevaDescripcion.Trim());
@@ -61,14 +98,12 @@ public partial class MainViewModel : ObservableObject
 
     private bool PuedeAnadir() => !string.IsNullOrWhiteSpace(NuevoNombre);
 
-    [RelayCommand(CanExecute = nameof(HaySeleccion))]
     private void AlternarHoy()
     {
         _repositorio.AlternarHoy(Seleccionado!);
         ActualizarEstado();
     }
 
-    [RelayCommand(CanExecute = nameof(HaySeleccion))]
     private void Eliminar()
     {
         var habito = Seleccionado!;
