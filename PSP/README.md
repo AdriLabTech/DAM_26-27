@@ -10,9 +10,9 @@ Tres proyectos Maven independientes. Cada uno se abre y se ejecuta por separado.
 
 | Proyecto | Qué trabaja |
 |---|---|
-| [`01-PruebaInicial`](01-PruebaInicial) | Prueba inicial con 4 ejercicios de consola: calculadora de las cuatro operaciones, comprobación de palíndromos, juego del ahorcado y gestión de alumnos y notas (clases `Alumno` y `Asignatura`). |
-| [`02-CadenasAleatorias`](02-CadenasAleatorias) | `Generador` lanza 10 o más procesos hijos de `Cadenas` con `ProcessBuilder`, recoge su salida con `getInputStream()` y comprueba su código de salida con `waitFor()`. |
-| [`03-Programacion-Multiproceso`](03-Programacion-Multiproceso) | Dos ejercicios padre/hijo: uno pasa dos arrays como argumentos al proceso hijo y otro le envía datos de alumnos redirigiendo su entrada, su salida y su error a ficheros (`src/main/resources`). |
+| [`01_Prueba_Inicial`](01_Prueba_Inicial) | Prueba inicial con 4 ejercicios de consola: calculadora de las cuatro operaciones, comprobación de palíndromos, juego del ahorcado y gestión de alumnos y notas (clases `Alumno` y `Asignatura`). |
+| [`02_Cadenas_Aleatorias`](02_Cadenas_Aleatorias) | `Generador` lanza 10 o más procesos hijos de `Cadenas` con `ProcessBuilder`, recoge su salida con `getInputStream()` y comprueba su código de salida con `waitFor()`. |
+| [`03_Programacion_Multiproceso`](03_Programacion_Multiproceso) | Dos ejercicios padre/hijo: uno pasa dos arrays como argumentos al proceso hijo y otro le envía datos de alumnos redirigiendo su entrada, su salida y su error a ficheros (`src/main/resources`). |
 
 ## 🚀 Ejecución
 
@@ -28,7 +28,7 @@ Cada proyecto tiene sus clases `main` en `src/main/java`. Por ejemplo, para la p
 java -cp target/classes ejercicios.Ejercicio1
 ```
 
-> En los proyectos 02 y 03 el padre lanza al hijo con su mismo *classpath*, así que hay que ejecutarlo con `-cp target/classes`. El ejercicio 2 de `03-Programacion-Multiproceso` recibe como argumentos los ficheros de entrada.
+> En los proyectos 02 y 03 el padre lanza al hijo con su mismo *classpath*, así que hay que ejecutarlo con `-cp target/classes`. El ejercicio 2 de `03_Programacion_Multiproceso` recibe como argumentos los ficheros de entrada.
 
 ## 🧰 Tecnologías
 

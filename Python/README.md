@@ -10,10 +10,10 @@ Cada actividad es un script independiente con su enunciado comentado al principi
 
 | Carpeta | Tema | Actividades |
 |---|---|:--:|
-| [`01-Introduccion-a-Python`](01-Introduccion-a-Python/ejercicios) | Entorno, tipos, operadores, entrada/salida y depuración | 19 |
-| [`02-Control-flujo-estructura-datos`](02-Control-flujo-estructura-datos/ejercicios) | Condicionales, bucles, listas, diccionarios y funciones | 42 |
-| [`03-Archivos-errores-modularizacion`](03-Archivos-errores-modularizacion/ejercicios) | Lectura y escritura de ficheros, excepciones y módulos | 17 |
-| [`Examen_UD2`](Examen_UD2) | Examen de la unidad 2 (2 ejercicios) | 2 |
+| [`UD01_Introduccion_a_Python`](UD01_Introduccion_a_Python/Ejercicios) | Entorno, tipos, operadores, entrada/salida y depuración | 19 |
+| [`UD02_Control_de_Flujo_y_Estructuras_de_Datos`](UD02_Control_de_Flujo_y_Estructuras_de_Datos/Ejercicios) | Condicionales, bucles, listas, diccionarios y funciones | 42 |
+| [`UD03_Archivos_Errores_y_Modularizacion`](UD03_Archivos_Errores_y_Modularizacion/Ejercicios) | Lectura y escritura de ficheros, excepciones y módulos | 17 |
+| [`Examen_UD02`](Examen_UD02) | Examen de la unidad 2 (2 ejercicios) | 2 |
 | [`utilidades`](utilidades) | Paquete `ficheros` con funciones reutilizables de rutas y ficheros | — |
 | [`pruebas`](pruebas) | Pruebas de `utilidades` | — |
 
@@ -22,7 +22,7 @@ Cada actividad es un script independiente con su enunciado comentado al principi
 Necesitas **Python 3.10 o superior**; no hay dependencias externas.
 
 ```bash
-python3 01-Introduccion-a-Python/ejercicios/a1_hola_entorno.py
+python3 UD01_Introduccion_a_Python/Ejercicios/a1_hola_entorno.py
 ```
 
 Algunos ejercicios piden datos por teclado.

@@ -8,8 +8,8 @@
 
 | Carpeta | Qué contiene |
 |---|---|
-| [`01_ConfiguracionDocker`](01_ConfiguracionDocker) | [Guía completa de Docker y Docker Compose en Arch Linux](01_ConfiguracionDocker/GuiaCompletaDockerCompose.md): conceptos, instalación, imágenes, volúmenes, redes, Compose, ejemplos con Odoo + PostgreSQL y Spring Boot + PostgreSQL, seguridad y solución de problemas. |
-| [`02_CasoPractico1_Odoo_VM`](02_CasoPractico1_Odoo_VM) | Manual de instalación y configuración de **Odoo 20 en una máquina virtual** (Ubuntu 26.04, Docker Compose, Odoo 20.0 y PostgreSQL 16), en [PDF](02_CasoPractico1_Odoo_VM/caso-Practico-2-1.pdf) de 12 páginas. |
+| [`01_Configuracion_Docker`](01_Configuracion_Docker) | [Guía completa de Docker y Docker Compose en Arch Linux](01_Configuracion_Docker/GuiaCompletaDockerCompose.md): conceptos, instalación, imágenes, volúmenes, redes, Compose, ejemplos con Odoo + PostgreSQL y Spring Boot + PostgreSQL, seguridad y solución de problemas. |
+| [`02_Caso_Practico_1_Odoo_VM`](02_Caso_Practico_1_Odoo_VM) | Manual de instalación y configuración de **Odoo 20 en una máquina virtual** (Ubuntu 26.04, Docker Compose, Odoo 20.0 y PostgreSQL 16), en [PDF](02_Caso_Practico_1_Odoo_VM/Caso_Practico_2_1.pdf) de 12 páginas. |
 
 ## 🚀 Uso
 

@@ -8,12 +8,12 @@
 
 | Carpeta | Qué contiene |
 |---|---|
-| [`IniciacionAKotlin`](IniciacionAKotlin) | Primer contacto con Kotlin: un proyecto Maven con una función `main` y una función `sumar`. |
-| [`Entorno_Movil`](Entorno_Movil) | Trabajo 1: informe en LaTeX (29 páginas) sobre la instalación y puesta en marcha de Android Studio, con capturas. El resultado es [`Trabajo1EntornosMoviles.pdf`](Entorno_Movil/Trabajo1EntornosMoviles.pdf). |
+| [`Iniciacion_a_Kotlin`](Iniciacion_a_Kotlin) | Primer contacto con Kotlin: un proyecto Maven con una función `main` y una función `sumar`. |
+| [`Entorno_Movil`](Entorno_Movil) | Trabajo 1: informe en LaTeX (29 páginas) sobre la instalación y puesta en marcha de Android Studio, con capturas. El resultado es [`Trabajo1_Entornos_Moviles.pdf`](Entorno_Movil/Trabajo1_Entornos_Moviles.pdf). |
 
 ## 🚀 Ejecución
 
-**Kotlin:** necesitas **JDK** y **Maven**. Desde `IniciacionAKotlin`:
+**Kotlin:** necesitas **JDK** y **Maven**. Desde `Iniciacion_a_Kotlin`:
 
 ```bash
 mvn -q compile
