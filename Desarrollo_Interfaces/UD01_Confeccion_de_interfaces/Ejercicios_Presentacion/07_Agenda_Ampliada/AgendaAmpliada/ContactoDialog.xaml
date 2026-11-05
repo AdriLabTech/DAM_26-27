@@ -1,0 +1,35 @@
+<Window
+    x:Class="AgendaAmpliada.ContactoDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Contacto"
+    Width="380"
+    SizeToContent="Height"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterOwner"
+    ShowInTaskbar="False">
+
+    <StackPanel Margin="16">
+        <Label Content="Nombre *" Padding="0,0,0,2"/>
+        <TextBox Style="{StaticResource CampoDialogo}"
+                 Text="{Binding Nombre, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
+        <TextBlock Style="{StaticResource ErrorCampo}" Text="{Binding ErrorNombre}"/>
+
+        <Label Content="Correo" Padding="0,0,0,2"/>
+        <TextBox Style="{StaticResource CampoDialogo}"
+                 Text="{Binding Email, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
+        <TextBlock Style="{StaticResource ErrorCampo}" Text="{Binding ErrorEmail}"/>
+
+        <Label Content="Teléfono" Padding="0,0,0,2"/>
+        <TextBox Style="{StaticResource CampoDialogo}" Text="{Binding Telefono, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Style="{StaticResource ErrorCampo}"/>
+
+        <Label Content="Ciudad" Padding="0,0,0,2"/>
+        <TextBox Style="{StaticResource CampoDialogo}" Text="{Binding Ciudad, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+            <Button Content="Aceptar" IsDefault="True" Padding="20,6" Margin="0,0,8,0" Click="Aceptar_Click"/>
+            <Button Content="Cancelar" IsCancel="True" Padding="20,6"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

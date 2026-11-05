@@ -1,0 +1,48 @@
+<Window
+    x:Class="MiniEditor.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Mini editor de texto"
+    Width="640"
+    Height="420">
+
+    <DockPanel>
+        <!-- Menú: Cortar/Copiar/Pegar usan los comandos estándar de WPF -->
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Archivo">
+                <MenuItem Header="_Nuevo" Click="Nuevo_Click"/>
+                <Separator/>
+                <MenuItem Header="_Salir" Click="Salir_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Edición">
+                <MenuItem Header="Cor_tar" Command="ApplicationCommands.Cut"/>
+                <MenuItem Header="_Copiar" Command="ApplicationCommands.Copy"/>
+                <MenuItem Header="_Pegar" Command="ApplicationCommands.Paste"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- Barra de herramientas con los mismos comandos: se habilitan solos -->
+        <ToolBar DockPanel.Dock="Top">
+            <Button Content="Cortar" Command="ApplicationCommands.Cut" CommandTarget="{Binding ElementName=editor}"/>
+            <Button Content="Copiar" Command="ApplicationCommands.Copy" CommandTarget="{Binding ElementName=editor}"/>
+            <Button Content="Pegar" Command="ApplicationCommands.Paste" CommandTarget="{Binding ElementName=editor}"/>
+        </ToolBar>
+
+        <!-- Barra de estado: número de caracteres del TextBox -->
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock>
+                    <Run Text="Caracteres: "/><Run Text="{Binding Text.Length, ElementName=editor, Mode=OneWay}"/>
+                </TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+
+        <!-- Contenido: TextBox multilínea -->
+        <TextBox x:Name="editor"
+                 AcceptsReturn="True"
+                 AcceptsTab="True"
+                 TextWrapping="Wrap"
+                 VerticalScrollBarVisibility="Auto"
+                 Padding="6"/>
+    </DockPanel>
+</Window>

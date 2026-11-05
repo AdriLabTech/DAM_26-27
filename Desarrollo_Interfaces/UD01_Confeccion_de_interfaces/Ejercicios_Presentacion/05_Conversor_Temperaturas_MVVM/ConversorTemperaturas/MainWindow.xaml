@@ -1,0 +1,38 @@
+<Window
+    x:Class="ConversorTemperaturas.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:ConversorTemperaturas"
+    Title="Conversor de temperaturas"
+    Width="380"
+    Height="380">
+
+    <!-- El DataContext es el ViewModel: toda la ventana son Binding y Command -->
+    <Window.DataContext>
+        <vm:ConversorViewModel/>
+    </Window.DataContext>
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <Label Content="Grados Celsius:" Padding="0"/>
+            <TextBox Text="{Binding Celsius, UpdateSourceTrigger=PropertyChanged}" Padding="4" Margin="0,4,0,0"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="1" Margin="0,16,0,0" FontSize="20">
+            <Run Text="{Binding Fahrenheit, Mode=OneWay, StringFormat={}{0:0.##}}" FontWeight="Bold"/>
+            <Run Text=" °F"/>
+        </TextBlock>
+
+        <Button Grid.Row="2" Content="Anotar" Command="{Binding AnotarCommand}"
+                HorizontalAlignment="Left" Padding="20,6" Margin="0,16,0,8"/>
+
+        <ListBox Grid.Row="3" ItemsSource="{Binding Anotaciones}"/>
+    </Grid>
+</Window>

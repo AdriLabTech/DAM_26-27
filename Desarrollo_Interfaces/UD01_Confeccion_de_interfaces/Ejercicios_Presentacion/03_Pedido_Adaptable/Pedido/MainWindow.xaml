@@ -1,0 +1,61 @@
+<Window
+    x:Class="Pedido.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Pedido"
+    Width="620"
+    Height="320"
+    MinWidth="360"
+    MinHeight="300"
+    SizeChanged="Ventana_SizeChanged">
+
+    <!-- Dos columnas: Datos | Resumen. Si el ancho es < 520, el Resumen pasa debajo -->
+    <Grid x:Name="raiz" Margin="16">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox x:Name="grpDatos" Header="Datos" Grid.Column="0" Grid.Row="0" Margin="0,0,8,8" Padding="8">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Content="Cliente:" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtCliente" Grid.Row="0" Grid.Column="1" Margin="0,0,0,6" Padding="4"
+                         Text="Lucía"/>
+
+                <Label Grid.Row="1" Content="Producto:" VerticalAlignment="Center"/>
+                <ComboBox x:Name="cmbProducto" Grid.Row="1" Grid.Column="1" Margin="0,0,0,6" SelectedIndex="0">
+                    <ComboBoxItem Content="Teclado"/>
+                    <ComboBoxItem Content="Ratón"/>
+                    <ComboBoxItem Content="Monitor"/>
+                </ComboBox>
+
+                <Label Grid.Row="2" Content="Cantidad:" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtCantidad" Grid.Row="2" Grid.Column="1" Padding="4" Text="1"/>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox x:Name="grpResumen" Header="Resumen" Grid.Column="1" Grid.Row="0" Margin="8,0,0,8" Padding="8">
+            <TextBlock TextWrapping="Wrap">
+                <Run Text="Cliente: "/><Run Text="{Binding Text, ElementName=txtCliente}" FontWeight="Bold"/>
+                <LineBreak/>
+                <Run Text="Producto: "/><Run Text="{Binding Text, ElementName=cmbProducto}" FontWeight="Bold"/>
+                <LineBreak/>
+                <Run Text="Cantidad: "/><Run Text="{Binding Text, ElementName=txtCantidad}" FontWeight="Bold"/>
+            </TextBlock>
+        </GroupBox>
+    </Grid>
+</Window>
