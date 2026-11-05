@@ -1,0 +1,343 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><title>CipherKey 4.0.0 — Informe técnico</title><style>
+:root{
+  --ink:#14212D; --text:#2A3947; --dim:#4C5D6D; --muted:#758391;
+  --line:#D9E1E8; --soft:#F5F7F9; --soft2:#EDF2F6;
+  --accent:#146C94; --accent-d:#0F5578; --accent-l:#E7F0F5;
+  --ok:#157F5B; --err:#B42318; --warn:#A45A0A;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;color:var(--text);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+img{max-width:100%}
+a{color:var(--accent);text-decoration:none}
+
+
+@page{size:A4;margin:0}
+.page{width:210mm;height:297mm;background:#fff;position:relative;overflow:hidden;
+  padding:24mm 19mm 17mm;page-break-after:always}
+.page:last-child{page-break-after:auto}
+.rh{position:absolute;left:19mm;right:19mm;top:11.5mm;display:flex;justify-content:space-between;
+  font-size:6.9pt;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  border-bottom:.35mm solid var(--line);padding-bottom:2.2mm}
+.rh b{font-weight:600;color:var(--dim)}
+.rf{position:absolute;left:19mm;right:19mm;bottom:9mm;display:flex;justify-content:space-between;
+  font-size:7pt;color:var(--muted);border-top:.35mm solid var(--line);padding-top:2.2mm}
+.sec{display:flex;align-items:baseline;gap:4mm;border-bottom:.55mm solid var(--ink);
+  padding-bottom:2.2mm;margin:0 0 4.2mm}
+.sec .n{font-size:7.4pt;font-weight:700;letter-spacing:.16em;color:var(--accent);white-space:nowrap}
+h1,h2,h3,h4{margin:0;color:var(--ink);font-family:'Inter Display','Inter',sans-serif;font-weight:600;letter-spacing:-.018em}
+h2{font-size:19.5pt;line-height:1.12}
+h3{font-size:10.6pt;line-height:1.3;margin:5mm 0 1.8mm;letter-spacing:-.01em}
+p{margin:0 0 2.8mm;font-size:9.35pt;line-height:1.58}
+.lead{font-size:11.1pt;line-height:1.5;color:var(--ink);margin-bottom:4mm}
+.small{font-size:7.9pt;line-height:1.45;color:var(--muted)}
+b,strong{font-weight:600;color:var(--ink)}
+code{font-family:'Noto Sans Mono','DejaVu Sans Mono',monospace;font-size:8.4pt;
+  background:var(--soft2);color:var(--ink);padding:.3mm 1.1mm;border-radius:.7mm}
+ul{margin:0 0 3mm;padding-left:4.6mm}
+li{font-size:9.3pt;line-height:1.52;margin-bottom:1.4mm;padding-left:.6mm}
+li::marker{color:var(--accent)}
+table{width:100%;border-collapse:collapse;margin:1.5mm 0 4mm;font-size:8.35pt;line-height:1.42}
+th{text-align:left;font-size:6.9pt;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);border-bottom:.45mm solid var(--ink);padding:1.7mm 2.2mm;vertical-align:bottom}
+td{padding:1.9mm 2.2mm;border-bottom:.25mm solid var(--line);vertical-align:top}
+th[scope=row]{width:35mm;color:var(--dim);font-size:8.1pt;letter-spacing:0;text-transform:none;font-weight:600;
+  border-bottom:.25mm solid var(--line)}
+.kpis{display:flex;gap:4mm;margin:3mm 0 5mm}
+.three{display:flex;gap:6mm;margin:3mm 0 4mm;border-top:.35mm solid var(--line);padding-top:3.4mm}
+.three>div{flex:1}
+.three h4{font-size:7.2pt;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);
+  margin:0 0 1.4mm}
+.three ul{margin:0;padding-left:3.4mm}
+.three li{font-size:8.1pt;line-height:1.45;margin-bottom:.9mm}
+.summary2{display:flex;gap:7mm;margin-top:4mm}
+.summary2>div{flex:1;border-top:.55mm solid var(--accent);padding-top:2.4mm}
+.summary2 .label{display:block;font-size:7.2pt;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:1.2mm}
+.summary2 p{font-size:9pt;line-height:1.5;margin:0}
+.kpi{flex:1;border-top:.6mm solid var(--accent);background:var(--soft);padding:3mm 3.5mm 3.2mm}
+.kpi b{display:block;font-family:'Inter Display','Inter',sans-serif;font-size:25pt;line-height:1;
+  letter-spacing:-.04em;color:var(--ink);font-weight:600}
+.kpi span{display:block;font-size:7.4pt;line-height:1.35;color:var(--muted);margin-top:1.4mm;
+  text-transform:uppercase;letter-spacing:.07em}
+.note{background:var(--accent-l);border-left:1mm solid var(--accent);padding:3.2mm 4mm;margin:3.2mm 0 4mm}
+.note > b:first-child{display:block;font-size:7.3pt;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-d);margin-bottom:1.2mm}
+.note p{font-size:9pt;margin:0;line-height:1.5}
+.note p b{color:var(--ink);font-weight:600}
+.note.warn{background:#FBF3E8;border-left-color:var(--warn)}
+.note.warn > b:first-child{color:var(--warn)}
+figure{margin:2.5mm 0 4.2mm}
+figcaption{font-size:7.25pt;line-height:1.4;color:var(--muted);margin-top:1.4mm}
+figcaption b{color:var(--dim);font-weight:600}
+.shot{border:.3mm solid #C9D4DD;border-radius:1.2mm;background:#fff;display:block}
+.shot-box{border:.3mm solid var(--line);background:var(--soft);padding:1.6mm;border-radius:1.4mm}
+.row{display:flex;gap:4mm;align-items:flex-start}
+.row>*{flex:1}
+.grid4{display:flex;gap:3.2mm;align-items:flex-start}
+.grid4>figure{flex:1;margin:0}
+.grid4 figcaption{font-size:6.8pt}
+.grid4 .thumb{height:36mm;border:.3mm solid #C9D4DD;border-radius:1.2mm;background:#fff;
+  display:flex;align-items:center;justify-content:center;overflow:hidden}
+.grid4 .thumb img{display:block;max-width:100%;max-height:100%;width:auto;height:auto}
+.cover{padding:0;background:#fff}
+.cover-band{position:absolute;right:0;top:0;width:63mm;height:297mm;background:#0E2131}
+.cover-inner{position:absolute;left:22mm;top:22mm;width:125mm}
+.cover-logo{width:57mm;display:block}
+.cover-rule{width:18mm;height:1.1mm;background:var(--accent);margin:19mm 0 4.5mm}
+.cover-kicker{font-size:7.6pt;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.cover h1{font-size:36pt;line-height:1.06;margin:3.5mm 0 6mm;max-width:118mm;letter-spacing:-.035em}
+.cover-sub{font-size:11.2pt;line-height:1.5;color:var(--dim);max-width:112mm}
+.cover-shot{position:absolute;left:45mm;top:150mm;width:154mm;margin:0;z-index:3;
+  border:.45mm solid #C9D4DD;background:#fff;padding:2.4mm;border-radius:2mm;
+  box-shadow:0 6mm 18mm rgba(11,27,43,.16)}
+.cover-shot img{display:block;width:100%;border-radius:1mm}
+.cover-meta{position:absolute;left:22mm;bottom:18mm;width:120mm;display:grid;grid-template-columns:1fr 1fr;
+  column-gap:8mm;row-gap:2.2mm;font-size:7.5pt;line-height:1.35;color:var(--dim)}
+.cover-meta span{display:block;font-size:6.3pt;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:.4mm}
+.cover-meta b{font-weight:500;color:var(--ink)}
+.cover-credit{position:absolute;right:8mm;bottom:10mm;width:47mm;color:#8FA6B6;font-size:6.4pt;
+  line-height:1.5;letter-spacing:.06em;text-align:right;z-index:4}
+.svgwrap svg text{font-family:'Inter',sans-serif !important}
+
+</style></head><body>
+<section class="page cover">
+ <div class="cover-band"></div>
+ <div class="cover-inner">
+  <img class="cover-logo" src="img/logo-crop.png" alt="CipherKey">
+  <div class="cover-rule"></div>
+  <div class="cover-kicker">Informe técnico · Versión 4.0.0</div>
+  <h1>La bóveda de contraseñas que vive en tu equipo.</h1>
+  <p class="cover-sub">CipherKey es un gestor de contraseñas de escritorio, cifrado y totalmente offline. Un único fichero, una clave maestra y ningún servidor.</p>
+ </div>
+ <figure class="cover-shot"><img src="img/dashboard-light.png" alt="Panel principal de CipherKey"></figure>
+ <div class="cover-meta">
+  <div><span>Aplicación</span><b>CipherKey · CipherKeyV2</b></div>
+  <div><span>Autor</span><b>AdriLabTech</b></div>
+  <div><span>Tecnología</span><b>Java 25 · Swing + FlatLaf</b></div>
+  <div><span>Licencia</span><b>MIT</b></div>
+  <div><span>Repositorio</span><b>github.com/AdriLabTech/CipherKeyV2</b></div>
+  <div><span>Fecha</span><b>30 de octubre de 2026</b></div>
+ </div>
+ <div class="cover-credit">Documento técnico<br>Versión 4.0.0<br>Distribución pública</div>
+</section>
+<section class="page ">
+ <div class="rh"><span><b>CipherKey</b> · Informe técnico</span><span>Versión 4.0.0</span></div>
+ <div class="sec"><span class="n">01 // Resumen ejecutivo</span><h2>La aplicación en una página</h2></div>
+ 
+<p class="lead">CipherKey reúne todas las credenciales del usuario en un único fichero cifrado (<code>.ckey</code>) que solo se abre con una clave maestra. No requiere servidor, cuenta ni conexión de red: el fichero reside en el equipo y su titular decide dónde guardarlo.</p>
+<table>
+ <tr><th scope="row">Aplicación</th><td>CipherKey 4.0.0, repositorio público <b>CipherKeyV2</b></td></tr>
+ <tr><th scope="row">Problema</th><td>La multiplicación de cuentas empuja a reutilizar contraseñas, anotarlas o delegar su custodia en un tercero.</td></tr>
+ <tr><th scope="row">Solución</th><td>Una bóveda local cifrada con Argon2id y AES-256-GCM, con generador, auditoría, 2FA TOTP e importación desde otros gestores.</td></tr>
+ <tr><th scope="row">Público</th><td>Usuarios que priorizan el control de sus datos y no necesitan sincronización en la nube ni autorrelleno en el navegador.</td></tr>
+ <tr><th scope="row">Estado</th><td>Publicada. La release 4.0.0 incluye instaladores para Linux, Windows y macOS, además de un JAR universal.</td></tr>
+</table>
+<div class="kpis">
+ <div class="kpi"><b>1</b><span>fichero cifrado con todas las credenciales</span></div>
+ <div class="kpi"><b>0</b><span>conexiones de red, cuentas o servidores</span></div>
+ <div class="kpi"><b>256</b><span>bits de clave en AES-GCM</span></div>
+</div>
+<p>El diseño prioriza la autonomía: no hay un servicio que pueda caer, cambiar de condiciones o exponer los datos. La contrapartida es explícita y se documenta en este informe: CipherKey no sincroniza dispositivos, no se integra en el navegador y no permite recuperar una clave maestra olvidada.</p>
+<div class="three">
+ <div><h4>Bóveda</h4><ul>
+  <li>Fichero <code>.ckey</code> único y cifrado.</li>
+  <li>Guardado atómico con copia de seguridad.</li>
+  <li>Bloqueo por inactividad y clave borrada al cerrar.</li>
+ </ul></div>
+ <div><h4>Herramientas</h4><ul>
+  <li>Generador de 8 a 64 caracteres.</li>
+  <li>Auditoría de contraseñas débiles o repetidas.</li>
+  <li>2FA TOTP e historial por entrada.</li>
+ </ul></div>
+ <div><h4>Distribución</h4><ul>
+  <li>Importación y exportación CSV.</li>
+  <li>Paquetes nativos para tres sistemas.</li>
+  <li>Código abierto con licencia MIT.</li>
+ </ul></div>
+</div>
+<div class="note"><b>Verificable, no una maqueta</b><p>El código es abierto (MIT), las pruebas se ejecutan en integración continua y la versión 4.0.0 está publicada como release descargable. El informe se apoya en el repositorio, las pruebas y las capturas de la aplicación.</p></div>
+
+ <div class="rf"><span>AdriLabTech · 30 de octubre de 2026</span><span>02 / 10</span></div>
+</section>
+<section class="page ">
+ <div class="rh"><span><b>CipherKey</b> · Informe técnico</span><span>Versión 4.0.0</span></div>
+ <div class="sec"><span class="n">02 // El problema</span><h2>Demasiadas cuentas, demasiada confianza</h2></div>
+ 
+<p class="lead">La memoria humana no escala al ritmo de los servicios digitales. Cuando aparecen decenas de cuentas, surgen cuatro atajos. Todos resuelven el momento; ninguno resuelve el riesgo.</p>
+<table>
+ <tr><th style="width:42mm">Atajo habitual</th><th>Consecuencia</th></tr>
+ <tr><td><b>Repetir la contraseña</b></td><td>Una filtración en el servicio más débil compromete el resto de cuentas.</td></tr>
+ <tr><td><b>Dejarla en el navegador</b></td><td>Queda vinculada a un perfil y a un navegador, sin una clave maestra propia.</td></tr>
+ <tr><td><b>Apuntarla en notas o papel</b></td><td>Se pierde, se copia o se lee sin ninguna barrera de cifrado.</td></tr>
+ <tr><td><b>Usar un gestor en la nube</b></td><td>Funciona, pero los datos viven en un servidor ajeno y dependen de una cuenta, una cuota y una política externa.</td></tr>
+</table>
+<figure class="svgwrap " style="width:165mm"><svg viewBox="0 0 840 350" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;font-family:'Komiki Mono',monospace"><circle cx="800" cy="70" r="60" fill="var(--brand)" opacity=".12"/><text x="20" y="28" text-anchor="start" font-size="11" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--muted)" letter-spacing=".08em">01 // HOY</text><rect x="26" y="50" width="330" height="58" fill="var(--sec)" opacity=".28"/><rect x="20" y="44" width="330" height="58" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="185.0" y="70.0" text-anchor="middle" font-size="14" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >Contraseña repetida</text><text x="185.0" y="90.0" text-anchor="middle" font-size="11.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >una filtración las abre todas</text><rect x="26" y="124" width="330" height="58" fill="var(--sec)" opacity=".28"/><rect x="20" y="118" width="330" height="58" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="185.0" y="144.0" text-anchor="middle" font-size="14" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >Guardada en el navegador</text><text x="185.0" y="164.0" text-anchor="middle" font-size="11.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >sin clave maestra propia</text><rect x="26" y="198" width="330" height="58" fill="var(--sec)" opacity=".28"/><rect x="20" y="192" width="330" height="58" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="185.0" y="218.0" text-anchor="middle" font-size="14" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >Apuntada en notas o papel</text><text x="185.0" y="238.0" text-anchor="middle" font-size="11.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >se pierde o se copia</text><rect x="26" y="272" width="330" height="58" fill="var(--sec)" opacity=".28"/><rect x="20" y="266" width="330" height="58" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="185.0" y="292.0" text-anchor="middle" font-size="14" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >Servicio en la nube</text><text x="185.0" y="312.0" text-anchor="middle" font-size="11.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >tu seguridad depende de un tercero</text><line x1="372" y1="190" x2="470" y2="190" stroke="var(--ink)" stroke-width="2"/><polyline points="459.9,194.3 470,190 459.9,185.7" fill="none" stroke="var(--ink)" stroke-width="2"/><text x="490" y="28" text-anchor="start" font-size="11" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--muted)" letter-spacing=".08em">02 // CON CIPHERKEY</text><rect x="496" y="50" width="330" height="290" fill="var(--sec)" opacity=".28"/><rect x="490" y="44" width="330" height="290" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><rect x="560" y="90" width="190" height="150" fill="none" stroke="var(--ink)" stroke-width="2"/><rect x="566" y="96" width="190" height="150" fill="var(--sec)" opacity=".28"/><rect x="560" y="90" width="190" height="150" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="655" y="150" text-anchor="middle" font-size="18" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >bóveda.ckey</text><text x="655" y="176" text-anchor="middle" font-size="12" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >AES-256-GCM</text><text x="655" y="196" text-anchor="middle" font-size="12" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >un solo fichero</text><text x="655" y="280" text-anchor="middle" font-size="16" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >1 clave maestra</text><text x="655" y="304" text-anchor="middle" font-size="12" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >100% offline · en tu equipo</text></svg><figcaption><b>Fig. 1</b> — Del problema a la solución: sustituir la dispersión por una bóveda local.</figcaption></figure>
+<div class="note"><b>Lo que resuelve CipherKey</b><p>Ofrece una forma segura y cómoda de usar contraseñas distintas y fuertes en cada servicio <b>sin ceder los datos a nadie</b>: el cifrado, el fichero y la clave permanecen bajo el control del usuario.</p></div>
+<p>El coste de los atajos no es solo técnico. También es operativo: rotar contraseñas, reconstruir accesos tras una filtración o confiar en la continuidad de un proveedor consume tiempo y atención. CipherKey reduce esa carga a un gesto: abrir la bóveda con una clave.</p>
+
+ <div class="rf"><span>AdriLabTech · 30 de octubre de 2026</span><span>03 / 10</span></div>
+</section>
+<section class="page ">
+ <div class="rh"><span><b>CipherKey</b> · Informe técnico</span><span>Versión 4.0.0</span></div>
+ <div class="sec"><span class="n">03 // Alcance funcional</span><h2>Qué hace CipherKey y qué deja fuera</h2></div>
+ 
+<p class="lead">La aplicación cubre el ciclo completo de una credencial: custodiarla, organizarla, generarla, protegerla, auditarla e intercambiarla con otros formatos. El alcance está deliberadamente acotado.</p>
+<figure class="svgwrap " style="width:160mm"><svg viewBox="0 0 840 330" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;font-family:'Komiki Mono',monospace"><circle cx="60" cy="330" r="50" fill="var(--brand)" opacity=".12"/><rect x="256" y="14" width="340" height="54" fill="var(--sec)" opacity=".28"/><rect x="250" y="8" width="340" height="54" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><rect x="250" y="8" width="6" height="54" fill="var(--brand)"/><text x="420.0" y="32.0" text-anchor="middle" font-size="18" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >CipherKey</text><text x="420.0" y="52.0" text-anchor="middle" font-size="12" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >gestor de contraseñas offline</text><rect x="26" y="126" width="240" height="70" fill="var(--sec)" opacity=".28"/><rect x="20" y="120" width="240" height="70" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="140.0" y="152.0" text-anchor="middle" font-size="15" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >Custodiar</text><text x="140.0" y="172.0" text-anchor="middle" font-size="11" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >cifra y guarda la bóveda</text><line x1="140" y1="62" x2="140" y2="120" stroke="var(--ink)" stroke-width="2"/><line x1="140" y1="190" x2="140" y2="230" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="4 4"/><rect x="306" y="126" width="240" height="70" fill="var(--sec)" opacity=".28"/><rect x="300" y="120" width="240" height="70" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="420.0" y="152.0" text-anchor="middle" font-size="15" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >Organizar</text><text x="420.0" y="172.0" text-anchor="middle" font-size="11" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >categorías, favoritas, búsqueda</text><line x1="420" y1="62" x2="420" y2="120" stroke="var(--ink)" stroke-width="2"/><line x1="420" y1="190" x2="420" y2="230" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="4 4"/><rect x="586" y="126" width="240" height="70" fill="var(--sec)" opacity=".28"/><rect x="580" y="120" width="240" height="70" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="700.0" y="152.0" text-anchor="middle" font-size="15" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >Generar</text><text x="700.0" y="172.0" text-anchor="middle" font-size="11" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >contraseñas y medidor de fuerza</text><line x1="700" y1="62" x2="700" y2="120" stroke="var(--ink)" stroke-width="2"/><line x1="700" y1="190" x2="700" y2="230" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="4 4"/><rect x="26" y="236" width="240" height="70" fill="var(--sec)" opacity=".28"/><rect x="20" y="230" width="240" height="70" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="140.0" y="262.0" text-anchor="middle" font-size="15" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >Proteger</text><text x="140.0" y="282.0" text-anchor="middle" font-size="11" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >bloqueo y portapapeles</text><rect x="306" y="236" width="240" height="70" fill="var(--sec)" opacity=".28"/><rect x="300" y="230" width="240" height="70" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="420.0" y="262.0" text-anchor="middle" font-size="15" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >Auditar</text><text x="420.0" y="282.0" text-anchor="middle" font-size="11" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >débiles, repetidas, antiguas</text><rect x="586" y="236" width="240" height="70" fill="var(--sec)" opacity=".28"/><rect x="580" y="230" width="240" height="70" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="700.0" y="262.0" text-anchor="middle" font-size="15" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >Interoperar</text><text x="700.0" y="282.0" text-anchor="middle" font-size="11" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >CSV, copia de seguridad, 2FA</text></svg><figcaption><b>Fig. 2</b> — Las seis responsabilidades funcionales de CipherKey.</figcaption></figure>
+<table>
+ <tr><th style="width:31mm">Responsabilidad</th><th>Implementación</th></tr>
+ <tr><td><b>Custodiar</b></td><td>Cifrado AES-256-GCM y guardado atómico (fichero temporal, <code>fsync</code> y renombrado) con copia <code>.bak</code> de la versión anterior.</td></tr>
+ <tr><td><b>Organizar</b></td><td>Entradas con usuario, contraseña, sitio web y notas; categorías, favoritas y búsqueda instantánea por cualquier campo.</td></tr>
+ <tr><td><b>Generar</b></td><td>Contraseñas de 8 a 64 caracteres, opción sin caracteres ambiguos y medidor de fuerza en vivo.</td></tr>
+ <tr><td><b>Proteger</b></td><td>Bloqueo automático por inactividad (5 minutos por defecto, configurable), portapapeles que se vacía a los 30 segundos y clave derivada borrada al bloquear.</td></tr>
+ <tr><td><b>Auditar</b></td><td>Detección de contraseñas débiles, repetidas, vacías o sin cambiar en más de un año; historial de las últimas 10 por entrada.</td></tr>
+ <tr><td><b>Interoperar</b></td><td>Códigos 2FA TOTP por entrada, importación CSV (Bitwarden, Chrome/Edge/Firefox, KeePass), exportación CSV y copia de seguridad cifrada.</td></tr>
+</table>
+<div class="note warn"><b>Fuera de alcance, por diseño</b><p><b>Sincronización entre dispositivos</b> (se resuelve copiando el fichero), <b>autorrelleno en el navegador</b> y <b>recuperación de una clave maestra olvidada</b>. Son límites conscientes, no carencias pendientes: sostienen el modelo de confianza.</p></div>
+
+ <div class="rf"><span>AdriLabTech · 30 de octubre de 2026</span><span>04 / 10</span></div>
+</section>
+<section class="page ">
+ <div class="rh"><span><b>CipherKey</b> · Informe técnico</span><span>Versión 4.0.0</span></div>
+ <div class="sec"><span class="n">04 // La aplicación</span><h2>La interfaz, en detalle</h2></div>
+ 
+<p class="lead">La versión 4.0.0 incorpora un rediseño completo con temas claro y oscuro. El tema se recuerda entre sesiones y la interfaz mantiene la misma estructura: categorías a la izquierda, lista central y detalle a la derecha.</p>
+<figure class="shot-box" style="margin-top:3mm;margin-bottom:3mm">
+ <img class="shot" src="img/dashboard-light.png" alt="Panel principal en tema claro" style="width:100%;display:block">
+ <figcaption style="padding:0 1mm"><b>Fig. 3</b> — Panel principal: barra lateral, lista ordenable, buscador y detalle con código 2FA.</figcaption>
+</figure>
+<div class="grid4">
+ <figure><div class="thumb"><img src="img/login-light.png" alt="Acceso a la bóveda"></div><figcaption><b>Acceso</b> — bóvedas recientes o «Examinar…».</figcaption></figure>
+ <figure><div class="thumb"><img src="img/entry.png" alt="Edición de una entrada"></div><figcaption><b>Entrada</b> — usuario, contraseña, sitio, categoría, 2FA y notas.</figcaption></figure>
+ <figure><div class="thumb"><img src="img/generator.png" alt="Generador de contraseñas"></div><figcaption><b>Generador</b> — de 8 a 64 caracteres y medidor de fuerza.</figcaption></figure>
+ <figure><div class="thumb"><img src="img/audit.png" alt="Auditoría de contraseñas"></div><figcaption><b>Auditoría</b> — débiles, repetidas o antiguas.</figcaption></figure>
+</div>
+<p style="margin-top:4mm">La búsqueda se activa con <code>Ctrl+F</code> y recorre todos los campos. El panel de detalle permite mostrar, copiar y ocultar la contraseña, además de mostrar el código TOTP con su cuenta atrás. El portapapeles se vacía automáticamente a los 30 segundos y la aplicación se bloquea tras cinco minutos de inactividad.</p>
+
+ <div class="rf"><span>AdriLabTech · 30 de octubre de 2026</span><span>05 / 10</span></div>
+</section>
+<section class="page ">
+ <div class="rh"><span><b>CipherKey</b> · Informe técnico</span><span>Versión 4.0.0</span></div>
+ <div class="sec"><span class="n">05 // Arquitectura</span><h2>Capas separadas y un formato documentado</h2></div>
+ 
+<p class="lead">El código, de aproximadamente 4.050 líneas en <code>src/main</code>, sigue una arquitectura inspirada en MVC. La seguridad y la persistencia no dependen de la interfaz, por lo que se pueden probar sin abrir ninguna ventana.</p>
+<figure class="svgwrap " style="width:160mm"><svg viewBox="0 0 840 378" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;font-family:'Komiki Mono',monospace"><circle cx="780" cy="40" r="46" fill="var(--brand)" opacity=".12"/><rect x="26" y="20" width="800" height="52" fill="var(--sec)" opacity=".28"/><rect x="20" y="14" width="800" height="52" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="420.0" y="37.0" text-anchor="middle" font-size="15" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >View · Swing + FlatLaf</text><text x="420.0" y="57.0" text-anchor="middle" font-size="11.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >LoginDialog · MainFrame · Sidebar · DetailPanel · EntryDialog · AuditDialog</text><line x1="420" y1="70" x2="420" y2="98" stroke="var(--ink)" stroke-width="2"/><polyline points="415.7,87.9 420,98 424.3,87.9" fill="none" stroke="var(--ink)" stroke-width="2"/><rect x="26" y="108" width="800" height="52" fill="var(--sec)" opacity=".28"/><rect x="20" y="102" width="800" height="52" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="420.0" y="125.0" text-anchor="middle" font-size="15" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >Controller · PasswordManager</text><text x="420.0" y="145.0" text-anchor="middle" font-size="11.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >casos de uso: abrir, guardar, buscar, importar, bloquear</text><line x1="420" y1="158" x2="420" y2="186" stroke="var(--ink)" stroke-width="2"/><polyline points="415.7,175.9 420,186 424.3,175.9" fill="none" stroke="var(--ink)" stroke-width="2"/><rect x="26" y="196" width="190" height="92" fill="var(--sec)" opacity=".28"/><rect x="20" y="190" width="190" height="92" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="115.0" y="214" text-anchor="middle" font-size="15" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >Model</text><text x="115.0" y="242" text-anchor="middle" font-size="10.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >PasswordEntry</text><text x="115.0" y="262" text-anchor="middle" font-size="10.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >PasswordHistoryItem</text><rect x="236" y="196" width="310" height="92" fill="var(--sec)" opacity=".28"/><rect x="230" y="190" width="310" height="92" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="385.0" y="214" text-anchor="middle" font-size="15" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >Security</text><text x="385.0" y="242" text-anchor="middle" font-size="10.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >VaultCrypto · Totp · PasswordAudit</text><text x="385.0" y="262" text-anchor="middle" font-size="10.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >PasswordGenerator · SecureClipboard</text><rect x="566" y="196" width="260" height="92" fill="var(--sec)" opacity=".28"/><rect x="560" y="190" width="260" height="92" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="690.0" y="214" text-anchor="middle" font-size="15" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >Persistence</text><text x="690.0" y="242" text-anchor="middle" font-size="10.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >Vault · AppPrefs</text><text x="690.0" y="262" text-anchor="middle" font-size="10.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >Csv · EntryCsv</text><line x1="690" y1="284" x2="690" y2="316" stroke="var(--ink)" stroke-width="2"/><polyline points="685.7,305.9 690,316 694.3,305.9" fill="none" stroke="var(--ink)" stroke-width="2"/><rect x="566" y="326" width="260" height="44" fill="var(--sec)" opacity=".28"/><rect x="560" y="320" width="260" height="44" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="690.0" y="346.9" text-anchor="middle" font-size="14" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >disco · bóveda.ckey</text><line x1="420" y1="282" x2="420" y2="300" stroke="none"/></svg><figcaption><b>Fig. 4</b> — Capas de la aplicación: vista, controlador, modelo, seguridad y persistencia.</figcaption></figure>
+<h3>El fichero <code>.ckey</code> (formato v2)</h3>
+<p>Una bóveda es un único fichero. La cabecera guarda los parámetros de derivación de clave, de modo que pueden endurecerse en el futuro sin invalidar las bóvedas existentes. La cabecera se autentica como datos adicionales (AAD): cualquier alteración invalida el conjunto.</p>
+<figure class="svgwrap " style="width:160mm"><svg viewBox="0 0 840 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;font-family:'Komiki Mono',monospace"><rect x="20" y="70" width="62" height="64" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="51.0" y="98" text-anchor="middle" font-size="12" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >CKEY</text><text x="51.0" y="118" text-anchor="middle" font-size="11" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >4 B</text><rect x="82" y="70" width="42" height="64" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="103.0" y="98" text-anchor="middle" font-size="12" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >ver</text><text x="103.0" y="118" text-anchor="middle" font-size="11" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >1</text><rect x="124" y="70" width="42" height="64" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="145.0" y="98" text-anchor="middle" font-size="12" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >KDF</text><text x="145.0" y="118" text-anchor="middle" font-size="11" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >1</text><rect x="166" y="70" width="52" height="64" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="192.0" y="98" text-anchor="middle" font-size="12" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >mem</text><text x="192.0" y="118" text-anchor="middle" font-size="11" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >4</text><rect x="218" y="70" width="52" height="64" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="244.0" y="98" text-anchor="middle" font-size="12" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >iter</text><text x="244.0" y="118" text-anchor="middle" font-size="11" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >4</text><rect x="270" y="70" width="42" height="64" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="291.0" y="98" text-anchor="middle" font-size="12" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >par</text><text x="291.0" y="118" text-anchor="middle" font-size="11" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >1</text><rect x="312" y="70" width="100" height="64" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="362.0" y="98" text-anchor="middle" font-size="12" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >sal</text><text x="362.0" y="118" text-anchor="middle" font-size="11" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >32 B</text><rect x="412" y="70" width="80" height="64" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="452.0" y="98" text-anchor="middle" font-size="12" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >nonce</text><text x="452.0" y="118" text-anchor="middle" font-size="11" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >12 B</text><rect x="492" y="70" width="268" height="64" fill="var(--sec)" opacity=".30"/><rect x="492" y="70" width="268" height="64" fill="none" stroke="var(--ink)" stroke-width="2"/><text x="626.0" y="98" text-anchor="middle" font-size="13" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >texto cifrado</text><text x="626.0" y="116" text-anchor="middle" font-size="12" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >+ tag GCM (16 B)</text><path d="M20 62 V50 H412 V62" fill="none" stroke="var(--ink)" stroke-width="2"/><text x="216.0" y="38" text-anchor="middle" font-size="13" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >cabecera · 47 bytes · en claro pero autenticada (AAD)</text><path d="M412 142 V154 H760 V142" fill="none" stroke="var(--ink)" stroke-width="2"/><text x="586.0" y="176" text-anchor="middle" font-size="13" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >AES-256-GCM · nonce nuevo en cada guardado</text><text x="20" y="214" text-anchor="start" font-size="12" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >Argon2id (64 MiB · 3 iteraciones) convierte clave maestra + sal en la clave de 256 bits.</text><text x="20" y="234" text-anchor="start" font-size="12" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >Si alguien toca un solo byte de la cabecera, el tag GCM deja de validar.</text></svg><figcaption><b>Fig. 5</b> — Estructura del fichero: cabecera autenticada y bloque cifrado con AES-256-GCM.</figcaption></figure>
+<p class="small">La contraseña maestra nunca se almacena. Argon2id la convierte, junto con una sal aleatoria de 32 bytes, en la clave de 256 bits que alimenta AES-GCM. El nonce se renueva en cada guardado.</p>
+
+ <div class="rf"><span>AdriLabTech · 30 de octubre de 2026</span><span>06 / 10</span></div>
+</section>
+<section class="page ">
+ <div class="rh"><span><b>CipherKey</b> · Informe técnico</span><span>Versión 4.0.0</span></div>
+ <div class="sec"><span class="n">06 // Seguridad</span><h2>Decisiones de seguridad y flujo de apertura</h2></div>
+ 
+<p class="lead">La seguridad se apoya en primitivas estándar y en una regla sencilla: si algo no cuadra, no se muestra ningún dato. El tag de autenticación de AES-GCM actúa como última barrera.</p>
+<table>
+ <tr><th style="width:36mm">Aspecto</th><th>Implementación</th></tr>
+ <tr><td><b>Derivación de clave</b></td><td>Argon2id (BouncyCastle): 64 MiB, 3 iteraciones y sal aleatoria de 32 bytes. Los parámetros se validan al abrir para rechazar valores absurdos.</td></tr>
+ <tr><td><b>Cifrado</b></td><td>AES-256-GCM con un nonce aleatorio de 12 bytes nuevo en cada guardado.</td></tr>
+ <tr><td><b>Integridad</b></td><td>La cabecera se autentica como AAD; cualquier modificación invalida la bóveda.</td></tr>
+ <tr><td><b>Memoria</b></td><td>La contraseña maestra no se conserva tras abrir. La clave derivada se pone a cero al bloquear.</td></tr>
+ <tr><td><b>Red</b></td><td>Ninguna. La aplicación no abre conexiones de red.</td></tr>
+</table>
+<figure class="svgwrap " style="width:150mm"><svg viewBox="0 0 840 296" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;font-family:'Komiki Mono',monospace"><circle cx="790" cy="60" r="44" fill="var(--brand)" opacity=".12"/><rect x="20" y="26" width="168" height="92" fill="var(--sec)" opacity=".28"/><rect x="14" y="20" width="168" height="92" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="98" y="48" text-anchor="middle" font-size="14" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >1 · Entrada</text><text x="98" y="76" text-anchor="middle" font-size="11.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >fichero .ckey</text><text x="98" y="94" text-anchor="middle" font-size="11.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >+ clave maestra</text><line x1="186" y1="66" x2="218" y2="66" stroke="var(--ink)" stroke-width="2"/><polyline points="207.9,70.3 218,66 207.9,61.7" fill="none" stroke="var(--ink)" stroke-width="2"/><rect x="228" y="26" width="168" height="92" fill="var(--sec)" opacity=".28"/><rect x="222" y="20" width="168" height="92" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="306" y="48" text-anchor="middle" font-size="14" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >2 · Cabecera</text><text x="306" y="76" text-anchor="middle" font-size="11.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >valida magic y</text><text x="306" y="94" text-anchor="middle" font-size="11.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >parámetros KDF</text><line x1="394" y1="66" x2="426" y2="66" stroke="var(--ink)" stroke-width="2"/><polyline points="415.9,70.3 426,66 415.9,61.7" fill="none" stroke="var(--ink)" stroke-width="2"/><rect x="436" y="26" width="168" height="92" fill="var(--sec)" opacity=".28"/><rect x="430" y="20" width="168" height="92" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="514" y="48" text-anchor="middle" font-size="14" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >3 · Argon2id</text><text x="514" y="76" text-anchor="middle" font-size="11.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >deriva la clave</text><text x="514" y="94" text-anchor="middle" font-size="11.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >de 256 bits</text><line x1="602" y1="66" x2="634" y2="66" stroke="var(--ink)" stroke-width="2"/><polyline points="623.9,70.3 634,66 623.9,61.7" fill="none" stroke="var(--ink)" stroke-width="2"/><rect x="644" y="26" width="168" height="92" fill="var(--sec)" opacity=".28"/><rect x="638" y="20" width="168" height="92" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="722" y="48" text-anchor="middle" font-size="14" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >4 · AES-GCM</text><text x="722" y="76" text-anchor="middle" font-size="11.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >descifra con la</text><text x="722" y="94" text-anchor="middle" font-size="11.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >cabecera como AAD</text><line x1="742" y1="112" x2="742" y2="160" stroke="var(--ink)" stroke-width="2"/><polyline points="737.7,149.9 742,160 746.3,149.9" fill="none" stroke="var(--ink)" stroke-width="2"/><text x="742" y="152" text-anchor="middle" font-size="10" style="font-family:'Komiki Mono',monospace" fill="var(--ink)" ></text><rect x="560" y="164" width="250" height="50" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="685.0" y="186.0" text-anchor="middle" font-size="14" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >Tag válido ✓</text><text x="685.0" y="206.0" text-anchor="middle" font-size="11.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >entradas en memoria</text><rect x="560" y="164" width="6" height="50" fill="var(--ok)"/><rect x="560" y="232" width="250" height="50" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="685.0" y="254.0" text-anchor="middle" font-size="14" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >Tag inválido ✕</text><text x="685.0" y="274.0" text-anchor="middle" font-size="11" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >clave errónea o bóveda alterada</text><rect x="560" y="232" width="6" height="50" fill="var(--err)"/><path d="M742 112 V138 H520 V257 H560" fill="none" stroke="var(--ink)" stroke-width="2"/><polyline points="549,251 560,257 549,263" fill="none" stroke="var(--ink)" stroke-width="2"/><text x="20" y="190" text-anchor="start" font-size="12" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >La contraseña maestra no se conserva</text><text x="20" y="210" text-anchor="start" font-size="12" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >tras abrir: solo queda la clave derivada,</text><text x="20" y="230" text-anchor="start" font-size="12" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >que se pone a cero al bloquear.</text></svg><figcaption><b>Fig. 6</b> — Flujo de apertura: validación de cabecera, derivación con Argon2id y descifrado autenticado.</figcaption></figure>
+<figure class="svgwrap " style="width:140mm"><svg viewBox="0 0 840 256" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;font-family:'Komiki Mono',monospace"><circle cx="60" cy="40" r="40" fill="var(--brand)" opacity=".12"/><rect x="20" y="40" width="470" height="200" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="7 5"/><text x="30" y="30" text-anchor="start" font-size="11" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--muted)" letter-spacing=".08em">TU EQUIPO</text><rect x="56" y="96" width="170" height="90" fill="var(--sec)" opacity=".28"/><rect x="50" y="90" width="170" height="90" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="135.0" y="132.0" text-anchor="middle" font-size="16" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >CipherKey</text><text x="135.0" y="152.0" text-anchor="middle" font-size="12" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >Java + Swing</text><rect x="306" y="96" width="160" height="90" fill="var(--sec)" opacity=".28"/><rect x="300" y="90" width="160" height="90" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="380.0" y="132.0" text-anchor="middle" font-size="15" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >bóveda.ckey</text><text x="380.0" y="152.0" text-anchor="middle" font-size="12" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >cifrada</text><line x1="226" y1="135" x2="294" y2="135" stroke="var(--ink)" stroke-width="2"/><polyline points="283.9,139.3 294,135 283.9,130.7" fill="none" stroke="var(--ink)" stroke-width="2"/><line x1="294" y1="150" x2="226" y2="150" stroke="var(--ink)" stroke-width="2"/><polyline points="236.1,145.7 226,150 236.1,154.3" fill="none" stroke="var(--ink)" stroke-width="2"/><text x="570" y="30" text-anchor="start" font-size="11" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--muted)" letter-spacing=".08em">FUERA</text><rect x="570" y="90" width="230" height="90" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="685.0" y="132.0" text-anchor="middle" font-size="14" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >Red · nube · cuenta</text><text x="685.0" y="152.0" text-anchor="middle" font-size="11.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >sin servidores, sin envío</text><line x1="500" y1="135" x2="560" y2="135" stroke="var(--ink)" stroke-width="2" stroke-dasharray="6 5"/><line x1="514" y1="112" x2="546" y2="158" stroke="var(--err)" stroke-width="4"/><line x1="546" y1="112" x2="514" y2="158" stroke="var(--err)" stroke-width="4"/><text x="420" y="218" text-anchor="end" font-size="12" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >Sin dependencias de red: no hay nada que filtrar.</text></svg><figcaption><b>Fig. 7</b> — Modelo de confianza: todo el proceso ocurre dentro del equipo del usuario.</figcaption></figure>
+<p>Este diseño tiene una consecuencia deliberada: quien obtenga el fichero puede intentar adivinar la clave sin límite de intentos. La defensa real es Argon2id y una clave maestra larga; el límite de intentos de la pantalla de acceso es una medida de usabilidad, no de seguridad.</p>
+
+ <div class="rf"><span>AdriLabTech · 30 de octubre de 2026</span><span>07 / 10</span></div>
+</section>
+<section class="page ">
+ <div class="rh"><span><b>CipherKey</b> · Informe técnico</span><span>Versión 4.0.0</span></div>
+ <div class="sec"><span class="n">07 // Valor diferencial</span><h2>Por qué usar CipherKey</h2></div>
+ 
+<ul>
+ <li><b>Control total.</b> Un fichero que el usuario guarda, copia o cifra donde quiera. Sin cuenta, sin suscripción y sin servidor al que confiar nada.</li>
+ <li><b>Seguridad por diseño, no por promesa.</b> Argon2id y AES-GCM, formato documentado y código abierto (MIT) que cualquiera puede revisar.</li>
+ <li><b>Adopción sin fricción.</b> Importa contraseñas desde Bitwarden, Chrome/Edge/Firefox o KeePass, y permite exportarlas cuando quiera: no ata al usuario.</li>
+ <li><b>Instalación sencilla.</b> Los paquetes incluyen su propio Java; no es necesario instalar nada más.</li>
+ <li><b>Más que un almacén.</b> Genera, mide, audita y muestra el código 2FA junto a cada contraseña.</li>
+</ul>
+<table>
+ <tr><th style="width:32mm"></th><th>CipherKey</th><th>Gestor en la nube</th><th>Navegador</th></tr>
+ <tr><td><b>Dónde están los datos</b></td><td>Equipo del usuario</td><td>Servidor del proveedor (cifrados)</td><td>Perfil del navegador</td></tr>
+ <tr><td><b>Cuenta necesaria</b></td><td>No</td><td>Sí</td><td>Normalmente sí</td></tr>
+ <tr><td><b>Sincroniza dispositivos</b></td><td>No (copia manual)</td><td>Sí</td><td>Sí</td></tr>
+ <tr><td><b>Autorrelleno</b></td><td>No</td><td>Sí</td><td>Sí</td></tr>
+ <tr><td><b>Código abierto</b></td><td>Sí (MIT)</td><td>Depende</td><td>Depende</td></tr>
+</table>
+<div class="note warn"><b>Cuándo no es la mejor opción</b><p>Si se necesita sincronización automática entre varios dispositivos o autorrelleno en el navegador, un gestor en la nube cubre mejor ese caso. CipherKey apuesta por lo contrario: máxima autonomía y mínima superficie de ataque.</p></div>
+<p>La comparación no pretende declarar un ganador universal. CipherKey es la elección coherente cuando la prioridad es que los datos no salgan del equipo y cuando el usuario acepta gestionar copias y actualizaciones por su cuenta.</p>
+<div class="summary2">
+ <div><span class="label">La propuesta</span><p>Seguridad fuerte, control del fichero y herramientas útiles sin crear una dependencia nueva. Un producto que se puede auditar, copiar y abandonar sin perder los datos.</p></div>
+ <div><span class="label">La renuncia</span><p>Comodidad de la nube: sincronización automática y autorrelleno. CipherKey cambia esas funciones por autonomía y una superficie de ataque menor.</p></div>
+</div>
+
+ <div class="rf"><span>AdriLabTech · 30 de octubre de 2026</span><span>08 / 10</span></div>
+</section>
+<section class="page ">
+ <div class="rh"><span><b>CipherKey</b> · Informe técnico</span><span>Versión 4.0.0</span></div>
+ <div class="sec"><span class="n">08 // Disponibilidad</span><h2>Una aplicación real, publicada y descargable</h2></div>
+ 
+<p class="lead">CipherKey no es una maqueta. El código está en un repositorio público de GitHub y la versión 4.0.0 se publicó como release con instaladores para tres sistemas operativos. Las capturas se tomaron sin iniciar sesión, lo que confirma que la página es pública.</p>
+<figure class="shot-box" style="margin-top:2mm;margin-bottom:3mm">
+ <img class="shot" src="img/gh-release-crop.png" alt="Release 4.0.0 en GitHub" style="width:100%;display:block">
+ <figcaption style="padding:0 1mm"><b>Fig. 8</b> — Release 4.0.0: nueve recursos descargables, hashes SHA-256 y código fuente.</figcaption>
+</figure>
+<table>
+ <tr><th>Sistema</th><th>Archivo</th><th style="width:24mm">Tamaño</th></tr>
+ <tr><td>Debian / Ubuntu</td><td><code>cipherkey_4.0.0_amd64.deb</code></td><td>30,1 MB</td></tr>
+ <tr><td>Cualquier Linux</td><td><code>CipherKey-4.0.0-linux-x64.tar.gz</code></td><td>38,1 MB</td></tr>
+ <tr><td>Windows</td><td><code>CipherKey-4.0.0.msi</code> · <code>…-windows-x64.zip</code> (portable)</td><td style="white-space:nowrap">34,6 / 33,2 MB</td></tr>
+ <tr><td>macOS (Apple Silicon)</td><td><code>CipherKey-4.0.0.dmg</code></td><td>36,7 MB</td></tr>
+ <tr><td>Cualquiera con Java 25</td><td><code>cipherkey-4.0.0.jar</code></td><td>8,84 MB</td></tr>
+</table>
+<p>Descarga: <a href="https://github.com/AdriLabTech/CipherKeyV2/releases/latest">github.com/AdriLabTech/CipherKeyV2/releases/latest</a>. Cada release incluye <code>SHA256SUMS.txt</code> para verificar la descarga con <code>sha256sum -c</code>. Los instaladores no están firmados: Windows mostrará SmartScreen y macOS pedirá abrir la aplicación con clic derecho la primera vez.</p>
+
+ <div class="rf"><span>AdriLabTech · 30 de octubre de 2026</span><span>09 / 10</span></div>
+</section>
+<section class="page ">
+ <div class="rh"><span><b>CipherKey</b> · Informe técnico</span><span>Versión 4.0.0</span></div>
+ <div class="sec"><span class="n">09 // Calidad y límites</span><h2>Verificación, historial y hoja de ruta</h2></div>
+ 
+<ul>
+ <li><b>Pruebas:</b> 52 pruebas unitarias (JUnit) sobre el formato y la criptografía de la bóveda, el generador, TOTP, auditoría y CSV. Cubren contraseña incorrecta, manipulación de cabecera y datos, cambio de clave, guardado atómico y parámetros KDF inválidos.</li>
+ <li><b>Integración continua:</b> GitHub Actions ejecuta <code>mvn verify</code> con JDK 25 en cada push y pull request.</li>
+ <li><b>Historial:</b> beta → 1.0 (clave maestra y generador) → 2.0 (gestión de bóvedas y modo oscuro) → 3.0 (2FA por email, retirado) → <b>4.0</b> (formato v2, rediseño, TOTP, auditoría y paquetes nativos).</li>
+</ul>
+<figure class="svgwrap " style="width:132mm"><svg viewBox="0 0 840 284" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;font-family:'Komiki Mono',monospace"><circle cx="790" cy="40" r="40" fill="var(--brand)" opacity=".12"/><rect x="20" y="76" width="150" height="70" fill="var(--sec)" opacity=".28"/><rect x="14" y="70" width="150" height="70" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="89.0" y="102.0" text-anchor="middle" font-size="15" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >git tag</text><text x="89.0" y="122.0" text-anchor="middle" font-size="12" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >v4.x.y</text><line x1="168" y1="105" x2="206" y2="105" stroke="var(--ink)" stroke-width="2"/><polyline points="195.9,109.3 206,105 195.9,100.7" fill="none" stroke="var(--ink)" stroke-width="2"/><rect x="216" y="76" width="170" height="70" fill="var(--sec)" opacity=".28"/><rect x="210" y="70" width="170" height="70" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="295.0" y="102.0" text-anchor="middle" font-size="14" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >GitHub Actions</text><text x="295.0" y="122.0" text-anchor="middle" font-size="12" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >release.yml</text><line x1="384" y1="105" x2="430" y2="46" stroke="var(--ink)" stroke-width="2"/><polyline points="427.1,56.6 430,46 420.4,51.4" fill="none" stroke="var(--ink)" stroke-width="2"/><rect x="434" y="20" width="120" height="52" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="494.0" y="43.0" text-anchor="middle" font-size="13" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >Linux</text><text x="494.0" y="63.0" text-anchor="middle" font-size="10.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >jpackage + JRE</text><line x1="558" y1="46" x2="600" y2="105" stroke="var(--ink)" stroke-width="2"/><polyline points="590.6,99.2 600,105 597.6,94.3" fill="none" stroke="var(--ink)" stroke-width="2"/><line x1="384" y1="105" x2="430" y2="118" stroke="var(--ink)" stroke-width="2"/><polyline points="419.1,119.4 430,118 421.4,111.1" fill="none" stroke="var(--ink)" stroke-width="2"/><rect x="434" y="92" width="120" height="52" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="494.0" y="115.0" text-anchor="middle" font-size="13" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >Windows</text><text x="494.0" y="135.0" text-anchor="middle" font-size="10.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >jpackage + JRE</text><line x1="558" y1="118" x2="600" y2="105" stroke="var(--ink)" stroke-width="2"/><polyline points="591.6,112.1 600,105 589.1,103.9" fill="none" stroke="var(--ink)" stroke-width="2"/><line x1="384" y1="105" x2="430" y2="190" stroke="var(--ink)" stroke-width="2"/><polyline points="421.4,183.1 430,190 428.9,179.1" fill="none" stroke="var(--ink)" stroke-width="2"/><rect x="434" y="164" width="120" height="52" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="494.0" y="187.0" text-anchor="middle" font-size="13" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >macOS</text><text x="494.0" y="207.0" text-anchor="middle" font-size="10.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >jpackage + JRE</text><line x1="558" y1="190" x2="600" y2="105" stroke="var(--ink)" stroke-width="2"/><polyline points="599.4,116.0 600,105 591.7,112.2" fill="none" stroke="var(--ink)" stroke-width="2"/><rect x="610" y="46" width="222" height="130" fill="var(--sec)" opacity=".28"/><rect x="604" y="40" width="222" height="130" fill="var(--raised)" stroke="var(--ink)" stroke-width="2"/><text x="715" y="78" text-anchor="middle" font-size="15" style="font-weight:700;font-family:'Komiki Mono',monospace" fill="var(--ink)" >GitHub Release</text><text x="715" y="106" text-anchor="middle" font-size="11.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >deb · tar.gz · msi</text><text x="715" y="126" text-anchor="middle" font-size="11.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >zip · dmg · jar</text><text x="715" y="146" text-anchor="middle" font-size="11.5" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >SHA256SUMS</text><text x="14" y="252" text-anchor="start" font-size="12" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >La etiqueta debe coincidir con la versión del pom.xml o el workflow falla.</text><text x="14" y="272" text-anchor="start" font-size="12" style="font-family:'Komiki Mono',monospace" fill="var(--dim)" >Cada paquete lleva su propio Java: no hay que instalar nada más.</text></svg><figcaption><b>Fig. 9</b> — Publicación automática: una etiqueta de versión genera los paquetes de los tres sistemas.</figcaption></figure>
+<h3>Limitaciones honestas</h3>
+<ul>
+ <li><b>Sin recuperación:</b> si se olvida la clave maestra, los datos no se pueden recuperar. Es la consecuencia directa de que nadie más tenga la clave.</li>
+ <li><b>Ataque offline:</b> quien consiga el <code>.ckey</code> puede intentar adivinar la clave sin límite de intentos. La defensa real es Argon2id y una clave maestra larga.</li>
+ <li><b>Instaladores sin firmar:</b> Windows mostrará SmartScreen y macOS pedirá confirmación la primera vez.</li>
+ <li><b>Sin auditoría externa:</b> no consta una revisión de seguridad independiente. El cifrado se apoya en primitivas estándar (JCA y BouncyCastle), pero el conjunto no ha sido auditado por terceros.</li>
+ <li><b>Paquetes nativos no probados aquí:</b> este informe se basa en el código, las pruebas y las capturas del repositorio, no en una instalación en cada sistema.</li>
+</ul>
+<h3>Hoja de ruta</h3>
+<p>Protección adicional de la bóveda mediante archivo de clave o FIDO2/WebAuthn, escaneo del QR de 2FA desde una imagen, bloqueo al suspender el equipo y limpieza del portapapeles al bloquear.</p>
+<p class="small" style="margin-top:5mm">Fuentes: README, código fuente, informes de pruebas y página de la release del repositorio github.com/AdriLabTech/CipherKeyV2 (versión 4.0.0, commit 6e7b71a).</p>
+
+ <div class="rf"><span>AdriLabTech · 30 de octubre de 2026</span><span>10 / 10</span></div>
+</section><script>
+(function(){
+ function run(){
+  var out=[];
+  document.querySelectorAll('.page,.slide').forEach(function(el,i){
+   var r=el.getBoundingClientRect(), mb=0, mr=0;
+   el.querySelectorAll('*').forEach(function(c){
+    if(c.closest('.sfoot,.s-rail,.rf,.rh')) return;
+    var b=c.getBoundingClientRect();
+    if(b.width>0&&b.height>0){mb=Math.max(mb,b.bottom-r.top);mr=Math.max(mr,b.right-r.left);}
+   });
+   el.setAttribute('data-geom', Math.round(mb)+'x'+Math.round(mr)+' of '+Math.round(r.height)+'x'+Math.round(r.width));
+   out.push((i+1)+': '+Math.round(mb)+'/'+Math.round(r.height)+'  '+Math.round(mr)+'/'+Math.round(r.width));
+  });
+  var m=document.createElement('pre'); m.id='metrics'; m.style.display='none';
+  m.textContent=out.join('\n'); document.body.appendChild(m);
+ }
+ if(document.fonts&&document.fonts.ready){document.fonts.ready.then(run);}else{window.addEventListener('load',run);}
+})();
+</script></body></html>

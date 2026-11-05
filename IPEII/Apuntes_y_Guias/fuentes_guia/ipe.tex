@@ -1,0 +1,484 @@
+\input{pre.tex}
+\newcommand{\docid}{IPE-UT5}
+\usetikzlibrary{arrows.meta,positioning,calc,fit,shapes.geometric}
+\tikzset{
+  nb/.style={draw=inkmuted,line width=0.4pt,rounded corners=2pt,fill=tinthi,text=ink,font=\sffamily\footnotesize,align=center,minimum height=0.9cm,inner sep=4pt},
+  nf/.style={nb,fill=ink,draw=ink,text=paper,font=\sffamily\footnotesize\bfseries},
+  nl/.style={nb,fill=tint,draw=inkline,font=\sffamily\scriptsize,minimum height=0.6cm},
+  fl/.style={-{Stealth[length=2.2mm]},draw=inkmuted,line width=0.5pt},
+  lk/.style={draw=inkmuted,line width=0.4pt},
+}
+\newcommand{\ojo}[1]{\begin{tcolorbox}[enhanced,coltext=ink,colback=tint,colframe=inkmuted,boxrule=0.4pt,arc=2pt,left=8pt,right=8pt,top=6pt,bottom=6pt,boxsep=0pt,before skip=6pt,after skip=8pt]{\eyebrow{Ojo, trampa de examen}}\par\vspace{3pt}#1\end{tcolorbox}}
+\newcommand{\clave}[1]{\begin{tcolorbox}[enhanced,coltext=ink,colback=tinthi,colframe=ink,boxrule=0.4pt,arc=2pt,left=8pt,right=8pt,top=6pt,bottom=6pt,boxsep=0pt,before skip=6pt,after skip=8pt]{\eyebrow{Para memorizar}}\par\vspace{3pt}#1\end{tcolorbox}}
+\newcommand{\defn}[1]{\begin{tcolorbox}[enhanced,coltext=ink,colback=tint,colframe=inkline,boxrule=0.4pt,arc=2pt,left=8pt,right=8pt,top=5pt,bottom=5pt,boxsep=0pt,before skip=4pt,after skip=6pt]{\eyebrow{Definición}}\par\vspace{2pt}#1\end{tcolorbox}}
+\newcommand{\num}[2]{\begin{minipage}[t]{0.235\textwidth}{\serif\fontsize{26}{28}\selectfont\color{ink}#1}\\[1pt]{\mono\scriptsize\color{inkmuted}\MakeUppercase{#2}}\end{minipage}}
+\titleformat{\subsection}[hang]{\serif\fontsize{20}{22}\selectfont\color{ink}}{\mono\small\color{inkmuted}\thesubsection\ //\ }{0pt}{}
+\titlespacing*{\subsection}{0pt}{14pt}{6pt}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newenvironment{tabla}{\rowcolors{2}{tint}{paper}\begin{center}\small\renewcommand{\arraystretch}{1.3}}{\end{center}\rowcolors{1}{paper}{paper}}
+
+\begin{document}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[ink,opacity=0.16] ([xshift=-3.2cm,yshift=-7.2cm]current page.north east) circle (4.6cm);
+  \draw[inkline,line width=0.4pt] ([xshift=2.3cm,yshift=-1.6cm]current page.north west) -- ([xshift=-2.3cm,yshift=-1.6cm]current page.north east);
+  \node[anchor=north west,inner sep=0] at ([xshift=2.3cm,yshift=-1.0cm]current page.north west) {\eyebrow{00 // Itinerario personal para la empleabilidad II}};
+  \node[anchor=north east,inner sep=0] at ([xshift=-2.3cm,yshift=-1.0cm]current page.north east) {\eyebrow{DAM \textperiodcentered\ 2026/2027}};
+  \node[anchor=south west,inner sep=0,text width=14cm] at ([xshift=2.3cm,yshift=7.5cm]current page.south west)
+    {{\serif\fontsize{54}{56}\selectfont\color{ink} IPE\\ Unidad\hspace{0.3em}5\\ Guía\hspace{0.3em}de\hspace{0.3em}examen\par}};
+  \node[anchor=south west,inner sep=0,text width=14cm] at ([xshift=2.3cm,yshift=5.2cm]current page.south west)
+    {{\mono\color{inkdim}Estrategias para la inserción laboral \textperiodcentered\ 6 apartados \textperiodcentered\ 23 oct 2026\par}};
+  \draw[inkline,line width=0.4pt] ([xshift=2.3cm,yshift=3.2cm]current page.south west) -- ([xshift=-2.3cm,yshift=3.2cm]current page.south east);
+  \node[anchor=north west,inner sep=0,text width=14cm] at ([xshift=2.3cm,yshift=3.0cm]current page.south west)
+    {\eyebrow{Fuente: libro digital IPE II, UT5 (extraído el 22 oct) \textperiodcentered\ más las fichas de carta y entrevista de clase}};
+\end{tikzpicture}
+\newpage
+\setcounter{tocdepth}{1}
+\renewcommand{\contentsname}{\mono\small\color{inkmuted}\MakeUppercase{Índice}}
+\tableofcontents
+\vspace{10pt}
+{\mono\footnotesize\color{inkmuted}CÓMO USARLO\par}
+Lee las secciones 01 a 06 una vez (cada una cierra con un recuadro «Para memorizar»), repasa la 07 (las confusiones donde se falla de verdad) y termina con la 08, que son preguntas con respuesta. Los números exactos (porcentajes, cantidades) están todos juntos al principio.
+\newpage
+
+\section{El mapa de la unidad}
+La unidad cuenta \textbf{cómo conseguir un empleo}: qué hay que tener antes, qué tres fases se siguen y qué hay que cuidar siempre (la marca personal y el seguimiento).
+
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node[nl,minimum width=4.6cm] (a) at (-5.2,5.2) {conocer el \textbf{mercado} de trabajo\\y el sector};
+  \node[nl,minimum width=4.6cm] (b) at (0,5.2) {conocer tus \textbf{competencias}\\(fortalezas y debilidades)};
+  \node[nl,minimum width=4.6cm] (c) at (5.2,5.2) {definir \textbf{objetivos}\\profesionales (SMART)};
+  \node[font=\mono\scriptsize,text=inkmuted] at (0,6.0) {ANTES DE EMPEZAR};
+  \node[nb,minimum width=4.6cm,minimum height=1.5cm] (f1) at (-5.2,2.7) {\textbf{FASE 1}\\preparar CV\\y carta de presentación\\{\scriptsize 5.2}};
+  \node[nb,minimum width=4.6cm,minimum height=1.5cm] (f2) at (0,2.7) {\textbf{FASE 2}\\hacerlos llegar:\\técnicas de búsqueda\\{\scriptsize 5.3 \textperiodcentered\ 5.5}};
+  \node[nb,minimum width=4.6cm,minimum height=1.5cm] (f3) at (5.2,2.7) {\textbf{FASE 3}\\participar en el\\proceso de selección\\{\scriptsize 5.4}};
+  \draw[fl] (f1) -- (f2); \draw[fl] (f2) -- (f3);
+  \draw[fl] (b.south) -- (f2.north);
+  \node[nf,minimum width=15.4cm,minimum height=0.8cm] (m) at (0,0.5) {\textbf{MARCA PERSONAL} (5.6) y \textbf{SEGUIMIENTO} (5.3.3 y 5.4.3): transversales, acompañan todo el proceso};
+  \draw[lk,dashed] (f1.south) -- (f1.south |- m.north); \draw[lk,dashed] (f2.south) -- (f2.south |- m.north); \draw[lk,dashed] (f3.south) -- (f3.south |- m.north);
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Los seis apartados en una línea}
+\begin{tabla}
+\begin{tabularx}{\textwidth}{@{}l Y@{}}
+\rowcolor{paper}\cab{APARTADO} & \cab{IDEA CENTRAL} \\
+\arrayrulecolor{inkmuted}\midrule
+\textbf{5.1} Búsqueda de empleo & Requisitos previos y las 3 fases. \\
+\textbf{5.2} CV y carta & Documentos que te presentan; adaptados a cada oferta. \\
+\textbf{5.3} Técnicas de búsqueda & Activas (tú buscas) y pasivas (esperas); herramientas digitales; seguimiento. \\
+\textbf{5.4} Proceso de selección & Criba, entrevistas, pruebas; preparar y hacer bien la entrevista. \\
+\textbf{5.5} Sector público & Convocatorias, bases reguladoras, oposición y concurso. \\
+\textbf{5.6} Marca personal & Imagen profesional: estrategia en 4 pasos y redes sociales. \\
+\arrayrulecolor{inkmuted}\bottomrule
+\end{tabularx}
+\end{tabla}
+
+\subsection*{Los números que hay que saber}
+\begin{center}
+\num{6 s}{lectura de un CV}\hfill\num{1 pág.}{CV ideal (máx. 2)}\hfill\num{85\%}{empleadores: el \emph{networking} es lo más eficaz}\hfill\num{900 M}{usuarios de LinkedIn}\\[10pt]
+\num{70\%}{ofertas no visibles en internet}\hfill\num{33\%}{más opciones con seguimiento (MIT)}\hfill\num{90\%}{empleadores revisan tus redes}\hfill\num{31}{idiomas del CV Europass}
+\end{center}
+\ojo{Los porcentajes son de lo primero que se olvida. Truco: \textbf{85} = \emph{networking} (LinkedIn), \textbf{70} = ofertas ocultas, \textbf{33} = seguimiento (MIT Sloan), \textbf{90} = redes sociales. Y el CV se mira \textbf{seis} segundos, no cinco.}
+
+\needspace{16\baselineskip}\clearpage\section{Currículum y carta de presentación (5.2)}
+\subsection{El currículum}
+\defn{El \textbf{currículum} o \emph{curriculum vitae} (CV, «carrera de la vida») es un documento que resume de forma estructurada la formación, la experiencia laboral y todo lo relacionado con la empleabilidad de la persona.}
+\textbf{Contenido mínimo}: todos los modelos deben tener estos cuatro bloques.
+\begin{center}
+\begin{tikzpicture}
+  \node[nb,minimum width=3.6cm,minimum height=1.9cm,text width=3.3cm] (a) at (0,0) {\textbf{1 Datos básicos}\\nombre y apellidos, contacto, población};
+  \node[nb,minimum width=3.6cm,minimum height=1.9cm,text width=3.3cm] (b) at (4.0,0) {\textbf{2 Formación}\\reglada, especializada, complementaria (idiomas con nivel, informática)};
+  \node[nb,minimum width=3.6cm,minimum height=1.9cm,text width=3.3cm] (c) at (8.0,0) {\textbf{3 Datos profesionales}\\trabajos, cargos, funciones, competencias; prácticas y voluntariado};
+  \node[nb,minimum width=3.6cm,minimum height=1.9cm,text width=3.3cm] (d) at (12.0,0) {\textbf{4 Otros datos}\\carné, disponibilidad (horaria, viajar, incorporación), aficiones};
+\end{tikzpicture}
+\end{center}
+\clave{Formación y experiencia van de \textbf{más reciente a más antigua}, con fechas de inicio y fin \textbf{siempre}. Ideal: \textbf{una página}, nunca más de dos. Se tarda unos \textbf{6 segundos} en revisarlo.}
+
+\subsection*{Modelos de CV}
+\begin{tabla}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}l Y@{}}
+\rowcolor{paper}\cab{MODELO} & \cab{CARACTERÍSTICA} \\
+\arrayrulecolor{inkmuted}\midrule
+Europeo (Europass) & El más \textbf{estandarizado}. Tradicional, ordena experiencia y cualificaciones por áreas; añade competencias personales y sociales. \\
+Videocurrículum & Formato visual y creativo, en vídeo. \\
+Infográfico & Formato visual y creativo, con gráficos. \\
+Por competencias & Resalta el \textbf{perfil y las competencias} (habilidades, aptitudes, actitudes) \emph{por encima} de la trayectoria laboral. \\
+\arrayrulecolor{inkmuted}\bottomrule
+\end{tabularx}
+\end{tabla}
+\ojo{Por competencias $\neq$ europeo. El europeo es el cronológico y estándar; el \textbf{por competencias} es el que prioriza el perfil sobre la trayectoria.}
+
+\subsection*{Cinco pautas para un buen CV}
+\begin{enumerate}[leftmargin=1.6em,itemsep=2pt,label={\mono\small\color{inkmuted}\arabic*.}]
+\item \textbf{Adaptado a cada oferta}: destaca primero lo relevante para ese puesto.
+\item \textbf{Diseño limpio y profesional}: apartados bien diferenciados, sin exceso de colores ni tipografías recargadas.
+\item \textbf{Información clave}: datos personales, perfil profesional (resumen), formación, experiencia (responsabilidades y logros), competencias técnicas y habilidades blandas.
+\item \textbf{Claro y conciso}: párrafos breves, orden cronológico, sin errores ortográficos.
+\item \textbf{Destaca logros}: ejemplos concretos del impacto de tu trabajo, no solo tareas.
+\end{enumerate}
+Debe estar \textbf{siempre actualizado}, en contenido y en aspecto gráfico. Antes se preferían CV extensos; hoy se valora la claridad y la brevedad.
+
+\subsection{La carta de presentación}
+\defn{Documento \textbf{complementario al CV} cuya función es presentar la candidatura que acompaña y despertar la curiosidad por leerla.}
+\textbf{Cinco elementos}, en este orden:
+\begin{center}
+\begin{tikzpicture}
+  \node[nb,minimum width=2.9cm,minimum height=1.5cm,text width=2.6cm] (a) at (0,0) {\textbf{1 Inicio}\\saludo cordial, formal, a quien lleva el proceso};
+  \node[nb,minimum width=2.9cm,minimum height=1.5cm,text width=2.6cm] (b) at (3.3,0) {\textbf{2 Motivación e interés}\\por la empresa y el puesto};
+  \node[nb,minimum width=2.9cm,minimum height=1.5cm,text width=2.6cm] (c) at (6.6,0) {\textbf{3 Ajuste al puesto}\\habilidades, experiencia, formación};
+  \node[nb,minimum width=2.9cm,minimum height=1.5cm,text width=2.6cm] (d) at (9.9,0) {\textbf{4 Valor agregado}\\cómo contribuyes al éxito de la empresa};
+  \node[nb,minimum width=2.9cm,minimum height=1.5cm,text width=2.6cm] (e) at (13.2,0) {\textbf{5 Cierre}\\disposición a entrevista y agradecimiento};
+  \foreach \x/\y in {a/b,b/c,c/d,d/e} \draw[fl] (\x) -- (\y);
+\end{tikzpicture}
+\end{center}
+\textbf{Formalmente}: lenguaje directo y claro, sin adornos; \textbf{personalizada} para cada oferta (nunca una carta estándar); revisar ortografía, gramática y puntuación.
+
+\textbf{Estructura vista en clase}: encabezado (nombre, correo, teléfono; empresa y fecha si se puede) $\rightarrow$ saludo («Estimada responsable de selección:» o «Departamento de Recursos Humanos:») $\rightarrow$ presentación y motivo (indicar si es una \textbf{oferta concreta o una autocandidatura}) $\rightarrow$ perfil profesional (no copiar el CV, explicar \emph{por qué aportan valor}) $\rightarrow$ interés por la empresa (investigación previa) $\rightarrow$ cierre y despedida formal («Atentamente,» y nombre). Extensión: \textbf{una página}.
+
+\begin{tabla}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}l Y Y@{}}
+\rowcolor{paper}\cab{} & \cab{CV} & \cab{CARTA} \\
+\arrayrulecolor{inkmuted}\midrule
+Función & Resume formación, experiencia y datos de empleabilidad. & Presenta la candidatura y explica interés y adecuación. \\
+Forma & Estructurado, sintético. & Texto personalizado y motivado. \\
+Error típico & Genérico, largo, desactualizado. & Misma carta para todos; repetir el CV. \\
+\arrayrulecolor{inkmuted}\bottomrule
+\end{tabularx}
+\end{tabla}
+\textbf{Consejos para ambos}: pide que \textbf{alguien de confianza los revise}; \textbf{tiempos de entrega} con antelación (un envío tardío da mala impresión); \textbf{formato digital} compatible (PDF o Word) y bien organizado. \textbf{Errores frecuentes de la carta}: la misma para todas las candidaturas, repetir el CV, información irrelevante, faltas, lenguaje genérico, demasiado larga.
+\clave{Carta = \textbf{5} partes. CV = \textbf{4} bloques. CV: reciente $\rightarrow$ antiguo, 1 página, 6 segundos. Los dos: personalizados por oferta y revisados.}
+
+\needspace{16\baselineskip}\section{Técnicas de búsqueda de empleo (5.3)}
+\defn{Las \textbf{técnicas de búsqueda de empleo} son un conjunto de estrategias y acciones para identificar oportunidades laborales y postularse de manera efectiva.}
+\subsection{Activas y pasivas}
+\begin{center}
+\begin{tikzpicture}
+  \node[nf,minimum width=5.6cm] (r) at (0,0) {Técnicas de búsqueda de empleo};
+  \node[nb,minimum width=6.4cm,text width=6.1cm] (ac) at (-4.1,-1.7) {\textbf{ACTIVAS}\\iniciativa propia, contacto directo con la empresa};
+  \node[nb,minimum width=6.4cm,text width=6.1cm] (pa) at (4.1,-1.7) {\textbf{PASIVAS}\\no hay interacción directa: se espera recibir ofertas};
+  \draw[lk] (r.south) -- ++(0,-0.4) -| (ac.north); \draw[lk] (r.south) -- ++(0,-0.4) -| (pa.north);
+  \node[nl,minimum width=2.0cm,text width=1.8cm] (a1) at (-6.3,-3.5) {\textbf{Networking}\\red de contactos};
+  \node[nl,minimum width=2.0cm,text width=1.8cm] (a2) at (-4.1,-3.5) {\textbf{Portales de empleo}};
+  \node[nl,minimum width=2.0cm,text width=1.8cm] (a3) at (-1.9,-3.5) {\textbf{Autocandi- daturas}};
+  \node[nl,minimum width=2.0cm,text width=1.8cm] (p1) at (2.3,-3.5) {\textbf{Servicios públicos de empleo}};
+  \node[nl,minimum width=2.0cm,text width=1.8cm] (p2) at (4.5,-3.5) {\textbf{Bolsas de empleo}};
+  \node[nl,minimum width=2.0cm,text width=1.8cm] (p3) at (6.7,-3.5) {\textbf{CV en portales y bases de datos}};
+  \foreach \n in {a1,a2,a3} \draw[lk] (ac.south) -- (\n.north);
+  \foreach \n in {p1,p2,p3} \draw[lk] (pa.south) -- (\n.north);
+\end{tikzpicture}
+\end{center}
+\begin{tabla}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}l Y@{}}
+\rowcolor{paper}\cab{TÉCNICA ACTIVA} & \cab{EN QUÉ CONSISTE} \\
+\arrayrulecolor{inkmuted}\midrule
+\emph{Networking} & Crear una red de contactos profesionales (eventos, ferias, conferencias, plataformas digitales; también familia, amistades y colegas de estudios). \\
+Portales de empleo & Webs de intermediación entre ofertas y demandas: suben CV, filtran, crean alertas. InfoJobs, Indeed, LinkedIn. \\
+Autocandidaturas & Presentar tu candidatura a una empresa que \textbf{no ha cursado ninguna demanda}: CV por correo o \textbf{en mano}. \\
+\arrayrulecolor{inkmuted}\bottomrule
+\end{tabularx}
+\end{tabla}
+\textbf{Pasivas}: inscribirte en los servicios públicos de empleo o bolsas, dejar el CV en portales especializados, mantenerte en bases de datos con vacantes. Son más accesibles, pero dependen de que te lleguen ofertas.
+\ojo{85\% de empleadores: el \emph{networking} es la forma más eficaz de encontrar talento (estudio de LinkedIn). Y el 70\% de las ofertas no se publica de forma visible.}
+
+\subsection*{Documento 5.1 · Servicios públicos de empleo}
+El \textbf{SEPE} (Servicio Público de Empleo Estatal) gestiona las políticas de empleo y la protección frente al desempleo. La mayoría de servicios están \textbf{transferidos a las comunidades autónomas}, que tienen los suyos. Hacen de \textbf{intermediación} entre ofertas (personas desempleadas que buscan trabajo) y demandas de trabajo (empresas con vacantes).
+
+\subsection*{Documento 5.2 · Trabajar en Europa}
+\begin{center}
+\begin{tikzpicture}
+  \node[nb,minimum width=3.4cm,text width=3.1cm] (a) at (0,0) {Crear perfil\\\textbf{Europass}\\(formación, experiencia, capacidades)};
+  \node[nb,minimum width=3.4cm,text width=3.1cm] (b) at (4.3,0) {Obtener el \textbf{CV Europass}\\31 idiomas, biblioteca Europass};
+  \node[nb,minimum width=3.4cm,text width=3.1cm] (c) at (8.6,0) {Publicarlo en \textbf{EURES}\\portal oficial de empleo en Europa};
+  \node[nb,minimum width=3.4cm,text width=3.1cm] (d) at (12.9,0) {Ofertas en EURES por país, sector o profesión};
+  \foreach \x/\y in {a/b,b/c,c/d} \draw[fl] (\x) -- (\y);
+\end{tikzpicture}
+\end{center}
+\emph{Freelance} desde cualquier sitio: Upwork, Freelancer, Toptal.
+
+\subsection{Herramientas digitales}
+\begin{tabla}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{3.1cm} Y@{}}
+\rowcolor{paper}\cab{CATEGORÍA} & \cab{EJEMPLOS Y NOTAS} \\
+\arrayrulecolor{inkmuted}\midrule
+Plataformas de empleo & Las empresas publican ofertas y se postula fácil: InfoJobs, Indeed, Monster, Glassdoor, JobToday. \\
+Redes sociales profesionales & Ampliar contactos y visibilidad: \textbf{LinkedIn} (la principal; más de 900 millones de usuarios); también X, Instagram, Facebook. \\
+Correo electrónico & El medio más usado para mandar CV y carta; influye en la primera impresión (ver abajo). \\
+Aplicaciones de gestión & Organizar candidaturas: \textbf{Trello, Asana}. Documentos en la nube: Google Drive, Dropbox. \\
+\arrayrulecolor{inkmuted}\bottomrule
+\end{tabularx}
+\end{tabla}
+\textbf{Documento 5.3 · Correo profesional}: (1) \textbf{redacción efectiva}: claro, breve y profesional, con saludo formal, propósito y cierre cordial, y adjuntos organizados; (2) \textbf{seguimiento}: si no hay respuesta, un correo de seguimiento muestra interés; (3) \textbf{dirección sensata}: relacionada con tu nombre y apellidos (no \texttt{pepito1234@gmail.com}).
+
+\subsection{Estrategias de seguimiento}
+\begin{center}
+\begin{tikzpicture}
+  \node[nb,minimum width=4.8cm,text width=4.5cm,minimum height=1.6cm] (a) at (0,0) {\textbf{Agenda de contactos}\\empresas y personas, fechas, actuaciones, documentación enviada};
+  \node[nb,minimum width=4.8cm,text width=4.5cm,minimum height=1.6cm] (b) at (5.4,0) {\textbf{Correo de seguimiento}\\cortés, para preguntar por el estado de la candidatura};
+  \node[nb,minimum width=4.8cm,text width=4.5cm,minimum height=1.6cm] (c) at (10.8,0) {\textbf{Agradecimiento}\\por el interés mostrado, p. ej. tras la entrevista};
+\end{tikzpicture}
+\end{center}
+\ojo{Trello es una herramienta de \emph{gestión}; las \textbf{tres} acciones de seguimiento son agenda, correo de seguimiento y agradecimiento. Seguir la candidatura sube un \textbf{33\%} las opciones de ser considerado para entrevista (MIT Sloan Management Review).}
+
+\needspace{16\baselineskip}\section{El proceso de selección y la entrevista (5.4)}
+\subsection{Cómo avanza un proceso}
+\begin{center}
+\begin{tikzpicture}
+  \node[nb,minimum width=14cm,minimum height=1.1cm] (a) at (0,0) {\textbf{1 Lectura de carta y CV}: se descartan las candidaturas que no cumplen o no destacan (CV confusos o mal estructurados)};
+  \node[nb,minimum width=11.5cm,minimum height=1.1cm] (b) at (0,-1.7) {\textbf{2 Rondas de entrevistas}: una o varias, según la complejidad; se va descartando};
+  \node[nb,minimum width=9cm,minimum height=1.1cm,text width=8.6cm] (c) at (0,-3.4) {\textbf{+ Pruebas}: psicotécnicas (antes o después de las entrevistas) y, según el puesto, profesionales};
+  \node[nf,minimum width=6cm,minimum height=1.1cm] (d) at (0,-5.1) {\textbf{3 Elección final}};
+  \foreach \x/\y in {a/b,b/c,c/d} \draw[fl] (\x) -- (\y);
+\end{tikzpicture}
+\end{center}
+\textbf{La entrevista es la herramienta decisiva.} La empresa busca tus aptitudes técnicas, habilidades personales, actitud ante el trabajo y capacidad de trabajar en equipo.
+
+\textbf{Documento 5.4 · Pruebas psicotécnicas}: cuestionarios sobre personalidad, inteligencia, aptitudes, conductas e intereses. Definen el perfil; \textbf{no suelen ser decisivas}, aunque a veces condicionan. Responder con \textbf{sinceridad}: están diseñados para detectar la \textbf{falta de consistencia}. \textbf{Pruebas profesionales}: comprueban conocimientos o destrezas del puesto.
+
+\subsection{Preparar la entrevista (cinco pasos)}
+\begin{center}
+\begin{tikzpicture}
+  \foreach \i/\t in {1/{Investiga la\\\textbf{empresa}},2/{Conoce el\\\textbf{puesto}},3/{Respuestas a\\\textbf{preguntas comunes}},4/{Discurso de\\\textbf{venta personal}},5/{\textbf{Ensaya}}}
+    \node[nb,minimum width=2.9cm,minimum height=1.3cm,text width=2.6cm] (n\i) at ({(\i-1)*3.3},0) {\textbf{\i}\\\t};
+  \foreach \x/\y in {1/2,2/3,3/4,4/5} \draw[fl] (n\x) -- (n\y);
+\end{tikzpicture}
+\end{center}
+\begin{itemize}
+\item \textbf{Empresa}: misión, visión, valores, cultura, productos o servicios, trayectoria.
+\item \textbf{Puesto}: lee la descripción, responsabilidades y requisitos; relaciona tus habilidades.
+\item \textbf{Preguntas comunes}: «¿Por qué te interesa el puesto?», fortalezas y debilidades, experiencias previas, ¿solo/a o en equipo?
+\item \textbf{Discurso de venta personal}: logros, habilidades y experiencias que te diferencian y cómo aportas.
+\item \textbf{Ensayar}: espejo, simulaciones con amistades o familiares, herramientas en línea.
+\end{itemize}
+\ojo{Llevar \textbf{preguntas propias} para la empresa no es un paso de la preparación: va en las \textbf{pautas durante} la entrevista (mostrar interés genuino).}
+
+\subsection{Durante la entrevista}
+\begin{tabla}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{3.4cm} Y@{}}
+\rowcolor{paper}\cab{PAUTA} & \cab{QUÉ HACER} \\
+\arrayrulecolor{inkmuted}\midrule
+Mantén la calma & Respira hondo, transmite confianza. \\
+Escucha activamente & Atiende, no interrumpas, comprende antes de responder. \\
+Interés genuino & Haz preguntas: «¿Cómo se estructura el equipo?», «¿Metas del departamento?». \\
+Comunicación no verbal & Contacto visual, sonrisa, postura abierta y relajada; sin gestos nerviosos. \\
+Comunicación verbal & Clara, segura, con entusiasmo; respuestas precisas y concisas. \\
+\arrayrulecolor{inkmuted}\bottomrule
+\end{tabularx}
+\end{tabla}
+\textbf{Otros aspectos}: \textbf{apariencia} (código de la empresa, ropa limpia y planchada, higiene), \textbf{modales} (cortesía desde el saludo; apretón de manos firme si es presencial) y \textbf{tiempo de respuesta} (piensa antes de hablar; sin impulsividad). Las entrevistas \textbf{virtuales} (Zoom, Microsoft Teams, Google Meet) son habituales y agilizan procesos y candidaturas de otros países.
+
+\subsection{Los cuatro tipos de pregunta (Doc. 5.5)}
+\begin{tabla}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{2.8cm} Y Y@{}}
+\rowcolor{paper}\cab{TIPO} & \cab{QUÉ ES} & \cab{EJEMPLO} \\
+\arrayrulecolor{inkmuted}\midrule
+Abiertas & Invitan a reflexionar con profundidad. & «Háblame de ti.» «¿Cómo manejas el trabajo bajo presión?» \\
+Situacionales & Cómo \textbf{actuarías} ante un escenario concreto. & «¿Cómo responderías ante un conflicto con un compañero?» \\
+De conocimiento & Miden habilidades técnicas o conocimiento del sector. & «¿Qué sabes de los últimos proyectos de la empresa?» \\
+De caso & \textbf{Simulaciones} de situaciones laborales reales; evalúan la \textbf{resolución de problemas}. & Resolver un problema real planteado como ejercicio. \\
+\arrayrulecolor{inkmuted}\bottomrule
+\end{tabularx}
+\end{tabla}
+\ojo{Situacional = «¿qué harías si…?» (una escena, tu reacción). De caso = una \textbf{simulación} que debes resolver. Abierta = reflexión («háblame de…»).}
+
+\subsection*{Negociar condiciones y errores a evitar}
+\textbf{Negociación salarial} (tres tácticas): \textbf{investiga el mercado} (rangos salariales del sector), \textbf{exprésate con confianza} (agradece y di tu expectativa con claridad), \textbf{escucha la oferta antes de responder} (beneficios, incentivos, crecimiento).
+
+\textbf{Cuatro errores habituales en la entrevista}: no haber investigado la empresa; no haber preparado ejemplos concretos; mala comunicación verbal o no verbal (juguetear, mirar al suelo, cruzar los brazos); no formular preguntas.
+
+\subsection{Después de la entrevista (5.4.3)}
+Mientras la empresa decide, el proceso sigue abierto: puedes \textbf{llamar o escribir} a los pocos días para saber si hay decisión y si abrirán nuevas ofertas. Si \textbf{no te eligen}, quedan dos acciones: (1) \textbf{completar la agenda de contactos} con lo aprendido de la entrevista y (2) \textbf{correo de agradecimiento} postulándote para próximas vacantes. Es normal no triunfar en la primera: hay muchas candidaturas y solo gana una; aprende de cada una.
+
+\subsection*{Documento 5.6 · Errores comunes en la búsqueda}
+\begin{tabla}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{3.6cm} Y@{}}
+\rowcolor{paper}\cab{ERROR} & \cab{CONSEJO} \\
+\arrayrulecolor{inkmuted}\midrule
+Desconocer el mercado laboral & Sigue tendencias: \emph{webinars}, artículos, comunidades profesionales. \\
+Subestimar el \emph{networking} & Refuerza la red: LinkedIn, eventos, talleres, foros. (Error: fiarlo todo a la presencia \emph{online}.) \\
+Ignorar el \emph{feedback} & Escucha activa; pide opinión sobre CV, expresión y trato. \\
+No preparar los documentos & Adapta CV y carta a cada oferta; actualízalos. \\
+No preparar las entrevistas & Investiga, prepara respuestas, practica, mantén la calma. \\
+Sin seguimiento adecuado & Correo tras enviar el CV, pregunta el estado, comunicación abierta; no esperar pasivamente. \\
+\arrayrulecolor{inkmuted}\bottomrule
+\end{tabularx}
+\end{tabla}
+\clave{Preparar la entrevista = \textbf{5}. Durante = \textbf{5} pautas. Tipos de pregunta = \textbf{4}. Negociar = \textbf{3}. Errores en la entrevista = \textbf{4}. Tras la entrevista: llamar o escribir; si no eres elegido, agenda + agradecimiento.}
+
+\needspace{16\baselineskip}\section{Empleo en el sector público (5.5)}
+\defn{Las \textbf{bases reguladoras} son el conjunto de normas y condiciones que establecen los requisitos, procedimientos y criterios para participar en una convocatoria pública.}
+\begin{center}
+\begin{tikzpicture}
+  \node[nb,minimum width=3.4cm,text width=3.1cm] (a) at (0,0) {\textbf{Convocatoria}\\publicada en boletín oficial (BOE, BOJA, DOG, DOCM…)};
+  \node[nb,minimum width=3.4cm,text width=3.1cm] (b) at (4.3,0) {\textbf{Bases reguladoras}\\condiciones de acceso};
+  \node[nb,minimum width=3.4cm,text width=3.1cm] (c) at (8.6,0) {\textbf{Pruebas}\\teóricas, prácticas, físicas, psicotécnicas, entrevista, méritos};
+  \node[nb,minimum width=3.4cm,text width=3.1cm] (d) at (12.9,0) {\textbf{Vías de acceso}\\oposición (pruebas) o concurso (méritos)};
+  \foreach \x/\y in {a/b,b/c,c/d} \draw[fl] (\x) -- (\y);
+\end{tikzpicture}
+\end{center}
+Publican convocatorias las administraciones estatales, autonómicas y locales. Atrae a mucha gente por la \textbf{estabilidad} y se rige por normas más específicas y transparentes (\textbf{igualdad de condiciones}). Boletines: \textbf{BOE} (Estado), \textbf{BOJA} (Andalucía), DOG (Galicia), DOCM (Castilla-La Mancha).
+
+\subsection*{Las cuatro cosas que detallan las bases}
+\begin{tabla}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{3.4cm} Y@{}}
+\rowcolor{paper}\cab{APARTADO} & \cab{CONTENIDO} \\
+\arrayrulecolor{inkmuted}\midrule
+Requisitos & Titulaciones específicas, experiencia en el sector público, competencias, certificados. \\
+Fases del proceso & Pruebas teóricas o prácticas, físicas (a veces), psicotécnicas, entrevistas, valoración de méritos. \\
+Criterios de evaluación & \textbf{Baremos ponderados}: identifica todos los criterios y su peso para valorar tus opciones. \\
+Fechas clave & Publicación y \textbf{fin de plazo} de solicitudes: no se admiten fuera de plazo. \\
+\arrayrulecolor{inkmuted}\bottomrule
+\end{tabularx}
+\end{tabla}
+\ojo{Truco de las cuatro preguntas: ¿\textbf{quién} puede presentarse? (requisitos) ¿\textbf{qué} hay que pasar? (fases) ¿\textbf{cómo} se puntúa? (criterios) ¿\textbf{cuándo}? (fechas).}
+
+\subsection*{Preparación específica}
+Más rigurosa y variada que en el privado. Tres bloques: \textbf{ejercicios de conocimientos} (temario oficial, los temas más probables), \textbf{test psicotécnicos} (razonamiento verbal, lógico y numérico; practicar con simulaciones) y \textbf{entrevistas orales} (experiencia, competencias, motivación para el servicio público, expectativas). Se valoran además la \textbf{ética}, la \textbf{responsabilidad social} y el \textbf{compromiso con el servicio público}. En España suele ser más largo y exigente que en otros países europeos: hasta \textbf{tres etapas} (escrita, oral y valoración de méritos), p. ej. en educación, enfermería o administración.
+\clave{Oposición = \textbf{pruebas}; concurso = \textbf{méritos}. Bases = \textbf{4} apartados. Pruebas = conocimientos + psicotécnicos + entrevista oral.}
+
+\needspace{16\baselineskip}\section{Marca personal y empleabilidad (5.6)}
+\defn{La \textbf{marca personal} (\emph{personal branding}) es la imagen pública que una persona construye sobre sí misma y proyecta ante el mundo laboral.}
+Es como una huella digital única: competencias, habilidades, valores y experiencias. Se gestiona en digital (redes, web personal, blog) pero va más allá: interacciones personales, eventos, proyección social. Debe haber \textbf{coherencia entre tu imagen digital y tu comportamiento real}.
+
+\subsection{Estrategia en cuatro pasos}
+\begin{center}
+\begin{tikzpicture}
+  \node[nf,minimum width=3.5cm,minimum height=0.8cm] (a) at (0,0) {1 Diagnóstico};
+  \node[nf,minimum width=3.5cm,minimum height=0.8cm] (b) at (4.0,0) {2 Definición};
+  \node[nf,minimum width=3.5cm,minimum height=0.8cm] (c) at (8.0,0) {3 Estructuración};
+  \node[nf,minimum width=3.5cm,minimum height=0.8cm] (d) at (12.0,0) {4 Mantenimiento y evolución};
+  \foreach \x/\y in {a/b,b/c,c/d} \draw[fl] (\x) -- (\y);
+  \node[nl,minimum width=3.5cm,text width=3.3cm,anchor=north] at (0,-0.7) {\textbf{Feedback} de otros\\\textbf{Autoevaluación}\\\textbf{Estudio del mercado}};
+  \node[nl,minimum width=3.5cm,text width=3.3cm,anchor=north] at (4.0,-0.7) {\textbf{Visión}\\\textbf{Misión}\\\textbf{Valores}\\\textbf{Propuesta de valor}};
+  \node[nl,minimum width=3.5cm,text width=3.3cm,anchor=north] at (8.0,-0.7) {\textbf{Objetivos} (corto, medio y largo plazo)\\\textbf{Plan de acción}\\\textbf{Redes} profesionales};
+  \node[nl,minimum width=3.5cm,text width=3.3cm,anchor=north] at (12.0,-0.7) {\textbf{Revisión} constante\\\textbf{Aprendizaje} continuo\\\textbf{Adaptación} al mercado};
+  \draw[fl,dashed] (d.north) -- ++(0,0.5) -| (a.north);
+\end{tikzpicture}
+\end{center}
+\begin{tabla}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{3.1cm} Y@{}}
+\rowcolor{paper}\cab{PASO} & \cab{DETALLE} \\
+\arrayrulecolor{inkmuted}\midrule
+1 Diagnóstico & Punto de partida desde \textbf{tres} perspectivas: \emph{feedback} (colegas, profesionales, amistades: cómo te ven), \textbf{autoevaluación} (competencias, logros, valores) y \textbf{estudio del mercado} (necesidades y habilidades más demandadas). \\
+2 Definición & \textbf{Visión} (propósito a largo plazo: ¿hasta dónde quieres llegar?), \textbf{misión} (principios que guían tu trabajo diario), \textbf{valores} (lo fundamental en tu desempeño) y \textbf{propuesta de valor} (lo específico que aportas y te diferencia). \\
+3 Estructuración & Objetivos a corto, medio y largo plazo; plan de acción (portafolio digital, CV y LinkedIn actualizados, eventos, cursos); presencia activa en redes profesionales. \\
+4 Mantenimiento y evolución & No es fija: revisión constante (¿sigue siendo auténtica y atractiva?), aprendizaje continuo y adaptación al mercado. \\
+\arrayrulecolor{inkmuted}\bottomrule
+\end{tabularx}
+\end{tabla}
+\ojo{Los cuatro pasos son \textbf{diagnóstico, definición, estructuración, mantenimiento y evolución} (no «descubrimiento»). El \textbf{estudio del mercado} es parte del \textbf{diagnóstico}, no de la definición: lo que sí define la marca es visión, misión, valores y propuesta de valor.}
+
+\subsection*{Documento 5.7 · Errores en la construcción de la marca (nueve)}
+\begin{tabla}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{4.2cm} Y@{}}
+\rowcolor{paper}\cab{ERROR} & \cab{ESENCIA} \\
+\arrayrulecolor{inkmuted}\midrule
+Falta de autenticidad & Una marca que no refleja quién eres. \\
+Incoherencia en la comunicación & Redes, CV y cartas que no cuadran entre sí o con las entrevistas. \\
+No diferenciarse & Copiar lo que hace la mayoría: pregúntate qué te hace diferente. \\
+Falta de estrategia y planificación & Sin plan a largo plazo se pierden oportunidades. \\
+Descuidar la visibilidad digital & Perfiles sin optimizar; LinkedIn sin actualizar. \\
+No mantener la relevancia & La marca no es estática: hay que adaptarla. \\
+Desconocer el mercado laboral & Ignorar tendencias y nuevas demandas. \\
+Subestimar el \emph{networking} & No basta la presencia \emph{online}: eventos y relaciones. \\
+Ignorar el \emph{feedback} & Sin opiniones ajenas no ves tus áreas de mejora. \\
+\arrayrulecolor{inkmuted}\bottomrule
+\end{tabularx}
+\end{tabla}
+
+\subsection{Marca personal en redes sociales}
+Lo primero que ven las empresas; \textbf{el 90\% de los empleadores revisa los perfiles antes de ofrecer un empleo}.
+\begin{tabla}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{3.6cm} Y@{}}
+\rowcolor{paper}\cab{BLOQUE} & \cab{PUNTOS} \\
+\arrayrulecolor{inkmuted}\midrule
+Imagen profesional (3) & \textbf{Visualidad} (foto profesional, no \emph{selfies}), \textbf{biografía} clara con palabras clave del sector, \textbf{contenido de los \emph{posts}} coherente con tu especialización. \\
+En qué se fijan los empleadores (3) & \textbf{Profesionalismo}; \textbf{habilidades y competencias} demostradas; \textbf{red de contactos}. \\
+Elementos de tu marca (4) & Imagen de perfil y cabecera; contenido relevante (sin mezclar lo personal); interacción y \emph{engagement}; \textbf{recomendaciones}. \\
+Errores en redes, Doc. 5.8 (3) & Publicar contenido inadecuado; descuidar la imagen profesional; \textbf{no interactuar} (pasividad = desinterés). \\
+Mantener la marca sólida (3) & \textbf{Coherencia} entre plataformas; optimizar \textbf{LinkedIn} (la más potente); \textbf{actualización} constante. \\
+\arrayrulecolor{inkmuted}\bottomrule
+\end{tabularx}
+\end{tabla}
+\clave{Marca personal: \textbf{4} pasos; diagnóstico \textbf{3} fuentes; definición \textbf{4} elementos. Redes: foto, biografía y posts profesionales; interactuar; LinkedIn completo y actualizado; coherencia en todas las plataformas.}
+
+\needspace{16\baselineskip}\section{Confusiones que cuestan puntos}
+Reunidas las que han fallado en los repasos y las parejas de conceptos que se parecen.
+\begin{tabla}
+\begin{tabularx}{\textwidth}{@{}Y Y@{}}
+\rowcolor{paper}\cab{SE CONFUNDE} & \cab{EN REALIDAD} \\
+\arrayrulecolor{inkmuted}\midrule
+El CV se revisa en 5 segundos. & \textbf{6 segundos}. Ideal una página, máximo dos. \\
+CV por competencias = CV europeo. & Europeo: el estándar, cronológico. \textbf{Por competencias}: perfil y habilidades sobre la trayectoria. \\
+Situacional = de caso = abierta. & Abierta: reflexión. Situacional: «¿qué harías?». \textbf{De caso}: simulación para resolver un problema. \\
+Trello es una acción de seguimiento. & Trello/Asana son \emph{herramientas de gestión}. Seguimiento = agenda, correo de seguimiento, agradecimiento. \\
+Preparar preguntas propias es un paso de preparación. & Los 5 pasos son empresa, puesto, respuestas comunes, discurso de venta, ensayo. Las preguntas propias van \emph{durante} (interés genuino). \\
+El estudio del mercado define la marca. & Es parte del \textbf{diagnóstico}. Definir = visión, misión, valores, propuesta de valor. \\
+Pasos de la marca: descubrimiento, definición, evolución. & \textbf{Diagnóstico, definición, estructuración, mantenimiento y evolución.} \\
+Bases reguladoras: requisitos y fechas. & \textbf{Cuatro}: requisitos, fases, criterios de evaluación, fechas clave. \\
+Autocandidatura = respuesta a una oferta. & Es presentarte a una empresa que \textbf{no ha publicado} demanda: CV por correo o \textbf{en mano}. \\
+Oposición = concurso. & Oposición: \textbf{pruebas}. Concurso: \textbf{méritos}. \\
+Activa = pasiva si usas portales. & \emph{Activa}: tú vas a la empresa (networking, portales, autocandidaturas). \emph{Pasiva}: te inscribes y esperas (SEPE, bolsas, CV colgado). \\
+Las psicotécnicas deciden el puesto. & Definen el perfil; \textbf{no suelen ser decisivas}. Se responde con sinceridad (detectan inconsistencias). \\
+\arrayrulecolor{inkmuted}\bottomrule
+\end{tabularx}
+\end{tabla}
+
+\needspace{16\baselineskip}\section{Autoevaluación con respuestas}
+Contesta tapando la columna derecha.
+\begin{tabla}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{7.6cm} >{\raggedright\arraybackslash}p{8.4cm}@{}}
+\rowcolor{paper}\cab{PREGUNTA} & \cab{RESPUESTA} \\
+\arrayrulecolor{inkmuted}\midrule\endhead
+¿Cuáles son las tres fases de la búsqueda de empleo? & Preparar CV y carta; hacerlos llegar con técnicas de búsqueda; participar en el proceso de selección. \\
+¿Qué hay que tener claro antes de buscar? & Conocimiento del mercado, de las propias competencias y objetivos profesionales definidos (SMART). \\
+¿Qué significa SMART? & Específicos, medibles, alcanzables, relevantes y con un tiempo definido. \\
+¿Cuántos bloques mínimos tiene un CV y cuáles? & Cuatro: datos básicos, formación, datos profesionales, otros datos. \\
+¿En qué orden se presentan formación y experiencia? & De más reciente a más antigua, siempre con fechas de inicio y fin. \\
+¿Cuánto debería ocupar un CV y cuánto se tarda en revisarlo? & Una página (nunca más de dos); unos 6 segundos. \\
+Nombra cuatro modelos de CV. & Europeo (Europass), videocurrículum, infográfico y por competencias. \\
+¿Cuáles son los cinco elementos de la carta de presentación? & Inicio, motivación e interés, ajuste al puesto, valor agregado y cierre. \\
+¿Qué diferencia a una técnica activa de una pasiva? & La activa busca el contacto directo con la empresa por iniciativa propia; la pasiva espera recibir ofertas. \\
+Tres técnicas activas. & \emph{Networking}, portales de empleo y autocandidaturas. \\
+¿Qué es el SEPE y qué función cumplen los servicios públicos de empleo? & Servicio Público de Empleo Estatal; intermediación entre ofertas (desempleados) y demandas (empresas con vacantes). \\
+¿Qué es EURES y cómo se llega? & Portal oficial de empleo en Europa; se crea el perfil Europass, se genera el CV y se publica en EURES. \\
+Cuatro categorías de herramientas digitales. & Plataformas de empleo, redes sociales profesionales, correo electrónico y aplicaciones de gestión. \\
+Tres acciones de seguimiento tras entregar el CV. & Agenda de contactos, correo de seguimiento y agradecimiento. \\
+¿Cuánto mejora el seguimiento las opciones de entrevista? & Un 33\% (MIT Sloan Management Review). \\
+¿Qué aportan las pruebas psicotécnicas y cómo se responde? & Información sobre personalidad, aptitudes e intereses; no suelen ser decisivas; con sinceridad. \\
+Cinco pasos para preparar la entrevista. & Investigar la empresa, conocer el puesto, respuestas a preguntas comunes, discurso de venta personal y ensayar. \\
+Cinco pautas durante la entrevista. & Mantener la calma, escucha activa, interés genuino, comunicación no verbal y verbal. \\
+Cuatro tipos de pregunta. & Abiertas, situacionales, de conocimiento y de caso. \\
+Tres tácticas de negociación salarial. & Investigar el mercado, expresarse con confianza y escuchar la oferta antes de responder. \\
+Si no te eligen, ¿qué dos acciones quedan? & Completar la agenda de contactos con lo aprendido y enviar un correo de agradecimiento postulándote a futuras vacantes. \\
+¿Dónde se publican las convocatorias públicas? & En los boletines oficiales: BOE, BOJA, DOG, DOCM… \\
+Vías de acceso al empleo público. & Oposiciones (pruebas) y concursos (méritos). \\
+Cuatro apartados de las bases reguladoras. & Requisitos, fases del proceso, criterios de evaluación y fechas clave. \\
+¿Qué valores busca además el sector público? & Ética, responsabilidad social y compromiso con el servicio público. \\
+Definición de marca personal. & Imagen pública que una persona construye sobre sí misma y proyecta ante el mundo laboral. \\
+Los cuatro pasos de la estrategia de marca. & Diagnóstico, definición, estructuración, mantenimiento y evolución. \\
+Tres fuentes del diagnóstico. & \emph{Feedback}, autoevaluación y estudio del mercado. \\
+Cuatro elementos de la definición. & Visión, misión, valores y propuesta de valor. \\
+¿Qué porcentaje de empleadores revisa las redes antes de ofrecer un empleo? & El 90\%. \\
+¿Y el que considera el \emph{networking} lo más eficaz? ¿Y el de ofertas ocultas? & 85\% y 70\%. \\
+\arrayrulecolor{inkmuted}\bottomrule
+\end{longtable}
+\end{tabla}
+
+\needspace{16\baselineskip}\section{Para las prácticas de carta y entrevista}
+Las fichas de clase (preparación y simulación de entrevista) usan estas preguntas; conviene tener una respuesta pensada para cada una. Las pautas de abajo son \textbf{criterio propio}, no vienen del libro.
+\begin{itemize}
+\item «Háblame de ti» (un minuto): quién eres, qué has estudiado (DAM), qué sabes hacer y qué buscas.
+\item Por qué DAM; qué te gusta de la informática; tres conocimientos técnicos y tres cualidades personales.
+\item Una debilidad \emph{y qué haces para corregirla}; un proyecto: qué hiciste, tecnologías, tu aportación y lo que aprendiste.
+\item Aprender una tecnología nueva; solo o en equipo; reacción ante un error; organizar varias tareas; críticas a tu aplicación; compañero bloqueado; error grave cerca de la entrega (preguntas \textbf{situacionales}).
+\end{itemize}
+
+\needspace{16\baselineskip}\section{Límites de este documento}
+\begin{itemize}
+\item El temario concreto, el formato y el material permitido del examen \textbf{no están confirmados} (la ficha del examen los marca «por concretar»): se ha cubierto \textbf{toda la Unidad 5}.
+\item Fuente: apuntes extraídos del libro digital el 22 de octubre. \textbf{No incluye} los vídeos, enlaces, imágenes ni las actividades del libro (solo se citan como recursos). Los porcentajes y cantidades son los que da el libro.
+\item Se añaden la estructura de carta y las preguntas de entrevista de las fichas de clase; las pautas de la sección 09 son criterio propio.
+\end{itemize}
+\end{document}

@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MVP · Diagramas de arquitectura, datos y flujos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    --bg: #e6e7ed;
+    --surface: #f4f4f8;
+    --surface-2: #dcdee8;
+    --line: #b9bdd0;
+    --text: #343b58;
+    --muted: #565a6e;
+    --accent: #2e5fd0;
+    --accent-2: #7847bd;
+    --ok: #33635c;
+    --warn: #8f5e15;
+    --code-bg: #dcdee8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1a1b26;
+      --surface: #1f2335;
+      --surface-2: #292e42;
+      --line: #3b4261;
+      --text: #c0caf5;
+      --muted: #8f94b3;
+      --accent: #7aa2f7;
+      --accent-2: #bb9af7;
+      --ok: #9ece6a;
+      --warn: #e0af68;
+      --code-bg: #292e42;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1a1b26;
+    --surface: #1f2335;
+    --surface-2: #292e42;
+    --line: #3b4261;
+    --text: #c0caf5;
+    --muted: #8f94b3;
+    --accent: #7aa2f7;
+    --accent-2: #bb9af7;
+    --ok: #9ece6a;
+    --warn: #e0af68;
+    --code-bg: #292e42;
+  }
+  html { scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 16px); scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 0; max-width: 1280px; margin: 0 auto; }
+  nav.toc {
+    position: sticky; top: env(safe-area-inset-top, 0px);
+    align-self: start; height: 100vh; overflow-y: auto;
+    padding: 28px 20px 28px 24px;
+    border-right: 1px solid var(--line);
+    font-size: 14px;
+  }
+  nav.toc strong { display: block; font-size: 15px; margin-bottom: 14px; }
+  nav.toc .grp { margin: 18px 0 6px; color: var(--muted); font-size: 13px; font-weight: 600; }
+  nav.toc a { display: block; padding: 3px 0; color: var(--text); text-decoration: none; }
+  nav.toc a:hover { color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+  main { padding: 40px 32px 80px; min-width: 0; }
+  header.hero { margin-bottom: 40px; max-width: 760px; }
+  h1 { font-size: clamp(28px, 4vw, 42px); line-height: 1.15; margin: 0 0 14px; letter-spacing: -0.02em; }
+  h2 { font-size: 26px; line-height: 1.25; margin: 64px 0 8px; padding-top: 24px; border-top: 1px solid var(--line); letter-spacing: -0.01em; }
+  h3 { font-size: 18px; margin: 36px 0 6px; }
+  p { max-width: 74ch; margin: 8px 0; }
+  p.lead { font-size: 18px; color: var(--muted); }
+  .note {
+    max-width: 74ch; margin: 14px 0; padding: 12px 16px;
+    background: var(--surface); border-left: 3px solid var(--accent-2); border-radius: 0 6px 6px 0;
+    font-size: 15px;
+  }
+  .note.warn { border-left-color: var(--warn); }
+  .diagram {
+    margin: 14px 0 6px; padding: 20px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+    overflow-x: auto;
+  }
+  .diagram pre.mermaid { margin: 0; text-align: center; font-family: "JetBrains Mono", ui-monospace, monospace; }
+  .cap { font-size: 14px; color: var(--muted); margin: 4px 0 18px; }
+  code { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.88em; background: var(--code-bg); padding: 1px 6px; border-radius: 4px; }
+  .tablewrap { overflow-x: auto; margin: 14px 0; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { text-align: left; padding: 9px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--surface-2); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.c, th.c { text-align: center; }
+  ul.tight { max-width: 74ch; padding-left: 20px; }
+  ul.tight li { margin: 4px 0; }
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    nav.toc { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+    main { padding: 28px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<nav class="toc" aria-label="Índice">
+  <strong>Diagramas del MVP</strong>
+  <div class="grp">Visión</div>
+  <a href="#contexto">Contexto y actores</a>
+  <a href="#componentes">Comunicación entre componentes</a>
+  <a href="#backend">Arquitectura del backend</a>
+  <div class="grp">Datos</div>
+  <a href="#er-identidad">E-R · Identidad y configuración</a>
+  <a href="#er-comercial">E-R · Catálogo y pedidos</a>
+  <a href="#er-modulos">E-R · Módulos opcionales</a>
+  <a href="#er-notas">Decisiones del modelo</a>
+  <div class="grp">Estados</div>
+  <a href="#estados">Pedido, reserva, cuenta</a>
+  <div class="grp">Flujos de comunicación</div>
+  <a href="#sec-auth">Autenticación</a>
+  <a href="#sec-pedido">Crear pedido</a>
+  <a href="#sec-estado">Cambio de estado + puntos</a>
+  <a href="#sec-modulos">Activar/desactivar módulo</a>
+  <a href="#sec-reserva">Reservas</a>
+  <a href="#sec-update">Actualización</a>
+  <div class="grp">Control</div>
+  <a href="#control-seguridad">Pipeline de seguridad</a>
+  <a href="#control-feature">Feature gate</a>
+  <a href="#control-precio">Cálculo del total</a>
+  <div class="grp">Operación</div>
+  <a href="#despliegue">Despliegue Docker</a>
+  <a href="#cicd">CI/CD y releases</a>
+  <div class="grp">Referencia</div>
+  <a href="#ref-permisos">Matriz de permisos</a>
+  <a href="#ref-ws">Eventos WebSocket</a>
+  <a href="#ref-rest">Endpoints REST</a>
+  <a href="#cierre">Cierre del MVP</a>
+</nav>
+
+<main>
+<header class="hero">
+  <h1>Plataforma instalable para establecimientos: modelo de datos, flujos y comunicación</h1>
+  <p class="lead">Traducción del documento del MVP a diagramas que se pueden implementar directamente: arquitectura, entidades y relaciones, estados, secuencias y reglas de control.</p>
+  <div class="note"><strong>Supuestos que he tomado donde el documento no los fija:</strong> autorización por roles y permisos en tablas (no solo un enum), carrito persistido en servidor, precios copiados al crear el pedido (snapshot), WebSocket con STOMP sobre Spring, y un servicio auxiliar <em>updater</em> para aplicar actualizaciones. Todos son decisiones fáciles de revertir si prefieres otra opción.</div>
+</header>
+
+<!-- ============ VISIÓN ============ -->
+<h2 id="contexto">Contexto y actores</h2>
+<p>Quién usa el sistema y qué capacidades toca cada actor. Las líneas discontinuas indican funcionalidades que dependen de un módulo opcional activado.</p>
+<div class="diagram">
+<pre class="mermaid">
+flowchart LR
+  C(["Cliente"])
+  EM(["Empleado"])
+  MG(["Manager"])
+  AD(["Administrador"])
+
+  subgraph CORE["Núcleo"]
+    REG["Registro, login y perfil"]
+    MENU["Ver menú y buscar"]
+    CART["Carrito"]
+    ORD["Crear y seguir pedidos"]
+    KAN["Kanban de pedidos"]
+    NOTI["Notificaciones internas"]
+    CAT["Gestión de catálogo"]
+    EMP["Gestión de empleados"]
+    CFG["Configuración del establecimiento"]
+    MOD["Activar o desactivar módulos"]
+    DASH["Dashboard"]
+    AUD["Auditoría"]
+    UPD["Actualizaciones y backup"]
+  end
+
+  subgraph OPC["Módulos opcionales del MVP"]
+    LOY["Fidelización: puntos"]
+    CUP["Cupones"]
+    RES["Reservas"]
+  end
+
+  C --- REG
+  C --- MENU
+  C --- CART
+  C --- ORD
+  C --- NOTI
+  C -.- LOY
+  C -.- CUP
+  C -.- RES
+
+  EM --- KAN
+  EM --- DASH
+  EM -.- RES
+
+  MG --- KAN
+  MG --- CAT
+  MG --- DASH
+  MG -.- RES
+
+  AD --- CFG
+  AD --- MOD
+  AD --- EMP
+  AD --- CAT
+  AD --- AUD
+  AD --- UPD
+  AD --- DASH
+</pre>
+</div>
+<p class="cap">Diagrama de contexto. CUSTOMER, EMPLOYEE, MANAGER y ADMIN son los cuatro roles del MVP.</p>
+
+<h2 id="componentes">Comunicación entre componentes</h2>
+<p>Regla del documento: <strong>REST para operaciones normales, WebSocket solo para eventos en tiempo real</strong>. Internamente, los módulos del backend no se llaman entre sí para efectos secundarios (puntos, notificaciones, auditoría): publican eventos de dominio y los demás reaccionan.</p>
+<div class="diagram">
+<pre class="mermaid">
+flowchart TB
+  subgraph CLI["Clientes"]
+    W["Web cliente"]
+    E["App de empleados"]
+    A["Panel de administración"]
+  end
+
+  PX["Reverse proxy<br/>TLS, rutas /api y /ws"]
+
+  subgraph BE["Backend Spring Boot"]
+    SEC["Capa de seguridad<br/>CORS, rate limit, JWT"]
+    REST["Controladores REST"]
+    WSE["Broker WebSocket STOMP"]
+    SVC["Servicios de dominio"]
+    BUS(["Event bus interno"])
+    PUB["Publicador de eventos en tiempo real"]
+  end
+
+  DB[("PostgreSQL")]
+  SMTP["SMTP<br/>verificación y recuperación"]
+  GH["GitHub Releases"]
+  UPDR["Updater<br/>servicio auxiliar"]
+
+  W -->|"HTTPS JSON"| PX
+  E -->|"HTTPS JSON"| PX
+  A -->|"HTTPS JSON"| PX
+  W <-.->|"WSS"| PX
+  E <-.->|"WSS"| PX
+  A <-.->|"WSS"| PX
+
+  PX --> SEC
+  SEC --> REST
+  SEC --> WSE
+  REST --> SVC
+  SVC -->|"JPA, transacciones"| DB
+  SVC -->|"publica"| BUS
+  BUS -->|"suscriptores"| SVC
+  BUS --> PUB
+  PUB --> WSE
+  SVC -->|"envía correo"| SMTP
+  SVC -->|"consulta versiones"| GH
+  SVC -->|"orden de actualizar"| UPDR
+  UPDR -->|"pg_dump y restore"| DB
+  UPDR -->|"descarga imágenes"| GH
+</pre>
+</div>
+<p class="cap">Líneas continuas: petición/respuesta. Líneas punteadas: conexión persistente WebSocket.</p>
+
+<div class="note"><strong>Detalle importante:</strong> los eventos WebSocket deben emitirse <em>después del commit</em> de la transacción (<code>@TransactionalEventListener(phase = AFTER_COMMIT)</code>). Si no, un empleado podría recibir un pedido que luego se revierte en la base de datos.</div>
+
+<h2 id="backend">Arquitectura del backend por dominios</h2>
+<p>Cada módulo tiene <code>controller / service / repository / domain / dto / mapper</code>. Las flechas continuas son dependencias directas (llamadas); las punteadas son comunicación por eventos, sin acoplamiento de compilación.</p>
+<div class="diagram">
+<pre class="mermaid">
+flowchart LR
+  shared["shared<br/>errores, seguridad base, utilidades"]
+  configuration["configuration<br/>ajustes y feature flags"]
+  auth["auth<br/>JWT, tokens, roles y permisos"]
+  customer["customer"]
+  employee["employee"]
+  catalog["catalog"]
+  order["order<br/>carrito y pedidos"]
+  reservation["reservation"]
+  loyalty["loyalty"]
+  coupon["coupon"]
+  notification["notification"]
+  update["update<br/>versiones y backup"]
+  audit["audit"]
+  realtime["realtime<br/>WebSocket"]
+
+  customer --> auth
+  employee --> auth
+  order --> catalog
+  order --> coupon
+  order --> loyalty
+  order --> customer
+  reservation --> customer
+  loyalty --> customer
+  order --> configuration
+  reservation --> configuration
+  loyalty --> configuration
+  coupon --> configuration
+  update --> configuration
+
+  order -.->|"OrderCreated<br/>OrderStatusChanged<br/>OrderCompleted"| notification
+  order -.-> realtime
+  order -.-> loyalty
+  reservation -.->|"ReservationCreated<br/>ReservationStatusChanged"| notification
+  reservation -.-> realtime
+  configuration -.->|"ConfigurationChanged"| realtime
+  configuration -.-> audit
+  catalog -.->|"ProductChanged"| audit
+  employee -.-> audit
+  notification -.-> realtime
+</pre>
+</div>
+<p class="cap">Todos los módulos dependen de <code>shared</code> (omitido en las flechas para no saturar el dibujo).</p>
+
+<!-- ============ E-R ============ -->
+<h2 id="er-identidad">Modelo E-R · Identidad y configuración</h2>
+<p>Usuarios, roles, permisos, tokens, configuración del establecimiento, feature flags y auditoría. Una sola tabla <code>user_account</code> para todos los roles; los datos propios de cliente y empleado viven en perfiles separados.</p>
+<div class="diagram">
+<pre class="mermaid">
+erDiagram
+  INSTALLATION_SETTINGS ||--o{ OPENING_HOURS : "define"
+  ROLE ||--o{ USER_ACCOUNT : "asignado a"
+  ROLE ||--o{ ROLE_PERMISSION : "tiene"
+  PERMISSION ||--o{ ROLE_PERMISSION : "concedido en"
+  USER_ACCOUNT ||--o| CUSTOMER_PROFILE : "es cliente"
+  USER_ACCOUNT ||--o| EMPLOYEE_PROFILE : "es empleado"
+  USER_ACCOUNT ||--o{ REFRESH_TOKEN : "sesiones"
+  USER_ACCOUNT ||--o{ VERIFICATION_TOKEN : "verificación y reset"
+  USER_ACCOUNT ||--o{ AUDIT_LOG : "actor"
+  USER_ACCOUNT ||--o{ FEATURE_FLAG : "modificó"
+
+  INSTALLATION_SETTINGS {
+    smallint id PK "siempre 1"
+    varchar name
+    varchar logo_url
+    text description
+    varchar address
+    varchar phone
+    varchar email
+    char currency "EUR"
+    varchar timezone "Europe/Madrid"
+    varchar primary_color
+    varchar secondary_color
+    varchar favicon_url
+    timestamptz updated_at
+  }
+  OPENING_HOURS {
+    bigint id PK
+    smallint settings_id FK
+    smallint day_of_week "1 a 7"
+    time opens_at
+    time closes_at
+    boolean is_open
+  }
+  FEATURE_FLAG {
+    varchar key PK "orders, reservations, loyalty, coupons, onlinePayment, delivery"
+    boolean enabled
+    uuid updated_by FK
+    timestamptz updated_at
+  }
+  ROLE {
+    varchar code PK "CUSTOMER, EMPLOYEE, MANAGER, ADMIN"
+    varchar description
+  }
+  PERMISSION {
+    varchar code PK "ORDER_VIEW_ALL, PRODUCT_WRITE ..."
+    varchar description
+  }
+  ROLE_PERMISSION {
+    varchar role_code FK
+    varchar permission_code FK
+  }
+  USER_ACCOUNT {
+    uuid id PK
+    varchar email UK
+    varchar password_hash "BCrypt o Argon2"
+    varchar role_code FK
+    varchar status "ACTIVE, DISABLED, PENDING_VERIFICATION"
+    boolean email_verified
+    timestamptz last_login_at
+    timestamptz created_at
+    timestamptz updated_at
+  }
+  CUSTOMER_PROFILE {
+    uuid user_id PK, FK
+    varchar first_name
+    varchar last_name
+    varchar phone
+  }
+  EMPLOYEE_PROFILE {
+    uuid user_id PK, FK
+    varchar first_name
+    varchar last_name
+    varchar job_title
+  }
+  REFRESH_TOKEN {
+    uuid id PK
+    uuid user_id FK
+    varchar token_hash UK
+    timestamptz expires_at
+    timestamptz revoked_at
+    varchar user_agent
+  }
+  VERIFICATION_TOKEN {
+    uuid id PK
+    uuid user_id FK
+    varchar type "EMAIL_VERIFY, PASSWORD_RESET"
+    varchar token_hash UK
+    timestamptz expires_at
+    timestamptz used_at
+  }
+  AUDIT_LOG {
+    bigint id PK
+    uuid actor_id FK
+    varchar action "PRODUCT_CREATED, FEATURE_CHANGED ..."
+    varchar entity_type
+    varchar entity_id
+    jsonb old_value
+    jsonb new_value
+    varchar ip_address
+    timestamptz created_at
+  }
+</pre>
+</div>
+
+<h2 id="er-comercial">Modelo E-R · Catálogo, carrito y pedidos</h2>
+<p>El núcleo del producto. <code>order_item</code> guarda nombre y precio del momento de la compra: si mañana cambias el precio de un producto, los pedidos antiguos no se alteran. <code>customer_order</code> evita el nombre reservado <code>order</code> de SQL.</p>
+<div class="diagram">
+<pre class="mermaid">
+erDiagram
+  CATEGORY ||--o{ PRODUCT : "contiene"
+  USER_ACCOUNT ||--o| CART : "tiene"
+  CART ||--o{ CART_ITEM : "líneas"
+  PRODUCT ||--o{ CART_ITEM : "referenciado"
+  USER_ACCOUNT ||--o{ CUSTOMER_ORDER : "realiza"
+  CUSTOMER_ORDER ||--|{ ORDER_ITEM : "líneas"
+  PRODUCT ||--o{ ORDER_ITEM : "origen"
+  CUSTOMER_ORDER ||--|{ ORDER_STATUS_HISTORY : "historial"
+  USER_ACCOUNT ||--o{ ORDER_STATUS_HISTORY : "cambió estado"
+  COUPON |o--o{ CUSTOMER_ORDER : "aplicado en"
+
+  CATEGORY {
+    bigint id PK
+    varchar name UK
+    text description
+    int sort_order
+    boolean active
+    timestamptz created_at
+    timestamptz updated_at
+  }
+  PRODUCT {
+    bigint id PK
+    bigint category_id FK
+    varchar name
+    text description
+    numeric price "12,2"
+    varchar image_url
+    boolean available "false = agotado"
+    boolean active "false = oculto"
+    int sort_order
+    timestamptz created_at
+    timestamptz updated_at
+  }
+  CART {
+    uuid id PK
+    uuid customer_id FK, UK
+    varchar coupon_code
+    timestamptz updated_at
+  }
+  CART_ITEM {
+    bigint id PK
+    uuid cart_id FK
+    bigint product_id FK
+    int quantity "mayor que 0"
+  }
+  CUSTOMER_ORDER {
+    bigint id PK "visible como numero de pedido"
+    uuid customer_id FK
+    varchar status "PENDING, ACCEPTED, PREPARING, READY, COMPLETED, CANCELLED"
+    numeric subtotal
+    numeric discount_total
+    numeric total
+    bigint coupon_id FK
+    int points_redeemed
+    int points_earned
+    text customer_notes
+    timestamptz created_at
+    timestamptz updated_at
+    timestamptz completed_at
+  }
+  ORDER_ITEM {
+    bigint id PK
+    bigint order_id FK
+    bigint product_id FK
+    varchar product_name "snapshot"
+    numeric unit_price "snapshot"
+    int quantity
+    numeric line_total
+  }
+  ORDER_STATUS_HISTORY {
+    bigint id PK
+    bigint order_id FK
+    varchar from_status
+    varchar to_status
+    uuid changed_by FK
+    varchar reason
+    timestamptz changed_at
+  }
+  COUPON {
+    bigint id PK
+    varchar code UK "BIENVENIDO10"
+  }
+</pre>
+</div>
+
+<h2 id="er-modulos">Modelo E-R · Módulos opcionales, notificaciones y actualizaciones</h2>
+<p>Fidelización, cupones y reservas viven en sus propias tablas: si el módulo está desactivado, las tablas siguen ahí pero el backend rechaza las operaciones. <code>loyalty_transaction</code> es un libro de movimientos; el saldo de <code>loyalty_account</code> es una cifra derivada que se actualiza en la misma transacción.</p>
+<div class="diagram">
+<pre class="mermaid">
+erDiagram
+  USER_ACCOUNT ||--o| LOYALTY_ACCOUNT : "saldo"
+  USER_ACCOUNT ||--o{ LOYALTY_TRANSACTION : "movimientos"
+  CUSTOMER_ORDER |o--o{ LOYALTY_TRANSACTION : "origen"
+  COUPON ||--o{ COUPON_REDEMPTION : "usos"
+  USER_ACCOUNT ||--o{ COUPON_REDEMPTION : "usado por"
+  CUSTOMER_ORDER ||--o| COUPON_REDEMPTION : "consume"
+  USER_ACCOUNT ||--o{ RESERVATION : "reserva"
+  USER_ACCOUNT |o--o{ RESERVATION : "gestionada por"
+  USER_ACCOUNT ||--o{ NOTIFICATION : "recibe"
+  UPDATE_HISTORY }o--o| USER_ACCOUNT : "lanzada por"
+
+  LOYALTY_RULE {
+    bigint id PK
+    numeric points_per_currency_unit "1 euro = 1 punto"
+    boolean active
+    timestamptz updated_at
+  }
+  LOYALTY_REWARD {
+    bigint id PK
+    int points_required "500, 1000"
+    numeric discount_amount "5, 12"
+    boolean active
+  }
+  LOYALTY_ACCOUNT {
+    uuid customer_id PK, FK
+    int balance "no negativo"
+    timestamptz updated_at
+  }
+  LOYALTY_TRANSACTION {
+    bigint id PK
+    uuid customer_id FK
+    bigint order_id FK
+    varchar type "EARN, REDEEM, ADJUST"
+    int points
+    int balance_after
+    timestamptz created_at
+  }
+  COUPON {
+    bigint id PK
+    varchar code UK
+    varchar discount_type "PERCENTAGE, FIXED"
+    numeric value
+    date expires_at
+    int max_uses_per_customer "1"
+    int max_total_uses
+    numeric min_order_amount
+    boolean active
+  }
+  COUPON_REDEMPTION {
+    bigint id PK
+    bigint coupon_id FK
+    uuid customer_id FK
+    bigint order_id FK
+    timestamptz redeemed_at
+  }
+  RESERVATION {
+    bigint id PK
+    uuid customer_id FK
+    timestamptz reserved_at
+    smallint party_size
+    varchar status "PENDING, CONFIRMED, COMPLETED, CANCELLED, NO_SHOW"
+    text notes
+    uuid handled_by FK
+    timestamptz created_at
+    timestamptz updated_at
+  }
+  NOTIFICATION {
+    bigint id PK
+    uuid user_id FK
+    varchar type "ORDER_ACCEPTED, ORDER_PREPARING, ORDER_READY ..."
+    varchar title
+    text message
+    jsonb payload
+    timestamptz read_at
+    timestamptz created_at
+  }
+  UPDATE_HISTORY {
+    bigint id PK
+    varchar from_version
+    varchar to_version
+    varchar status "STARTED, SUCCEEDED, FAILED"
+    varchar backup_file
+    uuid started_by FK
+    timestamptz started_at
+    timestamptz finished_at
+    text error_message
+  }
+</pre>
+</div>
+
+<h2 id="er-notas">Decisiones del modelo</h2>
+<ul class="tight">
+  <li><strong>Roles y permisos en tablas.</strong> Cumple tu requisito de no repartir <code>if (user.isAdmin())</code> por el código: los controladores usan <code>@PreAuthorize("hasAuthority('PRODUCT_WRITE')")</code> y los permisos se cargan desde <code>role_permission</code>.</li>
+  <li><strong>Un único registro de configuración.</strong> <code>installation_settings</code> tiene una sola fila (<code>id = 1</code>, con <code>CHECK (id = 1)</code>): refuerza la idea de instalación independiente, sin <code>tenant_id</code> en ninguna tabla.</li>
+  <li><strong>Feature flags con clave de texto.</strong> Añadir un módulo futuro (pago, delivery) es insertar una fila y una migración, no cambiar el esquema.</li>
+  <li><strong>Snapshots en el pedido.</strong> Nombre, precio unitario, subtotal, descuento y total se guardan en el pedido para que el historial sea inmutable.</li>
+  <li><strong>Historial de estados.</strong> <code>order_status_history</code> permite el detalle de pedido, la auditoría y calcular tiempos de preparación sin tablas extra.</li>
+  <li><strong>Baja lógica.</strong> Productos y categorías usan <code>active</code> en vez de borrarse si tienen pedidos asociados (clave foránea). El «eliminar» del CRUD hace borrado físico solo si no hay referencias.</li>
+  <li><strong>Índices recomendados:</strong> <code>customer_order(status, created_at)</code> para el kanban, <code>customer_order(customer_id, created_at DESC)</code> para el historial, <code>notification(user_id, read_at)</code>, <code>reservation(reserved_at, status)</code>, <code>audit_log(entity_type, entity_id)</code>.</li>
+  <li><strong>Auditoría básica en todas las tablas:</strong> <code>created_at</code> y <code>updated_at</code> (omitidos en algunos recuadros por espacio).</li>
+</ul>
+
+<!-- ============ ESTADOS ============ -->
+<h2 id="estados">Máquinas de estado</h2>
+<h3>Pedido</h3>
+<p>Quién puede ejecutar cada transición. El backend valida el estado de origen: un <code>COMPLETED</code> nunca vuelve atrás.</p>
+<div class="diagram">
+<pre class="mermaid">
+stateDiagram-v2
+  [*] --> PENDING : cliente crea el pedido
+  PENDING --> ACCEPTED : empleado acepta
+  ACCEPTED --> PREPARING : empleado inicia preparación
+  PREPARING --> READY : empleado marca listo
+  READY --> COMPLETED : empleado entrega
+  PENDING --> CANCELLED : cliente o empleado
+  ACCEPTED --> CANCELLED : empleado
+  PREPARING --> CANCELLED : manager o admin
+  COMPLETED --> [*]
+  CANCELLED --> [*]
+</pre>
+</div>
+<p class="cap">El cliente solo cancela mientras el pedido está en PENDING. Cancelar tras PREPARING exige MANAGER o ADMIN (decisión de negocio ajustable).</p>
+
+<h3>Reserva</h3>
+<div class="diagram">
+<pre class="mermaid">
+stateDiagram-v2
+  [*] --> PENDING : cliente solicita
+  PENDING --> CONFIRMED : empleado confirma
+  PENDING --> CANCELLED : cliente o empleado
+  CONFIRMED --> COMPLETED : el cliente acude
+  CONFIRMED --> NO_SHOW : no se presenta
+  CONFIRMED --> CANCELLED : cliente o empleado
+  COMPLETED --> [*]
+  NO_SHOW --> [*]
+  CANCELLED --> [*]
+</pre>
+</div>
+
+<h3>Cuenta de usuario</h3>
+<div class="diagram">
+<pre class="mermaid">
+stateDiagram-v2
+  [*] --> PENDING_VERIFICATION : registro de cliente
+  PENDING_VERIFICATION --> ACTIVE : verifica el email
+  [*] --> ACTIVE : empleado creado por administración
+  ACTIVE --> DISABLED : administración desactiva
+  DISABLED --> ACTIVE : administración reactiva
+  ACTIVE --> ACTIVE : cambio o recuperación de contraseña
+</pre>
+</div>
+
+<!-- ============ SECUENCIAS ============ -->
+<h2 id="sec-auth">Flujo · Registro, verificación y login</h2>
+<div class="diagram">
+<pre class="mermaid">
+sequenceDiagram
+  autonumber
+  actor U as Cliente
+  participant W as Web cliente
+  participant API as Backend REST
+  participant DB as PostgreSQL
+  participant M as SMTP
+
+  U->>W: Rellena el formulario de registro
+  W->>API: POST /api/auth/register
+  API->>API: Valida DTO y hash de contraseña
+  API->>DB: INSERT user_account y customer_profile
+  API->>DB: INSERT verification_token (hash)
+  API->>M: Envía enlace de verificación
+  API-->>W: 201 Created
+  U->>W: Abre el enlace del correo
+  W->>API: POST /api/auth/verify-email
+  API->>DB: Marca email_verified y consume el token
+  API-->>W: 200 OK
+
+  U->>W: Introduce email y contraseña
+  W->>API: POST /api/auth/login
+  API->>DB: Busca usuario y compara hash
+  alt Credenciales válidas y cuenta ACTIVE
+    API->>DB: INSERT refresh_token (hash)
+    API-->>W: access token corto y refresh token
+  else Inválidas o cuenta desactivada
+    API-->>W: 401 con código de error común
+  end
+  Note over W,API: El access token viaja en la cabecera Authorization<br/>El refresh token se rota en cada renovación
+</pre>
+</div>
+
+<h2 id="sec-pedido">Flujo · Crear un pedido y verlo en el kanban</h2>
+<p>Es el flujo que justifica toda la arquitectura: un <code>POST</code> del cliente aparece en la pantalla del empleado sin refrescar.</p>
+<div class="diagram">
+<pre class="mermaid">
+sequenceDiagram
+  autonumber
+  actor C as Cliente
+  participant W as Web cliente
+  participant API as OrderController
+  participant OS as OrderService
+  participant CS as CouponService
+  participant LS as LoyaltyService
+  participant DB as PostgreSQL
+  participant BUS as Event bus
+  participant WS as Broker WebSocket
+  participant E as App de empleados
+
+  C->>W: Pulsa Confirmar pedido
+  W->>API: POST /api/orders
+  API->>API: JWT válido, permiso ORDER_CREATE, módulo orders activo
+  API->>OS: createOrder(customerId, cartId, couponCode, pointsToUse)
+  OS->>DB: Lee carrito y productos
+  OS->>OS: Verifica disponibilidad y recalcula precios en servidor
+  opt Hay cupón y el módulo coupons está activo
+    OS->>CS: validate(code, customerId, subtotal)
+    CS-->>OS: descuento aplicable
+  end
+  opt Usa puntos y el módulo loyalty está activo
+    OS->>LS: reserve(customerId, points)
+    LS-->>OS: descuento por puntos
+  end
+  OS->>DB: INSERT customer_order, order_item, status_history
+  OS->>DB: Registra canje de cupón y vacía el carrito
+  OS->>BUS: publish OrderCreated
+  Note over OS,DB: Todo lo anterior ocurre en una sola transacción
+  DB-->>OS: COMMIT
+  OS-->>API: OrderDto
+  API-->>W: 201 Created con el pedido
+  BUS->>WS: después del commit, evento ORDER_CREATED
+  WS-->>E: /topic/staff/orders
+  E->>E: Aparece en la columna PENDIENTE sin recargar
+</pre>
+</div>
+<p class="cap">El servidor nunca confía en los precios que envía el cliente: los recalcula desde la base de datos.</p>
+
+<h2 id="sec-estado">Flujo · Cambio de estado, notificación al cliente y puntos</h2>
+<div class="diagram">
+<pre class="mermaid">
+sequenceDiagram
+  autonumber
+  actor E as Empleado
+  participant K as Kanban
+  participant API as OrderController
+  participant OS as OrderService
+  participant DB as PostgreSQL
+  participant BUS as Event bus
+  participant NS as NotificationService
+  participant LS as LoyaltyService
+  participant AU as AuditService
+  participant WS as Broker WebSocket
+  participant C as Web cliente
+
+  E->>K: Arrastra el pedido a PREPARACIÓN
+  K->>API: PATCH /api/orders/1042/status con PREPARING
+  API->>OS: changeStatus(orderId, PREPARING, actor)
+  OS->>OS: Comprueba transición válida y permiso
+  OS->>DB: UPDATE customer_order e INSERT status_history
+  OS->>BUS: publish OrderStatusChanged
+  DB-->>OS: COMMIT
+  API-->>K: 200 OK
+
+  par Notificación interna
+    BUS->>NS: OrderStatusChanged
+    NS->>DB: INSERT notification
+    NS->>WS: envía a la cola del cliente
+    WS-->>C: /user/queue/notifications
+  and Actualización del tablero
+    BUS->>WS: ORDER_STATUS_CHANGED
+    WS-->>K: /topic/staff/orders
+    WS-->>C: /user/queue/orders
+  and Auditoría
+    BUS->>AU: registra la acción
+  end
+
+  Note over E,C: Si el nuevo estado es COMPLETED
+  BUS->>LS: OrderCompleted
+  LS->>DB: INSERT loyalty_transaction EARN y actualiza saldo
+  LS->>NS: puntos acreditados
+  NS-->>C: Notificación con el nuevo saldo
+</pre>
+</div>
+<p class="cap">Cada suscriptor falla de forma independiente: si la notificación falla, el estado del pedido ya está confirmado.</p>
+
+<h2 id="sec-modulos">Flujo · Activar o desactivar un módulo en tiempo real</h2>
+<div class="diagram">
+<pre class="mermaid">
+sequenceDiagram
+  autonumber
+  actor A as Administrador
+  participant P as Panel admin
+  participant API as ConfigurationController
+  participant CF as ConfigurationService
+  participant DB as PostgreSQL
+  participant BUS as Event bus
+  participant AU as AuditService
+  participant WS as Broker WebSocket
+  participant W as Web cliente
+  participant E as App de empleados
+
+  A->>P: Mueve el interruptor Reservas a ON
+  P->>API: PUT /api/configuration/features/reservations
+  API->>API: Permiso FEATURE_MANAGE
+  API->>CF: setFeature(reservations, true)
+  CF->>DB: UPDATE feature_flag
+  CF->>BUS: publish ConfigurationChanged
+  DB-->>CF: COMMIT
+  API-->>P: 200 OK con la configuración vigente
+
+  BUS->>AU: INSERT audit_log con false a true
+  BUS->>WS: FEATURE_CONFIGURATION_CHANGED
+  WS-->>W: /topic/features
+  WS-->>E: /topic/features
+  W->>W: Aparece el botón Reservar mesa sin recargar
+  E->>E: Aparece la sección Reservas
+  Note over W,E: Al abrir la app, el cliente también hace GET /api/configuration/public<br/>para no depender de haber estado conectado
+</pre>
+</div>
+
+<h2 id="sec-reserva">Flujo · Reserva de mesa</h2>
+<div class="diagram">
+<pre class="mermaid">
+sequenceDiagram
+  autonumber
+  actor C as Cliente
+  participant W as Web cliente
+  participant API as ReservationController
+  participant FG as Feature gate
+  participant RS as ReservationService
+  participant DB as PostgreSQL
+  participant BUS as Event bus
+  participant WS as Broker WebSocket
+  participant E as App de empleados
+
+  C->>W: Elige viernes 20:30 para 4 personas
+  W->>API: POST /api/reservations
+  API->>FG: ¿reservations activo?
+  alt Módulo desactivado
+    FG-->>API: no
+    API-->>W: 403 FEATURE_DISABLED
+  else Módulo activo
+    FG-->>API: sí
+    API->>RS: create(customerId, fecha, personas)
+    RS->>RS: Valida horario de apertura y fecha futura
+    RS->>DB: INSERT reservation en PENDING
+    RS->>BUS: publish ReservationCreated
+    API-->>W: 201 Created
+    BUS->>WS: RESERVATION_CREATED
+    WS-->>E: /topic/staff/reservations
+  end
+
+  E->>API: PATCH /api/reservations/id/status con CONFIRMED
+  API->>RS: changeStatus
+  RS->>DB: UPDATE reservation
+  RS->>BUS: publish ReservationStatusChanged
+  BUS->>WS: Notificación al cliente
+  WS-->>C: Tu reserva ha sido confirmada
+</pre>
+</div>
+
+<h2 id="sec-update">Flujo · Actualización de una instalación</h2>
+<p>El backend no se reinicia a sí mismo: delega en un servicio auxiliar <em>updater</em> (un contenedor pequeño con acceso a Docker). Secuencia del documento: <strong>backup, update, migración, health check</strong>.</p>
+<div class="diagram">
+<pre class="mermaid">
+sequenceDiagram
+  autonumber
+  actor A as Administrador
+  participant P as Panel admin
+  participant API as UpdateController
+  participant US as UpdateService
+  participant GH as GitHub Releases
+  participant UP as Updater
+  participant DB as PostgreSQL
+  participant BE as Backend nuevo
+
+  P->>API: GET /api/updates/check
+  API->>US: checkForUpdates()
+  US->>GH: Última release publicada
+  GH-->>US: versión 1.1.0 y notas
+  US-->>P: Hay actualización 1.0.0 a 1.1.0 con migración de BD
+  A->>P: Pulsa Actualizar
+  P->>API: POST /api/updates/apply
+  API->>US: apply(1.1.0)
+  US->>DB: INSERT update_history STARTED
+  US->>UP: Orden de actualizar a 1.1.0
+  UP->>DB: pg_dump a volumen de backups
+  UP->>GH: Descarga imágenes con tag 1.1.0
+  UP->>UP: Detiene el backend viejo y arranca el nuevo
+  BE->>DB: Flyway aplica migraciones pendientes
+  UP->>BE: GET /actuator/health
+  alt Health check correcto
+    UP->>DB: update_history SUCCEEDED
+    UP-->>P: Actualizado a 1.1.0
+  else Falla la migración o el health check
+    UP->>UP: Vuelve a levantar la imagen anterior
+    UP->>DB: Restauración guiada desde el backup
+    UP-->>P: Actualización fallida con ruta del backup
+  end
+</pre>
+</div>
+<div class="note warn"><strong>Alcance MVP:</strong> el documento dice que no hace falta un rollback automático perfecto. La rama de fallo del diagrama se puede implementar como mínimo viable: conservar el backup, volver a la imagen anterior y documentar el procedimiento de restauración. Nota: las migraciones de Flyway no se deshacen solas, por eso el backup previo es obligatorio.</div>
+
+<!-- ============ CONTROL ============ -->
+<h2 id="control-seguridad">Control · Pipeline de seguridad de cada petición</h2>
+<p>Orden en el que una petición atraviesa las defensas. Cada rechazo devuelve el formato de error común.</p>
+<div class="diagram">
+<pre class="mermaid">
+flowchart TD
+  REQ(["Petición HTTP"]) --> CORS{"¿Origen permitido por CORS?"}
+  CORS -- no --> E403A["403"]
+  CORS -- sí --> RL{"¿Endpoint sensible?<br/>login, registro, reset"}
+  RL -- sí --> RLC{"¿Supera el límite de intentos?"}
+  RLC -- sí --> E429["429 Too Many Requests"]
+  RLC -- no --> PUB
+  RL -- no --> PUB{"¿Ruta pública?<br/>menú, config pública, auth"}
+  PUB -- sí --> VAL
+  PUB -- no --> JWT{"¿JWT presente, firmado y vigente?"}
+  JWT -- no --> E401["401 UNAUTHORIZED"]
+  JWT -- sí --> ACC{"¿Cuenta ACTIVE?"}
+  ACC -- no --> E403B["403 ACCOUNT_DISABLED"]
+  ACC -- sí --> FEAT{"¿Ruta de un módulo opcional?"}
+  FEAT -- sí --> FON{"¿Módulo activo?"}
+  FON -- no --> E403C["403 FEATURE_DISABLED"]
+  FON -- sí --> AUTH
+  FEAT -- no --> AUTH{"¿El rol tiene el permiso requerido?"}
+  AUTH -- no --> E403D["403 FORBIDDEN"]
+  AUTH -- sí --> OWN{"¿Recurso propio o permiso de gestión?"}
+  OWN -- no --> E404["404 o 403"]
+  OWN -- sí --> VAL{"¿DTO válido?"}
+  PUB -.-> VAL
+  VAL -- no --> E400["400 VALIDATION_ERROR"]
+  VAL -- sí --> SVC["Servicio de dominio"]
+  SVC --> OK(["Respuesta DTO sin datos sensibles"])
+  SVC -- excepción --> GEH["GlobalExceptionHandler<br/>formato común de error"]
+</pre>
+</div>
+
+<h3>Formato único de error</h3>
+<div class="diagram">
+<pre class="mermaid">
+classDiagram
+  class ApiError {
+    +Instant timestamp
+    +int status
+    +String code
+    +String message
+    +String path
+    +List~FieldError~ details
+  }
+  class FieldError {
+    +String field
+    +String message
+  }
+  class DomainException {
+    +String code
+    +HttpStatus status
+  }
+  class ProductNotFoundException
+  class FeatureDisabledException
+  class InvalidOrderTransitionException
+  class GlobalExceptionHandler {
+    +handle(DomainException) ApiError
+    +handle(MethodArgumentNotValidException) ApiError
+    +handle(AccessDeniedException) ApiError
+    +handle(Exception) ApiError
+  }
+  ApiError "1" o-- "0..*" FieldError
+  DomainException <|-- ProductNotFoundException
+  DomainException <|-- FeatureDisabledException
+  DomainException <|-- InvalidOrderTransitionException
+  GlobalExceptionHandler ..> DomainException
+  GlobalExceptionHandler ..> ApiError
+</pre>
+</div>
+<p class="cap">El manejador genérico nunca devuelve trazas ni mensajes internos: registra el detalle en el log (sin tokens) y responde con un código estable.</p>
+
+<h2 id="control-feature">Control · Feature gate</h2>
+<p>El módulo se comprueba en dos sitios, como pide el documento: la interfaz oculta la opción, y el backend bloquea la operación.</p>
+<div class="diagram">
+<pre class="mermaid">
+flowchart LR
+  subgraph FRONT["Cliente"]
+    BOOT["Arranque de la app"] --> GETCFG["GET /api/configuration/public"]
+    GETCFG --> STORE["Estado local de features"]
+    WSMSG["Evento FEATURE_CONFIGURATION_CHANGED"] --> STORE
+    STORE --> UI{"¿reservations = true?"}
+    UI -- sí --> SHOW["Muestra Reservar mesa"]
+    UI -- no --> HIDE["Oculta el acceso"]
+  end
+
+  subgraph BACK["Backend"]
+    CALL["Petición a /api/reservations"] --> GATE["Anotación @RequiresFeature"]
+    GATE --> FLAG[("feature_flag")]
+    FLAG --> CHK{"¿Activo?"}
+    CHK -- sí --> RUN["Ejecuta la operación"]
+    CHK -- no --> DENY["403 FEATURE_DISABLED"]
+  end
+</pre>
+</div>
+
+<h2 id="control-precio">Control · Cálculo del total del carrito</h2>
+<p>Se ejecuta en servidor al previsualizar el carrito y de nuevo al crear el pedido. Ejemplo del documento: 25,50 € de subtotal con 5,00 € de descuento da 20,50 €.</p>
+<div class="diagram">
+<pre class="mermaid">
+flowchart TD
+  S(["Carrito"]) --> A["Para cada línea: ¿producto activo y disponible?"]
+  A -- no --> X["Error PRODUCT_UNAVAILABLE"]
+  A -- sí --> B["Subtotal = suma de precio actual por cantidad"]
+  B --> C{"¿Hay cupón y módulo coupons activo?"}
+  C -- no --> F
+  C -- sí --> D{"¿Existe, activo, no caducado,<br/>mínimo cumplido y sin usar por el cliente?"}
+  D -- no --> Y["Error COUPON_INVALID con motivo"]
+  D -- sí --> E["Descuento cupón = porcentaje o importe fijo"]
+  E --> F{"¿Canjea puntos y módulo loyalty activo?"}
+  F -- no --> H
+  F -- sí --> G{"¿Saldo suficiente y recompensa existente?"}
+  G -- no --> Z["Error INSUFFICIENT_POINTS"]
+  G -- sí --> G2["Descuento puntos según recompensa"]
+  G2 --> H["Descuento total = cupón + puntos,<br/>nunca mayor que el subtotal"]
+  H --> I["Total = subtotal menos descuento total"]
+  I --> J(["Resultado: subtotal, descuento, total"])
+</pre>
+</div>
+
+<!-- ============ OPERACIÓN ============ -->
+<h2 id="despliegue">Despliegue · Una instalación con Docker Compose</h2>
+<p>Cada instalación es independiente: su propia base de datos, sus volúmenes y su configuración. No se comparte nada entre establecimientos.</p>
+<div class="diagram">
+<pre class="mermaid">
+flowchart TB
+  NET(["Internet"]) -->|"443 y 80"| PX
+
+  subgraph HOST["Servidor del establecimiento"]
+    subgraph COMPOSE["docker compose up -d"]
+      PX["proxy<br/>Nginx o Caddy<br/>sirve el frontend estático"]
+      BE["backend<br/>Spring Boot"]
+      DB[("postgres")]
+      UP["updater"]
+    end
+    V1[/"volumen pgdata"/]
+    V2[/"volumen backups"/]
+    V3[/"volumen uploads<br/>logos e imágenes"/]
+    ENV[".env<br/>credenciales, URLs, SMTP"]
+  end
+
+  PX -->|"/api y /ws"| BE
+  BE --> DB
+  DB --- V1
+  UP --> V2
+  UP -->|"pg_dump"| DB
+  UP -->|"docker socket"| COMPOSE
+  BE --- V3
+  ENV -.-> BE
+  ENV -.-> DB
+  ENV -.-> UP
+</pre>
+</div>
+<p class="cap">Perfiles <code>development</code>, <code>testing</code> y <code>production</code> de Spring, cada uno con su propio conjunto de variables de entorno. En testing la base de datos real la levanta Testcontainers.</p>
+
+<h2 id="cicd">CI/CD y publicación de releases</h2>
+<div class="diagram">
+<pre class="mermaid">
+flowchart LR
+  subgraph PUSH["En cada push"]
+    P1["Compilar"] --> P2["Tests unitarios"] --> P3["Tests de integración<br/>Testcontainers + PostgreSQL"] --> P4["Build"]
+  end
+  subgraph REL["Al crear un tag, por ejemplo v1.1.0"]
+    R1["Compilar y tests"] --> R2["Build de imágenes Docker"] --> R3["Publicar imágenes"] --> R4["GitHub Release con notas<br/>y marca de migración de BD"]
+  end
+  R4 -.->|"consultada por"| UPD["Servicio de actualizaciones<br/>de cada instalación"]
+</pre>
+</div>
+<div class="note">Para que el panel muestre «Requiere migración de BD», incluye en la release un archivo de metadatos (por ejemplo <code>release-manifest.json</code> con <code>version</code>, <code>requiresMigration</code> y <code>notes</code>). Así el backend no tiene que interpretar texto libre.</div>
+
+<!-- ============ REFERENCIA ============ -->
+<h2 id="ref-permisos">Matriz de permisos por rol</h2>
+<p>Propuesta inicial; se almacena en <code>role_permission</code> y se carga con una migración.</p>
+<div class="tablewrap">
+<table>
+<thead><tr><th>Capacidad</th><th class="c">CUSTOMER</th><th class="c">EMPLOYEE</th><th class="c">MANAGER</th><th class="c">ADMIN</th></tr></thead>
+<tbody>
+<tr><td>Ver menú y configuración pública</td><td class="c">✔</td><td class="c">✔</td><td class="c">✔</td><td class="c">✔</td></tr>
+<tr><td>Gestionar su perfil y contraseña</td><td class="c">✔</td><td class="c">✔</td><td class="c">✔</td><td class="c">✔</td></tr>
+<tr><td>Crear y ver sus pedidos, cancelar en PENDING</td><td class="c">✔</td><td class="c">–</td><td class="c">–</td><td class="c">–</td></tr>
+<tr><td>Ver sus puntos, cupones y reservas</td><td class="c">✔</td><td class="c">–</td><td class="c">–</td><td class="c">–</td></tr>
+<tr><td>Ver todos los pedidos y el kanban</td><td class="c">–</td><td class="c">✔</td><td class="c">✔</td><td class="c">✔</td></tr>
+<tr><td>Avanzar estados del pedido</td><td class="c">–</td><td class="c">✔</td><td class="c">✔</td><td class="c">✔</td></tr>
+<tr><td>Cancelar un pedido ya en preparación</td><td class="c">–</td><td class="c">–</td><td class="c">✔</td><td class="c">✔</td></tr>
+<tr><td>Gestionar reservas</td><td class="c">–</td><td class="c">✔</td><td class="c">✔</td><td class="c">✔</td></tr>
+<tr><td>Crear, editar y desactivar productos y categorías</td><td class="c">–</td><td class="c">–</td><td class="c">✔</td><td class="c">✔</td></tr>
+<tr><td>Gestionar cupones y reglas de puntos</td><td class="c">–</td><td class="c">–</td><td class="c">✔</td><td class="c">✔</td></tr>
+<tr><td>Ver clientes y activar o desactivar cuentas</td><td class="c">–</td><td class="c">–</td><td class="c">✔</td><td class="c">✔</td></tr>
+<tr><td>Dashboard administrativo</td><td class="c">–</td><td class="c">–</td><td class="c">✔</td><td class="c">✔</td></tr>
+<tr><td>Gestionar empleados y roles</td><td class="c">–</td><td class="c">–</td><td class="c">–</td><td class="c">✔</td></tr>
+<tr><td>Configuración del establecimiento y módulos</td><td class="c">–</td><td class="c">–</td><td class="c">–</td><td class="c">✔</td></tr>
+<tr><td>Auditoría, actualizaciones y backups</td><td class="c">–</td><td class="c">–</td><td class="c">–</td><td class="c">✔</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2 id="ref-ws">Eventos WebSocket</h2>
+<p>Conexión en <code>/ws</code> con el JWT en la trama <code>CONNECT</code>. La suscripción a cada destino se autoriza por rol: un cliente jamás puede suscribirse a <code>/topic/staff/**</code>.</p>
+<div class="tablewrap">
+<table>
+<thead><tr><th>Evento</th><th>Lo origina</th><th>Destino</th><th>Quién lo recibe</th></tr></thead>
+<tbody>
+<tr><td><code>ORDER_CREATED</code></td><td>OrderService</td><td><code>/topic/staff/orders</code></td><td>Empleados, managers, admin</td></tr>
+<tr><td><code>ORDER_STATUS_CHANGED</code></td><td>OrderService</td><td><code>/topic/staff/orders</code> y <code>/user/queue/orders</code></td><td>Personal y el cliente dueño del pedido</td></tr>
+<tr><td><code>ORDER_CANCELLED</code></td><td>OrderService</td><td><code>/topic/staff/orders</code> y <code>/user/queue/orders</code></td><td>Personal y el cliente dueño</td></tr>
+<tr><td><code>RESERVATION_CREATED</code></td><td>ReservationService</td><td><code>/topic/staff/reservations</code></td><td>Personal</td></tr>
+<tr><td><code>RESERVATION_STATUS_CHANGED</code></td><td>ReservationService</td><td><code>/user/queue/reservations</code></td><td>Cliente dueño</td></tr>
+<tr><td><code>NOTIFICATION_CREATED</code></td><td>NotificationService</td><td><code>/user/queue/notifications</code></td><td>Usuario destinatario</td></tr>
+<tr><td><code>FEATURE_CONFIGURATION_CHANGED</code></td><td>ConfigurationService</td><td><code>/topic/features</code></td><td>Todos los conectados</td></tr>
+<tr><td><code>SETTINGS_CHANGED</code></td><td>ConfigurationService</td><td><code>/topic/features</code></td><td>Todos (nombre, colores, horario)</td></tr>
+</tbody>
+</table>
+</div>
+<div class="note">Si la conexión se cae, al reconectar el cliente debe volver a pedir el estado por REST (pedidos activos, configuración). Los eventos WebSocket no se guardan: son avisos, y la fuente de verdad es siempre la base de datos.</div>
+
+<h2 id="ref-rest">Endpoints REST por módulo</h2>
+<div class="tablewrap">
+<table>
+<thead><tr><th>Módulo</th><th>Endpoints principales</th><th>Acceso</th></tr></thead>
+<tbody>
+<tr><td><code>/api/auth</code></td><td>POST register, login, logout, refresh, verify-email, forgot-password, reset-password, change-password</td><td>Público y autenticado</td></tr>
+<tr><td><code>/api/customers</code></td><td>GET lista con búsqueda y filtros, GET detalle con pedidos, reservas, puntos y cupones, PATCH activar o desactivar, GET y PUT /me</td><td>Gestión: MANAGER y ADMIN. /me: cliente</td></tr>
+<tr><td><code>/api/employees</code></td><td>CRUD, PATCH rol y estado, GET actividad</td><td>ADMIN</td></tr>
+<tr><td><code>/api/categories</code></td><td>GET público, POST, PUT, DELETE, PATCH activar, PUT orden</td><td>Escritura: MANAGER y ADMIN</td></tr>
+<tr><td><code>/api/products</code></td><td>GET público con búsqueda, POST, PUT, DELETE, PATCH availability, PATCH active</td><td>Escritura: MANAGER y ADMIN</td></tr>
+<tr><td><code>/api/cart</code></td><td>GET, POST items, PATCH items/id, DELETE items/id, DELETE vaciar, POST coupon, GET preview</td><td>CUSTOMER</td></tr>
+<tr><td><code>/api/orders</code></td><td>POST crear, GET mis pedidos, GET detalle, POST cancel, GET kanban, PATCH id/status</td><td>Cliente y personal según permiso</td></tr>
+<tr><td><code>/api/reservations</code></td><td>POST, GET mis reservas, POST cancel, GET agenda del día, PATCH id/status</td><td>Módulo reservations activo</td></tr>
+<tr><td><code>/api/loyalty</code></td><td>GET saldo y movimientos, GET recompensas, PUT reglas y recompensas</td><td>Módulo loyalty activo</td></tr>
+<tr><td><code>/api/coupons</code></td><td>POST validate, GET mis cupones, CRUD de cupones</td><td>Módulo coupons activo</td></tr>
+<tr><td><code>/api/notifications</code></td><td>GET lista, PATCH marcar como leída, PATCH marcar todas</td><td>Autenticado</td></tr>
+<tr><td><code>/api/configuration</code></td><td>GET public, GET y PUT settings, PUT features/key</td><td>Público lectura. Escritura: ADMIN</td></tr>
+<tr><td><code>/api/dashboard</code></td><td>GET staff resumen operativo, GET admin métricas de hoy</td><td>EMPLOYEE o superior, ADMIN</td></tr>
+<tr><td><code>/api/audit</code></td><td>GET con filtros por actor, entidad y fechas</td><td>ADMIN</td></tr>
+<tr><td><code>/api/updates</code></td><td>GET check, POST apply, GET history, POST backup</td><td>ADMIN</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2 id="cierre">Cierre del MVP</h2>
+<p>Lo que los diagramas dejan cubierto de principio a fin: un establecimiento instala el sistema y lo configura, crea productos y empleados; un cliente se registra y hace un pedido; el empleado lo gestiona en tiempo real y el cliente recibe cada cambio de estado; el administrador activa o desactiva módulos y la instalación se actualiza conservando sus datos.</p>
+<p>Fuera del MVP, como dice el documento: pagos reales, delivery, stock avanzado, app nativa, IA, analítica avanzada, multi-tenant y SaaS centralizado. El modelo ya deja el hueco para ellos (feature flags <code>onlinePayment</code> y <code>delivery</code> en <code>false</code>) sin crear tablas que no se usan.</p>
+</main>
+</div>
+
+<!--claude-mermaid-runtime-begin:3477-->
+<style>.mermaid-diagram{margin-block:4px}.mermaid-diagram svg{display:block;margin:0 auto;max-width:100%;height:auto}</style>
+<script src="/_runtime/mermaid-11.16.1.min.js"></script>
+<script>(function(){
+var CFG={"palettes":{"light":{"surface":"#f4efe4","text":"#42392e","line":"#8a7f6d","border":"#7a6c52","bg":"#fffdf8"},"dark":{"surface":"#262b34","text":"#f2f3f5","line":"#a8adb8","border":"#9aa4b8","bg":"#1f232b"}}};
+if(typeof mermaid==='undefined')return;
+var pres=Array.prototype.slice.call(document.querySelectorAll('pre.mermaid')).filter(function(p){if(p.hasAttribute('data-claude-mermaid-claimed'))return false;p.setAttribute('data-claude-mermaid-claimed','1');return true;});
+if(!pres.length)return;
+var mq=window.matchMedia?window.matchMedia('(prefers-color-scheme: dark)'):null;
+var root=document.documentElement;
+var items=pres.map(function(pre){
+var mount=document.createElement('div');mount.className='mermaid-diagram';
+return {pre:pre,mount:mount,src:pre.textContent||''};
+});
+var seq=0;
+var renderGen=0;
+var lastKey='';
+function pageBg(fallback){
+var els=[document.body,document.documentElement];
+for(var i=0;i<els.length;i++){
+var c=els[i]&&getComputedStyle(els[i]).backgroundColor;
+if(c&&c!=='transparent'&&c!=='rgba(0, 0, 0, 0)')return c;
+}
+return fallback;
+}
+function render(){
+var theme=root.getAttribute('data-theme');
+var dark=theme==='dark'||(!!(mq&&mq.matches)&&theme!=='light');
+var pal=dark?CFG.palettes.dark:CFG.palettes.light;
+var bg=pageBg(pal.bg);
+var key=(dark?'d':'l')+'|'+bg;
+if(key===lastKey)return;
+lastKey=key;
+var gen=++renderGen;
+var font=getComputedStyle(document.body).fontFamily||'sans-serif';
+var nat={useMaxWidth:false};
+mermaid.initialize({
+startOnLoad:false,securityLevel:'strict',theme:'base',
+flowchart:nat,sequence:nat,er:nat,state:nat,class:nat,pie:nat,
+gantt:nat,journey:nat,timeline:nat,gitGraph:nat,mindmap:nat,xyChart:nat,
+quadrantChart:nat,sankey:nat,c4:nat,requirement:nat,block:nat,
+packet:nat,kanban:nat,architecture:nat,radar:nat,
+themeVariables:{background:bg,mainBkg:pal.surface,primaryColor:pal.surface,
+primaryTextColor:pal.text,lineColor:pal.line,primaryBorderColor:pal.border,
+nodeBorder:pal.border,clusterBorder:pal.border,edgeLabelBackground:bg,
+clusterBkg:'rgba(127,127,127,0.07)',titleColor:pal.text,
+darkMode:dark,rowOdd:bg,rowEven:'rgba(127,127,127,0.07)',
+attributeBackgroundColorOdd:bg,attributeBackgroundColorEven:'rgba(127,127,127,0.07)',
+fontSize:'16px',fontFamily:font},
+themeCSS:'.node rect, .node circle, .node polygon, .node path, .cluster rect { stroke-width: 2px; }'
+});
+items.forEach(function(it){
+var id='claude-mermaid-'+seq++;
+mermaid.render(id,it.src).then(function(r){
+if(gen!==renderGen)return;
+var prev=it.pre.previousElementSibling;
+if(prev&&prev.className==='mermaid-diagram'&&prev!==it.mount)return;
+it.mount.innerHTML=r.svg;
+if(!it.mount.parentNode)it.pre.parentNode.insertBefore(it.mount,it.pre);
+it.pre.style.display='none';
+},function(){
+var scratch=document.getElementById(id);
+if(scratch)scratch.parentNode.removeChild(scratch);
+scratch=document.getElementById('d'+id);
+if(scratch)scratch.parentNode.removeChild(scratch);
+if(gen!==renderGen)return;
+if(it.mount.parentNode)it.mount.parentNode.removeChild(it.mount);
+it.pre.style.display='';
+});
+});
+}
+render();
+if(mq&&mq.addEventListener)mq.addEventListener('change',render);
+if(typeof MutationObserver!=='undefined')new MutationObserver(render).observe(root,{attributes:true,attributeFilter:['data-theme']});
+})();</script>
+<!--claude-mermaid-runtime-end-->
+</body>
+</html>
