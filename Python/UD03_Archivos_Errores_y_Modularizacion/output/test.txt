@@ -1,0 +1,6 @@
+Esto es un fichero de texto a modo de test
+que intentara servir para todos los ejercicios
+que lo requieran. Tiene varias lineas para que
+sirvan en ejercicios de contar letras, palabras, lineas
+o cualquier otra cosa. Se ira agregando contenido segun
+se requiera

@@ -1,0 +1,14 @@
+<Window
+    x:Class="CambioVentana.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Bienvenida"
+    Width="800"
+    Height="450">
+
+    <Grid>
+        <StackPanel>
+            <Label x:Name="lbusuario" />
+        </StackPanel>
+    </Grid>
+</Window>

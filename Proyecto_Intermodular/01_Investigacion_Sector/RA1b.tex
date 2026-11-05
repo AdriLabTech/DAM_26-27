@@ -1,0 +1,212 @@
+\input{pre.tex}
+\newcommand{\docid}{RA1b}
+\tikzset{
+  org/.style={draw=inkmuted,line width=0.4pt,rounded corners=2pt,fill=tinthi,text=ink,font=\sffamily\footnotesize,align=center,minimum height=0.9cm,inner sep=3pt},
+  crit/.style={fill=ink,draw=ink,text=paper,font=\sffamily\footnotesize\bfseries},
+  cima/.style={org,minimum width=3.6cm},
+  leaf/.style={org,fill=tint,draw=inkline,font=\sffamily\scriptsize,minimum height=0.6cm},
+  lk/.style={draw=inkmuted,line width=0.4pt},
+}
+\newcommand{\leyenda}{\vspace{4pt}{\mono\footnotesize\color{inkmuted}%
+ \tikz[baseline=-0.5ex]\node[org,crit,minimum height=0.35cm,minimum width=0.7cm]{};\ departamento cr\'itico\quad
+ \tikz[baseline=-0.5ex]\node[org,minimum height=0.35cm,minimum width=0.7cm]{};\ departamento\quad
+ \tikz[baseline=-0.5ex]\node[leaf,minimum height=0.35cm,minimum width=0.7cm]{};\ equipo o funci\'on}\par}
+
+\begin{document}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[ink,opacity=0.16] ([xshift=-3.2cm,yshift=-7.2cm]current page.north east) circle (4.6cm);
+  \draw[inkline,line width=0.4pt] ([xshift=2.3cm,yshift=-1.6cm]current page.north west) -- ([xshift=-2.3cm,yshift=-1.6cm]current page.north east);
+  \node[anchor=north west,inner sep=0] at ([xshift=2.3cm,yshift=-1.0cm]current page.north west) {\eyebrow{00 // Proyecto intermodular DAM}};
+  \node[anchor=north east,inner sep=0] at ([xshift=-2.3cm,yshift=-1.0cm]current page.north east) {\eyebrow{2026/2027}};
+  \node[anchor=south west,inner sep=0,text width=14cm] at ([xshift=2.3cm,yshift=7.5cm]current page.south west)
+    {{\serif\fontsize{54}{56}\selectfont\color{ink} Mapa\\ organizativo\\ sectorial\par}};
+  \node[anchor=south west,inner sep=0,text width=14cm] at ([xshift=2.3cm,yshift=5.2cm]current page.south west)
+    {{\mono\color{inkdim}RA1b \textperiodcentered\ 3 organigramas tipo \textperiodcentered\ 14 oct 2026\par}};
+  \draw[inkline,line width=0.4pt] ([xshift=2.3cm,yshift=3.2cm]current page.south west) -- ([xshift=-2.3cm,yshift=3.2cm]current page.south east);
+  \node[anchor=north west,inner sep=0] at ([xshift=2.3cm,yshift=3.0cm]current page.south west)
+    {\eyebrow{PAPER \#000000 \textperiodcentered\ INK \#cdc4ba \textperiodcentered\ GRAIN 5.5\% \textperiodcentered\ RADIUS 2 \textperiodcentered\ NO SHADOW}};
+\end{tikzpicture}
+\newpage
+\setcounter{tocdepth}{2}
+\renewcommand{\contentsname}{\mono\small\color{inkmuted}\MakeUppercase{\'Indice}}
+\tableofcontents
+\newpage
+
+\section{Objetivo y metodolog\'ia}
+Se dise\~nan tres organigramas tipo para una empresa de software (startup, pyme y gran empresa) y se identifican los departamentos cr\'iticos de cada una. Un departamento es \textbf{cr\'itico} cuando, si falla o no existe, la empresa deja de entregar su producto o de ingresar dinero.
+
+Los organigramas son \textbf{modelos gen\'ericos}, no el de una empresa concreta. Parten de lo observado en RA1a (Factorial y Holded como startups, Autentia y Plain Concepts como pymes, Indra y Amadeus como grandes) y de criterio propio. Los tama\~nos son orientativos y los nombres de los cargos var\'ian entre empresas. La clasificaci\'on de lo que es cr\'itico es una valoraci\'on propia, no un dato de una fuente.
+
+\section{Resumen comparativo}
+\rowcolors{2}{tint}{paper}
+\begin{center}\small
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}l >{\raggedright\arraybackslash}p{2.6cm} >{\raggedright\arraybackslash}p{2.9cm} X@{}}
+\rowcolor{paper}\cab{TIPO} & \cab{TAMA\~NO ORIENTATIVO} & \cab{ESTRUCTURA} & \cab{DEPARTAMENTOS CR\'ITICOS} \\
+\arrayrulecolor{inkmuted}\midrule
+Startup & 2--50 personas & plana, 2 niveles & Ingenier\'ia, Producto, Ventas y crecimiento \\
+Pyme & 50--250 personas & funcional, 3 niveles & Desarrollo, Proyectos y entrega, Comercial \\
+Gran empresa & 1.000+ personas & por divisiones, 4--5 niveles & Ingenier\'ia, Ciberseguridad, Datos, Infraestructura y cloud, Comercial \\
+\arrayrulecolor{inkmuted}\bottomrule
+\end{tabularx}
+\end{center}
+\rowcolors{1}{paper}{paper}
+
+\clearpage
+\section{Organigramas tipo}
+
+\subsection{Startup}
+\etiq{2--50 personas \textperiodcentered\ producto propio}\par\vspace{6pt}
+\begin{center}
+\begin{tikzpicture}
+  \node[org,cima] (ceo) at (0,0) {Fundador/a \textperiodcentered\ CEO};
+  \node[org,crit] (cto) at (-5.6,-1.9) {CTO\\Ingenier\'ia};
+  \node[org,crit] (pro) at (-1.9,-1.9) {Producto\\y dise\~no};
+  \node[org,crit] (gro) at (1.9,-1.9) {Ventas y\\crecimiento};
+  \node[org] (ope) at (5.6,-1.9) {Operaciones\\y administraci\'on};
+  \draw[lk] (ceo.south) -- ++(0,-0.45) coordinate (b);
+  \draw[lk] (-5.6,0 |- b) -- (5.6,0 |- b);
+  \foreach \x in {-5.6,-1.9,1.9,5.6} \draw[lk] (\x,0 |- b) -- (\x,-1.5);
+  \node[leaf,minimum width=3.1cm] (l1) at (-5.6,-3.2) {Backend};
+  \node[leaf,minimum width=3.1cm] (l2) at (-5.6,-3.95) {Frontend / m\'ovil};
+  \node[leaf,minimum width=3.1cm] (l3) at (-5.6,-4.7) {DevOps (compartido)};
+  \node[leaf,minimum width=3.1cm] (l4) at (-1.9,-3.2) {Producto (PM)};
+  \node[leaf,minimum width=3.1cm] (l5) at (-1.9,-3.95) {UX / UI};
+  \node[leaf,minimum width=3.1cm] (l6) at (1.9,-3.2) {Ventas};
+  \node[leaf,minimum width=3.1cm] (l7) at (1.9,-3.95) {Marketing};
+  \node[leaf,minimum width=3.1cm] (l8) at (1.9,-4.7) {Atenci\'on al cliente};
+  \node[leaf,minimum width=3.1cm] (l9) at (5.6,-3.2) {Finanzas y legal};
+  \node[leaf,minimum width=3.1cm] (l10) at (5.6,-3.95) {Personas (RR.\,HH.)};
+  \foreach \p/\q in {cto/l1,pro/l4,gro/l6,ope/l9} \draw[lk] (\p.south) -- (\q.north);
+  \foreach \p/\q in {l1/l2,l2/l3,l4/l5,l6/l7,l7/l8,l9/l10} \draw[lk] (\p.south) -- (\q.north);
+\end{tikzpicture}
+\end{center}
+\leyenda
+\subsection*{Departamentos cr\'iticos}
+\campo{Ingenier\'ia}{es el producto. Con un equipo de 3 a 10 personas, una baja o un mal fichaje frena el lanzamiento. DevOps no es un equipo aparte: lo asume el propio equipo de desarrollo}
+\campo{Producto y dise\~no}{decide qu\'e se construye. Construir lo equivocado agota la caja antes de encontrar el mercado}
+\campo{Ventas y crecimiento}{sin clientes de pago no hay siguiente ronda de financiaci\'on. En SaaS (Factorial, Holded en RA1a) es el motor de ingresos}
+\campo{Operaciones}{no es cr\'itico: finanzas, legal y personas las lleva el fundador o un gestor externo hasta que haya volumen}
+
+\clearpage
+\subsection{Pyme}
+\etiq{50--250 personas \textperiodcentered\ consultor\'ia o producto}\par\vspace{6pt}
+\begin{center}
+\begin{tikzpicture}
+  \node[org,cima] (dg) at (0,0) {Direcci\'on general};
+  \node[org] (dt) at (-5.6,-1.9) {Direcci\'on\\t\'ecnica};
+  \node[org,crit] (pm) at (-1.9,-1.9) {Proyectos\\y entrega};
+  \node[org,crit] (dc) at (1.9,-1.9) {Direcci\'on\\comercial};
+  \node[org] (da) at (5.6,-1.9) {Administraci\'on\\y personas};
+  \draw[lk] (dg.south) -- ++(0,-0.45) coordinate (b);
+  \draw[lk] (-5.6,0 |- b) -- (5.6,0 |- b);
+  \foreach \x in {-5.6,-1.9,1.9,5.6} \draw[lk] (\x,0 |- b) -- (\x,-1.5);
+  \node[leaf,crit,minimum width=3.1cm] (a1) at (-5.6,-3.2) {Desarrollo};
+  \node[leaf,minimum width=3.1cm] (a2) at (-5.6,-3.95) {QA y pruebas};
+  \node[leaf,minimum width=3.1cm] (a3) at (-5.6,-4.7) {Sistemas e infraestructura};
+  \node[leaf,minimum width=3.1cm] (a4) at (-5.6,-5.45) {Arquitectura};
+  \node[leaf,minimum width=3.1cm] (b1) at (-1.9,-3.2) {Jefes de proyecto};
+  \node[leaf,minimum width=3.1cm] (b2) at (-1.9,-3.95) {An\'alisis funcional};
+  \node[leaf,minimum width=3.1cm] (b3) at (-1.9,-4.7) {Equipos de proyecto};
+  \node[leaf,minimum width=3.1cm] (c1) at (1.9,-3.2) {Preventa};
+  \node[leaf,minimum width=3.1cm] (c2) at (1.9,-3.95) {Cuentas y ventas};
+  \node[leaf,minimum width=3.1cm] (c3) at (1.9,-4.7) {Marketing};
+  \node[leaf,minimum width=3.1cm] (d1) at (5.6,-3.2) {Finanzas};
+  \node[leaf,minimum width=3.1cm] (d2) at (5.6,-3.95) {RR.\,HH. y selecci\'on};
+  \node[leaf,minimum width=3.1cm] (d3) at (5.6,-4.7) {Legal y calidad};
+  \foreach \p/\q in {dt/a1,pm/b1,dc/c1,da/d1} \draw[lk] (\p.south) -- (\q.north);
+  \foreach \p/\q in {a1/a2,a2/a3,a3/a4,b1/b2,b2/b3,c1/c2,c2/c3,d1/d2,d2/d3} \draw[lk] (\p.south) -- (\q.north);
+\end{tikzpicture}
+\end{center}
+\leyenda
+\subsection*{Departamentos cr\'iticos}
+\campo{Desarrollo}{es lo que se factura. En una consultora (Autentia, Plain Concepts en RA1a) las horas del equipo son el ingreso}
+\campo{Proyectos y entrega}{coordina plazos, alcance y cliente. Si falla, los proyectos se retrasan o dan p\'erdidas aunque el c\'odigo sea bueno}
+\campo{Comercial}{la pyme depende de pocos clientes grandes; perder uno afecta a la ocupaci\'on del equipo}
+\campo{Resto}{necesarios pero no cr\'iticos: pueden tener pocas personas o externalizarse parcialmente}
+
+\clearpage
+\subsection{Gran empresa}
+\etiq{1.000+ personas \textperiodcentered\ divisiones}\par\vspace{6pt}
+\begin{center}
+\begin{tikzpicture}
+  \node[org,cima] (ceo) at (0,0) {Consejo \textperiodcentered\ CEO};
+  \def\w{2.4}
+  \node[org,crit,minimum width=\w cm] (t) at (-6.4,-1.9) {CTO\\Tecnolog\'ia};
+  \node[org,crit,minimum width=\w cm] (s) at (-3.85,-1.9) {CISO\\Seguridad};
+  \node[org,crit,minimum width=\w cm] (dd) at (-1.3,-1.9) {Datos\\e IA};
+  \node[org,crit,minimum width=\w cm] (c) at (1.3,-1.9) {CCO\\Comercial};
+  \node[org,minimum width=\w cm] (o) at (3.85,-1.9) {COO\\Operaciones};
+  \node[org,minimum width=\w cm] (f) at (6.4,-1.9) {CFO\\Finanzas};
+  \draw[lk] (ceo.south) -- ++(0,-0.45) coordinate (b);
+  \draw[lk] (-6.4,0 |- b) -- (6.4,0 |- b);
+  \foreach \x in {-6.4,-3.85,-1.3,1.3,3.85,6.4} \draw[lk] (\x,0 |- b) -- (\x,-1.5);
+  \node[leaf,minimum width=\w cm] (t1) at (-6.4,-3.2) {Ingenier\'ia};
+  \node[leaf,minimum width=\w cm] (t2) at (-6.4,-3.95) {Arquitectura};
+  \node[leaf,minimum width=\w cm] (t3) at (-6.4,-4.7) {Infraestructura y cloud};
+  \node[leaf,minimum width=\w cm] (t4) at (-6.4,-5.45) {DevOps / SRE};
+  \node[leaf,minimum width=\w cm] (t5) at (-6.4,-6.2) {QA};
+  \node[leaf,minimum width=\w cm] (s1) at (-3.85,-3.2) {Seguridad (SOC)};
+  \node[leaf,minimum width=\w cm] (s2) at (-3.85,-3.95) {Cumplimiento};
+  \node[leaf,minimum width=\w cm] (d1) at (-1.3,-3.2) {Ingenier\'ia de datos};
+  \node[leaf,minimum width=\w cm] (d2) at (-1.3,-3.95) {An\'alisis y BI};
+  \node[leaf,minimum width=\w cm] (d3) at (-1.3,-4.7) {IA / ML};
+  \node[leaf,minimum width=\w cm] (c1) at (1.3,-3.2) {Ventas};
+  \node[leaf,minimum width=\w cm] (c2) at (1.3,-3.95) {Marketing};
+  \node[leaf,minimum width=\w cm] (c3) at (1.3,-4.7) {\'Exito de cliente};
+  \node[leaf,minimum width=\w cm] (o1) at (3.85,-3.2) {Entrega de proyectos};
+  \node[leaf,minimum width=\w cm] (o2) at (3.85,-3.95) {Soporte};
+  \node[leaf,minimum width=\w cm] (o3) at (3.85,-4.7) {Compras};
+  \node[leaf,minimum width=\w cm] (f1) at (6.4,-3.2) {Contabilidad};
+  \node[leaf,minimum width=\w cm] (f2) at (6.4,-3.95) {Legal};
+  \node[leaf,minimum width=\w cm] (f3) at (6.4,-4.7) {Personas (RR.\,HH.)};
+  \foreach \p/\q in {t/t1,s/s1,dd/d1,c/c1,o/o1,f/f1} \draw[lk] (\p.south) -- (\q.north);
+  \foreach \p/\q in {t1/t2,t2/t3,t3/t4,t4/t5,s1/s2,d1/d2,d2/d3,c1/c2,c2/c3,o1/o2,o2/o3,f1/f2,f2/f3} \draw[lk] (\p.south) -- (\q.north);
+\end{tikzpicture}
+\end{center}
+\leyenda
+\subsection*{Departamentos cr\'iticos}
+\campo{Tecnolog\'ia}{ingenier\'ia, arquitectura e infraestructura sostienen el servicio. Una ca\'ida en cloud o en producci\'on se mide en dinero por minuto}
+\campo{Seguridad}{a esta escala hay datos de muchos clientes y obligaciones legales (RGPD) y de certificaci\'on (ISO 27001, vistas en RA1a). Una brecha da\~na la reputaci\'on y los contratos}
+\campo{Datos e IA}{base de las decisiones y de los productos con IA; en las multinacionales de RA1a es una l\'inea de negocio propia}
+\campo{Comercial}{sostiene el crecimiento y los grandes contratos}
+\campo{Operaciones y finanzas}{imprescindibles, pero repetibles y sustituibles: se estandarizan y se apoyan en proveedores}
+
+\clearpage
+\section{Matriz de departamentos cr\'iticos}
+\rowcolors{2}{tint}{paper}
+\begin{center}\small
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}l *{3}{>{\centering\arraybackslash}X}@{}}
+\rowcolor{paper}\cab{DEPARTAMENTO} & \cab{STARTUP} & \cab{PYME} & \cab{GRAN EMPRESA} \\
+\arrayrulecolor{inkmuted}\midrule
+Ingenier\'ia / Desarrollo & \crit & \crit & \crit \\
+Producto y dise\~no & \crit & \cPar & \cPar \\
+QA y pruebas & \cNada & \cPar & \cPar \\
+Infraestructura, DevOps y cloud & \cNada & \cPar & \crit \\
+Ciberseguridad & \cNada & \cNada & \crit \\
+Datos e IA & \cNada & \cNada & \crit \\
+Proyectos y entrega & \cNada & \crit & \cPar \\
+Comercial y ventas & \crit & \crit & \crit \\
+Atenci\'on al cliente y soporte & \cPar & \cPar & \cPar \\
+Finanzas y administraci\'on & \cNada & \cPar & \cPar \\
+RR.\,HH. y personas & \cNada & \cPar & \cPar \\
+Legal y cumplimiento & \cNada & \cNada & \cPar \\
+\arrayrulecolor{inkmuted}\bottomrule
+\end{tabularx}
+\end{center}
+\rowcolors{1}{paper}{paper}
+{\mono\footnotesize\color{inkmuted}$\bullet$ cr\'itico \quad $\circ$ existe, no cr\'itico \quad -- no existe como departamento propio (lo asume otro equipo o un externo).}
+
+\section{Conclusiones}
+\begin{itemize}
+\item \textbf{Ingenier\'ia y comercial son cr\'iticos en los tres tama\~nos}: sin producto o sin clientes no hay empresa.
+\item Al crecer, la estructura pasa de \textbf{personas polivalentes} (startup) a \textbf{funciones} (pyme) y a \textbf{divisiones} (gran empresa).
+\item Cuanto m\'as grande, m\'as departamentos aparecen como cr\'iticos por riesgo y no solo por producci\'on: \textbf{seguridad} y \textbf{datos} en la gran empresa.
+\item En la pyme la pieza propia es \textbf{proyectos y entrega}, porque su negocio es vender equipos y horas.
+\item Para un perfil DAM, los puestos de desarrollo, QA y DevOps (ver RA1c) est\'an en el departamento cr\'itico de los tres tipos.
+\end{itemize}
+
+\section{Limitaciones}
+Los organigramas son modelos simplificados de una empresa de software; en la realidad los nombres y las dependencias cambian (por ejemplo, el CISO puede depender del CTO o del CEO). Los rangos de tama\~no son aproximados y la lista de cr\'iticos es una valoraci\'on propia, no extra\'ida de una fuente. No se ha usado ning\'un organigrama real publicado de las empresas de RA1a.
+
+\end{document}

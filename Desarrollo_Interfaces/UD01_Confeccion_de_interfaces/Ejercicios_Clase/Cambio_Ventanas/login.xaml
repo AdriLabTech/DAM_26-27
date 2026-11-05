@@ -1,0 +1,29 @@
+<Window
+    x:Class="CambioVentana.login"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Login"
+    Width="800"
+    Height="450">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <Label Content="Usuario: " />
+
+            <TextBox x:Name="txtUsuario" />
+
+
+            <Button Grid.Column="1" Grid.Row="2" Content="Enviar" Click="Enviar_Form" MinWidth="100" MaxWidth="100" />
+
+        </StackPanel>
+    </Grid>
+</Window>

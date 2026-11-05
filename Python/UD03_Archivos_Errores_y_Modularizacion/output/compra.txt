@@ -1,0 +1,6 @@
+pan,1.20
+huevos,1.60
+pechuga,5.50
+lechuga,1.10
+chicles,0.70
+coche,12000

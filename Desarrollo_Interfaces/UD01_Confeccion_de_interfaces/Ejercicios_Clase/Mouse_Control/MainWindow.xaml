@@ -1,0 +1,19 @@
+<Window
+    x:Class="EventosRaton.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Mi primera aplicación"
+    Width="800"
+    Height="450">
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" Opacity="0.75" Margin="0,0,0,0"/>
+        <TextBlock DockPanel.Dock="Bottom" x:Name="txtEstado"/>
+        <Border BorderBrush="Black" BorderThickness="2">
+            <Canvas x:Name="lienzo" Background="Cornsilk" 
+                MouseMove="Lienzo_MouseMove" MouseDown="Lienzo_MouseDown" 
+                MouseWheel="Lienzo_MouseWheel" KeyDown="Window_KeyDown">
+                <Ellipse x:Name="punto" Width="20" Height="20" Fill="Red" />
+            </Canvas>
+        </Border>
+    </DockPanel>
+</Window>

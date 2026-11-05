@@ -1,0 +1,193 @@
+\input{pre.tex}
+\newcommand{\docid}{Caso pr\'actico 1}
+\usepackage{graphicx,fancyvrb}
+\newcommand{\fig}[3][\textwidth]{\begin{center}\begin{tcolorbox}[colback=tint,colframe=inkline,boxrule=0.4pt,arc=2pt,left=3pt,right=3pt,top=3pt,bottom=3pt,width=#1,halign=center,nobeforeafter]\includegraphics[width=\linewidth]{capturas/#2.png}\end{tcolorbox}\\[3pt]{\mono\footnotesize\color{inkmuted}#3}\end{center}}
+\usepackage{listings}
+\definecolor{cgold}{HTML}{E6B84A}
+\let\oldtexttt\texttt
+\renewcommand{\texttt}[1]{\textcolor{cgold}{\oldtexttt{#1}}}
+\definecolor{termbg}{HTML}{0B0D10}
+\definecolor{termline}{HTML}{6B665F}
+\definecolor{cprompt}{HTML}{7FD962}
+\definecolor{ccmd}{HTML}{82AAFF}
+\definecolor{cflag}{HTML}{FFB86C}
+\definecolor{cstr}{HTML}{A5E075}
+\definecolor{cvar}{HTML}{C792EA}
+\definecolor{ccom}{HTML}{6B7280}
+\definecolor{ctext}{HTML}{E6E1DA}
+% comando en linea: caja con borde y color de terminal
+\newcommand{\cmd}[1]{\tcbox[on line,colback=termbg,colframe=termline,boxrule=0.4pt,arc=2pt,left=2pt,right=2pt,top=1pt,bottom=1pt,boxsep=0pt,nobeforeafter]{{\mono\small\color{cprompt}\$\,\color{ctext}#1}}}
+\lstdefinelanguage{shellx}{alsoletter={-},
+  morekeywords=[1]{sudo,apt,systemctl,usermod,newgrp,docker,curl,nano,mkdir,cd,ip,psql,echo},
+  morekeywords=[2]{-y,-aG,-d,-U,-c,-I,-br,-a,--rm,--now,enable,update,upgrade,install,run,compose,exec,up,ps,version,manifest,inspect,docker-compose-v2,docker.io},
+  morecomment=[l]{\#},morestring=[b]",morestring=[b]'}
+\lstdefinelanguage{yamlx}{alsoletter={-_},morekeywords=[1]{services,volumes,environment,ports,depends_on},
+  morekeywords=[2]{db,web,image,container_name,restart,command,POSTGRES_DB,POSTGRES_USER,POSTGRES_PASSWORD,PGDATA,HOST,USER,PASSWORD},
+  morecomment=[l]{\#},morestring=[b]"}
+\lstdefinestyle{term}{basicstyle=\mono\small,keywordstyle=[1]\color{ccmd},keywordstyle=[2]\color{cflag},
+  stringstyle=\color{cstr},commentstyle=\color{ccom}\itshape,showstringspaces=false,columns=fullflexible,keepspaces=true,
+  literate={\$\ }{{\color{cprompt}\$\ }}2 {\$USER}{{\color{cvar}\$USER}}5,upquote=true}
+\tcbset{termbox/.style={enhanced,breakable,colupper=ctext,colback=termbg,colframe=termline,boxrule=0.6pt,arc=3pt,left=8pt,right=8pt,top=5pt,bottom=5pt,
+  listing only,before skip=6pt,after skip=8pt,
+  overlay={\node[anchor=north east,font=\mono\tiny,text=termline,inner sep=3pt] at (frame.north east) {#1};}}}
+\newtcblisting{shell}{termbox/.expanded=bash,listing options={style=term,language=shellx}}
+\newtcbinputlisting{\yamlfile}[1]{termbox/.expanded=yaml,listing file=#1,listing options={style=term,language=yamlx,tabsize=2}}
+
+\begin{document}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[ink,opacity=0.16] ([xshift=-3.2cm,yshift=-7.2cm]current page.north east) circle (4.6cm);
+  \draw[inkline,line width=0.4pt] ([xshift=2.3cm,yshift=-1.6cm]current page.north west) -- ([xshift=-2.3cm,yshift=-1.6cm]current page.north east);
+  \node[anchor=north west,inner sep=0] at ([xshift=2.3cm,yshift=-1.0cm]current page.north west) {\eyebrow{Sistemas de Gesti\'on Empresarial \textperiodcentered\ DAM}};
+  \node[anchor=north east,inner sep=0] at ([xshift=-2.3cm,yshift=-1.0cm]current page.north east) {\eyebrow{2026/2027}};
+  \node[anchor=south west,inner sep=0,text width=15cm] at ([xshift=2.3cm,yshift=7.5cm]current page.south west)
+    {{\serif\fontsize{50}{52}\selectfont\spaceskip=0.35em plus 0.1em\color{ink} Odoo 20\\ en una m\'aquina\\ virtual\par}};
+  \node[anchor=south west,inner sep=0,text width=15cm] at ([xshift=2.3cm,yshift=5.2cm]current page.south west)
+    {{\mono\color{inkdim}Caso pr\'actico 1 \textperiodcentered\ Manual de instalaci\'on y configuraci\'on \textperiodcentered\ 13 oct 2026\par}};
+  \draw[inkline,line width=0.4pt] ([xshift=2.3cm,yshift=3.2cm]current page.south west) -- ([xshift=-2.3cm,yshift=3.2cm]current page.south east);
+  \node[anchor=north west,inner sep=0] at ([xshift=2.3cm,yshift=3.0cm]current page.south west)
+    {\eyebrow{Ubuntu 26.04 \textperiodcentered\ Docker Compose \textperiodcentered\ Odoo 20.0 \textperiodcentered\ PostgreSQL 16}};
+\end{tikzpicture}
+\newpage
+\setcounter{tocdepth}{1}
+\renewcommand{\contentsname}{\mono\small\color{inkmuted}\MakeUppercase{\'Indice}}
+\tableofcontents
+\newpage
+
+\section{Objetivo y entorno}
+Instalar Odoo 20 con PostgreSQL 16 mediante Docker Compose dentro de una m\'aquina virtual Ubuntu y acceder a \'el desde el navegador del ordenador anfitri\'on en \texttt{http://localhost:8069}.
+
+\campo{Anfitri\'on}{Windows 11 con VMware Workstation}
+\campo{Hipervisor}{VMware Workstation (el enunciado menciona VirtualBox; el reenv\'io de puertos se hizo con el equivalente de VMware)}
+\campo{Sistema invitado}{Ubuntu 26.04 LTS (ISO \texttt{ubuntu-26.04-desktop-amd64})}
+\campo{Hardware VM}{8 GB de RAM, 4 procesadores, disco de 40 GB}
+\campo{Red}{NAT (\texttt{vmnet8}) con reenv\'io de puertos}
+\campo{Software}{Docker (paquetes de Ubuntu), Docker Compose v2, imagen \texttt{odoo:20.0}, imagen \texttt{postgres:16}}
+
+\section{Configuraci\'on de red de la VM}
+El adaptador de red de la VM est\'a en modo \textbf{NAT}: la VM comparte la IP del anfitri\'on y queda en una red privada, por lo que solo es accesible desde fuera mediante reenv\'io de puertos.
+
+\fig{1.3}{Fig. 1 \textperiodcentered\ Ajustes de la VM: adaptador de red en modo NAT.}
+
+Dentro de la VM, la interfaz \texttt{ens33} recibe por DHCP la IP \texttt{192.168.231.128/24} y la puerta de enlace es \texttt{192.168.231.2}, el router virtual de \texttt{vmnet8}.
+
+\fig{1.1}{Fig. 2 \textperiodcentered\ \cmd{ip -br a} e \cmd{ip route} en la VM.}
+
+En el editor de red virtual de VMware (NAT Settings de \texttt{vmnet8}, subred \texttt{192.168.231.0/24}) se crearon dos reglas de reenv\'io de puertos:
+
+\rowcolors{2}{tint}{paper}
+\begin{center}\small
+\begin{tabularx}{\textwidth}{@{}l l l X@{}}
+\rowcolor{paper}\cab{PUERTO ANFITRI\'ON} & \cab{TIPO} & \cab{DESTINO EN LA VM} & \cab{USO} \\
+\arrayrulecolor{inkmuted}\midrule
+8069 & TCP & 192.168.231.128:8069 & Odoo \\
+2222 & TCP & 192.168.231.128:22 & SSH \\
+\arrayrulecolor{inkmuted}\bottomrule
+\end{tabularx}
+\end{center}
+\rowcolors{1}{paper}{paper}
+
+\fig[0.6\textwidth]{1.2}{Fig. 3 \textperiodcentered\ NAT Settings de \texttt{vmnet8} con el reenv\'io de puertos.}
+
+\section{Instalaci\'on de Docker}
+Se actualiz\'o el sistema y se instalaron Docker y el plugin de Compose desde los repositorios de Ubuntu (ver el problema 1 en la secci\'on de problemas):
+
+\begin{shell}
+$ sudo apt update && sudo apt upgrade -y
+$ sudo apt install -y docker.io docker-compose-v2
+$ sudo systemctl enable --now docker
+$ sudo usermod -aG docker $USER
+$ newgrp docker
+$ docker --version
+$ docker compose version
+\end{shell}
+
+Se verific\'o la instalaci\'on con la imagen de prueba:
+
+\begin{shell}
+$ docker run --rm hello-world
+\end{shell}
+
+\fig{2.2}{Fig. 4 \textperiodcentered\ \cmd{hello-world}: Docker funciona y descarga im\'agenes de Docker Hub.}
+
+\clearpage\section{Fichero docker-compose.yaml}
+Se cre\'o el directorio de trabajo \texttt{\~{}/odoo20} y se comprob\'o antes que la etiqueta \texttt{odoo:20.0} existe en el registro:
+
+\fig{2.3}{Fig. 5 \textperiodcentered\ \cmd{docker manifest inspect odoo:20.0}: la imagen existe.}
+
+El fichero se edit\'o con \texttt{nano}. Contenido completo (entregable 1):
+
+\yamlfile{docker-compose.yaml}
+
+Puntos relevantes:
+\begin{itemize}
+\item El servicio \texttt{web} se conecta a PostgreSQL usando el nombre del servicio (\texttt{HOST: db}); Compose crea una red por defecto con DNS interno.
+\item Solo se publica el puerto \texttt{8069} de Odoo; PostgreSQL no se expone fuera de la red de Compose.
+\item Los datos persisten en dos vol\'umenes con nombre (\texttt{odoo-db-data} y \texttt{odoo-web-data}).
+\item \texttt{--http-interface=0.0.0.0} hace que Odoo escuche en todas las interfaces del contenedor.
+\item \texttt{restart: unless-stopped} reinicia los contenedores tras un reinicio de la VM.
+\end{itemize}
+
+\fig{2.4}{Fig. 6 \textperiodcentered\ \texttt{docker-compose.yaml} en nano (la l\'inea del volumen de \texttt{db} aparece cortada solo por el ancho de pantalla de nano).}
+
+\section{Arranque y estado de los contenedores}
+Se levant\'o la pila con \cmd{docker compose up -d}. Docker descarg\'o las im\'agenes, cre\'o la red \texttt{odoo20\_default}, los dos vol\'umenes y arranc\'o los contenedores \texttt{odoo\_db} y \texttt{odoo\_web}. La salida de \cmd{docker compose ps} muestra ambos en estado \emph{Up} y el puerto \texttt{0.0.0.0:8069->8069/tcp} publicado.
+
+\fig{2.5}{Fig. 7 \textperiodcentered\ Descarga de im\'agenes, creaci\'on de recursos y \cmd{docker compose ps}.}
+
+Tras a\~nadir la l\'inea \texttt{command} al compose (secci\'on de problemas) se volvi\'o a ejecutar \cmd{docker compose up -d} y se comprob\'o desde la propia VM que Odoo responde: \cmd{curl -I http://localhost:8069/web/login} devuelve \texttt{303 SEE OTHER} hacia \texttt{/web/database/selector} y la cabecera \texttt{server: odoo/20.0}. Eso es lo esperado cuando todav\'ia no existe ninguna base de datos.
+
+\fig{3.2}{Fig. 8 \textperiodcentered\ \cmd{docker compose up -d} y \cmd{curl -I} contra Odoo desde la VM.}
+
+\section{Acceso desde el anfitri\'on}
+Desde el navegador de Windows (anfitri\'on) se abri\'o \texttt{http://localhost:8069}. VMware reenv\'ia el puerto 8069 a la VM y Odoo muestra el gestor de bases de datos (\texttt{/web/database/selector}), lo que confirma que la cadena anfitri\'on $\to$ NAT $\to$ VM $\to$ contenedor \texttt{web} funciona.
+
+\fig{3.3}{Fig. 9 \textperiodcentered\ Pantalla de inicio de Odoo 20 en el navegador del anfitri\'on, formulario de creaci\'on de base de datos.}
+
+Odoo genera una \emph{master password} cuando el gestor de bases de datos no est\'a protegido; hay que guardarla porque se pide en operaciones posteriores sobre bases de datos (copia, borrado, restauraci\'on).
+
+\section{Creaci\'on de la base de datos e instalaci\'on de CRM}
+En el formulario del gestor de bases de datos se rellenaron los siguientes campos y se puls\'o \emph{Create database}:
+
+\campo{Base de datos}{\texttt{MiOdooDatabase}}
+\campo{Idioma}{Spanish / Espa\~nol}
+\campo{Datos de demostraci\'on}{desactivados}
+\campo{Usuario administrador}{el correo y la contrase\~na indicados en el formulario (la contrase\~na aparece oculta)}
+
+\fig{odoo}{Fig. 12 \textperiodcentered\ Formulario de creaci\'on de la base de datos \texttt{MiOdooDatabase}; abajo, los contenedores en ejecuci\'on.}
+
+Al terminar la creaci\'on, Odoo inicia sesi\'on autom\'aticamente con el usuario administrador y abre la aplicaci\'on \emph{Conversaciones} (con el mensaje de bienvenida de OdooBot). En el men\'u de aplicaciones aparece \textbf{CRM} junto a Conversaciones, Calendario, Contactos, Aplicaciones y Ajustes, lo que confirma que la aplicaci\'on est\'a instalada en la base de datos creada y que el objetivo del caso pr\'actico est\'a cumplido.
+
+\fig{odoo2}{Fig. 13 \textperiodcentered\ Odoo 20 con la base de datos creada: el men\'u de aplicaciones incluye CRM.}
+
+\section{Versi\'on de PostgreSQL}
+Con la consulta \texttt{SELECT version();} ejecutada dentro del contenedor \texttt{db}:
+
+\begin{shell}
+$ docker compose exec db psql -U odoo -d postgres -c "SELECT version();"
+\end{shell}
+
+El resultado es \textbf{PostgreSQL 16.15} (Debian 16.15-1.pgdg13+2, x86\_64, 64-bit), coherente con la imagen \texttt{postgres:16}.
+
+\fig{3.1}{Fig. 10 \textperiodcentered\ Versi\'on de PostgreSQL dentro del contenedor \texttt{odoo\_db}.}
+
+\section{Problemas encontrados y soluciones}
+
+\subsection{Docker}
+\etiq{Repositorio oficial no disponible}\par\vspace{4pt}
+\campo{S\'intoma}{\cmd{sudo apt install docker-ce} y el resto de paquetes oficiales de Docker fallan con \emph{El paquete docker-ce no tiene un candidato para la instalaci\'on}.}
+\campo{Causa}{Los paquetes \texttt{docker-ce} no se encuentran para Ubuntu 26.04 (\emph{resolute}) en los repositorios configurados. La causa exacta (repositorio de Docker sin a\~nadir o sin soporte para esa versi\'on) \nv.}
+\campo{Soluci\'on}{Usar los paquetes de los repositorios de Ubuntu: \cmd{sudo apt install -y docker.io docker-compose-v2}. Antes se intent\'o borrar \texttt{/etc/apt/sources.list.d/docker.list}, que no exist\'ia (\emph{No existe el archivo}), sin efecto.}
+
+\fig{2.1}{Fig. 11 \textperiodcentered\ Error de instalaci\'on de \texttt{docker-ce} y cambio a \texttt{docker.io}.}
+
+\subsection{Permisos}
+\etiq{Docker sin sudo}\par\vspace{4pt}
+\campo{Soluci\'on}{A\~nadir el usuario al grupo \texttt{docker} (\cmd{sudo usermod -aG docker \$USER}) y activar el grupo en la sesi\'on actual con \cmd{newgrp docker}, sin cerrar sesi\'on.}
+
+\subsection{Odoo}
+\etiq{Escucha en todas las interfaces}\par\vspace{4pt}
+\campo{Cambio}{La primera versi\'on del compose (31 l\'ineas) no inclu\'ia \texttt{command}. Despu\'es se a\~nadi\'o \texttt{command: ["odoo", "--http-interface=0.0.0.0"]} (32 l\'ineas) y se recre\'o la pila.}
+\campo{Motivo}{Garantizar que Odoo acepta conexiones desde fuera del contenedor, necesarias para el puerto publicado y el reenv\'io de VMware. Si fue estrictamente necesario con la imagen \texttt{odoo:20.0} \nv.}
+
+\end{document}

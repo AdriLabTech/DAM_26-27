@@ -1,0 +1,288 @@
+\documentclass[10.5pt,a4paper]{article}
+% Estilo visual Ryoku: papel y tinta (PAPER #000000, INK #cdc4ba), sin sombras, radio minimo
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{XCharter}          % titulares (alternativa serif a Fraunces en pdflatex)
+\usepackage[sfdefault,scaled=0.95]{FiraSans}  % UI y cuerpo (Inter y Space Grotesk no estan en pdflatex)
+\usepackage[scaled=0.9]{inconsolata}   % datos y etiquetas (alternativa a Space Mono)
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[spanish]{babel}
+\usepackage[margin=2.3cm,top=2.2cm,bottom=2.4cm]{geometry}
+\usepackage[table]{xcolor}
+\usepackage{microtype,booktabs,tabularx,longtable,tikz,titlesec,fancyhdr,enumitem}
+\usepackage[most]{tcolorbox}
+\usepackage{needspace}
+\newcommand{\cab}[1]{\mbox{\mono\footnotesize\color{inkmuted}#1}}
+\definecolor{paper}{HTML}{000000}
+\definecolor{ink}{HTML}{CDC4BA}
+\definecolor{inkdim}{HTML}{B0A9A0}
+\definecolor{inkmuted}{HTML}{958F87}
+\definecolor{tint}{HTML}{121110}
+\definecolor{tinthi}{HTML}{1E1C1A}
+\definecolor{inkline}{HTML}{3A3733}   % ink al ~.26 sobre negro
+\pagecolor{paper}\color{ink}
+\usepackage[colorlinks=true,linkcolor=ink,urlcolor=inkdim,citecolor=ink]{hyperref}
+
+\newcommand{\serif}{\rmfamily}
+\newcommand{\mono}{\ttfamily}
+\newcommand{\eyebrow}[1]{{\mono\footnotesize\color{inkmuted}\MakeUppercase{#1}}}
+\newcommand{\cSi}{\textcolor{ink}{\large$\bullet$}}\newcommand{\cDudo}{\textcolor{inkmuted}{?}}\newcommand{\cNada}{\textcolor{inkmuted}{--}}
+\newcommand{\nv}{\textcolor{inkmuted}{\textit{No verificado}}}
+
+\titleformat{\section}{\serif\huge\color{ink}}{\mono\small\color{inkmuted}\twodigits{\thesection}\ //\ }{0pt}{}[\vspace{2pt}{\color{inkline}\titlerule}]
+\titleformat{\subsection}[hang]{\serif\fontsize{28}{30}\selectfont\color{ink}}{\mono\small\color{inkmuted}\thesubsection\ //\ }{0pt}{}
+\titleformat{name=\subsection,numberless}{\mono\small\color{inkdim}}{}{0pt}{}\titlespacing*{\subsection}{0pt}{16pt}{6pt}
+\titlespacing*{\section}{0pt}{22pt}{10pt}
+\titlespacing*{\subsection}{0pt}{16pt}{6pt}
+\newcommand{\twodigits}[1]{\ifnum#1<10 0#1\else#1\fi}
+
+\pagestyle{fancy}\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\mono\footnotesize\color{inkmuted}RYOKU \textperiodcentered\ RA1a}
+\fancyfoot[R]{\mono\footnotesize\color{inkmuted}\thepage}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[R]{\mono\footnotesize\color{inkmuted}\thepage}}
+\arrayrulecolor{inkline}
+\setlength{\aboverulesep}{3pt}\setlength{\belowrulesep}{3pt}
+\setlength{\parindent}{0pt}\setlength{\parskip}{5pt}
+\setlist[itemize]{leftmargin=1.2em,itemsep=3pt,label={\color{inkmuted}--}}
+
+\newcommand{\etiq}[1]{\tikz[baseline=(t.base)]\node[draw=inkmuted,line width=0.4pt,rounded corners=2pt,inner xsep=6pt,inner ysep=3pt,text=ink,font=\mono\footnotesize] (t) {\MakeUppercase{#1}};}
+\newcommand{\kpi}[2]{\begin{minipage}[t]{0.235\textwidth}{\mono\scriptsize\color{inkmuted}\MakeUppercase{#1}}\\[2pt]{\serif\large\color{ink}#2}\end{minipage}}
+\newenvironment{ficha}[6]{\needspace{22\baselineskip}\subsection{#1}\par\nopagebreak\vspace{-4pt}\etiq{#2}\par\vspace{8pt}%
+ \begin{tcolorbox}[enhanced,colback=tint,colframe=inkline,boxrule=0.4pt,arc=2pt,left=8pt,right=8pt,top=7pt,bottom=7pt,boxsep=0pt]
+ \kpi{Empleados}{#3}\hfill\kpi{Fundaci\'on}{#4}\hfill\kpi{Modelo}{#5}\hfill\kpi{Cloud}{#6}
+ \end{tcolorbox}\vspace{6pt}{\color{inkline}\hrule height 0.4pt}\vspace{3pt}}{}
+\newcommand{\campo}[2]{\noindent\hangindent=3.4cm\hangafter=1\makebox[3.4cm][l]{\mono\footnotesize\color{inkmuted}\MakeUppercase{#1}}#2\par\vspace{2pt}{\color{inkline}\hrule height 0.4pt}\vspace{3pt}}
+
+\begin{document}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[ink,opacity=0.16] ([xshift=-3.2cm,yshift=-7.2cm]current page.north east) circle (4.6cm);
+  \draw[inkline,line width=0.4pt] ([xshift=2.3cm,yshift=-1.6cm]current page.north west) -- ([xshift=-2.3cm,yshift=-1.6cm]current page.north east);
+  \node[anchor=north west,inner sep=0] at ([xshift=2.3cm,yshift=-1.0cm]current page.north west) {\eyebrow{00 // Proyecto intermodular DAM}};
+  \node[anchor=north east,inner sep=0] at ([xshift=-2.3cm,yshift=-1.0cm]current page.north east) {\eyebrow{2026/2027}};
+  \node[anchor=south west,inner sep=0,text width=14cm] at ([xshift=2.3cm,yshift=7.5cm]current page.south west)
+    {{\serif\fontsize{54}{56}\selectfont\color{ink} Estado\\ tecnol\'ogico\\ del\hspace{0.3em}sector\par}};
+  \node[anchor=south west,inner sep=0,text width=14cm] at ([xshift=2.3cm,yshift=5.2cm]current page.south west)
+    {{\mono\color{inkdim}RA1a \textperiodcentered\ 8 empresas IT \textperiodcentered\ 8 oct 2026\par}};
+  \draw[inkline,line width=0.4pt] ([xshift=2.3cm,yshift=3.2cm]current page.south west) -- ([xshift=-2.3cm,yshift=3.2cm]current page.south east);
+  \node[anchor=north west,inner sep=0] at ([xshift=2.3cm,yshift=3.0cm]current page.south west)
+    {\eyebrow{PAPER \#000000 \textperiodcentered\ INK \#cdc4ba \textperiodcentered\ GRAIN 5.5\% \textperiodcentered\ RADIUS 2 \textperiodcentered\ NO SHADOW}};
+\end{tikzpicture}
+\newpage
+\setcounter{tocdepth}{2}
+\renewcommand{\contentsname}{\mono\small\color{inkmuted}\MakeUppercase{\'Indice}}
+\tableofcontents
+\newpage
+
+\section{Objetivo y metodolog\'ia}
+Se investigan 8 empresas del sector IT (2 startups, 2 pymes, 2 grandes empresas y 2 multinacionales), analizando: tecnolog\'ias (frontend, backend, base de datos, cloud), herramientas de CI/CD y testing, metodolog\'ia de desarrollo, certificaciones de seguridad y calidad, y modelo de negocio.
+
+Fuentes: webs oficiales cuando han sido accesibles (Indra, Izertis, Plain Concepts, SAP Trust Center), centros de ayuda y seguridad de las empresas, ofertas de empleo, prensa y agregadores. Lo que no se ha podido confirmar con una fuente se marca como \nv{} y \textbf{no} se ha inventado. Las tecnolog\'ias extra\'idas de ofertas de empleo son autodeclaradas y pueden estar desfasadas.
+
+\section{Resumen comparativo}
+\rowcolors{2}{tint}{paper}
+\begin{center}\small
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}l l l l X@{}}
+\rowcolor{paper}\cab{EMPRESA} & \cab{TIPO} & \cab{MODELO} & \cab{CLOUD} & \cab{STACK DESTACADO} \\
+\arrayrulecolor{inkmuted}\midrule
+Factorial & Startup & SaaS & AWS & Rails, React/TS, MySQL \\
+Holded & Startup & SaaS & Google Cloud & PHP + Go, React, MongoDB \\
+Autentia & Pyme & Consultor\'ia & \nv & Java, \'agil \\
+Plain Concepts & Pyme & Consultor\'ia & Azure & .NET, Angular/React/Vue \\
+Indra & Grande & Consultor\'ia/defensa & \nv & \nv \\
+Amadeus & Grande & SaaS B2B & Azure & Java Spring Boot, Angular \\
+Netflix & Multinacional & Streaming B2C & AWS & Java Spring Boot, React, Cassandra \\
+SAP & Multinacional & SaaS/ERP & BTP & ABAP, HANA, Fiori \\
+\arrayrulecolor{inkmuted}\bottomrule
+\end{tabularx}
+\end{center}
+\rowcolors{1}{paper}{paper}
+
+\section{Panorama}
+\subsection*{Tama\~no (empleados, escala logar\'itmica)}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=0.62cm,font=\mono\footnotesize]
+  \foreach \v/\l in {2/100,3/1\,000,4/10\,000,5/100\,000}{
+    \pgfmathsetmacro{\xx}{(\v-2)*3.45}
+    \draw[inkline,line width=0.4pt] (\xx+3.0,0.4) -- (\xx+3.0,-8.3);
+    \node[color=inkmuted,anchor=north] at (\xx+3.0,-8.3) {\l};
+  }
+  \foreach \n/\v/\lab/\r in {Factorial/2.978/{$\approx$950}/0, Holded/2.079/{120+}/1, Autentia/2.176/{150}/2, {Plain Concepts}/2.845/{700+}/3, Indra/4.792/{62\,000+}/4, Amadeus/4.301/{$\approx$20\,000}/5, Netflix/4.204/{$\approx$16\,000}/6, SAP/5.072/{$\approx$118\,000}/7}{
+    \pgfmathsetmacro{\w}{(\v-2)*3.45}
+    \node[anchor=east,color=ink] at (2.85,-\r) {\n};
+    \fill[ink,opacity=0.85] (3.0,-\r-0.25) rectangle ++(\w,0.5);
+    \node[anchor=west,color=inkdim] at (3.1+\w,-\r) {\lab};
+  }
+\end{tikzpicture}
+\end{center}
+{\mono\footnotesize\color{inkmuted}Escala logar\'itmica: cada marca multiplica por 10. Holded y Autentia son rangos de fuentes de terceros.}
+
+\subsection*{Proveedor cloud}
+\begin{center}
+\begin{tikzpicture}[font=\mono\footnotesize]
+  \foreach \prov/\r/\list in {AWS/0/{Factorial,Netflix}, Azure/1/{Plain Concepts,Amadeus}, {Google Cloud}/2/{Holded}, {SAP BTP}/3/{SAP}, {No verificado}/4/{Autentia,Indra}}{
+    \node[anchor=east,color=inkmuted] at (2.3,-\r*0.95) {\MakeUppercase{\prov}};
+    \foreach \c [count=\k from 0] in \list {
+      \node[anchor=west,draw=inkmuted,line width=0.4pt,rounded corners=2pt,fill=tinthi,text=ink,minimum width=2.7cm,minimum height=0.62cm,inner sep=2pt] at (2.5+\k*2.9,-\r*0.95) {\c};
+    }
+  }
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Certificaciones confirmadas}
+\begin{center}\small
+\rowcolors{2}{tint}{paper}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}l *{5}{>{\centering\arraybackslash}X}@{}}
+\rowcolor{paper}\cab{EMPRESA} & \cab{ISO 27001} & \cab{SOC 2} & \cab{ISO 9001} & \cab{ENS} & \cab{CMMI} \\
+\arrayrulecolor{inkmuted}\midrule
+Factorial & \cSi & \cSi & \cDudo & \cSi & \cDudo \\
+Holded & \cNada & \cDudo & \cDudo & \cDudo & \cDudo \\
+Autentia$^{\dagger}$ & \cSi & \cDudo & \cSi & \cSi & \cSi \\
+Plain Concepts & \cDudo & \cDudo & \cDudo & \cDudo & \cDudo \\
+Indra & \cSi & \cDudo & \cSi & \cSi & \cSi \\
+Amadeus & \cDudo & \cDudo & \cDudo & \cDudo & \cDudo \\
+Netflix & \cDudo & \cDudo & \cDudo & \cDudo & \cDudo \\
+SAP & \cSi & \cSi & \cSi & \cDudo & \cDudo \\
+\arrayrulecolor{inkmuted}\bottomrule
+\end{tabularx}
+\rowcolors{1}{paper}{paper}
+\end{center}
+{\mono\footnotesize\color{inkmuted}$\bullet$ confirmado en fuente \quad ? no confirmado \quad -- buscado y no encontrado. $^{\dagger}$ Certificaciones del grupo Izertis. Plain Concepts tiene sellos de partner Microsoft, no ISO.}
+
+\clearpage
+\section{Fichas de empresa}
+
+
+\begin{ficha}{Factorial}{Startup}{$\approx$950}{2016}{SaaS \textperiodcentered\ B2B}{AWS}
+\campo{Web}{\url{https://factorialhr.com}}
+\campo{Ubicaci\'on}{Barcelona, Espa\~na (sede principal)}
+\campo{Fundaci\'on}{2016}
+\campo{Empleados}{500--1000 (una fuente cita m\'as de 950)}
+\campo{Modelo de negocio}{SaaS, B2B (pymes). Presencia en m\'as de 65 pa\'ises seg\'un una fuente. Financiaci\'on: Serie C de 120\,M\$ (oct. 2022, Atomico, valoraci\'on 1.000\,M\$) y 120\,M\$ de deuda en marzo de 2025. Facturaci\'on: \nv}
+\campo{Productos}{gesti\'on de RR.\,HH. (fichaje, ausencias), n\'ominas y talento, Factorial AI (2023, AWS Marketplace)}
+\campo{Backend}{Ruby on Rails, Sidekiq, GraphQL}
+\campo{Frontend}{React, TypeScript, React Native}
+\campo{Base de datos}{MySQL, Redis}
+\campo{Cloud}{AWS; los datos de clientes se alojan en servidores de AWS en Fr\'ancfort (prensa alemana)}
+\campo{CI/CD y testing}{GitHub, Docker, Kubernetes, Terraform. Testing: \nv}
+\campo{Metodolog\'ia}{\nv}
+\campo{Certificaciones}{ISO/IEC 27001 (la versi\'on indicada var\'ia seg\'un la fuente: 2022 en prensa, 2023 en su Trust Center), SOC 2 Type 2 y ENS nivel Alto seg\'un su Trust Center; cumplimiento RGPD, UK-GDPR, LGPD, CCPA; programa de vulnerabilidades en HackerOne}
+\end{ficha}
+
+\begin{ficha}{Holded}{Startup}{120--500}{2016}{SaaS \textperiodcentered\ B2B}{Google Cloud}
+\campo{Web}{\url{https://www.holded.com}}
+\campo{Ubicaci\'on}{Barcelona, Espa\~na}
+\campo{Fundaci\'on}{2016 (Javi Fondevila y Bernat Ripoll)}
+\campo{Empleados}{120--500 (ofertas: ``+120''; perfiles: 201--500)}
+\campo{Modelo de negocio}{SaaS (ERP en la nube), B2B (pymes y aut\'onomos). M\'as de 20.000 empresas clientes seg\'un una oferta antigua. Facturaci\'on: \nv}
+\campo{Productos}{facturaci\'on y contabilidad; inventario, proyectos y CRM; gesti\'on de equipos}
+\campo{Backend}{PHP (principal) y microservicios en Go}
+\campo{Frontend}{React, TypeScript, Node.js}
+\campo{Base de datos}{MongoDB (base operacional)}
+\campo{Cloud}{Google Cloud, servidores en la Uni\'on Europea, cifrado en tr\'ansito y en reposo (centro de ayuda oficial)}
+\campo{CI/CD y testing}{Git; el resto \nv}
+\campo{Metodolog\'ia}{squads aut\'onomos (``startups dentro de una startup''); marco concreto \nv}
+\campo{Certificaciones}{No se ha encontrado ninguna certificaci\'on ISO. Declara cumplir el RGPD y estar inscrita en la AEPD}
+\end{ficha}
+
+
+\begin{ficha}{Autentia (grupo Izertis)}{Pyme}{51--200}{2003}{Consultor\'ia}{\nv}
+\campo{Web}{\url{https://www.autentia.com} (redirige a \url{https://www.izertis.com})}
+\campo{Ubicaci\'on}{San Fernando de Henares (Madrid); adquirida por el grupo Izertis en marzo de 2023}
+\campo{Fundaci\'on}{2003}
+\campo{Empleados}{51--200 (Levels.fyi: 150)}
+\campo{Modelo de negocio}{consultor\'ia, desarrollo a medida y formaci\'on, B2B. Facturaci\'on: \nv}
+\campo{Servicios}{desarrollo y arquitectura Java e iOS, auditor\'ias de software, formaci\'on, coaching e implantaci\'on de metodolog\'ias \'agiles}
+\campo{Backend / Frontend / BD}{Java como foco principal; el resto \nv}
+\campo{Cloud}{Izertis es partner de Microsoft, AWS y Google Cloud; el uso concreto de Autentia \nv}
+\campo{CI/CD y testing}{Izertis declara DevOps; herramientas concretas \nv}
+\campo{Metodolog\'ia}{metodolog\'ias \'agiles (servicio principal de la empresa)}
+\campo{Certificaciones}{la web de Izertis lista ISO 27001, ISO 9001, ISO 20000, ENS y CMMI. Se refieren al grupo; que apliquen a Autentia \nv}
+\end{ficha}
+
+\begin{ficha}{Plain Concepts}{Pyme}{700+}{2006}{Consultor\'ia}{Azure}
+\campo{Web}{\url{https://www.plainconcepts.com}}
+\campo{Ubicaci\'on}{Bilbao (domicilio social); origen en Le\'on; oficinas en Espa\~na, EE.\,UU., Reino Unido, Alemania, Pa\'ises Bajos, EAU y Australia}
+\campo{Fundaci\'on}{2006 (por cuatro Microsoft MVP)}
+\campo{Empleados}{m\'as de 700 y 26 centros de entrega (web oficial); 2.400 proyectos}
+\campo{Modelo de negocio}{consultor\'ia y software personalizado, B2B. Facturaci\'on: \nv}
+\campo{Servicios}{transformaci\'on e IA, ingenier\'ia de software, datos y anal\'itica, ciberseguridad, infraestructura y cloud}
+\campo{Backend}{.NET / C\#, Python}
+\campo{Frontend}{Angular, React, Vue}
+\campo{Base de datos}{SQL, Spark}
+\campo{Cloud}{Microsoft Azure (tambi\'en AWS)}
+\campo{CI/CD y testing}{\nv}
+\campo{Metodolog\'ia}{valida ideas pronto y escala lo que aporta valor (web oficial); marco concreto \nv}
+\campo{Certificaciones}{Microsoft Gold Partner, AI Partner y Mixed Reality Partner; 12 Microsoft MVP; ISO \nv}
+\end{ficha}
+
+
+\begin{ficha}{Indra Group}{Gran empresa}{62.000+}{1993$^{*}$}{Consultor\'ia}{\nv}
+\campo{Web}{\url{https://www.indragroup.com}}
+\campo{Ubicaci\'on}{Madrid (Alcobendas), Espa\~na}
+\campo{Fundaci\'on}{1993 (conocimiento general, \nv{} en esta investigaci\'on)}
+\campo{Empleados}{m\'as de 62.000 (web oficial)}
+\campo{Modelo de negocio}{tecnolog\'ia y consultor\'ia; B2B y Gobierno. Ventas 2025: 5.457\,M\texteuro{}{} (+13\,\%), EBIT con margen del 9,5\,\%, beneficio neto 436\,M\texteuro{}, cartera 16.083\,M\texteuro{}. Presencia comercial en m\'as de 140 pa\'ises; I+D+i del 8,7\,\% de las ventas}
+\campo{\'Areas}{Defensa, Tr\'afico a\'ereo, Espacio, Movilidad, IndraMind (IA soberana y ciberresiliencia) y Minsait (plataformas digitales, anal\'itica e IA)}
+\campo{Stack y DevOps}{no publicado en la web corporativa: \nv}
+\campo{Metodolog\'ia}{\nv}
+\campo{Certificaciones}{la web oficial lista ISO 27001, ISO 9001, CMMI y ENS (alcance concreto \nv)}
+\end{ficha}
+
+\begin{ficha}{Amadeus IT Group}{Gran empresa}{$\approx$20.000}{1987$^{*}$}{SaaS \textperiodcentered\ B2B}{Azure}
+\campo{Web}{\url{https://amadeus.com}}
+\campo{Ubicaci\'on}{Madrid, Espa\~na}
+\campo{Fundaci\'on}{1987 (conocimiento general, \nv)}
+\campo{Empleados}{unos 20.000 (20.643 en 2024 seg\'un Macrotrends/TipRanks)}
+\campo{Modelo de negocio}{plataformas y software para turismo, B2B (aerolíneas, hoteles, agencias). Ingresos 2024 cercanos a 6.140\,M\texteuro{}{} (TipRanks); las cifras de 2025 var\'ian seg\'un la fuente}
+\campo{Productos}{sistemas de distribuci\'on y reservas, software para aerol\'ineas, hoteles y aeropuertos}
+\campo{Backend}{Java con Spring Boot (microservicios)}
+\campo{Frontend}{Angular}
+\campo{Cloud}{Microsoft Azure (PaaS e IaaS); migraci\'on iniciada en 2016 seg\'un su blog}
+\campo{BD y DevOps}{\nv}
+\campo{Certificaciones}{\nv{} (las b\'usquedas no devolvieron fuentes de Amadeus)}
+\end{ficha}
+
+
+\begin{ficha}{Netflix}{Multinacional}{$\approx$16.000}{1997$^{*}$}{Streaming \textperiodcentered\ B2C}{AWS}
+\campo{Web}{\url{https://www.netflix.com}; blog t\'ecnico \url{https://netflixtechblog.com}}
+\campo{Ubicaci\'on}{Los Gatos (California, EE.\,UU.) (conocimiento general, \nv)}
+\campo{Fundaci\'on}{1997 (conocimiento general, \nv)}
+\campo{Empleados}{unos 16.000 a tiempo completo (10-K, 31/12/2025, seg\'un BusinessStats)}
+\campo{Modelo de negocio}{streaming por suscripci\'on, B2C. Ingresos 2025 estimados en 44--45 mil millones de \$ (gu\'ia/c\'alculo de terceros; confirmar en el 10-K)}
+\campo{Backend}{Java con Spring Boot (principal), Python, Node.js; Zuul y Eureka}
+\campo{Frontend}{React; GraphQL con Netflix DGS (c\'odigo abierto)}
+\campo{Base de datos}{Cassandra, EVCache, CockroachDB}
+\campo{Cloud}{AWS (EC2, S3, EKS, Lambda, CloudFront)}
+\campo{CI/CD y testing}{Spinnaker (entrega continua creada por Netflix, hoy de c\'odigo abierto), Titus (contenedores); ingenier\'ia del caos con Chaos Monkey y la Simian Army}
+\campo{Metodolog\'ia}{cultura ``Freedom and Responsibility''; marco \'agil concreto \nv}
+\campo{Certificaciones}{\nv{} (un agregador de terceros indica ISO 27001, SOC 2 y PCI DSS, no contrastado)}
+\end{ficha}
+
+\begin{ficha}{SAP SE}{Multinacional}{$\approx$118.000}{1972$^{*}$}{ERP \textperiodcentered\ SaaS}{SAP BTP}
+\campo{Web}{\url{https://www.sap.com}; \url{https://www.sap.com/about/trust-center.html}}
+\campo{Ubicaci\'on}{Walldorf, Alemania (conocimiento general, \nv)}
+\campo{Fundaci\'on}{1972 (conocimiento general, \nv)}
+\campo{Empleados}{unos 118.000 (Revelio Labs, dic. 2025)}
+\campo{Modelo de negocio}{software empresarial (ERP) en la nube, B2B. Ingresos 2025 de unos 36.800\,M\texteuro{}{} (provisional, sitio financiero de terceros)}
+\campo{Productos}{S/4HANA, SuccessFactors, SAP Business Technology Platform (BTP)}
+\campo{Backend / Frontend / BD}{ABAP, HANA, Fiori (conocimiento general, \nv{} con fuente en esta investigaci\'on)}
+\campo{Cloud}{BTP con entornos Neo, Cloud Foundry, Kyma y ABAP (informes SOC de SAP)}
+\campo{DevOps y metodolog\'ia}{\nv}
+\campo{Certificaciones}{ISO/IEC 27001:2022 para SAP Central Cloud Services (v\'alida hasta 31/05/2027); tambi\'en ISO 27017, 27018, 27701, 22301, 9001, BS 10012 e ISO/IEC 42001 (IA); informes SOC 1 y SOC 2 Type 2 de BTP (2024 H1 como m\'as reciente encontrado; solo bajo NDA)}
+\end{ficha}
+
+\section{Conclusiones}
+\begin{itemize}
+\item \textbf{Java} domina en empresas grandes (Amadeus, Netflix, Autentia); \textbf{.NET} en el ecosistema Microsoft (Plain Concepts); \textbf{Rails/PHP} en startups SaaS por rapidez de desarrollo.
+\item \textbf{React} es el frontend m\'as citado; \textbf{Angular} aparece en empresas grandes y consultoras.
+\item \textbf{Cloud}: AWS, Azure y Google Cloud se reparten el mercado; las startups apuestan por contenedores e infraestructura como c\'odigo.
+\item \textbf{Certificaciones}: las empresas de producto SaaS (Factorial, SAP) publican ISO 27001 y SOC 2; las consultoras grandes (Indra, Izertis) a\~naden ISO 9001, CMMI y ENS.
+\item \textbf{Modelo}: SaaS en startups y multinacionales de producto; consultor\'ia en pymes e Indra. Las tecnolog\'ias del ciclo DAM (Java/Spring, Angular, SQL) tienen demanda real.
+\end{itemize}
+
+\section{Limitaciones}
+Varias webs oficiales no eran accesibles (Holded, Factorial Trust Center, SAP Trust Center, Amadeus y Netflix devolvieron errores), por lo que se usaron centros de ayuda, resultados de b\'usqueda y prensa. CI/CD, testing y metodolog\'ia apenas se publican en la mayor\'ia de empresas. Los datos de fundaci\'on y sede de Indra, Amadeus, Netflix y SAP proceden de conocimiento general. El asterisco (*) en la fundaci\'on marca datos de conocimiento general. Conviene contrastar las cifras antes de entregar.
+
+\end{document}

@@ -1,0 +1,34 @@
+1- Introduce datos de alumnos:
+
+Escribe un nombre:
+FELIPE 19
+Datos introducidos: FELIPE, 19
+
+2- Introduce datos de alumnos:
+
+Escribe un nombre:
+PABLO 21
+Datos introducidos: PABLO, 21
+
+3- Introduce datos de alumnos:
+
+Escribe un nombre:
+MARIA 11
+Datos introducidos: MARIA, 11
+
+4- Introduce datos de alumnos:
+
+Escribe un nombre:
+IVAN 1000
+
+Incorrecto, debe estar entre 1 y 99. Se descarta el registro.
+
+Escribe un nombre:
+*
+Fin del proceso de lectura...
+
+Datos leídos: 3
+
+Alumno con más edad: PABLO
+
+Alumno con menos edad: MARIA

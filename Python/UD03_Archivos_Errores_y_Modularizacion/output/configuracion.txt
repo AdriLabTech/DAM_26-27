@@ -1,0 +1,7 @@
+clave1=hola
+clave2=hola
+clave3: hola
+clave4=hola:hola=hola
+clave5=hola
+clave6=hola=hola:hola
+clave7=hola

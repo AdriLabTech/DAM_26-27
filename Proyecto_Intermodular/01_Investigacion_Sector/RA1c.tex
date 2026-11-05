@@ -1,0 +1,220 @@
+\input{pre.tex}
+\newcommand{\docid}{RA1c}
+\makeatletter\g@addto@macro\UrlBreaks{\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j\do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w\do\x\do\y\do\z\do\0\do\1\do\2\do\3\do\4\do\5\do\6\do\7\do\8\do\9}\makeatother
+\newcommand{\id}[1]{\textcolor{inkdim}{\mono\footnotesize #1}}
+\newenvironment{perfil}[5]{\subsection{#1}\par\nopagebreak\vspace{-4pt}\etiq{#2}\par\vspace{8pt}%
+ \begin{tcolorbox}[enhanced,colback=tint,colframe=inkline,boxrule=0.4pt,arc=2pt,left=8pt,right=8pt,top=7pt,bottom=7pt,boxsep=0pt]
+ \perfilkpi{Seniority}{#2}\hfill\perfilkpi{Experiencia}{#3}\hfill\perfilkpi{Ofertas base}{#4}\hfill\perfilkpi{Sueldo bruto/a\~no}{#5}
+ \end{tcolorbox}\vspace{6pt}{\color{inkline}\hrule height 0.4pt}\vspace{3pt}}{}
+\newcommand{\sen}[1]{%
+ \ifcase#1 Junior\or Junior\or Mid\or Senior\or Lead\fi}
+
+\begin{document}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[ink,opacity=0.16] ([xshift=-3.2cm,yshift=-7.2cm]current page.north east) circle (4.6cm);
+  \draw[inkline,line width=0.4pt] ([xshift=2.3cm,yshift=-1.6cm]current page.north west) -- ([xshift=-2.3cm,yshift=-1.6cm]current page.north east);
+  \node[anchor=north west,inner sep=0] at ([xshift=2.3cm,yshift=-1.0cm]current page.north west) {\eyebrow{00 // Proyecto intermodular DAM}};
+  \node[anchor=north east,inner sep=0] at ([xshift=-2.3cm,yshift=-1.0cm]current page.north east) {\eyebrow{2026/2027}};
+  \node[anchor=south west,inner sep=0,text width=14cm] at ([xshift=2.3cm,yshift=7.5cm]current page.south west)
+    {{\serif\fontsize{54}{56}\selectfont\color{ink} An\'alisis\\ de roles\\ y\hspace{0.3em}funciones\par}};
+  \node[anchor=south west,inner sep=0,text width=14cm] at ([xshift=2.3cm,yshift=5.2cm]current page.south west)
+    {{\mono\color{inkdim}RA1c \textperiodcentered\ 11 ofertas \textperiodcentered\ 6 roles \textperiodcentered\ 14 oct 2026\par}};
+  \draw[inkline,line width=0.4pt] ([xshift=2.3cm,yshift=3.2cm]current page.south west) -- ([xshift=-2.3cm,yshift=3.2cm]current page.south east);
+  \node[anchor=north west,inner sep=0] at ([xshift=2.3cm,yshift=3.0cm]current page.south west)
+    {\eyebrow{PAPER \#000000 \textperiodcentered\ INK \#cdc4ba \textperiodcentered\ GRAIN 5.5\% \textperiodcentered\ RADIUS 2 \textperiodcentered\ NO SHADOW}};
+\end{tikzpicture}
+\newpage
+\setcounter{tocdepth}{2}
+\renewcommand{\contentsname}{\mono\small\color{inkmuted}\MakeUppercase{\'Indice}}
+\tableofcontents
+\newpage
+
+\section{Objetivo y metodolog\'ia}
+Se recogen 11 ofertas de empleo reales de desarrollo de software en Espa\~na, publicadas en 6 fuentes distintas (InfoJobs, StudentJob, Iberempleos, Ticjob, CazVid y la web de empleo de una empresa). Se extraen las palabras clave y los requisitos t\'ecnicos m\'as comunes y con ellos se redacta una descripci\'on estandarizada de 6 roles, con la plantilla de perfil de puesto del enunciado.
+
+Todas las ofertas se consultaron el 14 de octubre de 2026. Algunas ya estaban cerradas o inactivas en esa fecha y se indica en la tabla de fuentes. De las tres ofertas de InfoJobs solo se pudo leer el extracto que muestra el buscador (la p\'agina bloquea la descarga), as\'i que de ellas solo se usan los datos de ese extracto. Lo que una oferta no dice se marca como \nv{} y no se ha completado con suposiciones.
+
+\section{Fuentes analizadas}
+\rowcolors{2}{tint}{paper}
+\begin{center}\small
+\begin{tabularx}{\textwidth}{@{}l l >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{3.0cm}@{}}
+\rowcolor{paper}\cab{ID} & \cab{FUENTE} & \cab{PUESTO} & \cab{NOTA} \\
+\arrayrulecolor{inkmuted}\midrule
+O1 & InfoJobs & Programador/a Java (Spring Boot), Boycor, Madrid & extracto \\
+O2 & StudentJob & Java Backend Developer, TCS, Madrid & inactiva \\
+O3 & Ticjob & Desarrollador/a Java \& Kafka, Grupo Digital & activa \\
+O4 & Ticjob & Fullstack Angular + Spring Boot, Grupo Digital & activa \\
+O5 & Iberempleos & Sr. Frontend Developer Angular, Page Personnel & cerrada \\
+O6 & Web GBTEC & Ingeniero/a Senior Front-End, Galicia & activa \\
+O7 & Web GBTEC & Ingeniero/a Senior Back-End, Galicia & activa \\
+O8 & Ticjob & Azure Platform Engineer, Grupo Digital & activa \\
+O9 & InfoJobs & DevOps Senior Ciberdefensa, Barcelona & extracto \\
+O10 & CazVid & QA Tester, Madrid & activa \\
+O11 & InfoJobs & Analista BDD Jr, Madrid & extracto \\
+\arrayrulecolor{inkmuted}\bottomrule
+\end{tabularx}
+\end{center}
+\rowcolors{1}{paper}{paper}
+{\mono\footnotesize\color{inkmuted}Cada perfil repite los enlaces de sus ofertas y la secci\'on final los reune todos. Ticjob agrupa varias ofertas de una misma empresa; por eso hay tres de Grupo Digital.}
+
+\section{Palabras clave}
+\subsection*{Frecuencia en las 11 ofertas (n\'umero de ofertas que la piden)}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=0.58cm,font=\mono\footnotesize]
+  \foreach \v in {0,2,4,6}{
+    \draw[inkline,line width=0.4pt] (3.4+\v*1.6,0.4) -- (3.4+\v*1.6,-12.3);
+    \node[color=inkmuted,anchor=north] at (3.4+\v*1.6,-12.3) {\v};
+  }
+  \foreach \n/\v/\r in {Git/6/0, {Ingl\'es}/6/1, Java/5/2, {Spring Boot}/5/3, Jenkins/5/4, {Titulaci\'on}/5/5, Angular/3/6, Kafka/3/7, {REST/APIs}/3/8, Docker/2/9, Kubernetes/2/10, PostgreSQL/2/11}{
+    \node[anchor=east,color=ink] at (3.3,-\r) {\n};
+    \fill[ink,opacity=0.85] (3.4,-\r-0.25) rectangle ++(\v*1.6,0.5);
+    \node[anchor=west,color=inkdim] at (3.5+\v*1.6,-\r) {\v};
+  }
+\end{tikzpicture}
+\end{center}
+{\mono\footnotesize\color{inkmuted}Git agrupa Git, GitHub y GitLab. Ingl\'es cuenta solo cuando es requisito; en O3 y O4 es deseable. Las tres de InfoJobs solo aportan los datos del extracto, as\'i que sus tecnolog\'ias pueden estar infracontadas.}
+
+\subsection*{Lectura}
+\begin{itemize}
+\item El n\'ucleo \textbf{Java + Spring Boot + Git + Jenkins} aparece en casi la mitad de las ofertas y coincide con el ciclo DAM.
+\item \textbf{Angular} es el framework de frontend citado en las ofertas de frontend y full stack (O4, O5, O6). React y Vue solo aparecen como deseables en O5.
+\item \textbf{Mensajer\'ia y microservicios}: Kafka en 3 ofertas (O2, O3, O4) y microservicios en O3 y O4.
+\item \textbf{DevOps}: Docker (O2, O9), Kubernetes (O8, O9), Terraform y Azure DevOps (O8), Helm (O9).
+\item \textbf{Calidad}: SonarQube (O3, O4), TDD/BDD (O3), Selenium y JIRA (O10).
+\item \textbf{Base de datos}: PostgreSQL (O3, O11), Oracle y MongoDB (O3), JPA/Hibernate (O1, O4).
+\item \textbf{Ingl\'es} es requisito en 6 de 11 ofertas (O1, O2, O6, O7, O8, O9) y deseable en O3 y O4; el nivel pedido llega a avanzado (O1).
+\item \textbf{Habilidades blandas} expl\'icitas (pocas): autonom\'ia (O2, O8), proactividad (O2, O8), comunicaci\'on y colaboraci\'on (O8), trabajo en equipo \'agil (O5, O10).
+\end{itemize}
+
+\section{Salarios publicados}
+\rowcolors{2}{tint}{paper}
+\begin{center}\small
+\begin{tabularx}{\textwidth}{@{}l l l X@{}}
+\rowcolor{paper}\cab{ID} & \cab{ROL} & \cab{BRUTO/A\~NO} & \cab{EXPERIENCIA PEDIDA} \\
+\arrayrulecolor{inkmuted}\midrule
+O1 & Backend Java & 25.000--30.000 \texteuro{} & 1 a\~no \\
+O3 & Backend Java & hasta 35.000 \texteuro{} & 3 a\~nos \\
+O4 & Full stack & 33.000--41.000 \texteuro{} & 3 a\~nos \\
+O10 & QA & 30.000 \texteuro{} & 2 a\~nos \\
+O11 & Analista BBDD & 28.000--33.000 \texteuro{} & 2 a\~nos \\
+O2, O5, O6, O7, O8, O9 & varios & \nv & 3--7 a\~nos \\
+\arrayrulecolor{inkmuted}\bottomrule
+\end{tabularx}
+\end{center}
+\rowcolors{1}{paper}{paper}
+{\mono\footnotesize\color{inkmuted}Solo 5 de 11 ofertas publican cifra; el resto dice ``salario competitivo'' o nada. Las ofertas senior no publican rango, as\'i que los sueldos de abajo cubren sobre todo perfiles junior y mid.}
+
+% ---------------------------------------------------------------------------
+\clearpage
+\section{Perfiles de puesto}
+
+\begin{perfil}{Backend Java}{Mid}{3 a\~nos}{O1, O2, O3, O7}{25.000--35.000 \texteuro{}}
+\campo{Puesto}{Desarrollador/a Backend Java (Spring Boot)}
+\campo{Nivel seniority}{Junior / \textbf{Mid} / Senior / Lead. Las ofertas van de 1 a\~no (O1) a 6 a\~nos (O2); 3 a\~nos es lo m\'as repetido (O3, O7)}
+\campo{Lenguajes}{Java 8 o superior; SQL}
+\campo{Frameworks}{Spring Boot, Spring Cloud, JPA/Hibernate, servicios REST y SOAP, programaci\'on reactiva (O3)}
+\campo{Herramientas}{Git/GitHub, Jenkins, SonarQube, Docker, IntelliJ o Eclipse, Linux; Kafka y Redis; Oracle, PostgreSQL o MongoDB; AWS o Azure (O3)}
+\campo{Metodolog\'ias}{Scrum (etiqueta de O3), microservicios y arquitectura dirigida por eventos, TDD o BDD, CI/CD}
+\campo{Soft skills}{autonom\'ia (``individual contributor'', O2); proactividad y dinamismo (O2); ingl\'es hablado y escrito, de intermedio (O3) a avanzado (O1)}
+\campo{Responsabilidades}{1. Desarrollar y mantener APIs REST y microservicios con Spring Boot.\newline 2. Dise\~nar servicios orientados a eventos con Kafka y APIs de alto volumen y baja latencia.\newline 3. Integrar bases de datos y servicios cloud.\newline 4. Escribir pruebas y cuidar la calidad del c\'odigo (SonarQube, TDD/BDD) dentro de un pipeline CI/CD.}
+\campo{Sueldo aproximado}{25.000--35.000 \texteuro{} brutos anuales (O1: 25.000--30.000; O3: hasta 35.000)}
+\campo{Fuentes analizadas}{\textbf{O1} \url{https://www.infojobs.net/madrid/programador-java-spring-boot-con-ingles-avanzado-100-remoto/of-i70bf5a7e074fcb9e63bcbc0fa95ff9}\newline \textbf{O2} \url{https://www.studentjob.es/ofertas/5059146-java-backend-developer}\newline \textbf{O3} \url{https://ticjob.es/esp/trabajo/desarrollador-java-kafka-remoto/70663}\newline \textbf{O7} \url{https://www.gbtec.com/es/empleo/ofertas-de-empleo/}}
+\end{perfil}
+
+\clearpage
+\begin{perfil}{Frontend Angular}{Senior}{3--7 a\~nos}{O5, O6}{\nv}
+\campo{Puesto}{Desarrollador/a Frontend Angular}
+\campo{Nivel seniority}{Junior / Mid / \textbf{Senior} / Lead. Las dos ofertas son senior: 5--7 a\~nos (O5) y 3 a\~nos de frontend m\'as 3 de backend (O6)}
+\campo{Lenguajes}{HTML, CSS y JavaScript (conocimiento profundo, O5)}
+\campo{Frameworks}{Angular; deseable React o Vue.js y micro frontends (O5). RxJS aparece en la oferta full stack O4}
+\campo{Herramientas}{Git; patrones de dise\~no y arquitectura de software}
+\campo{Metodolog\'ias}{pr\'acticas \'agiles en un squad: historias de usuario, pruebas y entrega continua (O5)}
+\campo{Soft skills}{trabajo en equipo multicultural (O5); ingl\'es fluido (O6); liderazgo t\'ecnico valorado (O6). Las ofertas no las enumeran, estas son las que se deducen del texto}
+\campo{Responsabilidades}{1. Dise\~nar, implementar y probar aplicaciones web Angular, con c\'odigo escalable y mantenible.\newline 2. Garantizar rendimiento, disponibilidad y calidad del c\'odigo.\newline 3. Crear funcionalidades nuevas con el squad a partir de historias de usuario.\newline 4. Liderar actividades de desarrollo a nivel t\'ecnico.}
+\campo{Sueldo aproximado}{\nv{} (O5 y O6 dicen ``salario competitivo'')}
+\campo{Fuentes analizadas}{\textbf{O5} \url{https://asaja.iberempleos.es/oferta-empleo/barcelona/sr-frontend-developer-angular-pharma-company-valles-or-7708352}\newline \textbf{O6} \url{https://www.gbtec.com/es/empleo/ofertas-de-empleo/}\newline \textbf{O4} \url{https://ticjob.es/esp/trabajo/fullstack-angular-spring-boot-remoto/70704}}
+\end{perfil}
+
+\clearpage
+\begin{perfil}{Full Stack}{Mid}{3 a\~nos}{O4}{33.000--41.000 \texteuro{}}
+\campo{Puesto}{Desarrollador/a Full Stack (Angular + Spring Boot)}
+\campo{Nivel seniority}{Junior / \textbf{Mid} / Senior / Lead. O4 pide 3 a\~nos o m\'as de experiencia full stack}
+\campo{Lenguajes}{Java; TypeScript (impl\'icito en Angular); SQL}
+\campo{Frameworks}{Angular y RxJS; Spring Boot, Spring WebFlux, Spring Security, JPA/Hibernate}
+\campo{Herramientas}{Maven, Gitflow, GitHub Actions o Jenkins, SonarQube, Fortify, Kafka, bases de datos relacionales y no relacionales}
+\campo{Metodolog\'ias}{microservicios, arquitectura hexagonal, principios SOLID, pruebas unitarias, CI/CD; experiencia \'agil deseable}
+\campo{Soft skills}{\nv{} en O4 (solo se pide titulaci\'on universitaria en ingenier\'ia, matem\'aticas, f\'isica o similar, e ingl\'es avanzado como deseable)}
+\campo{Responsabilidades}{1. Desarrollar frontend, microfrontends y servicios backend.\newline 2. Dise\~nar microservicios y mensajer\'ia as\'incrona; migrar monolitos a microservicios.\newline 3. Actualizar versiones de Java y Spring Boot.\newline 4. Mantener los pipelines de despliegue.}
+\campo{Sueldo aproximado}{33.000--41.000 \texteuro{} brutos anuales (O4)}
+\campo{Fuentes analizadas}{\textbf{O4} \url{https://ticjob.es/esp/trabajo/fullstack-angular-spring-boot-remoto/70704}}
+\end{perfil}
+
+\clearpage
+\begin{perfil}{DevOps / Cloud}{Mid / Senior}{3--6 a\~nos}{O8, O9}{\nv}
+\campo{Puesto}{DevOps / Cloud Engineer}
+\campo{Nivel seniority}{Junior / \textbf{Mid} / \textbf{Senior} / Lead. O8 pide 3 a\~nos o m\'as y O9 pide de 4 a 6}
+\campo{Lenguajes}{scripting y HCL (Terraform); ninguna oferta lista un lenguaje concreto de programaci\'on}
+\campo{Frameworks}{no aplica. Plataformas: Azure (IaaS, PaaS, SaaS) y AKS (O8); Kubernetes y Docker (O9)}
+\campo{Herramientas}{Terraform, Azure DevOps, Jenkins o GitLab CI, Helm, Git/GitHub, Jira; certificaciones deseables AZ-104, AZ-400 o HashiCorp Terraform Associate (O8)}
+\campo{Metodolog\'ias}{CI/CD, infraestructura como c\'odigo, seguridad y gobierno cloud; guardia rotativa de una semana (O8)}
+\campo{Soft skills}{autonom\'ia, comunicaci\'on, colaboraci\'on, orientaci\'on a resultados, proactividad y adaptabilidad (O8); ingl\'es B2 o superior (O8) y alto (O9)}
+\campo{Responsabilidades}{1. Dise\~nar, desplegar y operar infraestructura cloud con Terraform.\newline 2. Construir y mantener pipelines CI/CD.\newline 3. Dar soporte de producci\'on de nivel 2 y 3.\newline 4. Aplicar seguridad y gobierno, y documentar los sistemas.}
+\campo{Sueldo aproximado}{\nv{} en O8 y O9. Referencia secundaria sin contrastar: una gu\'ia de KeepCoding cita una mediana de unos 50.000 \texteuro{} (datos de BeBee)}
+\campo{Fuentes analizadas}{\textbf{O8} \url{https://ticjob.es/esp/trabajo/azure-platform-engineer-remoto-100-espana/70733}\newline \textbf{O9} \url{https://www.infojobs.net/barcelona/devops-senior-ciberdefensa-barcelona-60-teletrabajo/of-ide7b9e2a234cdaa6c3dbad00460c56}}
+\end{perfil}
+
+\clearpage
+\begin{perfil}{QA Tester}{Mid}{2 a\~nos}{O10}{30.000 \texteuro{}}
+\campo{Puesto}{QA Tester (pruebas manuales y automatizadas)}
+\campo{Nivel seniority}{Junior / \textbf{Mid} / Senior / Lead. O10 pide como m\'inimo 2 a\~nos de experiencia en pruebas}
+\campo{Lenguajes}{scripting de automatizaci\'on (lenguaje concreto \nv)}
+\campo{Frameworks}{Selenium}
+\campo{Herramientas}{JIRA, Jenkins, herramientas de gesti\'on de pruebas y de seguimiento de errores; certificaciones de QA como ventaja}
+\campo{Metodolog\'ias}{equipo \'agil, pruebas de regresi\'on, revisi\'on de c\'odigo y mejora continua de los procesos de calidad}
+\campo{Soft skills}{colaboraci\'on con desarrolladores y analistas, apertura a ideas, enfoque de mejora continua (deducidas del texto de O10)}
+\campo{Responsabilidades}{1. Ejecutar pruebas manuales y automatizadas.\newline 2. Crear y mantener scripts de automatizaci\'on.\newline 3. Documentar resultados y redactar informes de calidad.\newline 4. Planificar y ejecutar pruebas de regresi\'on; trabajar con desarrollo para resolver defectos pronto.}
+\campo{Sueldo aproximado}{30.000 \texteuro{} brutos anuales (O10)}
+\campo{Fuentes analizadas}{\textbf{O10} \url{https://cazvid.com/empleo/qa-tester-en-madrid-espana-bb8503}}
+\end{perfil}
+
+\clearpage
+\begin{perfil}{Analista de bases de datos}{Junior}{2 a\~nos}{O11}{28.000--33.000 \texteuro{}}
+\campo{Puesto}{Analista de bases de datos (SQL / PostgreSQL)}
+\campo{Nivel seniority}{\textbf{Junior} / Mid / Senior / Lead. O11 pide al menos 2 a\~nos con SQL}
+\campo{Lenguajes}{SQL}
+\campo{Frameworks}{no aplica}
+\campo{Herramientas}{PostgreSQL (O11); en O3 tambi\'en Oracle y MongoDB. Resto \nv}
+\campo{Metodolog\'ias}{\nv}
+\campo{Soft skills}{\nv}
+\campo{Responsabilidades}{\nv{} en el extracto disponible de O11}
+\campo{Sueldo aproximado}{28.000--33.000 \texteuro{} brutos anuales, h\'ibrido en Madrid (O11)}
+\campo{Fuentes analizadas}{\textbf{O11} \url{https://www.infojobs.net/madrid/analista-bdd-jr/of-if262a925664ebb924965405be47f46}}
+\end{perfil}
+
+\clearpage
+\section{Enlaces de las ofertas}
+\campo{O1}{\url{https://www.infojobs.net/madrid/programador-java-spring-boot-con-ingles-avanzado-100-remoto/of-i70bf5a7e074fcb9e63bcbc0fa95ff9}}
+\campo{O2}{\url{https://www.studentjob.es/ofertas/5059146-java-backend-developer}}
+\campo{O3}{\url{https://ticjob.es/esp/trabajo/desarrollador-java-kafka-remoto/70663}}
+\campo{O4}{\url{https://ticjob.es/esp/trabajo/fullstack-angular-spring-boot-remoto/70704}}
+\campo{O5}{\url{https://asaja.iberempleos.es/oferta-empleo/barcelona/sr-frontend-developer-angular-pharma-company-valles-or-7708352}}
+\campo{O6, O7}{(la web publica las ofertas en una sola p\'agina, sin enlace individual) \url{https://www.gbtec.com/es/empleo/ofertas-de-empleo/}}
+\campo{O8}{\url{https://ticjob.es/esp/trabajo/azure-platform-engineer-remoto-100-espana/70733}}
+\campo{O9}{\url{https://www.infojobs.net/barcelona/devops-senior-ciberdefensa-barcelona-60-teletrabajo/of-ide7b9e2a234cdaa6c3dbad00460c56}}
+\campo{O10}{\url{https://cazvid.com/empleo/qa-tester-en-madrid-espana-bb8503}}
+\campo{O11}{\url{https://www.infojobs.net/madrid/analista-bdd-jr/of-if262a925664ebb924965405be47f46}}
+
+\section{Conclusiones}
+\begin{itemize}
+\item El perfil m\'as demandado en la muestra es el \textbf{desarrollador Java con Spring Boot} (5 de 11 ofertas), con Git y Jenkins como compa\~neros habituales.
+\item \textbf{Angular} es la opci\'on de frontend de las ofertas analizadas; combinada con Spring Boot forma el perfil full stack mejor pagado de la muestra (33.000--41.000 \texteuro{}).
+\item Las ofertas junior y mid son las que publican sueldo (25.000--41.000 \texteuro{}); las senior no.
+\item \textbf{Ingl\'es} y \textbf{titulaci\'on universitaria} son requisitos transversales, m\'as repetidos que cualquier tecnolog\'ia salvo Git.
+\item Java/Spring, Angular y SQL, el ciclo DAM, cubren los roles 1, 2, 3 y 6; DevOps y QA piden a\~nadir Docker, CI/CD y pruebas autom\'aticas.
+\end{itemize}
+
+\section{Limitaciones}
+La muestra es peque\~na (11 ofertas, 3 de la misma empresa en Ticjob) y no es representativa del mercado. Varias ofertas estaban cerradas o inactivas el 14 de octubre de 2026. Las tres de InfoJobs se leyeron solo en el extracto del buscador. Las cifras son salarios brutos publicados, no medias de mercado. Los requisitos de las ofertas son autodeclarados y los perfiles son una s\'intesis propia; los campos que ninguna oferta cubre se marcan como \nv. No se ha usado LinkedIn ni Indeed porque no se pudo acceder a ofertas concretas.
+
+\end{document}

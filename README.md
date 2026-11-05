@@ -66,7 +66,9 @@ Sirve a tres propósitos:
 | 🗄️ **Acceso a Datos** | [`Acceso_Datos/`](Acceso_Datos) | ![Java](https://img.shields.io/badge/-Java-ED8B00?logo=openjdk&logoColor=white) | Editor de ficheros binarios y excepciones propias |
 | 📱 **Desarrollo de Aplicaciones Móviles** | [`Desarrollo_Aplicaciones_Moviles/`](Desarrollo_Aplicaciones_Moviles) | ![Kotlin](https://img.shields.io/badge/-Kotlin-7F52FF?logo=kotlin&logoColor=white) | Iniciación a Kotlin |
 | 🏢 **Sistemas de Gestión Empresarial** | [`Sistema_Gestion_Empresarial/`](Sistema_Gestion_Empresarial) | ![Docker](https://img.shields.io/badge/-Docker-2496ED?logo=docker&logoColor=white) | Guías de Docker y Docker Compose |
-| 🚀 **Proyecto Intermodular** | [`Proyecto_intermodular_DAM/`](Proyecto_intermodular_DAM) | ![Markdown](https://img.shields.io/badge/-Markdown-000000?logo=markdown&logoColor=white) | Investigación del sector tecnológico (RA1a) |
+| 🚀 **Proyecto Intermodular** | [`Proyecto_Intermodular/`](Proyecto_Intermodular) | ![Markdown](https://img.shields.io/badge/-Markdown-000000?logo=markdown&logoColor=white) | Investigación del sector tecnológico (RA1a) |
+| 💼 **IPE II** · Itinerario Personal para la Empleabilidad | [`IPEII/`](IPEII) | ![LaTeX](https://img.shields.io/badge/-LaTeX-008080?logo=latex&logoColor=white) | Apuntes, guías de examen y entregas (CipherKey) |
+| 🇬🇧 **Inglés** | [`Ingles/`](Ingles) | ![Excalidraw](https://img.shields.io/badge/-Excalidraw-6965DB?logo=excalidraw&logoColor=white) | Actividades y presentaciones de clase |
 
 ---
 
@@ -75,35 +77,35 @@ Sirve a tres propósitos:
 ```text
 📦 DAM_26-27
 ┣ 📂 PSP
-┃ ┣ 📂 01-PruebaInicial ............... Maven · Java
-┃ ┣ 📂 02-CadenasAleatorias ........... procesos hijos
-┃ ┗ 📂 03-Programacion-Multiproceso ... padre/hijo con redirección
+┃ ┣ 📂 01_Prueba_Inicial ............... Maven · Java
+┃ ┣ 📂 02_Cadenas_Aleatorias ........... procesos hijos
+┃ ┗ 📂 03_Programacion_Multiproceso ... padre/hijo con redirección
 ┣ 📂 Python
-┃ ┣ 📂 01-Introduccion-a-Python ....... 19 actividades
-┃ ┣ 📂 02-Control-flujo-estructura-datos  42 actividades
-┃ ┣ 📂 03-Archivos-errores-modularizacion 17 actividades
-┃ ┣ 📂 Examen_UD2
+┃ ┣ 📂 UD01_Introduccion_a_Python ....... 19 actividades
+┃ ┣ 📂 UD02_Control_de_Flujo_y_Estructuras_de_Datos  42 actividades
+┃ ┣ 📂 UD03_Archivos_Errores_y_Modularizacion 17 actividades
+┃ ┣ 📂 Examen_UD02
 ┃ ┗ 📂 utilidades · pruebas ........... librería y tests
 ┣ 📂 Desarrollo_Interfaces
-┃ ┣ 📂 EjerciciosPresentacion ......... introducción a C#
-┃ ┣ 📂 EjerciciosClase ................ POO y ejercicios en clase
-┃ ┣ 📂 UD0-Introduccion_a_Csharp ...... MathGame · HabitLogger
+┃ ┣ 📂 Ejercicios_Presentacion ......... introducción a C#
+┃ ┣ 📂 Ejercicios_Clase ................ POO y ejercicios en clase
+┃ ┣ 📂 UD00_Introduccion_a_Csharp ...... MathGame · HabitLogger
 ┃ ┗ 📂 UD01_Confeccion_de_interfaces .. Calculadora (WPF)
 ┣ 📂 Acceso_Datos
 ┃ ┣ 📂 Editor_Binario ................. ficheros binarios
 ┃ ┗ 📂 Make_a_Duplicate_Image ......... copia de imágenes
 ┣ 📂 Desarrollo_Aplicaciones_Moviles
-┃ ┣ 📂 IniciacionAKotlin .............. Maven · Kotlin
+┃ ┣ 📂 Iniciacion_a_Kotlin .............. Maven · Kotlin
 ┃ ┗ 📂 Entorno_Movil .................. informe LaTeX
 ┣ 📂 Sistema_Gestion_Empresarial ........ Docker · Odoo
-┣ 📂 Proyecto_intermodular_DAM
-┃ ┗ 📂 01-Investigacion_Sector ........ RA1a · RA1b · RA1c
+┣ 📂 Proyecto_Intermodular
+┃ ┗ 📂 01_Investigacion_Sector ........ RA1a · RA1b · RA1c
 ┣ 📂 assets ............................. hero y mapa de conocimientos
 ┣ 📄 LICENSE
 ┗ 📄 README.md
 ```
 
-Cada módulo tiene su propio README con el detalle de lo que contiene y cómo ejecutarlo: [PSP](PSP/README.md) · [Python](Python/README.md) · [Interfaces](Desarrollo_Interfaces/README.md) · [Acceso a Datos](Acceso_Datos/README.md) · [Móviles](Desarrollo_Aplicaciones_Moviles/README.md) · [SGE](Sistema_Gestion_Empresarial/README.md) · [Intermodular](Proyecto_intermodular_DAM/README.md).
+Cada módulo tiene su propio README con el detalle de lo que contiene y cómo ejecutarlo: [PSP](PSP/README.md) · [Python](Python/README.md) · [Interfaces](Desarrollo_Interfaces/README.md) · [Acceso a Datos](Acceso_Datos/README.md) · [Móviles](Desarrollo_Aplicaciones_Moviles/README.md) · [SGE](Sistema_Gestion_Empresarial/README.md) · [Intermodular](Proyecto_Intermodular/README.md).
 
 ---
 
@@ -114,15 +116,15 @@ Cada módulo tiene su propio README con el detalle de lo que contiene y cómo ej
 
 <br>
 
-**`PSP/01-PruebaInicial`** · proyecto Maven (Java 26).
+**`PSP/01_Prueba_Inicial`** · proyecto Maven (Java 26).
 
 - 4 ejercicios (`Ejercicio1` … `Ejercicio4`) en el paquete `ejercicios`.
 - Modelo de dominio con clases como `Alumno` y `Asignatura`.
 - Refactorizaciones documentadas en el historial de commits.
 
-**`PSP/02-CadenasAleatorias`** · proyecto Maven con las clases `Generador` y `Cadenas` (paquete `dev.lownoise.cadenas`).
+**`PSP/02_Cadenas_Aleatorias`** · proyecto Maven con las clases `Generador` y `Cadenas` (paquete `dev.lownoise.cadenas`).
 
-**`PSP/03-Programacion-Multiproceso`** · dos ejercicios padre/hijo con `ProcessBuilder` y redirección de entrada, salida y error a ficheros.
+**`PSP/03_Programacion_Multiproceso`** · dos ejercicios padre/hijo con `ProcessBuilder` y redirección de entrada, salida y error a ficheros.
 
 </details>
 
@@ -133,9 +135,9 @@ Cada módulo tiene su propio README con el detalle de lo que contiene y cómo ej
 
 | Unidad | Tema | Actividades |
 |:--|:--|:--:|
-| [UD1](Python/01-Introduccion-a-Python/ejercicios) | Introducción a Python: entorno, tipos, operadores y depuración | 19 |
-| [UD2](Python/02-Control-flujo-estructura-datos/ejercicios) | Control de flujo y estructuras de datos: condicionales, bucles y listas | 42 |
-| [UD3](Python/03-Archivos-errores-modularizacion/ejercicios) | Archivos, errores y modularización: lectura y escritura de ficheros, `os.path` | 17 |
+| [UD1](Python/UD01_Introduccion_a_Python/Ejercicios) | Introducción a Python: entorno, tipos, operadores y depuración | 19 |
+| [UD2](Python/UD02_Control_de_Flujo_y_Estructuras_de_Datos/Ejercicios) | Control de flujo y estructuras de datos: condicionales, bucles y listas | 42 |
+| [UD3](Python/UD03_Archivos_Errores_y_Modularizacion/Ejercicios) | Archivos, errores y modularización: lectura y escritura de ficheros, `os.path` | 17 |
 
 Cada actividad es un script independiente con su enunciado comentado, por ejemplo clasificador de edades, FizzBuzz, comprobación de primos, palíndromos o calculadoras.
 
@@ -148,10 +150,10 @@ Cada actividad es un script independiente con su enunciado comentado, por ejempl
 
 | Carpeta | Descripción |
 |:--|:--|
-| [`EjerciciosPresentacion`](Desarrollo_Interfaces/EjerciciosPresentacion) | Primer programa, entorno de desarrollo, estructura sintáctica, variables y tipos de datos. |
-| [`EjerciciosClase`](Desarrollo_Interfaces/EjerciciosClase) | Cálculo de área, día de la semana y programación orientada a objetos (vehículos). |
-| [`01_CasoPractico_MathGame`](Desarrollo_Interfaces/UD0-Introduccion_a_Csharp/01_CasoPractico_MathGame) | 🧮 Juego de matemáticas por consola con historial y estadísticas. |
-| [`02_CasoPractico_HabitLogger`](Desarrollo_Interfaces/UD0-Introduccion_a_Csharp/02_CasoPractico_HabitLogger) | 📝 Registro de hábitos con SQLite, en versión **consola** y versión **TUI**. |
+| [`Ejercicios_Presentacion`](Desarrollo_Interfaces/UD00_Introduccion_a_Csharp/Ejercicios_Presentacion) | Primer programa, entorno de desarrollo, estructura sintáctica, variables y tipos de datos. |
+| [`Ejercicios_Clase`](Desarrollo_Interfaces/UD00_Introduccion_a_Csharp/Ejercicios_Clase) | Cálculo de área, día de la semana y programación orientada a objetos (vehículos). |
+| [`01_CasoPractico_MathGame`](Desarrollo_Interfaces/UD00_Introduccion_a_Csharp/Casos_Practicos/01_Math_Game) | 🧮 Juego de matemáticas por consola con historial y estadísticas. |
+| [`02_CasoPractico_HabitLogger`](Desarrollo_Interfaces/UD00_Introduccion_a_Csharp/Casos_Practicos/02_Habit_Logger) | 📝 Registro de hábitos con SQLite, en versión **consola** y versión **TUI**. |
 
 </details>
 
@@ -169,7 +171,7 @@ Cada actividad es un script independiente con su enunciado comentado, por ejempl
 
 <br>
 
-- [`IniciacionAKotlin`](Desarrollo_Aplicaciones_Moviles/IniciacionAKotlin): primer contacto con el lenguaje mediante un proyecto Maven.
+- [`Iniciacion_a_Kotlin`](Desarrollo_Aplicaciones_Moviles/Iniciacion_a_Kotlin): primer contacto con el lenguaje mediante un proyecto Maven.
 
 </details>
 
@@ -187,7 +189,7 @@ Cada actividad es un script independiente con su enunciado comentado, por ejempl
 
 <br>
 
-- [`01-Investigacion_Sector`](Proyecto_intermodular_DAM/01-Investigacion_Sector): estado tecnológico del sector empresarial (RA1a). Investigación de 8 empresas del sector IT, con [informe en PDF](Proyecto_intermodular_DAM/01-Investigacion_Sector/RA1a_Estado_Tecnologico_Sector.pdf).
+- [`01_Investigacion_Sector`](Proyecto_Intermodular/01_Investigacion_Sector): estado tecnológico del sector empresarial (RA1a). Investigación de 8 empresas del sector IT, con [informe en PDF](Proyecto_Intermodular/01_Investigacion_Sector/RA1a_Estado_Tecnologico_Sector.pdf).
 
 </details>
 
@@ -199,17 +201,17 @@ Registro de hábitos (agua, lectura, ejercicio…) donde cada hábito es una tab
 
 | Versión | Descripción | Documentación |
 |:--|:--|:--|
-| 💻 Consola | Menú numerado | [README](Desarrollo_Interfaces/UD0-Introduccion_a_Csharp/02_CasoPractico_HabitLogger/HabitLogger/README.md) |
-| 🖥️ TUI | Interfaz de terminal con formularios | [README](Desarrollo_Interfaces/UD0-Introduccion_a_Csharp/02_CasoPractico_HabitLogger/HabitLoggerTui/README.md) |
+| 💻 Consola | Menú numerado | [README](Desarrollo_Interfaces/UD00_Introduccion_a_Csharp/Casos_Practicos/02_Habit_Logger/HabitLogger/README.md) |
+| 🖥️ TUI | Interfaz de terminal con formularios | [README](Desarrollo_Interfaces/UD00_Introduccion_a_Csharp/Casos_Practicos/02_Habit_Logger/HabitLoggerTui/README.md) |
 
 <table>
   <tr>
-    <td align="center"><img src="Desarrollo_Interfaces/UD0-Introduccion_a_Csharp/02_CasoPractico_HabitLogger/HabitLoggerTui/docs/01-menu.png" alt="Menú principal de HabitLogger TUI" width="400"><br><sub>Menú principal</sub></td>
-    <td align="center"><img src="Desarrollo_Interfaces/UD0-Introduccion_a_Csharp/02_CasoPractico_HabitLogger/HabitLoggerTui/docs/02-ver-registros.png" alt="Lista de registros" width="400"><br><sub>Lista de registros</sub></td>
+    <td align="center"><img src="Desarrollo_Interfaces/UD00_Introduccion_a_Csharp/Casos_Practicos/02_Habit_Logger/HabitLoggerTui/docs/01-menu.png" alt="Menú principal de HabitLogger TUI" width="400"><br><sub>Menú principal</sub></td>
+    <td align="center"><img src="Desarrollo_Interfaces/UD00_Introduccion_a_Csharp/Casos_Practicos/02_Habit_Logger/HabitLoggerTui/docs/02-ver-registros.png" alt="Lista de registros" width="400"><br><sub>Lista de registros</sub></td>
   </tr>
   <tr>
-    <td align="center"><img src="Desarrollo_Interfaces/UD0-Introduccion_a_Csharp/02_CasoPractico_HabitLogger/HabitLoggerTui/docs/03-formulario-error.png" alt="Formulario con error de validación" width="400"><br><sub>Validación de formularios</sub></td>
-    <td align="center"><img src="Desarrollo_Interfaces/UD0-Introduccion_a_Csharp/02_CasoPractico_HabitLogger/HabitLoggerTui/docs/05-actualizar.png" alt="Actualizar un registro" width="400"><br><sub>Actualizar registro</sub></td>
+    <td align="center"><img src="Desarrollo_Interfaces/UD00_Introduccion_a_Csharp/Casos_Practicos/02_Habit_Logger/HabitLoggerTui/docs/03-formulario-error.png" alt="Formulario con error de validación" width="400"><br><sub>Validación de formularios</sub></td>
+    <td align="center"><img src="Desarrollo_Interfaces/UD00_Introduccion_a_Csharp/Casos_Practicos/02_Habit_Logger/HabitLoggerTui/docs/05-actualizar.png" alt="Actualizar un registro" width="400"><br><sub>Actualizar registro</sub></td>
   </tr>
 </table>
 
@@ -226,15 +228,15 @@ cd DAM_26-27
 
 | Tipo | Requisitos | Comando |
 |:--|:--|:--|
-| 🐍 Python | Python 3 | `python3 Python/02-Control-flujo-estructura-datos/ejercicios/<actividad>.py` |
+| 🐍 Python | Python 3 | `python3 Python/UD02_Control_de_Flujo_y_Estructuras_de_Datos/Ejercicios/<actividad>.py` |
 | 🔷 C# / .NET | SDK de **.NET 10** | `dotnet run --project <carpeta_proyecto>` |
 | ☕ Java (Maven) | JDK y Maven | `mvn compile` y ejecutar la clase `Main` desde tu IDE |
-| 🟣 Kotlin (Maven) | JDK y Maven | `mvn compile` dentro de `IniciacionAKotlin` |
+| 🟣 Kotlin (Maven) | JDK y Maven | `mvn compile` dentro de `Iniciacion_a_Kotlin` |
 
 Ejemplo con HabitLogger:
 
 ```bash
-dotnet run --project Desarrollo_Interfaces/UD0-Introduccion_a_Csharp/02_CasoPractico_HabitLogger/HabitLogger
+dotnet run --project Desarrollo_Interfaces/UD00_Introduccion_a_Csharp/Casos_Practicos/02_Habit_Logger/HabitLogger
 ```
 
 > [!TIP]

@@ -1,0 +1,4 @@
+Este es el fichero origen.txt
+y su objetivo es ver si podemos
+copiar su contenido en otro
+fichero

@@ -1,0 +1,85 @@
+<Window
+    x:Class="FichaUsuario_BBDD.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Ficha de Usuario"
+    Width="400"
+    Height="350">
+
+    <StackPanel Margin="20">
+
+        <TextBlock Text="Ficha de usuario"
+                   FontSize="16"
+                   FontWeight="Bold"
+                   Margin="0,0,0,15"/>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Nombre:" VerticalAlignment="Center"/>
+            <TextBox x:Name="tbNombre"
+                     Grid.Column="1"
+                     Margin="0,3"/>
+
+            <TextBlock Text="Correo:"
+                       Grid.Row="1"
+                       VerticalAlignment="Center"/>
+
+            <TextBox x:Name="tbCorreo"
+                     Grid.Row="1"
+                     Grid.Column="1"
+                     Margin="0,3"/>
+
+            <TextBlock Text="Ciudad:"
+                       Grid.Row="2"
+                       VerticalAlignment="Center"/>
+            <ComboBox x:Name="cbCuidad"
+                      Grid.Row="2"
+                      Grid.Column="1"
+                      SelectedIndex="0"
+                      Margin="0,3">
+            </ComboBox>
+
+            <TextBlock Text="Fecha:"
+                       Grid.Row="3"
+                       VerticalAlignment="Center"/>
+            <DatePicker x:Name="dpFecha"
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        SelectedDate="2026-11-12"
+                        Margin="0,3"/>
+        </Grid>
+
+        <CheckBox x:Name="cbAceptarCondiciones"
+            Content="Acepto condiciones"
+            IsChecked="False"
+            Checked="CambioAceptacion"
+            Unchecked="CambioAceptacion"
+            Margin="60,10,0,10"/>
+
+
+        <Button x:Name="btnGuardar" 
+            Content="Guardar" 
+            IsEnabled="false"
+            Width="80"
+            HorizontalAlignment="Left"
+            Margin="60,0,0,10"
+            Click="VerificarDatos"/>
+
+        <TextBlock x:Name="tbResumen"
+            Text=""
+            FontWeight="Bold"
+            TextWrapping="Wrap"/>
+
+    </StackPanel>
+</Window>

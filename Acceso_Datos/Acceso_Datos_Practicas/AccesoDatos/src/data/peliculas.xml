@@ -1,0 +1,10 @@
+<cine>
+    <pelicula>
+        <titulo>Matrix</titulo>
+        <director>Wachowski</director>
+    </pelicula>
+    <pelicula>
+        <titulo>Inception</titulo>
+        <director>Christopher Nolan</director>
+    </pelicula>
+</cine>
