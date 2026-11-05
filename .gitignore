@@ -2,12 +2,39 @@
 **/bin/
 **/obj/
 .vs/
+**/.vs/
+*.user
+*.suo
+TestResults/
+*.nupkg
 
 # Java / Maven / Gradle
 **/target/
 **/*.class
 .gradle/
+**/.gradle/
 build/
+**/build/
+hs_err_pid*
+dependency-reduced-pom.xml
+
+# Eclipse (metadatos de proyecto locales)
+.classpath
+.project
+.settings/
+.factorypath
+
+# Android / Kotlin
+.kotlin/
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+*.jks
+*.keystore
+google-services.json
 
 # Python
 **/__pycache__/
@@ -15,6 +42,11 @@ build/
 **/.venv/
 **/venv/
 **/env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+*.egg-info/
 
 # LaTeX (auxiliares de compilación)
 *.aux
@@ -25,16 +57,64 @@ build/
 *.synctex.gz
 *.toc
 *.tex~
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.nav
+*.snm
+*.vrb
+*.lof
+*.lot
+*.xdv
+
+# Docker / Odoo / bases de datos locales (datos y volúmenes, no se versionan)
+.env.*
+!.env.example
+pgdata/
+odoo-data/
+filestore/
+odoo.conf
+*.dump
+*.sql.gz
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+
+# Secretos y credenciales
+.env
+*.pem
+*.key
+*.p12
+*.pfx
+*.kdbx
+*.secret
+secrets/
+id_rsa*
+id_ed25519*
+
+# Datos personales (CV, cartas y fichas con teléfono, correo o dirección)
+**/Carta_de_Presentacion*
+**/Curriculum*
+**/CV_*
+**/Ficha_Preparacion_Entrevista*
+**/*_privado.*
+**/*_personal.*
 
 # IDEs y editores
 .idea/
 .vscode/
 *.iml
+*.swp
+*~
+
+# Herramientas de asistentes y notas locales
+.obsidian/
+.superpowers/
+.claude/
 
 # Sistema operativo
 .DS_Store
 Thumbs.db
-
-# Entorno local
-.env
-.obsidian/
+desktop.ini
