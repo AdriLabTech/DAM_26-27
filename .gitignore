@@ -94,6 +94,9 @@ secrets/
 id_rsa*
 id_ed25519*
 
+# Paquetes de entrega (zips que duplican el código ya versionado)
+*.zip
+
 # Datos personales (CV, cartas y fichas con teléfono, correo o dirección)
 **/Carta_de_Presentacion*
 **/Curriculum*
