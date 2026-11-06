@@ -121,3 +121,6 @@ id_ed25519*
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Resúmenes de entrega en PDF que no se publican
+Desarrollo_Interfaces/UD01_Confeccion_de_interfaces/Casos_Practicos/02_GUI_BBDD_2/Resumen_02_GUI_BBDD_2.pdf
