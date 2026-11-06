@@ -1,0 +1,90 @@
+<Window
+    x:Class="gui_bbdd.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Registro de hábitos"
+    Width="760"
+    Height="480"
+    MinWidth="600"
+    MinHeight="360">
+
+    <DockPanel Margin="12">
+
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem x:Name="lblEstado"/>
+        </StatusBar>
+
+        <!-- Alta de un hábito nuevo -->
+        <Grid DockPanel.Dock="Top" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                <TextBlock Text="Nombre"/>
+                <TextBox x:Name="txtNombre" MaxLength="60" TextChanged="txtNombre_TextChanged"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Margin="0,0,8,0">
+                <TextBlock Text="Descripción"/>
+                <TextBox x:Name="txtDescripcion" MaxLength="200"/>
+            </StackPanel>
+
+            <Button
+                x:Name="btnAnadir"
+                Grid.Column="2"
+                Content="Añadir"
+                Width="90"
+                VerticalAlignment="Bottom"
+                IsEnabled="False"
+                Click="btnAnadir_Click"/>
+        </Grid>
+
+        <!-- Buscador y acciones sobre el hábito seleccionado -->
+        <DockPanel DockPanel.Dock="Top" Margin="0,0,0,8">
+            <Button
+                x:Name="btnEliminar"
+                DockPanel.Dock="Right"
+                Content="Eliminar"
+                Width="90"
+                Margin="8,0,0,0"
+                IsEnabled="False"
+                Click="btnEliminar_Click"/>
+            <Button
+                x:Name="btnHechoHoy"
+                DockPanel.Dock="Right"
+                Content="Hecho hoy / Deshacer"
+                Padding="10,0"
+                Margin="8,0,0,0"
+                IsEnabled="False"
+                Click="btnHechoHoy_Click"/>
+            <TextBlock DockPanel.Dock="Left" Text="Buscar: " VerticalAlignment="Center"/>
+            <TextBox x:Name="txtBuscar" TextChanged="txtBuscar_TextChanged"/>
+        </DockPanel>
+
+        <DataGrid
+            x:Name="dgHabitos"
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            CanUserAddRows="False"
+            SelectionChanged="dgHabitos_SelectionChanged">
+            <!-- Doble clic en una fila: abre la ventana de detalle -->
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" Handler="Fila_MouseDoubleClick"/>
+                    <Setter Property="ToolTip" Value="Doble clic para ver el detalle"/>
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Hábito" Binding="{Binding Nombre}" Width="*"/>
+                <DataGridTextColumn Header="Descripción" Binding="{Binding Descripcion}" Width="2*"/>
+                <DataGridCheckBoxColumn Header="Hoy" Binding="{Binding HechoHoy, Mode=OneWay}" Width="60"/>
+                <DataGridTextColumn Header="Racha" Binding="{Binding Racha, StringFormat='{}{0} d'}" Width="70"/>
+                <DataGridTextColumn Header="Total" Binding="{Binding Total}" Width="60"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </DockPanel>
+</Window>

@@ -32,9 +32,6 @@ public class Ejercicio1 {
             } catch (NumberFormatException e) {
                 System.err.println("[ERROR]: Alguno de los argumentos no es un numero entero");
                 System.exit(1);
-            } catch (IndexOutOfBoundsException ioobe){
-                System.err.println("[ERROR]: la cantidad de argumentos es impar");
-                System.exit(1);
             }
         }
 

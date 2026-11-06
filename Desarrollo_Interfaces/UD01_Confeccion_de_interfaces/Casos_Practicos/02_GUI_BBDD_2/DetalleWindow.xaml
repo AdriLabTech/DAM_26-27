@@ -1,0 +1,69 @@
+<Window
+    x:Class="gui_bbdd.DetalleWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Width="440"
+    Height="460"
+    MinWidth="360"
+    MinHeight="360"
+    WindowStartupLocation="CenterOwner"
+    ShowInTaskbar="False">
+
+    <DockPanel Margin="16">
+
+        <Button
+            DockPanel.Dock="Bottom"
+            Content="Cerrar"
+            Width="90"
+            Margin="0,12,0,0"
+            HorizontalAlignment="Right"
+            IsCancel="True"
+            IsDefault="True"/>
+
+        <!-- Datos del hábito -->
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Margin" Value="0,0,12,6"/>
+                    <Setter Property="TextWrapping" Value="Wrap"/>
+                </Style>
+            </Grid.Resources>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Id:" FontWeight="SemiBold"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="txtId"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Hábito:" FontWeight="SemiBold"/>
+            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="txtNombre" FontSize="16"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Descripción:" FontWeight="SemiBold"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" x:Name="txtDescripcion"/>
+
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Hecho hoy:" FontWeight="SemiBold"/>
+            <CheckBox Grid.Row="3" Grid.Column="1" x:Name="chkHechoHoy" IsEnabled="False" Margin="0,0,0,6"/>
+
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Racha:" FontWeight="SemiBold"/>
+            <TextBlock Grid.Row="4" Grid.Column="1" x:Name="txtRacha"/>
+
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="Total:" FontWeight="SemiBold"/>
+            <TextBlock Grid.Row="5" Grid.Column="1" x:Name="txtTotal"/>
+        </Grid>
+
+        <!-- Historial de días completados -->
+        <TextBlock DockPanel.Dock="Top" Text="Historial" FontWeight="SemiBold" Margin="0,12,0,4"/>
+        <TextBlock DockPanel.Dock="Top" x:Name="txtResumen" Foreground="Gray" Margin="0,0,0,6"/>
+        <ListBox x:Name="lstHistorial"/>
+
+    </DockPanel>
+</Window>
