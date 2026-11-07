@@ -5,25 +5,33 @@ la añada (modo "a") a un archivo historial.txt, junto con un número de intento
 Cada vez que se ejecute el programa, debe añadirse una nueva línea sin borrar las
 anteriores
 """
-# Importamos os para trabajar con ficheros
+# Importamos os para comprobar si el fichero existe
 import os
 path_fichero = "../output/historial.txt"
 
-def agregar_registro(nota, fichero):
+# Cuenta las lineas que ya hay: el siguiente intento es esa cantidad + 1
+def contar_intentos(fichero):
     if os.path.exists(fichero):
-        with open (fichero, "a", encoding="utf-8") as f:
-            f.write(str(nota) + "\n") # Agregamos la nota en formato str y con un salto de linea
-    else:
-        with open(fichero, "w", encoding="utf-8"):
-            agregar_registro(nota, fichero)
+        with open(fichero, "r", encoding="utf-8") as f:
+            return len(f.readlines())
+    return 0
+
+def agregar_registro(nota, fichero):
+    numero_intento = contar_intentos(fichero) + 1
+    # Modo "a": anade al final sin borrar lo anterior (y crea el fichero si no existe)
+    with open(fichero, "a", encoding="utf-8") as f:
+        f.write(f"Intento {numero_intento}: {nota}\n")
 
 def leer_fichero(fichero):
     if os.path.exists(fichero):
         with open(fichero, "r", encoding="utf-8") as f:
             print(f.read())
 
-agregar_registro(6.8, path_fichero)
-agregar_registro(3.2, path_fichero)
-agregar_registro(9.7, path_fichero)
+# Pedimos la nota al usuario (antes estaban escritas a mano en el codigo)
+try:
+    nota_usuario = float(input("Introduce una nota: "))
+    agregar_registro(nota_usuario, path_fichero)
+except ValueError:
+    print("[ERROR]: la nota tiene que ser un numero")
 
 leer_fichero(path_fichero)

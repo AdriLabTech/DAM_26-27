@@ -9,18 +9,32 @@ si no existe). Desde un programa main.py, importa el módulo y ofrece un pequeñ
 para probar las tres funciones
 """
 
-# Fichero main.py
+# Fichero main.py: importamos nuestro modulo (carpeta modulos/, fichero contactos.py)
 from modulos import contactos
 
-# Funcion 1.- Agregar contactos
-contactos.añadir_contacto("Adrian","644-644-644")
+# Menu que se repite hasta que el usuario elige salir
+while True:
+    print("\n1. Añadir contacto")
+    print("2. Listar contactos")
+    print("3. Buscar contacto")
+    print("4. Salir")
+    opcion = input("Elige una opcion: ")
 
-print("Contactos")
-# Funcion 2.- Listar contactos
-contactos.listar_contactos()
-
-# Funcion 3.- Buscar un contacto (no existente)
-contactos.buscar_contacto("Rafa")
-
-# Funcion 3.- Buscar un contacto exitente
-contactos.buscar_contacto("Adrian")
+    # Cada opcion llama a una funcion del modulo
+    # (salta un error si falta el fichero, si el contacto no existe o si el dato no vale)
+    try:
+        if opcion == "1":
+            nombre = input("Nombre: ")
+            telefono = input("Telefono: ")
+            contactos.añadir_contacto(nombre, telefono)
+        elif opcion == "2":
+            contactos.listar_contactos()
+        elif opcion == "3":
+            contactos.buscar_contacto(input("Nombre a buscar: "))
+        elif opcion == "4":
+            print("Adios")
+            break
+        else:
+            print("Opcion no valida")
+    except (FileNotFoundError, contactos.ContactoNoEncontradoError, ValueError) as e:
+        print(e)

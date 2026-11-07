@@ -4,17 +4,18 @@ Escribe un programa que abra un archivo de texto y cuente
 cuántas palabras contiene en total, leyendo línea a línea y
 usando split() en cada una para contar los elementos
 """
-# Importamos os para trabajar con archivos
+# Importamos os para comprobar si el fichero existe
 import os
 path_fichero = "../output/poema.txt"
 
 def contar_palabras(fichero):
     contador = 0
     if os.path.exists(fichero):
-        with open (fichero, "r", encoding="utf-8") as archivo:
+        with open(fichero, "r", encoding="utf-8") as archivo:
             for linea in archivo:
+                # split() corta la linea en palabras; len() dice cuantas salen
                 contador += len(linea.split())
     return contador
 
 contador = contar_palabras(path_fichero)
-print(contador)
+print(f"El fichero tiene {contador} palabras")

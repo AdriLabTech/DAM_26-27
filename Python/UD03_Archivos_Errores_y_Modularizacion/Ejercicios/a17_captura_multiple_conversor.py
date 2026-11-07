@@ -8,13 +8,13 @@ mostrando el mensaje del error con
 print(error)
 """
 
-
+# Comprueba que el operador sea uno de los cuatro permitidos; si no, lanza error
 def operador_valido(operador):
     if len(operador) != 1 or operador not in ("+", "-", "*", "/"):
         raise ValueError("El operador no es correcto")
-    return len(operador) == 1 and operador in ("+", "-", "*", "/")
+    return True
 
-
+# Hace la operacion segun el signo (match es como un "if" con varios casos)
 def realizar_operacion(n1, n2, signo):
     match signo:
         case "+":
@@ -24,8 +24,7 @@ def realizar_operacion(n1, n2, signo):
         case "*":
             return n1 * n2
         case "/":
-            return n1 / n2
-
+            return n1 / n2  # si n2 es 0, Python lanza ZeroDivisionError
 
 try:
     primer_numero = int(input("Introduce el primer numero: "))
@@ -33,5 +32,6 @@ try:
     operador = input("Introduce el operador (+ - * /): ")
     if operador_valido(operador):
         print(realizar_operacion(primer_numero, segundo_numero, operador))
+# Un solo except para los dos errores: numero no valido y division entre 0
 except (ValueError, ZeroDivisionError) as error:
     print(f"[ERROR]: {error}")

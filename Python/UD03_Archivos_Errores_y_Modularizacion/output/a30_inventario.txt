@@ -1,0 +1,3 @@
+manzanas,7
+peras,4
+kiwis,0

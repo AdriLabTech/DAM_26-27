@@ -8,13 +8,15 @@ módulo csv, compruebe que cada línea tiene exactamente
 import os
 
 fichero = "../output/ventas.txt"
+
+# Separa la linea por comas y comprueba que salgan justo 3 campos
 def lectura_campos(linea):
     campos = linea.split(",")
-    campos = [c.replace('\n', '') for c in campos]
+    # Quitamos el salto de linea que queda pegado a cada campo
+    campos = [c.strip() for c in campos]
     if len(campos) != 3:
         raise ValueError("El numero de campos no coincide")
-    else:
-        return campos
+    return campos
 
 if os.path.exists(fichero):
     with open(fichero, "r", encoding="utf-8") as f:
@@ -22,4 +24,7 @@ if os.path.exists(fichero):
             try:
                 print(lectura_campos(linea))
             except ValueError as e:
-                continue
+                # Linea con formato incorrecto: la descartamos y seguimos
+                print(f"Descartada ({e}): {linea.strip()!r}")
+else:
+    print("El fichero ventas.txt no existe")

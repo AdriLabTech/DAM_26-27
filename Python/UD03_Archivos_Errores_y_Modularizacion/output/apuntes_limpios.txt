@@ -1,0 +1,3 @@
+Los ficheros se abren con open
+with cierra el fichero solo
+try y except controlan los errores

@@ -8,15 +8,20 @@ sin detener el programa
 import os
 
 fichero = "../output/a20_resultados.txt"
+
 def suma_puntuaciones(fichero):
+    # Empezamos en 0 fuera del "if": si el fichero no existe devolvemos 0 en vez de fallar
+    suma = 0
     if os.path.exists(fichero):
         with open(fichero, "r", encoding="utf-8") as f:
-            suma = 0
             for linea in f:
                 try:
                     suma += float(linea)
                 except ValueError:
-                    continue
+                    # Linea corrupta (no es un numero): la saltamos y seguimos
+                    print(f"Linea corrupta saltada: {linea.strip()!r}")
+    else:
+        print("El fichero no existe")
     return suma
 
-print(f"La suma de las notas es: {suma_puntuaciones(fichero)}")
+print(f"La suma de las puntuaciones es: {suma_puntuaciones(fichero)}")

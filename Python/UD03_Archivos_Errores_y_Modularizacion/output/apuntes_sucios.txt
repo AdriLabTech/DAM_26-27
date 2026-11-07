@@ -1,0 +1,7 @@
+# Apuntes de la unidad 3
+   Los ficheros se abren con open   
+
+# esto es un comentario
+with cierra el fichero solo
+      
+  try y except controlan los errores  
