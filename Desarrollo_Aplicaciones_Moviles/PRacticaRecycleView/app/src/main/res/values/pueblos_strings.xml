@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="vista_lista">Lista</string>
+<string name="vista_cuadricula">Cuadrícula</string>
+<string name="habitantes_formato">%1$s hab.</string>
+<string name="detalle_formato">%1$s (2025)\n\n%2$s</string>
+<string name="cerrar_ficha">Cerrar</string>
+</resources>
