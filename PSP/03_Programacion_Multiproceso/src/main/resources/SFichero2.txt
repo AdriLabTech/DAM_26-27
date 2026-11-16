@@ -1,0 +1,35 @@
+1- Introduce datos de alumnos:
+
+Escribe un nombre:
+ADRIAN 20
+Datos introducidos: ADRIAN, 20
+
+2- Introduce datos de alumnos:
+
+Escribe un nombre:
+JUAN 25
+Datos introducidos: JUAN, 25
+
+3- Introduce datos de alumnos:
+
+Escribe un nombre:
+JOSE 13
+Datos introducidos: JOSE, 13
+
+4- Introduce datos de alumnos:
+
+Escribe un nombre:
+IVAN 99
+Datos introducidos: IVAN, 99
+
+5- Introduce datos de alumnos:
+
+Escribe un nombre:
+*
+Fin del proceso de lectura...
+
+Datos leídos: 4
+
+Alumno con más edad: IVAN
+
+Alumno con menos edad: JOSE

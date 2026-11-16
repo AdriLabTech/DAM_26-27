@@ -19,16 +19,17 @@ Datos introducidos: MARIA, 11
 4- Introduce datos de alumnos:
 
 Escribe un nombre:
-IVAN 1000
+IVAN 82
+Datos introducidos: IVAN, 82
 
-Incorrecto, debe estar entre 1 y 99. Se descarta el registro.
+5- Introduce datos de alumnos:
 
 Escribe un nombre:
 *
 Fin del proceso de lectura...
 
-Datos leídos: 3
+Datos leídos: 4
 
-Alumno con más edad: PABLO
+Alumno con más edad: IVAN
 
 Alumno con menos edad: MARIA

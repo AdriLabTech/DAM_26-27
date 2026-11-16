@@ -3,7 +3,6 @@ Actividad 32 — Combinar dos módulos propios. (Voluntaria) Escribe un programa
 importe dos de los módulos creados en esta unidad (por ejemplo, validaciones.py y
 contactos.py) y muestre un menú que use funciones de ambos módulos.
 """
-# Importamos dos modulos propios a la vez
 from modulos import validaciones, contactos
 
 while True:
@@ -30,6 +29,6 @@ while True:
             break
         else:
             print("Opcion no valida")
-    # Un solo bloque recoge los errores de los dos modulos
+    # Un solo except para los errores de los dos modulos
     except (ValueError, FileNotFoundError, contactos.ContactoNoEncontradoError) as e:
         print(f"[ERROR]: {e}")

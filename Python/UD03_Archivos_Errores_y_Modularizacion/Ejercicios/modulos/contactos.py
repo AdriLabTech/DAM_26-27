@@ -6,11 +6,11 @@ Los contactos se guardan en contactos.txt, una linea por contacto: nombre,telefo
 import os
 fichero_contactos = "../output/contactos.txt"
 
-# Error propio: se lanza cuando se busca o elimina un contacto que no existe (actividad 34)
+# Se lanza al buscar o eliminar un contacto que no existe (actividad 34)
 class ContactoNoEncontradoError(Exception):
     pass
 
-# Lee todos los contactos del fichero y los devuelve como lista de (nombre, telefono)
+# Devuelve los contactos como lista de (nombre, telefono)
 def _leer_todos():
     if not os.path.exists(fichero_contactos):
         raise FileNotFoundError("el fichero contactos.txt no existe todavia")
@@ -24,10 +24,9 @@ def _leer_todos():
     return contactos
 
 def añadir_contacto(nombre, telefono):
-    # La coma separa nombre y telefono en el fichero, asi que no puede ir dentro de ellos
+    # La coma separa nombre y telefono en el fichero, asi que no puede ir en ninguno
     if "," in nombre or "," in telefono or nombre.strip() == "":
         raise ValueError("el nombre no puede estar vacio y ni nombre ni telefono pueden llevar comas")
-    # Modo "a": anade al final del fichero sin borrar los contactos anteriores
     with open(fichero_contactos, "a", encoding="utf-8") as f:
         f.write(f"{nombre},{telefono}\n")
     print("Registro guardado")
@@ -43,10 +42,9 @@ def buscar_contacto(nombre):
         if nombre_guardado == nombre:
             print(f"Registro encontrado, {nombre} tiene el telefono: {telefono}")
             return telefono
-    # Solo llegamos aqui si no estaba en ninguna linea
     raise ContactoNoEncontradoError(f"No se ha encontrado el nombre {nombre}")
 
-# Borra un contacto reescribiendo el fichero con todos los demas
+# Para borrar reescribimos el fichero con todos los contactos menos ese
 def eliminar_contacto(nombre):
     contactos = _leer_todos()
     restantes = [c for c in contactos if c[0] != nombre]

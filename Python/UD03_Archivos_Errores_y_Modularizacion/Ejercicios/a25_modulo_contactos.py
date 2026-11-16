@@ -9,10 +9,8 @@ si no existe). Desde un programa main.py, importa el módulo y ofrece un pequeñ
 para probar las tres funciones
 """
 
-# Fichero main.py: importamos nuestro modulo (carpeta modulos/, fichero contactos.py)
 from modulos import contactos
 
-# Menu que se repite hasta que el usuario elige salir
 while True:
     print("\n1. Añadir contacto")
     print("2. Listar contactos")
@@ -20,8 +18,7 @@ while True:
     print("4. Salir")
     opcion = input("Elige una opcion: ")
 
-    # Cada opcion llama a una funcion del modulo
-    # (salta un error si falta el fichero, si el contacto no existe o si el dato no vale)
+    # El modulo lanza errores si falta el fichero, el contacto no existe o el dato no vale
     try:
         if opcion == "1":
             nombre = input("Nombre: ")

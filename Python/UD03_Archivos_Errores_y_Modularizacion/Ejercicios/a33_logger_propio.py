@@ -6,7 +6,6 @@ partes de otro programa para registrar su actividad.
 """
 from modulos.logger import registrar, fichero_log
 
-# Pequeno programa de prueba que va dejando constancia de lo que hace
 registrar("INFO", "El programa ha arrancado")
 
 def dividir(a, b):
@@ -21,7 +20,7 @@ def dividir(a, b):
 dividir(10, 2)
 dividir(5, 0)
 
-# Un nivel que no existe tambien lo controlamos
+# Un nivel que no existe tambien se registra, como error
 try:
     registrar("AVISO", "este nivel no existe")
 except ValueError as e:
@@ -29,6 +28,5 @@ except ValueError as e:
 
 registrar("INFO", "El programa ha terminado")
 
-# Mostramos el fichero de log para ver el resultado
 with open(fichero_log, "r", encoding="utf-8") as f:
     print(f.read())

@@ -6,7 +6,7 @@ ValueError si no lo es. Pruébala desde un main.py con varios valores.
 """
 from modulos import fechas
 
-# Probamos fechas buenas y malas; cada una con su propio try/except
+# Mezcla de fechas buenas y malas
 pruebas = ["07/11/2026", "29/02/2024", "29/02/2025", "31/04/2026",
            "15/13/2026", "1/1/2026", "ab/cd/efgh", "2026-11-07", "10/10/1850"]
 

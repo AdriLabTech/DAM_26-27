@@ -10,14 +10,12 @@ import os
 
 fichero = "../output/ventas.txt"
 
-# Calcula cantidad x precio de una linea. Lanza ValueError si algo no cuadra.
 def calcular_factura_producto(linea):
     campos = [c.strip() for c in linea.split(",")]
-    # Tienen que ser exactamente 3 campos: producto, cantidad y precio
     if len(campos) != 3:
         raise ValueError(f"Cantidad de elementos no valido: {campos}")
 
-    # Si cantidad o precio no son numeros, float() lanza ValueError solo
+    # Si cantidad o precio no son numeros, float() ya lanza ValueError
     cantidad = float(campos[1])
     precio = float(campos[2])
     return cantidad * precio
@@ -30,7 +28,6 @@ if os.path.exists(fichero):
             try:
                 factura_total += calcular_factura_producto(linea)
             except ValueError as e:
-                # Linea rota: avisamos de que se descarta y seguimos con las demas
                 print(f"[DESCARTADA]: {e}")
 
     print(f"Factura total: {factura_total:.2f}")

@@ -9,7 +9,7 @@ contactos añadidos anteriormente siguen ahí.
 """
 from modulos import contactos
 
-# Los contactos se guardan en un fichero, asi que siguen ahi la proxima vez que se ejecute
+# Los contactos viven en un fichero, asi que siguen ahi al volver a ejecutar
 while True:
     print("\n=== AGENDA ===")
     print("1. Añadir contacto")
@@ -18,7 +18,6 @@ while True:
     print("4. Salir")
     opcion = input("Elige una opcion: ")
 
-    # Todas las operaciones con el fichero van dentro de un try/except
     try:
         if opcion == "1":
             contactos.añadir_contacto(input("Nombre: "), input("Telefono: "))

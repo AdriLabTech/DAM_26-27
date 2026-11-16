@@ -4,24 +4,23 @@ Los valores que no se pueden convertir a numero se sustituyen por el ultimo valo
 """
 valores = ["--", "20.0", "21.5", "--", "x", "19.35", ""]
 
-ultimo = None     # ultimo valor valido visto (todavia ninguno)
-anterior = None   # ultimo valor MOSTRADO, para calcular la variacion
+ultimo = None     # ultimo valor valido
+anterior = None   # ultimo valor mostrado, para calcular la variacion
 
-# enumerate(..., start=1) numera los valores desde 1
 for numero, texto in enumerate(valores, start=1):
     try:
         valor = float(texto)
         marca = "ok"
         ultimo = valor
     except ValueError:
-        # No es un numero: usamos el ultimo bueno; si todavia no hay ninguno, se descarta
+        # Sin numero: usamos el ultimo bueno, y si aun no hay ninguno se descarta
         if ultimo is None:
             print(f"{numero}. {texto!r}: descartado (aun no hay valor anterior)")
             continue
         valor = ultimo
         marca = "imputado"
 
-    # Desde el segundo valor mostrado calculamos cuanto ha subido o bajado en %
+    # Desde el segundo valor mostramos tambien la variacion en %
     if anterior is None:
         print(f"{numero}. {valor:.2f} {marca}")
     else:

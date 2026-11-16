@@ -5,7 +5,6 @@ está entre 0 y 10. Desde un programa main.py, importa la función, pide notas a
 en un bucle hasta que escriba “fin”, y usa try/except para avisar (sin detener el programa)
 cada vez que se introduzca una nota fuera de rango
 """
-# Importamos nuestro modulo con la funcion validar_nota
 from modulos import validaciones
 
 while True:
@@ -14,7 +13,7 @@ while True:
     if entrada_usuario == "fin":
         break
 
-    # El try esta dentro del bucle: un error avisa pero no detiene el programa
+    # El try va dentro del bucle: un error avisa pero no para el programa
     try:
         n = float(entrada_usuario)
         if validaciones.validar_nota(n):

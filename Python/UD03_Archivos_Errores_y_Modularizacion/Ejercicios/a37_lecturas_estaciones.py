@@ -20,34 +20,32 @@ ruta = "../output/lecturas.ini"
 with open(ruta, "w", encoding="utf-8") as archivo:
     archivo.write(contenido)
 
-# Devuelve (datos, errores). No imprime nada: de eso se encarga el programa principal.
+# Devuelve (datos, errores) y no imprime nada
 def leer_lecturas(ruta):
     datos = {}       # {estacion: {hora: valor}}
-    errores = []     # mensajes de las lineas con problemas
-    actual = None    # estacion en la que estamos ahora (None = todavia ninguna)
-    ultimo = None    # ultimo valor valido de la estacion actual
+    errores = []
+    actual = None    # estacion actual (None = todavia ninguna)
+    ultimo = None    # ultimo valor valido de esa estacion
 
     with open(ruta, "r", encoding="utf-8") as f:
         for numero, linea in enumerate(f, start=1):
-            # Quitamos el comentario del final (lo que va tras ";") y los espacios
+            # Quitamos el comentario de despues del ";"
             linea = linea.split(";")[0].strip()
-            # Ignoramos lineas vacias y las que empiezan por #
             if linea == "" or linea.startswith("#"):
                 continue
 
-            # Linea [Nombre]: empieza una seccion nueva
+            # [Nombre] abre una seccion nueva
             if linea.startswith("[") and linea.endswith("]"):
                 actual = linea[1:-1]
                 datos[actual] = {}
-                ultimo = None  # Cada seccion empieza sin valor anterior
+                ultimo = None
                 continue
 
-            # Una linea de datos tiene que llevar "="
             if "=" not in linea:
                 errores.append(f"Línea {numero}: falta '=' en {linea!r}")
                 continue
 
-            # Un dato antes de cualquier seccion no sabemos a que estacion pertenece
+            # Un dato antes de cualquier seccion no tiene estacion
             if actual is None:
                 errores.append(f"Línea {numero}: dato fuera de sección")
                 continue
@@ -57,7 +55,7 @@ def leer_lecturas(ruta):
             try:
                 valor = float(texto)
             except ValueError:
-                # Valor vacio o "--": usamos el ultimo valor bueno de esta seccion
+                # Valor vacio o "--": repetimos el ultimo valor bueno
                 if ultimo is None:
                     errores.append(f"Línea {numero}: {texto!r} sin valor anterior")
                     continue

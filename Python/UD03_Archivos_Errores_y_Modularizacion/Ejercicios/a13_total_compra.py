@@ -4,32 +4,20 @@ Crea un archivo compra.txt donde cada línea tenga el
 formato producto,precio (por ejemplo pan,1.20). Escribe un programa que
 lea el archivo y calcule el importe total de la compra
 """
-# Importamos os para comprobar si el fichero existe
 import os
+
 path_fichero_compra = "../output/compra.txt"
-
-def calcular_importe_linea(linea):
-    # Separamos la linea en lo que hay antes y despues de la coma
-    # pan,1.20 -> ["pan", "1.20"]
-    partes_cadena = linea.split(",")
-    try:
-        precio = float(partes_cadena[-1]) # Cogemos la ultima parte (el precio)
-    except ValueError:
-        # Si el precio no es un numero, avisamos y no lo sumamos
-        print("El precio no es numerico")
-        return 0.0
-
-    return precio
 
 def calcular_importe_fichero(fichero):
     precio_total = 0.0
     if os.path.exists(fichero):
         with open(fichero, "r", encoding="utf-8") as f:
             for linea in f:
-                precio_total += calcular_importe_linea(linea)
-
+                # "pan,1.20" -> ["pan", "1.20"]; el precio es la ultima parte
+                try:
+                    precio_total += float(linea.split(",")[-1])
+                except ValueError:
+                    print(f"El precio no es numerico: {linea.strip()!r}")
     return precio_total
 
-precio_final = calcular_importe_fichero(path_fichero_compra)
-
-print(f"El precio total de la compra es: {precio_final:.2f}")
+print(f"El precio total de la compra es: {calcular_importe_fichero(path_fichero_compra):.2f}")

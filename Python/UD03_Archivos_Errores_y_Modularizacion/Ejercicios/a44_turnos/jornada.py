@@ -14,8 +14,7 @@ for entrada, salida in fichajes:
     except ValueError as error:
         print(f"{entrada} -> {salida}: descartado ({error})")
     else:
-        # El else solo se ejecuta si el try no dio ningun error
         print(f"{entrada} -> {salida}: trabajado {turnos.formatear(fin - inicio)}")
 
-# ¿Por que "17:3" se acepta?  int("3") vale 3, asi que se lee como 17:03.
-# El modulo no exige que los minutos tengan 2 cifras, solo que sean un numero entre 0 y 59.
+# "17:3" se acepta porque int("3") vale 3 y se lee como 17:03: el modulo solo
+# exige que los minutos sean un numero entre 0 y 59, no que tengan 2 cifras.

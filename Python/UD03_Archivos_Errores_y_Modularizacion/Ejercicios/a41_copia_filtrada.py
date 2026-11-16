@@ -9,7 +9,7 @@ sucio = "../output/apuntes_sucios.txt"
 limpio = "../output/apuntes_limpios.txt"
 log = "../output/limpieza.log"
 
-# Creamos por codigo el fichero sucio (comentarios, lineas vacias y espacios de mas)
+# Fichero sucio de prueba: comentarios, lineas vacias y espacios de mas
 with open(sucio, "w", encoding="utf-8") as f:
     f.write("# Apuntes de la unidad 3\n")
     f.write("   Los ficheros se abren con open   \n")
@@ -19,26 +19,25 @@ with open(sucio, "w", encoding="utf-8") as f:
     f.write("      \n")
     f.write("  try y except controlan los errores  \n")
 
-# Y dos ficheros temporales (tmp3.txt no se crea a proposito)
+# Dos temporales (tmp3.txt no se crea a proposito, para probar el "no existia")
 for nombre in ["tmp1.txt", "tmp2.txt"]:
     with open("../output/" + nombre, "w", encoding="utf-8") as f:
         f.write("temporal\n")
 
-# (1) Un unico "with" con los dos ficheros: el sucio para leer y el limpio para escribir
+# Copiamos solo las lineas utiles
 copiadas = 0
 with open(sucio, "r", encoding="utf-8") as entrada, open(limpio, "w", encoding="utf-8") as salida:
     for linea in entrada:
-        linea = linea.strip()  # quita espacios y salto de linea de los extremos
-        # Una linea es util si no esta vacia y no empieza por #
+        linea = linea.strip()
         if linea != "" and not linea.startswith("#"):
             salida.write(linea + "\n")
             copiadas += 1
 print(f"Lineas utiles copiadas: {copiadas}")
 
-# (2) Vaciamos el log: abrir en modo "w" y cerrar lo deja en blanco
+# Vaciamos el log
 open(log, "w", encoding="utf-8").close()
 
-# (3) Borramos cada temporal si existe y lo apuntamos en el log
+# Borramos los temporales que existan y lo apuntamos en el log
 for nombre in ["tmp1.txt", "tmp2.txt", "tmp3.txt"]:
     ruta = "../output/" + nombre
     with open(log, "a", encoding="utf-8") as f:

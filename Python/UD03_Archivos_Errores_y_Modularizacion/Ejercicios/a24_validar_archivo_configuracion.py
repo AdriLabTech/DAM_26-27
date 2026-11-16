@@ -8,11 +8,10 @@ todas las claves de una lista de claves obligatorias, avisando
 import os
 
 fichero = "../output/configuracion.txt"
-# Claves que tienen que estar si o si (antes el programa no comprobaba ninguna)
+# Claves que tienen que estar si o si
 CLAVES_OBLIGATORIAS = ["clave1", "clave2", "clave3", "clave8"]
 
-# Divide "clave=valor" en dos partes. Solo corta por el primer "=",
-# asi un valor como "hola=hola" tambien es valido.
+# Solo corta por el primer "=", asi un valor como "hola=hola" tambien es valido
 def leer_clave(linea):
     campos = linea.strip().split("=", 1)
     if len(campos) != 2:
@@ -28,14 +27,12 @@ if os.path.exists(fichero):
                 clave, valor = leer_clave(linea)
                 claves_encontradas.append(clave)
             except ValueError as e:
-                # Linea mal escrita: avisamos y seguimos con la siguiente
                 print(f"[ERROR]: {e} -> {linea.strip()!r}")
 
-    # Revisamos una por una las claves obligatorias
     for clave in CLAVES_OBLIGATORIAS:
-        if clave not in claves_encontradas:
-            print(f"[AVISO]: falta la clave obligatoria '{clave}'")
-        else:
+        if clave in claves_encontradas:
             print(f"Clave '{clave}' presente")
+        else:
+            print(f"[AVISO]: falta la clave obligatoria '{clave}'")
 else:
     print("El archivo no existe. Crealo y agrega contenido siguiendo el patron correcto")

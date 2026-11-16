@@ -24,18 +24,16 @@ class AlertaError(Exception):
 def guardar(texto):
     if texto == "":
         raise AlertaError("alerta vacía")
-    # Defecto 3 corregido: "with" cierra el archivo solo y no hace falta finally.
-    # Defecto 1 corregido: modo "a" (anadir al final) en vez de "w" (borrar y escribir).
+    # Defectos 3 y 1: "with" cierra el archivo solo (sin finally) y el modo "a" añade al final
     with open(ruta, "a", encoding="utf-8") as archivo:
-        # Defecto 2 corregido: el "\n" deja cada alerta en su propia linea.
+        # Defecto 2: el "\n" deja cada alerta en su linea
         archivo.write(texto + "\n")
 
-# Vaciamos el fichero antes de empezar
 open(ruta, "w", encoding="utf-8").close()
 for texto in ["Puerta abierta", "", "Humo en cocina"]:
     try:
         guardar(texto)
-    # Defecto 4 corregido: lo mas concreto (AlertaError) va PRIMERO y lo general (Exception) despues.
+    # Defecto 4: lo concreto (AlertaError) va antes que lo general (Exception)
     except AlertaError as error:
         print(f"No guardada: {error}")
     except Exception:

@@ -12,7 +12,7 @@ for tarifa, entradas in ventas:
     try:
         importe = precio(tarifa, entradas)
     except PrecioError as error:
-        # Venta incorrecta: se anula y no suma nada
+        # Una venta incorrecta se anula y no suma
         print(f"{tarifa}, {entradas}: ANULADA ({error})")
     else:
         recaudado += importe

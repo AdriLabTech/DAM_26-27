@@ -8,13 +8,11 @@ mostrando el mensaje del error con
 print(error)
 """
 
-# Comprueba que el operador sea uno de los cuatro permitidos; si no, lanza error
 def operador_valido(operador):
-    if len(operador) != 1 or operador not in ("+", "-", "*", "/"):
+    if operador not in ("+", "-", "*", "/"):
         raise ValueError("El operador no es correcto")
     return True
 
-# Hace la operacion segun el signo (match es como un "if" con varios casos)
 def realizar_operacion(n1, n2, signo):
     match signo:
         case "+":

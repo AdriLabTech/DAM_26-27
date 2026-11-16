@@ -6,13 +6,13 @@ import os
 from torneo.inscripciones import inscribir, InscripcionError
 
 ruta = "inscritos.txt"
-# Borramos las pruebas de ejecuciones anteriores para empezar de cero
+# Empezamos de cero borrando las inscripciones de otras ejecuciones
 if os.path.exists(ruta):
     os.remove(ruta)
 
 for jugador, nivel in [("Ana", "medio"), ("Luis", "experto"), ("Ana", "inicial"),
                        ("Eva", "pro"), ("Marta", "inicial")]:
-    # Un unico except recoge tanto el duplicado como el nivel incorrecto
+    # Un solo except para el duplicado y el nivel incorrecto
     try:
         inscribir(ruta, jugador, nivel)
         print(f"{jugador}: inscrito como {nivel}")

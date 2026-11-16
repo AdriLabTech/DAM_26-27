@@ -6,17 +6,15 @@ FileNotFoundError, avisar al usuario y crear el archivo vacío para la próxima 
 path_fichero = "../output/a16_fichero_inexistente.txt"
 
 def leer_fichero(fichero):
-    # Intentamos abrir el fichero directamente
     try:
         with open(fichero, "r", encoding="utf-8") as f:
             print(f"Contenido: '{f.read()}'")
-    # Si no existe, Python lanza FileNotFoundError y lo capturamos aqui
     except FileNotFoundError:
         print("[AVISO]: El fichero no existe. Se crea vacio para la proxima vez")
-        # Abrir en modo "w" y cerrar deja un fichero vacio
+        # Abrirlo en modo "w" ya lo deja creado y vacio
         with open(fichero, "w", encoding="utf-8"):
             pass
 
-# La primera vez avisa y crea el fichero; la segunda ya lo encuentra
+# La primera vez avisa y lo crea; la segunda ya lo encuentra
 leer_fichero(path_fichero)
 leer_fichero(path_fichero)

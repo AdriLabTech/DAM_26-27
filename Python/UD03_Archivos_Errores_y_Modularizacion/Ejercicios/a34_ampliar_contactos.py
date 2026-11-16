@@ -6,11 +6,10 @@ contacto que no existe.
 """
 from modulos import contactos
 
-# Preparamos dos contactos de prueba
 contactos.añadir_contacto("Laura", "611-111-111")
 contactos.añadir_contacto("Pedro", "622-222-222")
 
-# Cada prueba lleva su try/except: asi vemos el error propio sin que el programa se pare
+# Las busquedas y borrados que fallan van con try/except para ver el error propio
 print("\n-- Buscar un contacto que existe --")
 contactos.buscar_contacto("Laura")
 

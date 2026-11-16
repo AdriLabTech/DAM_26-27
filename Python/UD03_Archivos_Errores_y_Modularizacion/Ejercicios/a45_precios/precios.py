@@ -8,7 +8,7 @@ Los tres problemas del original (precios_mal.py):
 """
 TARIFAS = {"normal": 8.5, "reducida": 6.0}
 
-# Un unico error propio para todo lo que pueda ir mal al calcular un precio
+# Un solo error propio para todo lo que pueda fallar al calcular un precio
 class PrecioError(Exception):
     pass
 
@@ -18,13 +18,13 @@ def precio(tarifa, entradas):
     try:
         cantidad = int(entradas)
     except ValueError:
-        # Traducimos el error tecnico de int() a uno nuestro y claro
+        # Cambiamos el error de int() por uno mas claro
         raise PrecioError(f"número de entradas no válido: {entradas!r}") from None
     if cantidad <= 0:
         raise PrecioError(f"el número de entradas debe ser positivo: {cantidad}")
     return TARIFAS[tarifa] * cantidad
 
-# El autotest solo se ejecuta si lanzamos este fichero, no al importarlo
+# Autotest: solo si lanzamos este fichero directamente
 if __name__ == "__main__":
     assert precio("normal", 2) == 17.0
     assert precio("reducida", "3") == 18.0

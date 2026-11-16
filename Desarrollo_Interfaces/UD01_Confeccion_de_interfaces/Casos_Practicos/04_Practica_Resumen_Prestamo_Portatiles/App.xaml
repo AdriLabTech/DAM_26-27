@@ -1,0 +1,17 @@
+<Application x:Class="PrestamosGC.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="VentanaPrincipal.xaml">
+    <Application.Resources>
+
+        <!-- Colores comunes de la aplicación: úsalos con {StaticResource ...} -->
+        <SolidColorBrush x:Key="ColorPrincipal" Color="#0F6CBD"/>
+        <SolidColorBrush x:Key="ColorError" Color="#C42B1C"/>
+        <SolidColorBrush x:Key="ColorCorrecto" Color="#0F7B0F"/>
+        <SolidColorBrush x:Key="ColorTextoSecundario" Color="#5F5F5F"/>
+        <SolidColorBrush x:Key="ColorFondoTarjeta" Color="#FFFFFF"/>
+
+        <!-- Ejercicio 4: añade aquí los estilos comunes -->
+
+    </Application.Resources>
+</Application>

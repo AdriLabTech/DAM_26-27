@@ -9,11 +9,8 @@ import os
 
 fichero = "../output/ventas.txt"
 
-# Separa la linea por comas y comprueba que salgan justo 3 campos
 def lectura_campos(linea):
-    campos = linea.split(",")
-    # Quitamos el salto de linea que queda pegado a cada campo
-    campos = [c.strip() for c in campos]
+    campos = [c.strip() for c in linea.split(",")]
     if len(campos) != 3:
         raise ValueError("El numero de campos no coincide")
     return campos
@@ -24,7 +21,6 @@ if os.path.exists(fichero):
             try:
                 print(lectura_campos(linea))
             except ValueError as e:
-                # Linea con formato incorrecto: la descartamos y seguimos
                 print(f"Descartada ({e}): {linea.strip()!r}")
 else:
     print("El fichero ventas.txt no existe")
