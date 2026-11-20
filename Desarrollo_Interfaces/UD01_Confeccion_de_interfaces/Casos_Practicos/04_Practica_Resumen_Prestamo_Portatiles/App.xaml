@@ -11,7 +11,75 @@
         <SolidColorBrush x:Key="ColorTextoSecundario" Color="#5F5F5F"/>
         <SolidColorBrush x:Key="ColorFondoTarjeta" Color="#FFFFFF"/>
 
-        <!-- Ejercicio 4: añade aquí los estilos comunes -->
+        <!-- Colores auxiliares (también aquí, para no escribir ningún color en las ventanas) -->
+        <SolidColorBrush x:Key="ColorTextoClaro" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="ColorFondoBarra" Color="#F0F0F0"/>
+        <SolidColorBrush x:Key="ColorBorde" Color="#E0E0E0"/>
+
+        <!-- ================= Estilos comunes (ejercicio 4) ================= -->
+
+        <!-- Etiqueta que va encima de cada campo del formulario -->
+        <Style x:Key="Etiqueta" TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,8,0,3"/>
+        </Style>
+
+        <!-- Mismo alto y margen para TextBox, ComboBox y DatePicker -->
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,2"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,2"/>
+        </Style>
+        <Style TargetType="DatePicker">
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,2"/>
+        </Style>
+
+        <!-- Mensaje de error bajo un campo: oculto hasta que haga falta -->
+        <Style x:Key="MensajeError" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource ColorError}"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Visibility" Value="Collapsed"/>
+        </Style>
+
+        <!-- Botones: los normales y el principal (azul) -->
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="18,6"/>
+            <Setter Property="MinWidth" Value="100"/>
+            <Setter Property="Margin" Value="8,0,0,0"/>
+        </Style>
+        <Style x:Key="BotonPrincipal" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Background" Value="{StaticResource ColorPrincipal}"/>
+            <Setter Property="Foreground" Value="{StaticResource ColorTextoClaro}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ColorPrincipal}"/>
+        </Style>
+
+        <!-- Panel blanco con borde de la ventana de detalle -->
+        <Style x:Key="Tarjeta" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource ColorFondoTarjeta}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ColorBorde}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="16,8"/>
+        </Style>
+
+        <!-- Filas de la ventana de detalle -->
+        <Style x:Key="DetalleTitulo" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource ColorTextoSecundario}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,9"/>
+        </Style>
+        <Style x:Key="DetalleValor" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="0,9"/>
+        </Style>
 
     </Application.Resources>
 </Application>

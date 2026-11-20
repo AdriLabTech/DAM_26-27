@@ -1,0 +1,102 @@
+<Window x:Class="PrestamosGC.VentanaDetalle"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Detalle del préstamo"
+        Width="520" SizeToContent="Height"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize" ShowInTaskbar="False"
+        Language="es-ES">
+
+    <Border Padding="24,16">
+        <StackPanel>
+
+            <!-- ===== Cabecera: código del portátil y alumno ===== -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Width="56" Height="56" CornerRadius="28"
+                        Background="{StaticResource ColorPrincipal}">
+                    <TextBlock Text="{Binding Portatil}" Foreground="{StaticResource ColorTextoClaro}"
+                               FontWeight="SemiBold" FontSize="16"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <StackPanel Grid.Column="1" Margin="14,0,0,0" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding NombreCompleto}" FontSize="20" FontWeight="SemiBold"/>
+                    <!-- «2º DAW · En préstamo»: Estado es de solo lectura, por eso Mode=OneWay -->
+                    <TextBlock Foreground="{StaticResource ColorTextoSecundario}">
+                        <Run Text="{Binding Grupo}"/>
+                        <Run Text=" · "/>
+                        <Run Text="{Binding Estado, Mode=OneWay}"/>
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+
+            <!-- ===== Datos del préstamo ===== -->
+            <Border Style="{StaticResource Tarjeta}" Margin="0,16,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Correo" Style="{StaticResource DetalleTitulo}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Correo}" Style="{StaticResource DetalleValor}"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Motivo" Style="{StaticResource DetalleTitulo}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Motivo}" Style="{StaticResource DetalleValor}"/>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Incluye cargador" Style="{StaticResource DetalleTitulo}"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding CargadorTexto}" Style="{StaticResource DetalleValor}"/>
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Fecha de préstamo" Style="{StaticResource DetalleTitulo}"/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" Style="{StaticResource DetalleValor}"
+                               Text="{Binding FechaPrestamo, StringFormat={}{0:dd/MM/yyyy}}"/>
+
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Devolución prevista" Style="{StaticResource DetalleTitulo}"/>
+                    <TextBlock Grid.Row="4" Grid.Column="1" Style="{StaticResource DetalleValor}"
+                               Text="{Binding FechaDevolucionPrevista, StringFormat={}{0:D}}"/>
+
+                    <TextBlock Grid.Row="5" Grid.Column="0" Text="Duración" Style="{StaticResource DetalleTitulo}"/>
+                    <TextBlock Grid.Row="5" Grid.Column="1" Style="{StaticResource DetalleValor}"
+                               Text="{Binding DuracionDias, StringFormat='{}{0} días'}"/>
+
+                    <TextBlock Grid.Row="6" Grid.Column="0" Text="Plazo" Style="{StaticResource DetalleTitulo}"/>
+                    <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding Plazo}" Style="{StaticResource DetalleValor}"/>
+
+                    <TextBlock Grid.Row="7" Grid.Column="0" Text="Observaciones" Style="{StaticResource DetalleTitulo}"/>
+                    <!-- Si no hay observaciones se muestra una raya (FallbackValue no sirve: la cadena vacía no es null) -->
+                    <TextBlock Grid.Row="7" Grid.Column="1" TextWrapping="Wrap">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource DetalleValor}">
+                                <Setter Property="Text" Value="{Binding Observaciones}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Observaciones}" Value="">
+                                        <Setter Property="Text" Value="—"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+            </Border>
+
+            <!-- ===== Botones ===== -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+                <Button Content="Cerrar" IsCancel="True"/>
+                <Button Content="Registrar devolución" Style="{StaticResource BotonPrincipal}"
+                        IsEnabled="{Binding EstaActivo}" Click="Devolucion_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</Window>
