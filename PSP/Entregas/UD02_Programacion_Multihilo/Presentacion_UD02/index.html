@@ -1,0 +1,370 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PSP Unidad 2 · Programación multihilo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Space+Grotesk:wght@400;500&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#000;--raised:#0a0a0a;--ink:#cdc4ba;--dim:#b0a9a0;--muted:#958f87;--faint:#7a756e;
+--line:rgba(205,196,186,.26);--soft:rgba(205,196,186,.13);--strong:rgba(205,196,186,.42);
+--t5:rgba(205,196,186,.05);--t10:rgba(205,196,186,.10);--t16:rgba(205,196,186,.16);--verm:#e2342a;
+--ease:cubic-bezier(.215,.61,.355,1);
+--display:"Fraunces",ui-serif,Georgia,serif;--sans:"Space Grotesk","Inter",system-ui,sans-serif;
+--mono:"Space Mono","JetBrainsMono Nerd Font",ui-monospace,monospace;--jp:"Noto Sans JP","Noto Sans CJK JP",sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#000;overflow:hidden}
+body{color:var(--ink);font:400 26px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
+#stage{position:fixed;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center;}
+.slide{position:absolute;inset:0;background:#000;overflow:hidden;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .21s var(--ease),transform .21s var(--ease),visibility 0s .21s}
+.slide.on{opacity:1;visibility:visible;transform:none;transition:opacity .21s var(--ease),transform .21s var(--ease)}
+.slide::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.055;mix-blend-mode:screen;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* marco + cromo */
+.frame{position:absolute;inset:28px;border:1px solid var(--soft);pointer-events:none}
+.top,.bot{position:absolute;left:84px;right:84px;display:flex;justify-content:space-between;align-items:center;font:400 15px var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.top{top:58px}.bot{bottom:56px}
+.top b{color:var(--ink);font-weight:400}.top .k{font:600 26px var(--display);color:var(--verm);letter-spacing:0;margin-right:14px;text-transform:none}
+.bot .bar{flex:1;height:1px;background:var(--soft);margin:0 28px;position:relative}
+.bot .bar i{position:absolute;left:0;top:-1px;height:3px;background:var(--ink)}
+.rail{position:absolute;left:46px;top:50%;writing-mode:vertical-rl;transform:rotate(180deg) translateY(50%);font:400 13px var(--mono);letter-spacing:.3em;text-transform:uppercase;color:var(--faint)}
+.eyebrow{font:400 17px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:14px}
+.eyebrow i{display:block;width:34px;height:1px;background:var(--muted)}
+.body{position:absolute;left:150px;right:120px;top:150px;bottom:130px}
+h1{font:400 150px/.92 var(--display);letter-spacing:-.025em}
+h2{font:400 88px/1 var(--display);letter-spacing:-.02em}
+h2 em,h1 em,h3 em{font-style:italic;color:var(--dim)}
+h3{font:500 46px/1.1 var(--display)}
+.lede{font:400 32px/1.45 var(--sans);color:var(--dim);max-width:1000px}
+p.s{font-size:29px;color:var(--dim);line-height:1.5}
+b.hl{color:var(--ink);font-weight:500}
+code,.mono{font-family:var(--mono)}
+.mono{font-size:22px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.sun{position:absolute;border-radius:50%;background:var(--t16)}
+.art{position:absolute;image-rendering:pixelated;background-repeat:no-repeat;background-size:contain}
+.mask-l{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 40%);mask-image:linear-gradient(90deg,transparent 0,#000 40%)}
+.mask-b{-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent);mask-image:linear-gradient(180deg,#000 55%,transparent)}
+.card{border:1px solid var(--line);border-radius:2px;background:var(--raised);padding:36px 40px;position:relative}
+.card.hi{background:var(--t10);border-color:var(--strong)}
+.card .n{font:400 16px var(--mono);letter-spacing:.2em;color:var(--muted);text-transform:uppercase;margin-bottom:14px;display:block}
+.card h3{margin-bottom:14px}
+.grid{display:grid;gap:26px}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+ul.l{list-style:none}
+ul.l li{position:relative;padding:12px 0 12px 38px;border-bottom:1px solid var(--soft);font-size:29px;color:var(--dim);line-height:1.4}
+ul.l li:last-child{border:0}
+ul.l li::before{content:"+";position:absolute;left:2px;top:12px;font:400 24px var(--mono);color:var(--muted)}
+ul.l li b{color:var(--ink);font-weight:500}
+.rows{border-top:1px solid var(--soft)}
+.rows div{display:flex;align-items:center;gap:18px;padding:15px 0;border-bottom:1px solid var(--soft)}
+.rows dt{font:400 17px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.rows .ld{flex:1;height:1px;background:var(--soft)}
+.rows dd{font:400 25px var(--mono);color:var(--ink);text-align:right}
+pre.code{font:400 25px/1.55 var(--mono);background:var(--raised);border:1px solid var(--line);border-radius:2px;padding:24px 28px;color:var(--ink);white-space:pre;overflow:hidden}
+.c{color:var(--faint)}.k{color:var(--ink);font-weight:700}.s{color:var(--dim)}
+.k2{color:var(--muted)}
+.box{border:1px solid var(--strong);border-radius:2px;padding:18px 26px;font:400 24px var(--mono);text-align:center;background:var(--raised);position:relative}
+.box.f{background:var(--ink);color:#000;border-color:var(--ink)}
+.box.d{border-style:dashed;border-color:var(--line);color:var(--muted)}
+.box small{display:block;font:400 13px var(--mono);letter-spacing:.16em;text-transform:uppercase;opacity:.7;margin-top:4px}
+.note{border-left:2px solid var(--ink);padding:6px 0 6px 26px;font-size:30px;color:var(--dim);max-width:1350px}
+.note b{color:var(--ink);font-weight:500}
+svg text{font-family:var(--mono)}
+.big{font:400 230px/1 var(--display);letter-spacing:-.04em}
+.ghost{position:absolute;font:400 520px/1 var(--display);color:var(--t5);letter-spacing:-.05em;pointer-events:none}
+.kanji{font:400 28px var(--jp);color:var(--verm)}
+.stat b{display:block;font:400 74px/1 var(--mono);color:var(--ink)}
+.g3 .card ul.l li{font-size:26px}
+.chip{display:inline-block;border:1px solid var(--line);padding:5px 14px;font:400 17px var(--mono);margin:4px 8px 4px 0;color:var(--ink)}
+.chip.on{background:var(--ink);color:#000}
+/* ui */
+#hud{position:fixed;right:18px;bottom:14px;font:400 11px var(--mono);color:#444;letter-spacing:.12em;z-index:9}
+.a{opacity:0;transform:translateY(10px)}
+.on .a{animation:in .42s var(--ease) forwards;animation-delay:calc(var(--d,0) * 70ms + 120ms)}
+@keyframes in{to{opacity:1;transform:none}}
+
+.slide::after{display:none}
+.a,.on .a{opacity:1!important;transform:none!important;animation:none!important}
+.slide{transition:none}
+.top,.bot{left:120px;right:120px;font-size:16px;letter-spacing:.14em}.top{top:56px}.bot{bottom:50px;justify-content:flex-end}
+.body{left:120px;right:120px;top:150px}
+h1{font-size:136px;line-height:1;letter-spacing:-.02em}
+h2{font-size:72px;line-height:1.08}
+h2 em,h1 em,h3 em{font-style:normal;color:var(--ink)}
+.card,.card.hi{background:none;border:0;border-top:1px solid var(--line);border-radius:0;padding:26px 0 0}
+.card .n{display:none}
+.box,.box.d{background:none;border-radius:0;border-color:var(--line)}
+.box.f{background:var(--ink);color:#000}
+pre.code{background:none;border:0;border-left:1px solid var(--line);border-radius:0;padding:4px 0 4px 28px}
+.note{border-left:0;padding:0;color:var(--dim)}
+ul.l li::before{content:"–"}
+.chip{border-color:var(--line)}
+@page{size:1920px 1080px;margin:0}
+@media print{.slide::after{display:none}html,body{overflow:visible;height:auto}#stage{position:static;transform:none!important;width:1920px}#hud{display:none}
+.slide{position:relative;opacity:1!important;visibility:visible!important;transform:none!important;height:1080px;break-after:page;transition:none}
+.a{opacity:1!important;transform:none!important;animation:none!important}}
+
+/* ---- ajustes UD2: texto más grande, acento vermellón para lo peligroso ---- */
+.body{top:140px}
+h2{font-size:78px}
+ul.l li{font-size:31px}
+p.s{font-size:30px}
+.card{padding:30px 0 0}
+.bad{color:var(--verm)!important}
+.box.bad{border-color:var(--verm)}
+.box.f.bad{background:var(--verm);color:#000;border-color:var(--verm)}
+pre.code{font-size:27px;line-height:1.5}
+.tag{display:inline-block;border:1px solid var(--line);padding:6px 16px;font:400 21px var(--mono);color:var(--ink);margin:0 10px 10px 0}
+.tag.on{background:var(--ink);color:#000;border-color:var(--ink)}
+.tag.bad{border-color:var(--verm);color:var(--verm)}
+.num{font:400 22px var(--mono);letter-spacing:.2em;color:var(--muted)}
+.cap{font:400 21px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.five{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
+.five>div{border-top:1px solid var(--strong);padding:26px 24px 0 0;margin-right:24px}
+.five h3{font-size:44px;margin:10px 0 12px}
+.five p{font:400 26px/1.4 var(--sans);color:var(--dim)}
+.five .j{margin-top:20px;font:400 20px var(--mono);color:var(--ink)}
+</style></head><body><div id="stage"><section class="slide on" data-i="0">
+<div class="body" style="top:0;bottom:0;display:flex;flex-direction:column;justify-content:center">
+ <p class="eyebrow">Programación de servicios y procesos</p>
+ <h1 style="margin-top:36px">Unidad 2.<br>Programación<br>multihilo</h1>
+ <p class="lede" style="margin-top:70px;color:var(--ink)">Desarrollado por Adrián Velasco Mañas</p>
+</div>
+<svg style="position:absolute;right:150px;top:250px" viewBox="0 0 520 520" width="520" height="520" fill="none" stroke="#cdc4ba" stroke-width="2">
+ <g stroke-opacity=".55"><path d="M40 260C140 260 140 90 260 90S380 90 480 90"/><path d="M40 260C140 260 140 260 260 260S380 260 480 260"/><path d="M40 260C140 260 140 430 260 430S380 430 480 430"/></g>
+ <circle cx="40" cy="260" r="14" fill="#cdc4ba" stroke="none"/>
+ <g fill="#000"><circle cx="260" cy="90" r="11"/><circle cx="260" cy="260" r="11"/><circle cx="260" cy="430" r="11"/></g>
+ <circle cx="480" cy="90" r="9" fill="#cdc4ba" stroke="none"/><circle cx="480" cy="260" r="9" fill="#cdc4ba" stroke="none"/><circle cx="480" cy="430" r="9" fill="#cdc4ba" stroke="none"/>
+</svg></section><section class="slide" data-i="1"><div class="top"><span>Contenido</span></div><div class="bot"><span></span><span>02</span></div>
+<div class="body"><h2 class="a" style="--d:1">Cinco bloques,<br><em>de menos a más difícil.</em></h2>
+<div style="margin-top:34px;width:1500px;border-top:1px solid var(--soft)"><div class="a" style="--d:2;display:grid;grid-template-columns:100px 1fr;align-items:center;gap:20px;padding:20px 0;border-bottom:1px solid var(--soft)"><span class="num" style="font-size:26px">01</span><div><h3 style="font-size:50px">El hilo</h3><p class="cap" style="margin-top:8px;font-size:19px;text-transform:none;letter-spacing:.04em">Qué es y en qué se diferencia de un proceso</p></div></div><div class="a" style="--d:3;display:grid;grid-template-columns:100px 1fr;align-items:center;gap:20px;padding:20px 0;border-bottom:1px solid var(--soft)"><span class="num" style="font-size:26px">02</span><div><h3 style="font-size:50px">La sección crítica</h3><p class="cap" style="margin-top:8px;font-size:19px;text-transform:none;letter-spacing:.04em">Condiciones de carrera y cómo evitarlas</p></div></div><div class="a" style="--d:4;display:grid;grid-template-columns:100px 1fr;align-items:center;gap:20px;padding:20px 0;border-bottom:1px solid var(--soft)"><span class="num" style="font-size:26px">03</span><div><h3 style="font-size:50px">Hilos en Java</h3><p class="cap" style="margin-top:8px;font-size:19px;text-transform:none;letter-spacing:.04em">Runnable, Thread, estados y control</p></div></div><div class="a" style="--d:5;display:grid;grid-template-columns:100px 1fr;align-items:center;gap:20px;padding:20px 0;border-bottom:1px solid var(--soft)"><span class="num" style="font-size:26px">04</span><div><h3 style="font-size:50px">Sincronización</h3><p class="cap" style="margin-top:8px;font-size:19px;text-transform:none;letter-spacing:.04em">synchronized, wait/notify, semáforos</p></div></div><div class="a" style="--d:6;display:grid;grid-template-columns:100px 1fr;align-items:center;gap:20px;padding:20px 0;border-bottom:1px solid var(--soft)"><span class="num" style="font-size:26px">05</span><div><h3 style="font-size:50px">Problemas clásicos</h3><p class="cap" style="margin-top:8px;font-size:19px;text-transform:none;letter-spacing:.04em">Productor-consumidor, filósofos, lectores-escritores</p></div></div></div></div></section><section class="slide" data-i="2"><div class="top"><span>01 · El hilo</span></div><div class="bot"><span></span><span>03</span></div>
+<div class="body"><h2 class="a" style="--d:1">Un hilo es una vía de ejecución<br><em>dentro de un proceso.</em></h2>
+<svg class="a" style="--d:3;margin-top:34px" viewBox="0 0 1680 560" width="1680" height="560" fill="none" stroke="#cdc4ba">
+ <rect x="2" y="2" width="1676" height="556" stroke-opacity=".5"/>
+ <text x="36" y="48" fill="#cdc4ba" stroke="none" font-size="22" letter-spacing="5">PROCESO</text>
+ <rect x="36" y="76" width="1608" height="130" fill="#cdc4ba" stroke="none"/>
+ <text x="70" y="122" fill="#000" stroke="none" font-size="19" letter-spacing="4">COMPARTIDO POR TODOS LOS HILOS</text>
+ <g fill="#000" stroke="none" font-size="30" text-anchor="middle"><text x="290" y="176">Memoria</text><text x="840" y="176">Ficheros abiertos</text><text x="1390" y="176">Variables globales</text></g>
+ <g>
+  <rect x="36" y="244" width="500" height="280" stroke-opacity=".7"/><rect x="590" y="244" width="500" height="280" stroke-opacity=".7"/><rect x="1144" y="244" width="500" height="280" stroke-opacity=".7"/>
+  <g fill="#cdc4ba" stroke="none" font-size="30"><text x="66" y="296">Hilo 1</text><text x="620" y="296">Hilo 2</text><text x="1174" y="296">Hilo 3</text></g>
+  <g fill="#958f87" stroke="none" font-size="18" letter-spacing="4"><text x="66" y="332">PROPIO</text><text x="620" y="332">PROPIO</text><text x="1174" y="332">PROPIO</text></g>
+  <g stroke-opacity=".6"><rect x="66" y="360" width="200" height="130"/><rect x="290" y="360" width="214" height="130"/><rect x="620" y="360" width="200" height="130"/><rect x="844" y="360" width="214" height="130"/><rect x="1174" y="360" width="200" height="130"/><rect x="1398" y="360" width="214" height="130"/></g>
+  <g fill="#cdc4ba" stroke="none" font-size="26" text-anchor="middle"><text x="166" y="432">Registros</text><text x="397" y="432">Pila</text><text x="720" y="432">Registros</text><text x="951" y="432">Pila</text><text x="1274" y="432">Registros</text><text x="1505" y="432">Pila</text></g>
+ </g>
+</svg>
+<p class="note a" style="--d:5;margin-top:26px;font-size:31px"><b>Proceso:</b> programa en ejecución con su propia memoria. &nbsp; <b>Hilo:</b> comparte esa memoria, y por eso es más ligero… y más peligroso.</p></div></section><section class="slide" data-i="3"><div class="top"><span>01 · El hilo</span></div><div class="bot"><span></span><span>04</span></div>
+<div class="body"><h2 class="a" style="--d:1">Más rendimiento,<br><em>a cambio de más cuidado.</em></h2>
+<div class="grid g2 a" style="--d:3;margin-top:40px;gap:60px">
+ <div class="card hi" style="border-top:1px solid var(--strong)"><p class="mono" style="color:var(--ink);margin-bottom:12px">+ Ventajas</p>
+  <ul class="l"><li><b>Aprovechan</b> todos los núcleos.</li><li><b>Menos tiempo</b> total: tareas en paralelo.</li><li><b>Interfaz fluida</b> mientras algo trabaja detrás.</li></ul></div>
+ <div class="card"><p class="mono bad" style="margin-bottom:12px">− Desafíos</p>
+  <ul class="l"><li>Programarlo es <b>más complejo</b>.</li><li>Hay que <b>sincronizar</b> lo compartido.</li><li>Los fallos son <b>difíciles de reproducir</b>.</li></ul></div>
+</div>
+<div class="a" style="--d:5;margin-top:56px"><p class="cap" style="margin-bottom:16px">Dónde se usan</p>
+ <span class="tag on">Interfaces de usuario</span><span class="tag on">Servidores web · un hilo por conexión</span><span class="tag on">Audio y vídeo en tiempo real</span></div></div></section><section class="slide" data-i="4"><div class="top"><span>02 · Sección crítica</span></div><div class="bot"><span></span><span>05</span></div>
+<div class="body"><h2 class="a" style="--d:1">Dos hilos, una variable:<br><em>se pierde una suma.</em></h2>
+<svg class="a" style="--d:3;margin-top:30px" viewBox="0 0 1680 520" width="1680" height="520" fill="none" stroke="#cdc4ba">
+ <defs><marker id="m5" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 1L11 6L0 11z" fill="#cdc4ba" stroke="none"/></marker><marker id="r5" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 1L11 6L0 11z" fill="#e2342a" stroke="none"/></marker></defs>
+ <text x="0" y="40" fill="#958f87" stroke="none" font-size="20" letter-spacing="4">contador = contador + 1      ·      contador empieza en 0</text>
+ <g fill="#cdc4ba" stroke="none" font-size="28"><text x="0" y="170">Hilo A</text><text x="0" y="330">Hilo B</text></g>
+ <path d="M150 150H1600" stroke-opacity=".3" stroke-dasharray="3 8"/><path d="M150 310H1600" stroke-opacity=".3" stroke-dasharray="3 8"/>
+ <g font-size="26" text-anchor="middle">
+  <rect x="250" y="120" width="260" height="64" fill="#cdc4ba" stroke="none"/><text x="380" y="162" fill="#000" stroke="none">lee 0</text>
+  <rect x="250" y="280" width="260" height="64" fill="#cdc4ba" stroke="none"/><text x="380" y="322" fill="#000" stroke="none">lee 0</text>
+  <rect x="640" y="120" width="260" height="64" stroke-opacity=".7"/><text x="770" y="162" fill="#cdc4ba" stroke="none">calcula 1</text>
+  <rect x="640" y="280" width="260" height="64" stroke-opacity=".7"/><text x="770" y="322" fill="#cdc4ba" stroke="none">calcula 1</text>
+  <rect x="1030" y="120" width="260" height="64" stroke="#e2342a"/><text x="1160" y="162" fill="#e2342a" stroke="none">escribe 1</text>
+  <rect x="1030" y="280" width="260" height="64" stroke="#e2342a"/><text x="1160" y="322" fill="#e2342a" stroke="none">escribe 1</text>
+ </g>
+ <path d="M1330 232H1480" stroke="#e2342a" marker-end="url(#r5)"/>
+ <g text-anchor="middle" stroke="none"><text x="1560" y="228" fill="#e2342a" font-size="64">1</text><text x="1560" y="270" fill="#958f87" font-size="19" letter-spacing="3">ESPERADO: 2</text></g>
+ <path d="M150 440H1600" stroke-opacity=".5" marker-end="url(#m5)"/><text x="1600" y="480" fill="#958f87" stroke="none" font-size="18" letter-spacing="4" text-anchor="end">TIEMPO</text>
+</svg>
+<p class="note a" style="--d:5;margin-top:10px;font-size:31px"><b>Sección crítica:</b> el trozo de código que toca un recurso compartido. Solo debe entrar <b>un hilo a la vez</b>.</p></div></section><section class="slide" data-i="5"><div class="top"><span>02 · Sección crítica</span></div><div class="bot"><span></span><span>06</span></div>
+<div class="body"><h2 class="a" style="--d:1">Cinco herramientas<br><em>para una exclusión mutua.</em></h2>
+<div class="five" style="margin-top:84px"><div class="a" style="--d:3"><span class="num">01</span><h3>Mutex</h3><p>Un cerrojo: solo un hilo dentro.</p><div class="j">lock() / unlock()</div></div><div class="a" style="--d:4"><span class="num">02</span><h3>Semáforo</h3><p>Deja pasar hasta N hilos a la vez.</p><div class="j">Semaphore</div></div><div class="a" style="--d:5"><span class="num">03</span><h3>Monitor</h3><p>Cerrojo + esperar y avisar.</p><div class="j">wait() / notify()</div></div><div class="a" style="--d:6"><span class="num">04</span><h3>Atómicas</h3><p>Operación indivisible, sin bloqueo.</p><div class="j">AtomicInteger</div></div><div class="a" style="--d:7"><span class="num">05</span><h3>synchronized</h3><p>La forma de Java de exigir el cerrojo.</p><div class="j">método o bloque</div></div></div>
+<p class="note a" style="--d:9;margin-top:90px;font-size:31px">Cuidado con el <b class="bad">deadlock</b> (todos esperando a todos) y con bloquear de más: <b>demasiados cerrojos = poca concurrencia</b>.</p></div></section><section class="slide" data-i="6"><div class="top"><span>03 · Hilos en Java</span></div><div class="bot"><span></span><span>07</span></div>
+<div class="body"><h2 class="a" style="--d:1">Dos formas de crear un hilo,<br><em>un solo botón para arrancarlo.</em></h2>
+<div class="grid g2 a" style="--d:3;margin-top:60px;gap:50px">
+ <div><p class="mono" style="color:var(--ink);margin-bottom:12px">A · Implementar Runnable</p>
+<pre class="code"><span class="k">class</span> Tarea <span class="k">implements</span> Runnable {
+  <span class="k">public void</span> run() {
+    System.out.println(<span class="s">"Hola"</span>);
+  }
+}
+
+Thread t = <span class="k">new</span> Thread(<span class="k">new</span> Tarea());
+t.<span class="k">start</span>();</pre></div>
+ <div><p class="mono" style="color:var(--ink);margin-bottom:12px">B · Extender Thread</p>
+<pre class="code"><span class="k">class</span> MiHilo <span class="k">extends</span> Thread {
+  <span class="k">public void</span> run() {
+    System.out.println(<span class="s">"Hola"</span>);
+  }
+}
+
+<span class="k">new</span> MiHilo().<span class="k">start</span>();</pre></div>
+</div>
+<div class="grid g2 a" style="--d:5;margin-top:56px;gap:50px">
+ <p class="note" style="font-size:30px"><b>Con lambda:</b> <code style="font-size:26px">new Thread(() -&gt; ...).start()</code></p>
+ <p class="note" style="font-size:30px;border-color:var(--verm)"><b class="bad">start()</b> crea el hilo. <b>run()</b> a secas solo ejecuta el método, sin hilo nuevo.</p></div></div></section><section class="slide" data-i="7"><div class="top"><span>03 · Hilos en Java</span></div><div class="bot"><span></span><span>08</span></div>
+<div class="body"><h2 class="a" style="--d:1">Un hilo nace, trabaja, espera<br><em>y termina.</em></h2>
+<svg class="a" style="--d:3;margin-top:22px" viewBox="0 0 1680 470" width="1680" height="470" fill="none" stroke="#cdc4ba">
+ <defs><marker id="m8" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 1L11 6L0 11z" fill="#cdc4ba" stroke="none"/></marker><marker id="r8" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 1L11 6L0 11z" fill="#e2342a" stroke="none"/></marker></defs>
+ <rect x="0" y="70" width="250" height="84" fill="#000" stroke="#cdc4ba" stroke-opacity="0.7"/><text x="125.0" y="110" text-anchor="middle" font-size="26" fill="#cdc4ba" stroke="none">NEW</text><text x="125.0" y="138" text-anchor="middle" font-size="16" letter-spacing="2" fill="#958f87" stroke="none">creado, sin arrancar</text>
+ <rect x="400" y="70" width="340" height="84" fill="#cdc4ba" stroke="#cdc4ba" stroke-opacity="1"/><text x="570.0" y="110" text-anchor="middle" font-size="26" fill="#000" stroke="none">RUNNABLE</text><text x="570.0" y="138" text-anchor="middle" font-size="16" letter-spacing="2" fill="#222" stroke="none">listo o ejecutándose</text>
+ <rect x="1430" y="70" width="250" height="84" fill="#000" stroke="#cdc4ba" stroke-opacity="0.7"/><text x="1555.0" y="110" text-anchor="middle" font-size="26" fill="#cdc4ba" stroke="none">TERMINATED</text><text x="1555.0" y="138" text-anchor="middle" font-size="16" letter-spacing="2" fill="#958f87" stroke="none">ha acabado</text>
+ <g stroke-opacity=".7" marker-end="url(#m8)"><path d="M255 112H395"/><path d="M745 112H1425"/></g>
+ <text x="325" y="96" fill="#958f87" stroke="none" font-size="18" text-anchor="middle">start()</text>
+ <text x="1085" y="96" fill="#958f87" stroke="none" font-size="18" text-anchor="middle">run() termina</text>
+ <g stroke-opacity=".5"><path d="M570 154V222"/><path d="M220 222H1220"/><path d="M220 222V285" marker-end="url(#m8)"/><path d="M720 222V285" marker-end="url(#m8)"/><path d="M1220 222V285" marker-end="url(#m8)"/></g>
+ <text x="600" y="206" fill="#958f87" stroke="none" font-size="18">se bloquea o espera…  y cuando acaba, vuelve a RUNNABLE</text>
+ <rect x="0" y="290" width="440" height="84" fill="#000" stroke="#cdc4ba" stroke-opacity="0.7"/><text x="220.0" y="330" text-anchor="middle" font-size="26" fill="#cdc4ba" stroke="none">BLOCKED</text><text x="220.0" y="358" text-anchor="middle" font-size="16" letter-spacing="2" fill="#958f87" stroke="none">espera un monitor</text>
+ <rect x="500" y="290" width="440" height="84" fill="#000" stroke="#cdc4ba" stroke-opacity="0.7"/><text x="720.0" y="330" text-anchor="middle" font-size="26" fill="#cdc4ba" stroke="none">WAITING</text><text x="720.0" y="358" text-anchor="middle" font-size="16" letter-spacing="2" fill="#958f87" stroke="none">wait() · join()</text>
+ <rect x="1000" y="290" width="440" height="84" fill="#000" stroke="#cdc4ba" stroke-opacity="0.7"/><text x="1220.0" y="330" text-anchor="middle" font-size="26" fill="#cdc4ba" stroke="none">TIMED_WAITING</text><text x="1220.0" y="358" text-anchor="middle" font-size="16" letter-spacing="2" fill="#958f87" stroke="none">sleep(ms) · wait(ms)</text>
+</svg>
+<div class="a" style="--d:5;margin-top:18px"><span class="tag on">join()</span><span class="tag on">sleep(ms)</span><span class="tag on">yield()</span><span class="tag on">interrupt()</span><span class="tag on">setPriority(1…10)</span><span class="cap" style="margin-left:14px">getState() devuelve el estado</span></div></div></section><section class="slide" data-i="8"><div class="top"><span>03 · Hilos en Java</span></div><div class="bot"><span></span><span>09</span></div>
+<div class="body"><h2 class="a" style="--d:1">Sin sincronizar,<br><em>el error es intermitente.</em></h2>
+<div style="display:grid;grid-template-columns:780px 1fr;gap:80px;margin-top:40px">
+ <div class="a" style="--d:3"><pre class="code" style="font-size:28px"><span class="k">class</span> Contador {
+  <span class="k">private int</span> c;
+
+  <span class="c">// c++ = leer, sumar, escribir</span>
+  <span class="k">void</span> inc() { c++; }
+
+  <span class="k">synchronized void</span> incS() { c++; }
+}</pre>
+ <p class="cap" style="margin-top:22px">2 hilos · 1 000 000 sumas cada uno · esperado: 2 000 000</p></div>
+ <div class="a" style="--d:4">
+  <div style="border-top:1px solid var(--strong);padding:22px 0 30px"><p class="cap bad">Sin synchronized</p><p style="font:400 112px/1.1 var(--mono);color:var(--verm);margin-top:6px">1 de 20</p><p class="s" style="font-size:28px">ejecuciones erróneas · llegó a dar <b class="hl">1 028 410</b></p></div>
+  <div style="border-top:1px solid var(--strong);padding:22px 0 0"><p class="cap">Con synchronized</p><p style="font:400 112px/1.1 var(--mono);color:var(--ink);margin-top:6px">0 de 20</p><p class="s" style="font-size:28px">siempre <b class="hl">2 000 000</b></p></div>
+ </div></div>
+<p class="cap a" style="--d:6;margin-top:36px;font-size:17px">Medido en Java 27, 20 núcleos. Que casi nunca falle es justo lo que hace tan difícil depurarlo.</p></div></section><section class="slide" data-i="9"><div class="top"><span>04 · Sincronización</span></div><div class="bot"><span></span><span>10</span></div>
+<div class="body"><h2 class="a" style="--d:1">Cada objeto tiene un cerrojo.<br><em>synchronized lo pide.</em></h2>
+<div style="display:grid;grid-template-columns:820px 1fr;gap:70px;margin-top:30px">
+ <svg class="a" style="--d:3" viewBox="0 0 820 480" width="820" height="480" fill="none" stroke="#cdc4ba">
+  <defs><marker id="m10" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 1L11 6L0 11z" fill="#cdc4ba" stroke="none"/></marker><marker id="r10" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 1L11 6L0 11z" fill="#e2342a" stroke="none"/></marker></defs>
+  <text x="0" y="30" fill="#958f87" stroke="none" font-size="17" letter-spacing="4">COLA DEL CERROJO</text>
+  <g font-size="22" text-anchor="middle"><rect x="0" y="60" width="130" height="60" stroke-opacity=".6" stroke-dasharray="5 5"/><text x="65" y="98" fill="#cdc4ba" stroke="none">Hilo 3</text><rect x="150" y="60" width="130" height="60" stroke-opacity=".6" stroke-dasharray="5 5"/><text x="215" y="98" fill="#cdc4ba" stroke="none">Hilo 2</text></g>
+  <path d="M300 90H400" stroke-opacity=".7" marker-end="url(#m10)"/>
+  <rect x="420" y="20" width="390" height="430" stroke-opacity=".7"/>
+  <text x="440" y="56" fill="#958f87" stroke="none" font-size="17" letter-spacing="4">OBJETO · SECCIÓN CRÍTICA</text>
+  <rect x="450" y="150" width="330" height="80" fill="#cdc4ba" stroke="none"/><text x="615" y="200" text-anchor="middle" fill="#000" stroke="none" font-size="26">Hilo 1 dentro</text>
+  <text x="615" y="300" text-anchor="middle" fill="#cdc4ba" stroke="none" font-size="22">1 cerrojo</text>
+  <text x="615" y="340" text-anchor="middle" fill="#958f87" stroke="none" font-size="19">1 hilo a la vez</text>
+ </svg>
+ <div class="a" style="--d:4"><dl class="rows" style="border-top:1px solid var(--soft)">
+  <div style="padding:22px 0"><dt style="width:260px;color:var(--ink);font-size:19px">Método</dt><dd style="text-align:left;font:400 26px var(--sans);color:var(--dim)">cerrojo = <b class="hl">this</b></dd></div>
+  <div style="padding:22px 0"><dt style="width:260px;color:var(--ink);font-size:19px">Método static</dt><dd style="text-align:left;font:400 26px var(--sans);color:var(--dim)">cerrojo = <b class="hl">la clase</b></dd></div>
+  <div style="padding:22px 0"><dt style="width:260px;color:var(--ink);font-size:19px">Bloque</dt><dd style="text-align:left;font:400 26px var(--sans);color:var(--dim)">el objeto que <b class="hl">tú indiques</b></dd></div></dl>
+  <p class="note" style="margin-top:34px;font-size:28px"><b>volatile</b> garantiza que todos ven el valor actual (visibilidad), <b>no</b> la exclusión. Sirve si un hilo escribe y el resto lee.</p></div>
+</div></div></section><section class="slide" data-i="10"><div class="top"><span>04 · Sincronización</span></div><div class="bot"><span></span><span>11</span></div>
+<div class="body"><h2 class="a" style="--d:1">Esperar sin gastar CPU:<br><em>wait y notify.</em></h2>
+<svg class="a" style="--d:3;margin-top:34px" viewBox="0 0 1680 330" width="1680" height="330" fill="none" stroke="#cdc4ba">
+ <defs><marker id="m11" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 1L11 6L0 11z" fill="#cdc4ba" stroke="none"/></marker><marker id="r11" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 1L11 6L0 11z" fill="#e2342a" stroke="none"/></marker></defs>
+ <g font-size="25" text-anchor="middle">
+  <rect x="0" y="40" width="360" height="110" fill="#cdc4ba" stroke="none"/><text x="180" y="86" fill="#000" stroke="none">Hilo en synchronized</text><text x="180" y="122" fill="#333" stroke="none" font-size="19">la condición no se cumple</text>
+  <rect x="520" y="40" width="360" height="110" stroke-opacity=".7"/><text x="700" y="86" fill="#cdc4ba" stroke="none">wait()</text><text x="700" y="122" fill="#958f87" stroke="none" font-size="19">suelta el cerrojo y duerme</text>
+  <rect x="1040" y="40" width="300" height="110" stroke-opacity=".7" stroke-dasharray="6 6"/><text x="1190" y="86" fill="#cdc4ba" stroke="none">Cola de espera</text><text x="1190" y="122" fill="#958f87" stroke="none" font-size="19">sin consumir CPU</text>
+ </g>
+ <g stroke-opacity=".7" marker-end="url(#m11)"><path d="M365 95H515"/><path d="M885 95H1035"/></g>
+ <path d="M1190 160C1190 290 700 290 500 200" stroke-opacity=".6" marker-end="url(#m11)" stroke-dasharray="3 6"/>
+ <g fill="#cdc4ba" stroke="none" font-size="22" text-anchor="middle"><text x="900" y="285">otro hilo: notify() / notifyAll()</text></g>
+ <text x="1420" y="104" fill="#958f87" stroke="none" font-size="20">vuelve a competir</text><text x="1420" y="134" fill="#958f87" stroke="none" font-size="20">por el cerrojo</text>
+</svg>
+<div class="grid g3 a" style="--d:5;margin-top:26px;gap:50px">
+ <div style="border-top:1px solid var(--strong);padding-top:18px"><p class="num">01</p><p class="s" style="font-size:29px;margin-top:8px">Solo dentro de <b class="hl">synchronized</b>.</p></div>
+ <div style="border-top:1px solid var(--strong);padding-top:18px"><p class="num">02</p><p class="s" style="font-size:29px;margin-top:8px">Siempre en un <b class="hl">while</b>, no en un if.</p></div>
+ <div style="border-top:1px solid var(--strong);padding-top:18px"><p class="num">03</p><p class="s" style="font-size:29px;margin-top:8px">En duda, <b class="hl">notifyAll()</b>.</p></div>
+</div></div></section><section class="slide" data-i="11"><div class="top"><span>05 · Problemas clásicos</span></div><div class="bot"><span></span><span>12</span></div>
+<div class="body"><h2 class="a" style="--d:1">Productor y consumidor<br><em>comparten un búfer.</em></h2>
+<svg class="a" style="--d:3;margin-top:24px" viewBox="0 0 1680 250" width="1680" height="250" fill="none" stroke="#cdc4ba">
+ <defs><marker id="m12" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 1L11 6L0 11z" fill="#cdc4ba" stroke="none"/></marker><marker id="r12" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 1L11 6L0 11z" fill="#e2342a" stroke="none"/></marker></defs>
+ <rect x="0" y="70" width="300" height="100" fill="#cdc4ba" stroke="none"/><text x="150" y="130" text-anchor="middle" fill="#000" stroke="none" font-size="30">Productor</text>
+ <rect x="1380" y="70" width="300" height="100" fill="#cdc4ba" stroke="none"/><text x="1530" y="130" text-anchor="middle" fill="#000" stroke="none" font-size="30">Consumidor</text>
+ <g stroke-opacity=".7" marker-end="url(#m12)"><path d="M305 120H460"/><path d="M1220 120H1375"/></g>
+ <g><rect x="470" y="70" width="150" height="100" stroke-opacity=".7"/><rect x="620" y="70" width="150" height="100" fill="#cdc4ba" fill-opacity=".25" stroke-opacity=".7"/><rect x="770" y="70" width="150" height="100" fill="#cdc4ba" fill-opacity=".25" stroke-opacity=".7"/><rect x="920" y="70" width="150" height="100" fill="#cdc4ba" fill-opacity=".25" stroke-opacity=".7"/><rect x="1070" y="70" width="150" height="100" stroke-opacity=".7"/></g>
+ <text x="845" y="40" text-anchor="middle" fill="#958f87" stroke="none" font-size="19" letter-spacing="5">BÚFER FINITO</text>
+ <text x="150" y="220" text-anchor="middle" fill="#958f87" stroke="none" font-size="21">lleno → wait()</text>
+ <text x="1530" y="220" text-anchor="middle" fill="#958f87" stroke="none" font-size="21">vacío → wait()</text>
+</svg>
+<div class="grid g2 a" style="--d:5;margin-top:22px;gap:60px">
+<pre class="code" style="font-size:26px"><span class="k">synchronized</span> (cont) {
+  <span class="k">while</span> (!cont.datoDisponible())
+    cont.<span class="k">wait</span>();
+  dato = cont.get();
+  cont.<span class="k">notify</span>();
+}</pre>
+<div><p class="note" style="font-size:29px"><b>Cada uno avisa al otro</b> al cambiar el estado del búfer.</p>
+<p class="note" style="font-size:29px;margin-top:26px;border-color:var(--verm)"><b class="bad">Mal hecho</b> (sleep/wakeup sin monitor) el aviso se pierde y ambos duermen para siempre.</p></div></div></div></section><section class="slide" data-i="12"><div class="top"><span>04 · Sincronización</span></div><div class="bot"><span></span><span>13</span></div>
+<div class="body"><h2 class="a" style="--d:1">Un semáforo deja pasar<br><em>hasta N hilos.</em></h2>
+<div style="display:grid;grid-template-columns:1fr 700px;gap:70px;margin-top:70px">
+ <div class="a" style="--d:3">
+  <p class="cap" style="margin-bottom:14px">new Semaphore(2) · permisos = 2</p>
+  <svg viewBox="0 0 640 74" width="640" height="74" fill="none"><rect x="0" y="0" width="200" height="74" fill="#cdc4ba" stroke="none"/><text x="100" y="46" text-anchor="middle" fill="#000" stroke="none" font-size="24">Hilo 1</text><rect x="220" y="0" width="200" height="74" fill="#cdc4ba" stroke="none"/><text x="320" y="46" text-anchor="middle" fill="#000" stroke="none" font-size="24">Hilo 2</text></svg>
+  <p class="cap" style="margin:34px 0 14px">esperando permiso</p>
+  <svg viewBox="0 0 640 74" width="640" height="74" fill="none"><rect x="0" y="0" width="200" height="74" stroke="#cdc4ba" stroke-opacity=".6" stroke-dasharray="6 6"/><text x="100" y="46" text-anchor="middle" fill="#cdc4ba" stroke="none" font-size="24">Hilo 3</text></svg>
+  <p class="note" style="margin-top:40px;font-size:29px">Cuando uno hace <b>release()</b>, el hilo 3 entra. <b>Semaphore(1)</b> se comporta como un mutex.</p></div>
+ <div class="a" style="--d:4"><pre class="code" style="font-size:26px">Semaphore sem = <span class="k">new</span> Semaphore(<span class="k">2</span>);
+
+sem.<span class="k">acquire</span>();   <span class="c">// pide permiso</span>
+<span class="c">// sección crítica</span>
+sem.<span class="k">release</span>();   <span class="c">// lo devuelve</span></pre>
+ <dl class="rows" style="margin-top:28px"><div><dt>acquire()</dt><span class="ld"></span><dd style="font:400 22px var(--sans);color:var(--dim)">espera si no hay</dd></div><div><dt>release()</dt><span class="ld"></span><dd style="font:400 22px var(--sans);color:var(--dim)">libera un permiso</dd></div></dl></div></div></div></section><section class="slide" data-i="13"><div class="top"><span>04 · Sincronización</span></div><div class="bot"><span></span><span>14</span></div>
+<div class="body"><h2 class="a" style="--d:1">Java ya trae lo difícil hecho:<br><em>java.util.concurrent.</em></h2>
+<svg class="a" style="--d:3;margin-top:60px" viewBox="0 0 1680 190" width="1680" height="190" fill="none" stroke="#cdc4ba">
+ <defs><marker id="m14" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 1L11 6L0 11z" fill="#cdc4ba" stroke="none"/></marker><marker id="r14" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 1L11 6L0 11z" fill="#e2342a" stroke="none"/></marker></defs>
+ <rect x="0" y="40" width="300" height="100" stroke-opacity=".7"/><text x="150" y="98" text-anchor="middle" fill="#cdc4ba" stroke="none" font-size="28">Tareas</text>
+ <rect x="440" y="20" width="460" height="140" fill="#cdc4ba" stroke="none"/><text x="670" y="82" text-anchor="middle" fill="#000" stroke="none" font-size="30">ExecutorService</text><text x="670" y="122" text-anchor="middle" fill="#222" stroke="none" font-size="20">pool de N hilos</text>
+ <rect x="1040" y="40" width="300" height="100" stroke-opacity=".7"/><text x="1190" y="98" text-anchor="middle" fill="#cdc4ba" stroke="none" font-size="28">Future</text>
+ <rect x="1480" y="40" width="200" height="100" stroke-opacity=".7" stroke-dasharray="6 6"/><text x="1580" y="98" text-anchor="middle" fill="#cdc4ba" stroke="none" font-size="26">get()</text>
+ <g stroke-opacity=".7" marker-end="url(#m14)"><path d="M305 90H435"/><path d="M905 90H1035"/><path d="M1345 90H1475"/></g>
+</svg>
+<div class="grid g2 a" style="--d:5;margin-top:70px;gap:60px">
+<pre class="code" style="font-size:24px">ExecutorService pool =
+  Executors.<span class="k">newFixedThreadPool</span>(<span class="k">4</span>);
+Future&lt;Integer&gt; f =
+  pool.<span class="k">submit</span>(() -&gt; calcular());
+<span class="c">// ...mientras tanto, sigues trabajando</span>
+<span class="k">int</span> r = f.<span class="k">get</span>();   <span class="c">// espera si no ha acabado</span>
+pool.<span class="k">shutdown</span>();</pre>
+<ul class="l" style="font-size:31px"><li><b>Callable</b>: como Runnable, pero devuelve valor.</li><li><b>BlockingQueue</b>: cola que bloquea si está vacía.</li><li><b>ConcurrentHashMap</b>, <b>AtomicInteger</b>…</li></ul></div></div></section><section class="slide" data-i="14"><div class="top"><span>05 · Problemas clásicos</span></div><div class="bot"><span></span><span>15</span></div>
+<div class="body"><h2 class="a" style="--d:1">Cinco filósofos, cinco tenedores<br><em>y un interbloqueo.</em></h2>
+<div style="display:grid;grid-template-columns:560px 1fr;gap:70px;margin-top:10px;align-items:center">
+ <svg class="a" style="--d:3" viewBox="0 0 560 560" width="560" height="560" fill="none">
+  <circle cx="280" cy="280" r="100" stroke="#cdc4ba" stroke-opacity=".3"/>
+  <circle cx="280" cy="90" r="46" fill="#cdc4ba" stroke="none"/><text x="280" y="99" text-anchor="middle" fill="#000" stroke="none" font-size="26">F1</text><path d="M349 185L410 100" stroke="#e2342a" stroke-width="5"/><circle cx="461" cy="221" r="46" fill="#cdc4ba" stroke="none"/><text x="461" y="230" text-anchor="middle" fill="#000" stroke="none" font-size="26">F2</text><path d="M392 316L491 349" stroke="#e2342a" stroke-width="5"/><circle cx="392" cy="434" r="46" fill="#cdc4ba" stroke="none"/><text x="392" y="443" text-anchor="middle" fill="#000" stroke="none" font-size="26">F3</text><path d="M280 398L280 502" stroke="#e2342a" stroke-width="5"/><circle cx="168" cy="434" r="46" fill="#cdc4ba" stroke="none"/><text x="168" y="443" text-anchor="middle" fill="#000" stroke="none" font-size="26">F4</text><path d="M168 316L69 349" stroke="#e2342a" stroke-width="5"/><circle cx="99" cy="221" r="46" fill="#cdc4ba" stroke="none"/><text x="99" y="230" text-anchor="middle" fill="#000" stroke="none" font-size="26">F5</text><path d="M211 185L150 100" stroke="#e2342a" stroke-width="5"/>
+ </svg>
+ <div class="a" style="--d:4">
+  <p class="s" style="font-size:31px">Para comer hacen falta <b class="hl">dos tenedores</b>. Si todos cogen primero el de su derecha, <b class="bad">nadie puede comer y nadie suelta</b>.</p>
+  <p class="cap" style="margin:40px 0 4px">Cómo se rompe el bloqueo</p>
+  <ul class="l"><li><b>Romper la simetría:</b> uno coge los tenedores en orden contrario.</li><li><b>Coger los dos a la vez:</b> un método <code style="font-size:26px">synchronized</code> en la mesa; si falta uno, <code style="font-size:26px">wait()</code>.</li></ul></div>
+</div></div></section><section class="slide" data-i="15"><div class="top"><span>05 · Problemas clásicos</span></div><div class="bot"><span></span><span>16</span></div>
+<div class="body"><h2 class="a" style="--d:1">Muchos pueden leer;<br><em>escribir, solo uno.</em></h2>
+<svg class="a" style="--d:3;margin-top:60px" viewBox="0 0 1680 330" width="1680" height="330" fill="none" stroke="#cdc4ba">
+ <defs><marker id="m16" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 1L11 6L0 11z" fill="#cdc4ba" stroke="none"/></marker><marker id="r16" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 1L11 6L0 11z" fill="#e2342a" stroke="none"/></marker></defs>
+ <g font-size="26" text-anchor="middle">
+  <rect x="0" y="30" width="240" height="80" stroke-opacity=".7"/><text x="120" y="80" fill="#cdc4ba" stroke="none">Lector 1</text>
+  <rect x="0" y="130" width="240" height="80" stroke-opacity=".7"/><text x="120" y="180" fill="#cdc4ba" stroke="none">Lector 2</text>
+  <rect x="0" y="230" width="240" height="80" stroke-opacity=".7"/><text x="120" y="280" fill="#cdc4ba" stroke="none">Lector 3</text>
+  <rect x="620" y="60" width="440" height="210" fill="#cdc4ba" stroke="none"/><text x="840" y="150" fill="#000" stroke="none" font-size="34">Recurso</text><text x="840" y="196" fill="#222" stroke="none" font-size="20">dato compartido</text>
+  <rect x="1440" y="115" width="240" height="100" stroke="#e2342a"/><text x="1560" y="175" fill="#e2342a" stroke="none">Escritor</text>
+ </g>
+ <g stroke-opacity=".6" marker-end="url(#m16)"><path d="M250 70L610 120"/><path d="M250 170H610"/><path d="M250 270L610 215"/></g>
+ <path d="M1430 165H1070" stroke="#e2342a" marker-end="url(#r16)"/>
+ <text x="430" y="20" fill="#958f87" stroke="none" font-size="18" letter-spacing="4" text-anchor="middle">A LA VEZ</text><text x="1250" y="140" fill="#e2342a" stroke="none" font-size="18" letter-spacing="4" text-anchor="middle">EN EXCLUSIVA</text>
+</svg>
+<div class="grid g3 a" style="--d:5;margin-top:60px;gap:50px">
+ <div style="border-top:1px solid var(--strong);padding-top:18px"><p class="num">01</p><p class="s" style="font-size:29px;margin-top:8px">Leer no cambia nada: <b class="hl">se comparte</b>.</p></div>
+ <div style="border-top:1px solid var(--strong);padding-top:18px"><p class="num">02</p><p class="s" style="font-size:29px;margin-top:8px">Escribir sí: <b class="hl">nadie más dentro</b>.</p></div>
+ <div style="border-top:1px solid var(--strong);padding-top:18px"><p class="num">03</p><p class="s" style="font-size:29px;margin-top:8px">Se cuentan las <b class="hl">peticiones de escritura</b> para que no esperen eternamente.</p></div>
+</div></div></section><section class="slide" data-i="16"><div class="top"><span>Ideas clave</span></div><div class="bot"><span></span><span>17</span></div>
+<div class="body"><h2 class="a" style="--d:1">Lo esencial,<br><em>en cinco líneas.</em></h2>
+<div style="margin-top:40px;width:1500px;border-top:1px solid var(--soft)"><div class="a" style="--d:2;display:grid;grid-template-columns:90px 330px 1fr;gap:20px;align-items:baseline;padding:24px 0;border-bottom:1px solid var(--soft)"><span class="num" style="font-size:24px">01</span><h3 style="font-size:44px">Hilo</h3><p class="s" style="font-size:28px">Comparte la memoria del proceso; por eso es ligero y peligroso.</p></div><div class="a" style="--d:3;display:grid;grid-template-columns:90px 330px 1fr;gap:20px;align-items:baseline;padding:24px 0;border-bottom:1px solid var(--soft)"><span class="num" style="font-size:24px">02</span><h3 style="font-size:44px">Carrera</h3><p class="s" style="font-size:28px">Dos hilos tocan lo mismo a la vez y se pierde una actualización.</p></div><div class="a" style="--d:4;display:grid;grid-template-columns:90px 330px 1fr;gap:20px;align-items:baseline;padding:24px 0;border-bottom:1px solid var(--soft)"><span class="num" style="font-size:24px">03</span><h3 style="font-size:44px">Exclusión</h3><p class="s" style="font-size:28px">synchronized, locks, semáforos o atómicas: un hilo (o N) a la vez.</p></div><div class="a" style="--d:5;display:grid;grid-template-columns:90px 330px 1fr;gap:20px;align-items:baseline;padding:24px 0;border-bottom:1px solid var(--soft)"><span class="num" style="font-size:24px">04</span><h3 style="font-size:44px">Espera</h3><p class="s" style="font-size:28px">wait() y notify() para esperar sin gastar CPU.</p></div><div class="a" style="--d:6;display:grid;grid-template-columns:90px 330px 1fr;gap:20px;align-items:baseline;padding:24px 0;border-bottom:1px solid var(--soft)"><span class="num" style="font-size:24px">05</span><h3 style="font-size:44px">Clásicos</h3><p class="s" style="font-size:28px">Productor-consumidor, filósofos, lectores-escritores: mismos patrones.</p></div></div></div></section></div><div id="hud"></div><script>
+const S=[...document.querySelectorAll('.slide')];let i=0;const st=document.getElementById('stage');
+function fit(){const k=Math.min(innerWidth/1920,innerHeight/1080);st.style.transform=`translate(-50%,-50%) scale(${k})`}
+function go(n){n=Math.max(0,Math.min(S.length-1,n));S[i].classList.remove('on');i=n;S[i].classList.add('on');
+ document.getElementById('hud').textContent=(i+1)+' / '+S.length;try{history.replaceState(null,'','#'+(i+1))}catch(e){}}
+addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' ','Enter'].includes(e.key)){e.preventDefault();go(i+1)}
+ else if(['ArrowLeft','PageUp','Backspace'].includes(e.key)){e.preventDefault();go(i-1)}
+ else if(e.key==='Home')go(0);else if(e.key==='End')go(S.length-1);
+ else if(e.key==='f')document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()});
+addEventListener('click',e=>go(e.clientX>innerWidth/2?i+1:i-1));
+addEventListener('resize',fit);fit();
+const h=parseInt(location.hash.slice(1));go(h>0?h-1:0);
+</script></body></html>
